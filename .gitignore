@@ -1,0 +1,7 @@
+.sass-cache
+node_modules
+scripts/*.js
+scripts/src/*.js
+stylesheets
+wp-config.php
+wp-environment.php

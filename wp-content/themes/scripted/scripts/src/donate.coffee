@@ -23,6 +23,7 @@ class Give
       error_output: $( settings.error_output or '#give-error' )
       name_first: $( settings.name_first or '' )
       name_last: $( settings.name_last or '' )
+      email: $( settings.email or '' )
 
     @watch()
 
@@ -51,7 +52,6 @@ class Give
       ###
 
   handle: (e) ->
-      @lock()
       unless @validate()
         @unlock()
         return false
@@ -63,6 +63,7 @@ class Give
   get_token: ->
     console.log "Starting Stripe Query..."
     Stripe.card.createToken @stripe_params(), @process
+    @lock()
 
   process: (status, response) =>
     @response = response
@@ -92,8 +93,12 @@ class Give
     }
 
   complete: (data, success) ->
-    @donation = data
-    console.log [@donation, success]
+    @donor = data
+    if @donor.success == true
+      window.location = @donor.data.confirmation_path
+    else
+      @unlock()
+    console.log @donor
 
   abort: ->
     @unlock()
@@ -101,12 +106,7 @@ class Give
   donation_params: ->
     {
       action: 'give'
-      amount: @options.amount_converted.val()
-      zip: @options.zip.val()
-      name_first: @options.name_first.val()
-      name_last: @options.name_last.val()
-      stripe_token: @options.token.val()
-      nonce: @options.nonce.val()
+      payload: @options.form.serializeArray()
     }
 
   stripe_params: ->
@@ -136,10 +136,10 @@ class Give
     valid
 
   lock: ->
-    @options.form.find('input').prop 'disabled', true
+    @options.form.find('input').prop 'readonly', true
 
   unlock: ->
-    @options.form.find('input').prop 'disabled', false
+    @options.form.find('input').prop 'readonly', false
 
   to_cents: ->
     Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )
@@ -187,5 +187,6 @@ $(document).on 'ready', ->
     error_output: '#give-error'
     name_first: '#name-first'
     name_last: '#name-last'
+    email: '#email'
     nonce: '#nonce'
   })

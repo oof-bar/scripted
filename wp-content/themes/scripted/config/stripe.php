@@ -7,34 +7,39 @@
 
   function se_give ( ) {
 
-    if ( !wp_verify_nonce($_POST['nonce'], 'give_nonce') || !isset($_POST['stripe_token']) ) {
+    # Payload is our serialized form, or at least everything fit to submit...
+    $donor = array();
+    foreach ( $_POST['payload'] as $index => $param ) {
+      $donor[$param['name']] = $param['value'];
+    }
+
+    if ( !wp_verify_nonce($donor['nonce'], 'give_nonce') || !isset($donor['stripe-token']) ) {
       wp_send_json_error(array(
-        'post' => $_POST,
+        'post' => $donor,
         'message' => 'Sorry, your payment couldn\'t be completed, because we identified a potentially malicious request.'
       ));
     }
 
+
     try {
-      # Stripe::setApiKey(getenv('STRIPE_APIKEY'));
       $charge = Stripe_Charge::create(array(
-        'amount' => $_POST['amount'],
+        'amount' => $donor['amount'],
         'currency' => 'usd',
-        'card' => $_POST['stripe_token'],
-        'description' => 'test'
+        'card' => $donor['stripe-token'],
+        'description' => $donor['name-first'] . ' ' . $donor['name-last']
       ));
-      /*
-      wp_insert_post(array(
-        'asdf'
-      ));
-      */
+
+      $donation = create_donation( $donor['name-first'], $donor['name-last'], $donor['email'], $donor['amount'], $donor['zip'] );
+
       wp_send_json_success(array(
-        'post' => $_POST,
-        'stripe' => $charge
+        'post' => $donor,
+        'stripe' => $charge,
+        'confirmation_path' => get_permalink($donation)
       ));
 
     } catch ( Stripe_CardError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $_POST ) );
+      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
     } catch ( Stripe_AuthenticationError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $_POST ) );
+      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
     }
   }

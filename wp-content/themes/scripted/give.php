@@ -10,11 +10,22 @@ Give to Script Ed
   <fieldset class="group name">
     <label for="name-first">
       First Name
-      <input type="text" id="name-first" />
+      <input type="text" id="name-first" name="name-first" value="August" />
     </label>
     <label for="name-last">
       Last Name
-      <input type="text" id="name-last" />
+      <input type="text" id="name-last" name="name-last" value="Miller" />
+    </label>
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" value="lol@lol.com" />
+    </label>
+  </fieldset>
+
+  <fieldset class="group address">
+    <label for="address-zip">
+      Zip Code
+      <input type="text" id="address-zip" name="zip" class="address zip" value="97202" />
     </label>
   </fieldset>
 
@@ -40,13 +51,6 @@ Give to Script Ed
     </label>
   </fieldset>
 
-  <fieldset class="group address">
-    <label for="address-zip">
-      Zip Code
-      <input type="text" id="address-zip" name="address-zip" class="address zip" value="97202" />
-    </label>
-  </fieldset>
-
   <fieldset class="group amount">
     <label for="amount-formatted">
       Amount
@@ -69,7 +73,5 @@ Give to Script Ed
 
   <input type="submit" value="Give!" />
 </form>
-
-<pre><?= Stripe::getApiKey() ?></pre>
 
 <? get_footer(); ?>

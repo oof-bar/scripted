@@ -23,7 +23,8 @@
         minimum_donation: settings.minimum_donation || 1,
         error_output: $(settings.error_output || '#give-error'),
         name_first: $(settings.name_first || ''),
-        name_last: $(settings.name_last || '')
+        name_last: $(settings.name_last || ''),
+        email: $(settings.email || '')
       };
       this.watch();
       Stripe.setPublishableKey(this.options.publishable_key);
@@ -61,7 +62,6 @@
     };
 
     Give.prototype.handle = function(e) {
-      this.lock();
       if (!this.validate()) {
         this.unlock();
         return false;
@@ -74,7 +74,8 @@
 
     Give.prototype.get_token = function() {
       console.log("Starting Stripe Query...");
-      return Stripe.card.createToken(this.stripe_params(), this.process);
+      Stripe.card.createToken(this.stripe_params(), this.process);
+      return this.lock();
     };
 
     Give.prototype.process = function(status, response) {
@@ -116,8 +117,13 @@
     };
 
     Give.prototype.complete = function(data, success) {
-      this.donation = data;
-      return console.log([this.donation, success]);
+      this.donor = data;
+      if (this.donor.success === true) {
+        window.location = this.donor.data.confirmation_path;
+      } else {
+        this.unlock();
+      }
+      return console.log(this.donor);
     };
 
     Give.prototype.abort = function() {
@@ -127,12 +133,7 @@
     Give.prototype.donation_params = function() {
       return {
         action: 'give',
-        amount: this.options.amount_converted.val(),
-        zip: this.options.zip.val(),
-        name_first: this.options.name_first.val(),
-        name_last: this.options.name_last.val(),
-        stripe_token: this.options.token.val(),
-        nonce: this.options.nonce.val()
+        payload: this.options.form.serializeArray()
       };
     };
 
@@ -164,11 +165,11 @@
     };
 
     Give.prototype.lock = function() {
-      return this.options.form.find('input').prop('disabled', true);
+      return this.options.form.find('input').prop('readonly', true);
     };
 
     Give.prototype.unlock = function() {
-      return this.options.form.find('input').prop('disabled', false);
+      return this.options.form.find('input').prop('readonly', false);
     };
 
     Give.prototype.to_cents = function() {
@@ -221,6 +222,7 @@
       error_output: '#give-error',
       name_first: '#name-first',
       name_last: '#name-last',
+      email: '#email',
       nonce: '#nonce'
     });
   });

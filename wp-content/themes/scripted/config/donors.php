@@ -20,7 +20,7 @@ function add_cpt_gifts ( ) {
       'not_found_in_trash' => 'No Gifts Found in Trash'
     ),
     'description' => 'A gift is a successful charge to a credit card. We capture a few bits of info about the donor and save them here.',
-    'public' => false,
+    'public' => true,
     'publicaly_queryable' => false,
     'query_var' => false,
     'show_ui' => true,
@@ -31,7 +31,8 @@ function add_cpt_gifts ( ) {
     'supports' => array('title'),
     'has_archive' => false,
     'rewrite' => array(
-      'slug' => 'donations'
+      'slug' => 'donation',
+      'pages' => false
     )
   ));
 
@@ -46,13 +47,37 @@ function add_cpt_columns_se_gifts ( $columns ) {
 }
 
 function cpt_column_content_se_gifts ( $column ) {
+  global $post;
 
   switch ( $column ) {
     case 'amount':
-      money_format('%', ( the_field( 'amount', $post->ID ) / 100 ) );
+      echo money_format('$%n', ( get_field( 'amount', $post->ID ) ) );
       break;
 
     default:
       break;
   }
+}
+
+/*
+  Helpers
+*/
+
+function create_donation ( $name_first, $name_last, $email, $amount, $zip ) {
+
+  global $se_field_keys;
+
+  $donation = wp_insert_post( array(
+    'post_name' => md5(microtime(true)),
+    'post_title' => ( $name_first . ' ' . $name_last ),
+    'post_type' => 'se_gift',
+    'post_status' => 'publish',
+    'ping_status' => 'closed'
+  ));
+
+  update_field( $se_field_keys['give_email'], $email, $donation );
+  update_field( $se_field_keys['give_amount'], ( $amount / 100 ), $donation );
+  update_field( $se_field_keys['give_zip'], $zip, $donation );
+
+  return $donation;
 }

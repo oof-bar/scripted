@@ -5,6 +5,16 @@
   August W. Miller
 */
 
+* {
+  font-weight: inherit;
+}
+
 body {
-  
+  font-family: "Fira Sans", "Helvetica", sans-serif;
+  font-weight: 300;
+}
+
+pre {
+  font-family: "Fira Mono";
+  font-size: 70%;
 }

@@ -1,6 +1,9 @@
 <? /* Template Name: Narrative */ ?>
 <? get_header(); ?>
 
-Narrative.
+<h1>Narrative</h1>
+<h2><? the_title(); ?></h2>
+
+<? pp(get_fields()); ?>
 
 <? get_footer(); ?>

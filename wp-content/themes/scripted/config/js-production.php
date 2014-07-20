@@ -2,7 +2,7 @@
   # ScriptEd Specific
   wp_register_script('app', get_template_directory_uri() . '/scripts/app.min.js', array('vendor'), '0.1.0', true);
 
-  wp_localize_script('scripted', 'global', array(
+  wp_localize_script('app', 'global', array(
     'ajax_url' => admin_url('admin-ajax.php')
   ));
 

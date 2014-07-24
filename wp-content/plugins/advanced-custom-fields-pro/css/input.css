@@ -456,13 +456,16 @@ ul.acf-checkbox-list li label {
 }
 
 .hidden-by-tab {
-	display: none;
+	display: none !important;
 }
 
 .acf-postbox .acf-tab-wrap:first-child .acf-tab-group {
 	border-top: 0 none;
 }
 
+.compat-item .acf-tab-wrap td {
+	display: block;
+}
 
 /*
 *  Box
@@ -944,6 +947,14 @@ ul.acf-checkbox-list li label {
 /* Create gallery fix */
 .media-modal .media-sidebar .collection-settings .setting span {
 	padding-top: 8px;
+	margin: 0 10px 0 0;
+}
+
+.media-modal .acf-uploadedTo {
+	line-height: 28px;
+	display: inline-block;
+	position: relative;
+	bottom: -6px;
 	margin: 0 10px 0 0;
 }
 

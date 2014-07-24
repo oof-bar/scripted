@@ -2,7 +2,7 @@
 	
 	<h2><?php _e('Import / Export', 'acf'); ?></h2>
 	
-	<div class="acf-box">
+	<div class="acf-box" id="acf-export-field-groups">
 		<div class="title">
 			<h3><?php _e('Export Field Groups', 'acf'); ?></h3>
 		</div>
@@ -61,7 +61,29 @@
 			</form>
             
 		</div>
-		
+		<script type="text/javascript">
+		(function($) {
+			
+			// hide on screen toggle
+			var $ul = $('#acf-export-field-groups .acf-checkbox-list'),
+				$li = $('<li><label><input type="checkbox" value="" name=""><?php _e("Toggle All", 'acf'); ?></label></li>');
+			
+			
+			// event
+			$li.on('change', 'input', function(){
+				
+				var checked = $(this).is(':checked');
+				
+				$ul.find('input').attr('checked', checked);
+				
+			});
+			
+			
+			// add to ul
+			$ul.prepend( $li );
+						
+		})(jQuery);	
+		</script>
 		
 	</div>
 

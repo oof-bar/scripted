@@ -107,6 +107,16 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.0.2 =
+* Field group: Fixed bug deleteing fields after they are moved to another group
+* Field group: Fixed PHP error preventing redirect after group is duplicated
+* Field group: Fixed blank conditional logic UI
+* Field group: Fixed taxonomy term location rule not saving
+* Image field: Added functionality to edit/crop image within popup
+* File field: Added functionality to edit/crop image within popup
+* Core: Added toggle checkbox to export field group list
+* Core: Fixed logic to include minified scripts and styles
+
 = 5.0.1 =
 * Gallery field: Added auto save when change is detected
 * Gallery field: Added logic to better render grid with non cropped image sizes

@@ -12,9 +12,15 @@ if( empty($groups) ) {
 	$groups = array(
 		
 		// group 0
-		array()
+		array(
+			
+			// rule 0
+			array()
+		
+		)
 		
 	);
+	
 }
 
 ?>

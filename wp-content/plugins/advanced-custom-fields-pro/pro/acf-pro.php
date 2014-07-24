@@ -84,13 +84,17 @@ class acf_pro {
 	
 	function wp_init() {
 		
-		// register acf scripts
-		wp_register_script( 'acf-pro-input', acf_get_dir( 'pro/js/pro-input.js' ), false, acf_get_setting('version') );
+		// min
+		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		
+		
+		// register scripts
+		wp_register_script( 'acf-pro-input', acf_get_dir( "pro/js/pro-input{$min}.js" ), false, acf_get_setting('version') );
+		wp_register_script( 'acf-pro-field-group', acf_get_dir( "pro/js/pro-field-group{$min}.js" ), false, acf_get_setting('version') );
+		
+		
+		// register styles
 		wp_register_style( 'acf-pro-input', acf_get_dir( 'pro/css/pro-input.css' ), false, acf_get_setting('version') ); 
-		
-		
-		// register acf scripts
-		wp_register_script( 'acf-pro-field-group', acf_get_dir( 'pro/js/pro-field-group.js' ), false, acf_get_setting('version') );
 		wp_register_style( 'acf-pro-field-group', acf_get_dir( 'pro/css/pro-field-group.css' ), false, acf_get_setting('version') ); 
 		
 	}

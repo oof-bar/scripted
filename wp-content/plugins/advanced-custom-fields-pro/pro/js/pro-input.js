@@ -1665,7 +1665,7 @@
 		},
 		
 		remove : function( id ){
-
+			
 			// deselect attachmnet
 			this.clear_selection();
 			
@@ -1679,9 +1679,10 @@
 			
 			
 			// close sidebar
-			if( this.count() == 0 )
-			{
+			if( this.count() == 0 ) {
+			
 				this.close_sidebar();
+				
 			}
 			
 			
@@ -1751,50 +1752,42 @@
 			
 			
 			// popup
-			var frame = acf.media.upload_popup({
-				title		: acf._e('gallery', 'select'),
-				type		: 'image',
-				multiple	: 'add',
-				uploadedTo	: ( library == 'uploadedTo' ) ? acf.get('post_id') : 0,
-				activate	: function( frame ){
-					
-					acf.fields.gallery.render_collection( frame, $el );
-					
-					frame.content.get().collection.on( 'reset add', function(){
-					    
-						acf.fields.gallery.render_collection( frame, $el );
-					    
-				    });
-
-						
-				},
-				select		: function( attachment, i ) {
+			var frame = acf.media.popup({
+				'title'			: acf._e('gallery', 'select'),
+				'mode'			: 'select',
+				'type'			: 'all',
+				'multiple'		: 'add',
+				'library'		: library,
+				'select'		: function( attachment, i ) {
 					
 					// is image already in gallery?
-					if( $el.find('.acf-gallery-attachment[data-id="' + attachment.id  + '"]').exists() )
-					{
+					if( $el.find('.acf-gallery-attachment[data-id="' + attachment.id  + '"]').exists() ) {
+					
 						return;
+						
 					}
 					
 					
 			    	// vars
 			    	var image = {
-				    	id			:	attachment.id,
-				    	url			:	attachment.attributes.url
+				    	'id'	: attachment.id,
+				    	'url'	: attachment.attributes.url
 			    	};
 			    	
 			    	
 			    	// file?
-				    if( attachment.attributes.type != 'image' )
-				    {
+				    if( attachment.attributes.type != 'image' ) {
+				    
 					    image.url = attachment.attributes.icon;
+					    
 				    }
 				    
 				    
 				    // is preview size available?
-			    	if( attachment.attributes.sizes && attachment.attributes.sizes[ preview_size ] )
-			    	{
+			    	if( acf.isset(attachment, 'attributes', 'sizes', preview_size) ) {
+			    	
 				    	image.url = attachment.attributes.sizes[ preview_size ].url;
+				    	
 			    	}
 				    
 				    
@@ -1803,6 +1796,21 @@
 					
 				}
 			});
+			
+			
+			// modify DOM
+			frame.on('content:activate:browse', function(){
+				
+				acf.fields.gallery.render_collection( frame, $el );
+				
+				frame.content.get().collection.on( 'reset add', function(){
+				    
+					acf.fields.gallery.render_collection( frame, $el );
+				    
+			    });
+				
+			});
+			
 		},
 		
 		resize : function(){
@@ -1969,6 +1977,10 @@
 		// remove
 		acf.fields.gallery.set( $field ).remove( $a.attr('data-id') );
 		
+		
+		// prevent bubble
+		return false;
+		
 	});
 	
 	$(document).on('click', '.acf-gallery [data-name="add-attachment-button"]', function( e ){
@@ -1988,7 +2000,6 @@
 	});
 	
 	$(document).on('change', '.acf-gallery [data-name="bulk-actions-select"]', function( e ){
-		
 		
 		// vars
 		var $select	= $(this),

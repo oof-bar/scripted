@@ -1040,6 +1040,10 @@
 		
 		move_field_confirm : function( $field, html ){
 			
+			// reference
+			var self = this;
+			
+			
 			// update popup
 			acf.update_popup({
 				content : html
@@ -1073,7 +1077,13 @@
 							content : html
 						});
 						
-						acf.field_group.delete_field( $field );
+						
+						// remove field's ID to prevent it being deleted on save
+						self.update_field_meta( $field, 'ID', '');
+						
+						
+						// delete field (just for animation)
+						self.delete_field( $field );
 						
 					}
 				});

@@ -15,7 +15,7 @@
 .acf-bl:before, .acf-bl:after,
 .acf-cf:before, .acf-cf:after {
     content: "";
-    display: table;
+    display: block;
     line-height: 0;
 }
 .acf-hl:after,

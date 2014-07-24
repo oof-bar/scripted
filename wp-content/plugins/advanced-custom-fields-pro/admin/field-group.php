@@ -31,18 +31,19 @@ class acf_admin_field_group {
 	function __construct() {
 		
 		// actions
-		add_action( 'admin_enqueue_scripts',							array( $this,'admin_enqueue_scripts' ) );
-		add_action( 'save_post',										array( $this,'save_post' ) );
+		add_action('current_screen',									array($this, 'current_screen'));
+		add_action('save_post',											array($this, 'save_post'));
 		
 		
 		// ajax
-		add_action( 'wp_ajax_acf/field_group/render_field_settings',	array( $this, 'ajax_render_field_settings') );
-		add_action( 'wp_ajax_acf/field_group/render_location_value',	array( $this, 'ajax_render_location_value') );
-		add_action( 'wp_ajax_acf/field_group/move_field',				array( $this, 'ajax_move_field') );
+		add_action('wp_ajax_acf/field_group/render_field_settings',		array($this, 'ajax_render_field_settings'));
+		add_action('wp_ajax_acf/field_group/render_location_value',		array($this, 'ajax_render_location_value'));
+		add_action('wp_ajax_acf/field_group/move_field',				array($this, 'ajax_move_field'));
 		
 		
 		// filters
-		add_filter( 'post_updated_messages',							array( $this, 'post_updated_messages') );
+		add_filter('post_updated_messages',								array($this, 'post_updated_messages'));
+		
 	}
 	
 	
@@ -83,43 +84,69 @@ class acf_admin_field_group {
 	
 	
 	/*
-	*  validate_page
+	*  validate_screen
 	*
-	*  This function will check if the current page is correct for this class
+	*  This function will check if the current screen is correct for this class
 	*
 	*  @type	function
 	*  @date	23/06/12
 	*  @since	3.1.8
 	*
-	*  @param	n/a
+	*  @param	$current_screen (object)
 	*  @return	(boolean)
 	*/
 	
-	function validate_page() {
+	function validate_screen( $current_screen ) {
 		
-		// global
-		global $pagenow, $typenow;
-		
-
 		// vars
-		$r = false;
+		$allowed_base = array('post', 'post-new');
+		$allowed_type = array('acf-field-group');
 		
 		
-		// validate page
-		if( in_array( $pagenow, array('post.php', 'post-new.php') ) ) {
+		// validate base and type
+		if( in_array($current_screen->base, $allowed_base) && in_array($current_screen->post_type, $allowed_type) ) {
 			
-			// validate post type
-			if( $typenow == 'acf-field-group' ) {
-			
-				$r = true;
-				
-			}
+			return true;
 			
 		}
 		
 		
 		// return
-		return $r;
+		return false;
+	}
+	
+	
+	/*
+	*  current_screen
+	*
+	*  This function is fired when loading the admin page before HTML has been rendered.
+	*
+	*  @type	action (current_screen)
+	*  @date	21/07/2014
+	*  @since	5.0.0
+	*
+	*  @param	$current_screen (object)
+	*  @return	n/a
+	*/
+	
+	function current_screen( $current_screen ) {
+		
+		// validate page
+		if( !$this->validate_screen($current_screen) ) {
+		
+			return;
+			
+		}
+		
+		
+		// disable JSON to avoid conflicts between DB and JSON
+		acf_disable_local();
+		
+		
+		// actions
+		add_action('admin_enqueue_scripts',		array($this,'admin_enqueue_scripts'));
+		add_action('admin_head', 				array($this,'admin_head'));
+		
 	}
 	
 	
@@ -139,33 +166,17 @@ class acf_admin_field_group {
 	
 	function admin_enqueue_scripts() {
 		
-		// validate page
-		if( ! $this->validate_page() ) {
-		
-			return;
-			
-		}
-		
-		
 		// no autosave
-		wp_dequeue_script( 'autosave' );
+		wp_dequeue_script('autosave');
 		
 		
 		// custom scripts
-		wp_enqueue_style( 'acf-field-group' );
-		wp_enqueue_script( 'acf-field-group' );
-    
-		
-		// disable JSON to avoid conflicts between DB and JSON
-		acf_disable_local();
+		wp_enqueue_style('acf-field-group');
+		wp_enqueue_script('acf-field-group');
 		
 		
-		// actions
-		add_action( 'admin_head', array( $this,'admin_head' ) );
-		
-				
 		// 3rd party hook
-		do_action( 'acf/field_group/admin_enqueue_scripts' );
+		do_action('acf/field_group/admin_enqueue_scripts');
 		
 	}
 	
@@ -190,20 +201,20 @@ class acf_admin_field_group {
 		
 		
 		// vars
-		$l10n = apply_filters( 'acf/field_group/admin_l10n', array(
-			'move_to_trash'			=>	__("Move to trash. Are you sure?",'acf'),
-			'checked'				=>	__("checked",'acf'),
-			'no_fields'				=>	__("No toggle fields available",'acf'),
-			'title_is_required'		=>	__("Field group title is required",'acf'),
-			'copy'					=>	__("copy",'acf'),
-			'or'					=>	__("or",'acf'),
-			'fields'				=>	__("Fields",'acf'),
-			'parent_fields'			=>	__("Parent fields",'acf'),
-			'sibling_fields'		=>	__("Sibling fields",'acf'),
-			'hide_show_all'			=>	__("Hide / Show All",'acf'),
-			'move_field'			=>	__("Move Custom Field",'acf'),
-			'move_field_warning'	=>	__("This field cannot be moved until its changes have been saved",'acf'),
-			'null'					=>	__("Null",'acf'),
+		$l10n = apply_filters('acf/field_group/admin_l10n', array(
+			'move_to_trash'			=> __("Move to trash. Are you sure?",'acf'),
+			'checked'				=> __("checked",'acf'),
+			'no_fields'				=> __("No toggle fields available",'acf'),
+			'title_is_required'		=> __("Field group title is required",'acf'),
+			'copy'					=> __("copy",'acf'),
+			'or'					=> __("or",'acf'),
+			'fields'				=> __("Fields",'acf'),
+			'parent_fields'			=> __("Parent fields",'acf'),
+			'sibling_fields'		=> __("Sibling fields",'acf'),
+			'hide_show_all'			=> __("Hide / Show All",'acf'),
+			'move_field'			=> __("Move Custom Field",'acf'),
+			'move_field_warning'	=> __("This field cannot be moved until its changes have been saved",'acf'),
+			'null'					=> __("Null",'acf'),
 		));
 		
 		$o = array(
@@ -240,7 +251,7 @@ class acf_admin_field_group {
 		
 		
 		// hidden $_POST data
-		add_action( 'edit_form_after_title', array($this, 'edit_form_after_title') );
+		add_action('edit_form_after_title', array($this, 'edit_form_after_title'));
 		
 	}
 	

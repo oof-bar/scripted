@@ -25,6 +25,7 @@ class acf_compatibility {
 		add_filter('acf/get_valid_field/type=textarea',		array($this, 'get_valid_textarea_field'), 20, 1);
 		add_filter('acf/get_valid_field/type=relationship',	array($this, 'get_valid_relationship_field'), 20, 1);
 		add_filter('acf/get_valid_field/type=post_object',	array($this, 'get_valid_relationship_field'), 20, 1);
+		add_filter('acf/get_valid_field/type=page_link',	array($this, 'get_valid_relationship_field'), 20, 1);
 		add_filter('acf/get_valid_field/type=image',		array($this, 'get_valid_image_field'), 20, 1);
 		add_filter('acf/get_valid_field/type=file',			array($this, 'get_valid_image_field'), 20, 1);
 		add_filter('acf/get_valid_field/type=wysiwyg',		array($this, 'get_valid_wysiwyg_field'), 20, 1);
@@ -154,7 +155,7 @@ class acf_compatibility {
 	function get_valid_relationship_field( $field ) {
 		
 		// remove 'all' from post_type
-		if( is_array($field['post_type']) && in_array('all', $field['post_type']) ) {
+		if( acf_in_array('all', $field['post_type']) ) {
 			
 			$field['post_type'] = array();
 			
@@ -162,7 +163,7 @@ class acf_compatibility {
 		
 		
 		// remove 'all' from taxonomy
-		if( is_array($field['taxonomy']) && in_array('all', $field['taxonomy']) ) {
+		if( acf_in_array('all', $field['taxonomy']) ) {
 			
 			$field['taxonomy'] = array();
 			
@@ -336,17 +337,20 @@ class acf_compatibility {
 	
 	function get_valid_field_group( $field_group ) {
 		
+		// bail ealry if field group contains key ( is ACF5 )
+		if( !empty($field_group['key']) ) {
+			
+			return $field_group;
+			
+		}
+		
+		
 		// global
 		global $wpdb;
 		
 		
 		// add missing key
-		if( empty($field_group['key']) ) {
-			
-			$field_group['key'] = uniqid('group_');
-			
-		}
-		
+		$field_group['key'] = empty($field_group['id']) ? uniqid('group_') : 'group_' . $field_group['id'];
 		
 		// extract options
 		if( !empty($field_group['options']) ) {

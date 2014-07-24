@@ -31,7 +31,7 @@ class acf_admin_field_groups {
 	function __construct() {
 	
 		// actions
-		add_action('admin_enqueue_scripts',	array($this, 'admin_enqueue_scripts'));
+		add_action('current_screen',		array($this, 'current_screen'));
 		add_action('trashed_post',			array($this, 'trashed_post'));
 		add_action('untrashed_post',		array($this, 'untrashed_post'));
 		add_action('deleted_post',			array($this, 'deleted_post'));
@@ -40,71 +40,55 @@ class acf_admin_field_groups {
 	
 	
 	/*
-	*  validate_page
+	*  validate_screen
 	*
-	*  This function will check if the current page is correct for this class
+	*  This function will check if the current screen is correct for this class
 	*
 	*  @type	function
 	*  @date	23/06/12
 	*  @since	3.1.8
 	*
-	*  @param	n/a
+	*  @param	$current_screen (object)
 	*  @return	(boolean)
 	*/
 	
-	function validate_page() {
-		
-		// global
-		global $pagenow;
-		
+	function validate_screen( $current_screen ) {
 		
 		// vars
-		$r = false;
+		$allowed_base = array('edit');
+		$allowed_type = array('acf-field-group');
 		
 		
-		// validate page
-		if( $pagenow == 'edit.php' ) {
-		
-			// validate post type
-			if( isset($_GET['post_type']) && $_GET['post_type'] == 'acf-field-group' ) {
+		// validate base and type
+		if( in_array($current_screen->base, $allowed_base) && in_array($current_screen->post_type, $allowed_type) ) {
 			
-				$r = true;
-				
-			}
-			
-			
-			if( isset($_GET['page']) ) {
-			
-				$r = false;
-				
-			}
+			return true;
 			
 		}
 		
 		
 		// return
-		return $r;
+		return false;
 	}
 	
 	
 	/*
-	*  admin_enqueue_scripts
+	*  current_screen
 	*
-	*  This action is run after post query but before any admin script / head actions. 
-	*  It is a good place to register all actions.
+	*  This function is fired when loading the admin page before HTML has been rendered.
 	*
-	*  @type	action (admin_enqueue_scripts)
-	*  @date	30/06/2014
+	*  @type	action (current_screen)
+	*  @date	21/07/2014
 	*  @since	5.0.0
 	*
-	*  @param	n/a
+	*  @param	$current_screen (object)
 	*  @return	n/a
 	*/
 	
-	function admin_enqueue_scripts() {
+	function current_screen( $current_screen ) {
 		
 		// validate page
-		if( ! $this->validate_page() ) {
+		if( !$this->validate_screen($current_screen) ) {
 		
 			return;
 			
@@ -120,12 +104,13 @@ class acf_admin_field_groups {
 		
 		
 		// columns
-		add_filter('manage_edit-acf-field-group_columns',			array($this,'field_group_columns'), 10, 1);
-		add_action('manage_acf-field-group_posts_custom_column',	array($this,'field_group_columns_html'), 10, 2);
+		add_filter('manage_edit-acf-field-group_columns',			array($this, 'field_group_columns'), 10, 1);
+		add_action('manage_acf-field-group_posts_custom_column',	array($this, 'field_group_columns_html'), 10, 2);
 		
 	}
 	
 	
+		
 	/*
 	*  trashed_post
 	*
@@ -217,7 +202,7 @@ class acf_admin_field_groups {
 	/*
 	*  check_duplicate
 	*
-	*  This function is run during the 'admin_enqueue_scripts' action and will duplicate any selected field groups
+	*  This function is run during the 'admin_init' action and will duplicate any selected field groups
 	*
 	*  @type	function
 	*  @date	17/10/13

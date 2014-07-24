@@ -142,9 +142,9 @@ class acf_field_radio extends acf_field {
 					
 				}
 				
-				if( isset($field['disabled']) && in_array($value, $field['disabled']) ) {
+				if( isset($field['disabled']) && acf_in_array($value, $field['disabled']) ) {
 				
-					$atts['disabled'] = 'true';
+					$atts['disabled'] = 'disabled';
 					
 				}
 				

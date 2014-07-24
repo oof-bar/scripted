@@ -1422,11 +1422,22 @@ function acf_decode_taxonomy_term( $string ) {
 	
 	// vars
 	$data = explode(':', $string);
+	$taxonomy = 'category';
+	$term = '';
+	
+	
+	// check data
+	if( isset($data[1]) ) {
+		
+		$taxonomy = $data[0];
+		$term = $data[1];
+		
+	}
 	
 	
 	// add data to $r
-	$r['taxonomy'] = $data[0];
-	$r['term'] = $data[1];
+	$r['taxonomy'] = $taxonomy;
+	$r['term'] = $term;
 	
 	
 	// return
@@ -2340,6 +2351,35 @@ function acf_get_user_setting( $name = '', $default = false ) {
 	
 	// return
 	return $settings[0][$name];
+	
+}
+
+
+/*
+*  acf_in_array
+*
+*  description
+*
+*  @type	function
+*  @date	22/07/2014
+*  @since	5.0.0
+*
+*  @param	$post_id (int)
+*  @return	$post_id (int)
+*/
+
+function acf_in_array( $value, $array ) {
+	
+	// bail early if not array
+	if( !is_array($array) ) {
+		
+		return false;
+		
+	}
+	
+	
+	// find value in array
+	return in_array($value, $array);
 	
 }
 

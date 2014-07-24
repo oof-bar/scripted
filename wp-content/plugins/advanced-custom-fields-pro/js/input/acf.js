@@ -234,6 +234,7 @@ get_field_data : function( $el, name ){
 		
 		get_data : function( $el, name ){
 			
+			//console.log('get_data(%o, %o)', name, $el);
 			// defaults
 			name = name || false;
 			
@@ -907,88 +908,147 @@ get_field_data : function( $el, name ){
 	
 	acf.media = {
 		
-		upload_popup : function( args ) {
+		popup : function( args ) {
 			
 			// defaults
-			args = $.extend({}, {
-				title		: '',		// Upload Image
-				type		: '',		// image
-				query		: {},		// library query
-				uploadedTo	: 0,		// restrict browsing to post_id
-				multiple	: 0,		// allow multiple attachments to be selected
-				activate	: function(){},
-				select		: function( attachment, i ){}
-			}, args);
+			var defaults = {
+				'mode'			: 'select', // 'upload'|'edit'
+				'title'			: '',		// 'Upload Image'
+				'button'		: '',		// 'Select Image'
+				'type'			: '',		// 'image'
+				'library'		: 'all',	// 'all'|'uploadedTo'
+				'multiple'		: false,	// false, true, 'add'
+			};
 			
 			
-			// args.query
-			if( args.type )
-			{
-				args.query = { 
-					type : args.type
+			// vars
+			args = $.extend({}, defaults, args);
+			
+			
+			// frame options
+			var options = {
+				'title'			: args.title,
+				'filterable'	: args.filterable,
+				'multiple'		: args.multiple,
+				'library'		: {},
+				'states'		: [],
+			};
+			
+			
+			// add library
+			if( args.type ) {
+				
+				options.library = {
+					'type' : args.type
 				};
+				
 			}
 			
 			
-			// create frame
-			var frame = wp.media({
-				states : [
-					new wp.media.controller.Library({
-						title		: args.title,
-						multiple	: args.multiple,
-						library		: wp.media.query(args.query),
-						priority	: 20,
-						filterable	: 'all'
-					})
-				]
-			});
-			
-			
-			// events
-			frame.on('content:activate', function(){
+			// add states
+			options.states = [
 				
-				// vars
-				var toolbar = null,
-					filters = null;
-					
+				// main state
+				new wp.media.controller.Library({
+					library		: wp.media.query( options.library ),
+					multiple	: options.multiple,
+					title		: options.title,
+					priority	: 20,
+					filterable	: 'all',
+					editable	: true,
+
+					// If the user isn't allowed to edit fields,
+					// can they still edit it locally?
+					allowLocalEdits: true,
+				}),
+				
+				// edit image functionality
+				new wp.media.controller.EditImage()
+				
+			];
+			
+				
+			// add button
+			if( args.button ) {
+			
+				options.button = {
+					'text' : args.button
+				};
+				
+			}
+
+
+				
+			// create frame
+			var frame = wp.media( options );
+			
+			
+			// log events
+			frame.on('all', function( e ) {
+				
+				//console.log( e );
+			
+			}); 
+			
+			
+			// edit image view
+			// source: media-views.js:2410 editImageContent()
+			frame.on('content:render:edit-image', function(){
+				
+				var image = this.state().get('image'),
+					view = new wp.media.view.EditImage( { model: image, controller: this } ).render();
+	
+				this.content.set( view );
+	
+				// after creating the wrapper view, load the actual editor via an ajax call
+				view.loadEditor();
+				
+			}, frame);
+			
+			
+			// modify DOM
+			frame.on('content:activate:browse', function(){
 				
 				// populate above vars making sure to allow for failure
-				try
-				{
-					toolbar = frame.content.get().toolbar;
-					filters = toolbar.get('filters');
-				} 
-				catch(e)
-				{
-					// one of the objects was 'undefined'... perhaps the frame open is Upload Files
-					//console.log( e );
-				}
-				
-				
-				// validate
-				if( !filters )
-				{
-					return false;
-				}
-				
-				
-				// no need for 'uploaded' filter
-				if( args.uploadedTo )
-				{
-					filters.$el.find('option[value="uploaded"]').remove();
-					filters.$el.after('<span>' + acf._e('image', 'uploadedTo') + '</span>')
+				try {
 					
+					var content = frame.content.get(),
+						toolbar = content.toolbar,
+						filters = toolbar.get('filters');
+				
+				} catch(e) {
+				
+					// one of the objects was 'undefined'... perhaps the frame open is Upload Files
+					console.log( 'error %o', e );
+					return;
+					
+				}
+				
+				
+				// uploaded to post
+				if( args.library == 'uploadedTo' ) {
+					
+					// remove 'uploaded' option
+					filters.$el.find('option[value="uploaded"]').remove();
+					
+					
+					// add 'uploadedTo' text
+					filters.$el.after('<span class="acf-uploadedTo">' + acf._e('image', 'uploadedTo') + '</span>')
+					
+					
+					// add uploadedTo to filters
 					$.each( filters.filters, function( k, v ){
 						
-						v.props.uploadedTo = args.uploadedTo;
+						v.props.uploadedTo = acf.get('post_id');
 						
 					});
+				
 				}
 				
 				
-				// image
-				if( args.type == 'image' )
-				{
+				// type = image
+				if( args.type == 'image' ) {
+					
 					// filter only images
 					$.each( filters.filters, function( k, v ){
 					
@@ -1005,56 +1065,52 @@ get_field_data : function( $el, name ){
 						
 						
 						// don't remove the 'uploadedTo' if the library option is 'all'
-						if( v == 'uploaded' && !args.uploadedTo )
-						{
+						if( v == 'uploaded' && args.library == 'all' ) {
+						
 							return;
+							
 						}
 						
-						if( v.indexOf('image') === -1 )
-						{
+						
+						// remove this option
+						if( v.indexOf('image') === -1 ) {
+						
 							$(this).remove();
+							
 						}
 						
 					});
 					
 					
 					// set default filter
-					filters.$el.val('image').trigger('change');
+					filters.$el.val('image');
 					
 				}
 				
 				
-				// callback
-				if( typeof args.activate === 'function' )
-				{
-					args.activate.apply( this, [ frame ] );
-				}
+				// trigger change
+				filters.$el.trigger('change')
+				
+				
 			});
 			
 			
 			// select callback
+			if( typeof args.select === 'function' ) {
+			
 			frame.on( 'select', function() {
 				
 				// reference
-				var self = this;
+				var self = this,
+					i = -1;
 				
-				
-				// validate
-				if( typeof args.select !== 'function' ) {
-				
-					return false;
-					
-				}
-				
-				
+								
 				// get selected images
 				var selection = frame.state().get('selection');
 				
 				
 				// loop over selection
 				if( selection ) {
-				
-					var i = -1;
 					
 					selection.each(function( attachment ){
 						
@@ -1067,6 +1123,8 @@ get_field_data : function( $el, name ){
 				
 			});
 			
+			}
+			
 			
 			// close
 			frame.on('close',function(){
@@ -1086,125 +1144,82 @@ get_field_data : function( $el, name ){
 			});
 			
 			
-			// open popup
-			frame.open();
-			
-			
-			// return
-			return frame;
-			
-		},
-		
-		edit_popup : function( args ) {
-			
-			// defaults
-			args = $.extend({}, {
-				title		: '',
-				button		: '',
-				id			: 0
-			}, args);
-			
-			
-			// create frame
-			var frame = wp.media({
-				title		: args.title,
-				multiple	: 0,
-				button		: { text : args.button }
-			});
-			
-			
-			// open
+			// edit mode
+			if( args.mode == 'edit' ) {
+				
 			frame.on('open',function() {
 				
 				// set to browse
-				if( frame.content._mode != 'browse' )
-				{
-					frame.content.mode('browse');
-				}
+				this.content.mode('browse');
 				
 				
 				// add class
-				frame.$el.closest('.media-modal').addClass('acf-media-modal acf-expanded');
+				this.$el.closest('.media-modal').addClass('acf-media-modal acf-expanded');
 					
 				
 				// set selection
-				var selection	=	frame.state().get('selection'),
+				var selection	=	this.state().get('selection'),
 					attachment	=	wp.media.attachment( args.id );
 				
 				
 				// to fetch or not to fetch
-				if( $.isEmptyObject(attachment.changed) )
-				{
+				if( $.isEmptyObject(attachment.changed) ) {
+				
 					attachment.fetch();
+					
 				}
 				
 
 				selection.add( attachment );
 						
-			});
+			}, frame);
 			
-			
-			// select callback
-			frame.on( 'select', function() {
-				
-				
-				// validate
-				if( typeof args.select !== 'function' )
-				{
-					return false;
-				}
-				
-				
-				// get selected images
-				var selection = frame.state().get('selection');
-				
-				
-				// loop over selection
-				if( selection )
-				{
-					var i = -1;
-					
-					selection.each(function( attachment ){
-						
-						i++;
-						
-						args.select( attachment, i );
-						
-					});
-				}
-				
-			});
-			
-			
-			// close
 			frame.on('close',function(){
-				
-				setTimeout(function(){
-					
-					// detach
-					frame.detach();
-					frame.dispose();
-					
-					
-					// reset var
-					frame = null;
-					
-				}, 500);
-				
 				
 				// remove class
 				frame.$el.closest('.media-modal').removeClass('acf-media-modal');
 				
 			});
+				
+			}
+			
+			
+			// add button
+			if( args.button ) {
+			
+			/*
+			*  Notes
+			*
+			*  The normal button setting seems to break the 'back' functionality when editing an image.
+			*  As a work around, the following code updates the button text.
+			*/
+			
+			frame.on( 'toolbar:create:select', function( toolbar ) {
+				
+				options = {
+					'text'			: args.button,
+					'controller'	: this
+				};	
+
+				toolbar.view = new wp.media.view.Toolbar.Select( options );
+				
+				
+			}, frame );
+					
+			}
 			
 			
 			// open popup
-			frame.open();
+			setTimeout(function(){
+				
+				frame.open();
+				
+			}, 1);
 			
 			
 			// return
 			return frame;
-
+			
 		},
 		
 		init : function(){

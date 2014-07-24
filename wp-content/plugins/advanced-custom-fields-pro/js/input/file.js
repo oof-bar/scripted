@@ -9,11 +9,13 @@
 				id = $el.find('[data-name="id"]').val();
 			
 			
-			acf.media.edit_popup({
-				title		: acf._e('file', 'edit'),
-				button		: acf._e('file', 'update'),
-				id			: id,
-				select		: function( attachment, i ) {
+			// popup
+			var frame = acf.media.popup({
+				'title'			: acf._e('file', 'edit'),
+				'button'		: acf._e('file', 'update'),
+				'mode'			: 'edit',
+				'id'			: id,
+				'select'		: function( attachment, i ) {
 					
 			    	// vars
 			    	var file = {
@@ -31,6 +33,7 @@
 					
 				}
 			});
+			
 			
 		},
 		
@@ -75,12 +78,13 @@
 			
 			
 			// popup
-			var frame = acf.media.upload_popup({
-				title		: acf._e('file', 'select'),
-				type		: '',
-				multiple	: multiple,
-				uploadedTo	: ( library == 'uploadedTo' ) ? acf.get('post_id') : 0,
-				select		: function( attachment, i ) {
+			var frame = acf.media.popup({
+				'title'			: acf._e('file', 'select'),
+				'mode'			: 'select',
+				'type'			: '',
+				'multiple'		: multiple,
+				'library'		: library,
+				'select'		: function( attachment, i ) {
 					
 					// select / add another image field?
 			    	if( i > 0 ) {

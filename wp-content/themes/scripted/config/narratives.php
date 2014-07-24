@@ -1,5 +1,12 @@
 <? /* Narratives */
 
+function get_narrative_section ( $layout ) {
+  return ( get_template_directory() . '/narrative-layouts/' . $layout . '.php' );
+}
+
+/*
+// Deprecated Custom Post Type (Now a Page Template)
+
 function add_cpt_narratives ( ) {
 
   register_post_type('se_narrative', array(
@@ -46,5 +53,6 @@ function add_cpt_columns_se_narratives ( $columns ) {
 }
 
 function cpt_column_content_se_narratives ( ) {
-
+  # ?
 }
+*/

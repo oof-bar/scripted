@@ -1,6 +1,5 @@
-<? acf_form_head(); ?>
 <? get_header(); ?>
 
-Page template.
+Oh no, nothing here!
 
 <? get_footer(); ?>

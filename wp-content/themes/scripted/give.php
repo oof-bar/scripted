@@ -1,4 +1,4 @@
-<? /* Template Name: Give */ ?>
+<? # Template Name: Give ?>
 <? get_header(); ?>
 
 Give to Script Ed

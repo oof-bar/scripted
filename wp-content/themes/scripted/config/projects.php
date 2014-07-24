@@ -21,7 +21,7 @@ function add_cpt_projects ( ) {
     ),
     'description' => 'A place to share student projects. Currently under development.',
     'public' => true,
-    'menu_position' => 40,
+    'menu_position' => 41,
     'menu_icon' => 'dashicons-analytics',
     'hierarchical' => false,
     'supports' => array('title', 'excerpt'),

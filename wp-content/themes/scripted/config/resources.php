@@ -21,7 +21,7 @@ function add_cpt_resources ( ) {
     ),
     'description' => 'Alongside normal blog entries and events, educational resources will be available.',
     'public' => true,
-    'menu_position' => 40,
+    'menu_position' => 42,
     'menu_icon' => 'dashicons-portfolio',
     'hierarchical' => false,
     'supports' => array('title', 'excerpt', 'editor'),

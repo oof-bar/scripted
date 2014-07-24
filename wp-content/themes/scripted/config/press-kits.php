@@ -21,7 +21,7 @@ function add_cpt_press_kits ( ) {
     ),
     'description' => 'Downloadable press resources and media kits ought to be added here.',
     'public' => true,
-    'menu_position' => 50,
+    'menu_position' => 51,
     'menu_icon' => 'dashicons-admin-site',
     'hierarchical' => false,
     'supports' => array('title'),

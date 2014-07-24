@@ -25,7 +25,7 @@ function add_cpt_gifts ( ) {
     'query_var' => false,
     'show_ui' => true,
     'show_in_menu' => true,
-    'menu_position' => 60,
+    'menu_position' => 52,
     'menu_icon' => 'dashicons-awards',
     'hierarchical' => false,
     'supports' => array('title'),

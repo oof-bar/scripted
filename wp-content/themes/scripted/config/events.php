@@ -21,7 +21,7 @@ function add_cpt_events ( ) {
     ),
     'description' => 'Events are added to a feed and display in a unique way, but aren\'t sortable.',
     'public' => true,
-    'menu_position' => 35,
+    'menu_position' => 43,
     'menu_icon' => 'dashicons-calendar',
     'hierarchical' => false,
     'supports' => array('title', 'editor', 'excerpt'),

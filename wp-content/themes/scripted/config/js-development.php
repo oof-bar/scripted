@@ -21,10 +21,19 @@
   wp_register_script('donate', $scripts_path . 'donate.js', array('jquery','stripe'), '0.1.0', true);
   wp_enqueue_script('donate');
 
+  # Volunteer
+  wp_register_script('volunteer', $scripts_path . 'volunteer.js', array('jquery'), '0.1.0', true);
+  wp_enqueue_script('volunteer');
+
   # Stripe
   wp_register_script('stripe', 'https://js.stripe.com/v2/stripe-debug.js', array('jquery'), '', false);
   wp_enqueue_script('stripe');
+
   
   # jQuery
   wp_register_script('jquery-se', get_template_directory_uri() . '/scripts/src/lib/jquery.min.js', array(), '1.11.1', false);
   wp_enqueue_script('jquery-se');
+
+  # jQuery Validate
+  wp_register_script('jquery-validate', get_template_directory_uri() . '/scripts/src/lib/jquery.validate.js', array('jquery'), '1.13.0');
+  wp_enqueue_script('jquery-validate');

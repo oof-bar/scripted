@@ -1,4 +1,4 @@
-# Stripe
+# Stripe Donation Integration
 
 
 class Give
@@ -23,7 +23,6 @@ class Give
       error_output: $( settings.error_output or '#give-error' )
       name_first: $( settings.name_first or '' )
       name_last: $( settings.name_last or '' )
-      email: $( settings.email or '' )
 
     @watch()
 
@@ -145,48 +144,21 @@ class Give
     Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )
 
 
-###
-
-  Stripe.card.createToken {
-    number: $('#card-number').val()
-    cvc: $('#card-cvc').val()
-    exp_month: $('#card-expiry-month').val()
-    exp_year: $('#card-expiry-year').val()
-  }, stripeResponseHandler
-
-  $(this).off('submit.give')
-
-
-
-stripeResponseHandler = (status, response) ->
-  $form = $('#payment-form')
-
-  if response.error
-    # Show the errors on the form
-    $form.find('.payment-errors').text(response.error.message)
-    $form.find('button').prop('disabled', false)
-  else
-    $('#stripe-token').val(response.id)
-    # $('#give').submit()
-
-###
-
 $(document).on 'ready', ->
-  window.Donate = window.Donate or new Give({
-    name: 'main_give_form'
-    key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
-    form: '#give'
-    token: '#stripe-token'
-    cc: '#card-number'
-    cvc: '#card-cvc'
-    exp_month: '#card-expiry-month'
-    exp_year: '#card-expiry-year'
-    zip: '#address-zip'
-    amount: '#amount-formatted'
-    cents: '#amount-cents'
-    error_output: '#give-error'
-    name_first: '#name-first'
-    name_last: '#name-last'
-    email: '#email'
-    nonce: '#nonce'
-  })
+  if ( $('#give').length )
+    window.Donate = window.Donate or new Give
+      name: 'main_give_form'
+      key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
+      form: '#give'
+      token: '#stripe-token'
+      cc: '#card-number'
+      cvc: '#card-cvc'
+      exp_month: '#card-expiry-month'
+      exp_year: '#card-expiry-year'
+      zip: '#address-zip'
+      amount: '#amount-formatted'
+      cents: '#amount-cents'
+      error_output: '#give-error'
+      name_first: '#name-first'
+      name_last: '#name-last'
+      nonce: '#nonce'

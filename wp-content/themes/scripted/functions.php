@@ -49,29 +49,40 @@
     echo ');</script>';
   }
 
+  # Process Text
+
   function markdown ( $text ) {
     return $Parsedown->text( $text );
+  }
+
+  function speak_number ( $number ) {
+    $speakables = array("zero","one","two","three","four","five","six","seven","eight","nine","ten");
+    return ( ( $number > abs(10) || $number < 0 ) ? $number : $speakables[abs($number)] );
   }
 
   # Tags
   function se_meta_tags ( ) {
     if ( $tags = se_option('tags') ) {
-      $tag_list = U::pluck( $tags, 'tag');
+      $tag_list = __::pluck( $tags, 'tag');
       return implode(',', $tag_list);
     }
   }
 
+
   /*
-    Custom Post Types
+    Custom Post Types & Configuration
 
     To allow functions.php to express the primary features of the site, we'll split out the Custom Post Type Registrations into their own files. Each CPT file contains a few initializers, triggered by a management function attached to the init event.
   */
 
   # Narrative / Story
-  # require_once('config/narratives.php');
+  require_once('config/narratives.php');
 
   # Volunteer Applications
   require_once('config/volunteers.php');
+
+  # News
+  # require_once('config/news.php');
 
   # Events
   require_once('config/events.php');
@@ -89,13 +100,14 @@
   require_once('config/press-kits.php');
 
   # Donors
-  require_once('config/donors.php');
+  require_once('config/gifts.php');
 
   add_action('init', 'init_custom_post_types');
 
   function init_custom_post_types ( ) {
     # add_cpt_narratives();
-    add_cpt_volunteer_applications();
+    # add_cpt_volunteer_applications();
+    # add_cpt_news();
     add_cpt_events();
     add_cpt_resources();
     add_cpt_projects();
@@ -117,11 +129,7 @@
     Site-wide Options
   */
 
-  # function se_add_options_page
-  acf_add_options_page( array(
-    'page_title' => 'Site Options',
-    'menu_slug' => 'se_site_options'
-  ));
+  add_filter( 'pre_get_shortlink', '__return_empty_string' );
 
   /*
     Menus
@@ -182,6 +190,4 @@
   /*
     Mailchimp & Newsletter Signup
   */
-
-
 

@@ -11,4 +11,6 @@
   <? } ?>
 <? } ?>
 
+<? include 'partials/pagination.php'; ?>
+
 <? get_footer(); ?>

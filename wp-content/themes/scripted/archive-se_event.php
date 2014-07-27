@@ -1,8 +1,8 @@
 <? get_header(); ?>
 
-<h1><?= "Event Archive"; ?></h1>
-
 <? include 'partials/blog-navigation.php'; ?>
+
+<h1><?= "Event Archive"; ?></h1>
 
 <? if ( have_posts() ) { ?>
   <div class="events">
@@ -11,5 +11,7 @@
     <? } ?>
   </div>
 <? } ?>
+
+<? include 'partials/pagination.php'; ?>
 
 <? get_footer(); ?>

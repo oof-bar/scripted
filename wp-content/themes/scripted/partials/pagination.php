@@ -1,0 +1,1 @@
+<?= posts_nav_link() ?>

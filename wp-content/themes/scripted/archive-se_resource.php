@@ -1,8 +1,8 @@
 <? get_header(); ?>
 
-<h1>Resource Archive</h1>
-
 <? include 'partials/blog-navigation.php'; ?>
+
+<h1>Resource Archive</h1>
 
 <? if ( have_posts() ) { ?>
   <div class="resources">
@@ -11,5 +11,7 @@
     <? } ?>
   </div>
 <? } ?>
+
+<? include 'partials/pagination.php'; ?>
 
 <? get_footer(); ?>

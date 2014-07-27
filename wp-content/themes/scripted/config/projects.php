@@ -2,7 +2,7 @@
 
 function add_cpt_projects ( ) {
 
-  register_post_type('se_projects', array(
+  register_post_type('se_project', array(
     'label' => "Student Projects",
     'labels' => array(  
       'name' => 'Student Projects',

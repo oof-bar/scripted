@@ -30,6 +30,7 @@ function add_cpt_gifts ( ) {
     'hierarchical' => false,
     'supports' => array('title'),
     'has_archive' => false,
+    'query_var' => false,
     'rewrite' => array(
       'slug' => 'donation',
       'pages' => false

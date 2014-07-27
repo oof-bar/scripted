@@ -81,8 +81,11 @@
   # Volunteer Applications
   require_once('config/volunteers.php');
 
-  # News
-  # require_once('config/news.php');
+  # Post Override
+  require_once('config/post.php');
+
+  # Aggregator
+  require_once('config/aggregator.php');
 
   # Events
   require_once('config/events.php');
@@ -108,6 +111,10 @@
     # add_cpt_narratives();
     # add_cpt_volunteer_applications();
     # add_cpt_news();
+
+    add_cpt_aggregator();
+    add_cpt_post_override();
+
     add_cpt_events();
     add_cpt_resources();
     add_cpt_projects();
@@ -119,7 +126,7 @@
   add_filter( 'pre_get_posts', 'add_cpt_to_main_query' );
 
   function add_cpt_to_main_query ( $query ) {
-    if ( is_home() && $query->is_main_query() ) {
+    if ( $query->get('post_type') == 'se_aggregator' && ! is_admin() ) {
       $query->set( 'post_type', array( 'post', 'se_event', 'se_resource', 'se_project' ) );
     }
     return $query;

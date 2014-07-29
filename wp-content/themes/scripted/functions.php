@@ -7,9 +7,6 @@
   # ACF Customizations
   require_once("config/acf.php");
 
-  # cURL Polyfill
-  # require_once("lib/Purl.php");
-
   # Mailchimp API
   require_once("lib/Mailchimp.php");
   require_once("config/mc.php");

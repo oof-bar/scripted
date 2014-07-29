@@ -1,8 +1,3 @@
-<? # Template Name: Give ?>
-<? get_header(); ?>
-
-Give to Script Ed
-
 <form id="give">
 
   <div id="give-error"></div>
@@ -73,5 +68,3 @@ Give to Script Ed
 
   <input type="submit" value="Give!" />
 </form>
-
-<? get_footer(); ?>

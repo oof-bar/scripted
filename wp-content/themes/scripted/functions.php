@@ -65,6 +65,11 @@
     }
   }
 
+  # Partials
+  function get_partial ( $name ) {
+    include ( get_template_directory() . '/partials/' . $name .'.php' );
+  }
+
 
   /*
     Custom Post Types & Configuration

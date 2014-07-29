@@ -1,4 +1,5 @@
 <? /* Template Name: Narrative */ ?>
+
 <? get_header(); ?>
 <? $narrative = get_fields(); ?>
 

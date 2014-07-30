@@ -2,6 +2,9 @@
 
 class acf_wpml_compatibility {
 	
+	var $lang = '';
+	
+	
 	/*
 	*  Constructor
 	*
@@ -17,7 +20,12 @@ class acf_wpml_compatibility {
 	
 	function __construct() {
 		
+		// vars
+		$this->lang = ICL_LANGUAGE_CODE;
+		
+		
 		// actions
+		add_action('acf/update_field_group',		array($this, 'update_field_group'), 1, 1);
 		add_action('icl_make_duplicate',			array($this, 'icl_make_duplicate'), 10, 4);
 		add_action('acf/field_group/admin_head',	array($this, 'admin_head'));
 		add_action('acf/input/admin_head',			array($this, 'admin_head'));
@@ -28,6 +36,28 @@ class acf_wpml_compatibility {
 		add_filter('acf/settings/load_json',		array($this, 'settings_load_json'));
 	}
 	
+	
+	/*
+	*  update_field_group
+	*
+	*  This function is hooked into the acf/update_field_group action and will save all field group data to a .json file 
+	*
+	*  @type	function
+	*  @date	10/03/2014
+	*  @since	5.0.0
+	*
+	*  @param	$field_group (array)
+	*  @return	n/a
+	*/
+	
+	function update_field_group( $field_group ) {
+		
+		global $sitepress;
+		
+		$this->lang = $sitepress->get_language_for_element($field_group['ID'], 'post_acf-field-group');
+		
+	}
+
 	
 	/*
 	*  settings_save_json
@@ -44,12 +74,20 @@ class acf_wpml_compatibility {
 	
 	function settings_save_json( $path ) {
 		
+		// bail early if dir does not exist
+		if( !is_writable($path) ) {
+			
+			return $path;
+			
+		}
+		
+		
 		// remove trailing slash
 		$path = untrailingslashit( $path );
-		
-		
+
+			
 		// ammend
-		$path = $path . '/' . ICL_LANGUAGE_CODE;
+		$path = $path . '/' . $this->lang;
 		
 		
 		// make dir if does not exist
@@ -90,7 +128,7 @@ class acf_wpml_compatibility {
 				
 				
 				// ammend
-				$paths[ $i ] = $path . '/' . ICL_LANGUAGE_CODE;
+				$paths[ $i ] = $path . '/' . $this->lang;
 			
 			}
 		}
@@ -129,6 +167,13 @@ class acf_wpml_compatibility {
 		// duplicate field group
 		acf_duplicate_field_group( $master_post_id, $id );
 		
+		
+		// always translate independately to avoid many many bugs!
+		// - translation post gets a new key (post_name) when origional post is saved
+		// - local json creates new files due to changed key
+		global $iclTranslationManagement;
+		
+		$iclTranslationManagement->reset_duplicate_flag( $id );
 
 	}
 	

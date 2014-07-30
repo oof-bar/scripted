@@ -504,6 +504,12 @@ ul.acf-checkbox-list li label {
 	padding-left: 24%;
 }
 
+/* media popup & gallery field fix */
+.acf-table .form-table tr.acf-tab-wrap td .acf-tab-group {
+	margin-bottom: 10px;
+	padding-left: 0;
+}
+
 
 /*--------------------------------------------------------------------------------------------
 *

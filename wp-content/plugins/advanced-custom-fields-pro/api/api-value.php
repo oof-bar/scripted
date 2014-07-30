@@ -80,7 +80,7 @@ function acf_get_value( $post_id, $field, $db_only = false ) {
 	 	
 	} else {
 		
-		$v = get_option( "{$post_id}_{$field['name']}", false );
+		$v = get_option( "{$post_id}_{$field['name']}", null );
 	
 		if( ! is_null($v) ) {
 		

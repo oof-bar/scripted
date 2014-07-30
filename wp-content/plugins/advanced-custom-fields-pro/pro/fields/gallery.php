@@ -54,7 +54,7 @@ class acf_field_gallery extends acf_field {
 										<img alt="" src="<%= url %>">
 									</div>
 									<div class="actions acf-soh-target">
-										<a class="acf-icon dark" data-name="remove-attachment-button" data-id="<%= id %>" href="#">
+										<a href="#" class="acf-icon dark remove-attachment" data-id="<%= id %>">
 											<i class="acf-sprite-delete"></i>
 										</a>
 									</div>
@@ -308,7 +308,8 @@ class acf_field_gallery extends acf_field {
 			<img src="<?php echo $attachment['sizes']['thumbnail']['url']; ?>" alt="<?php echo $attachment['alt']; ?>" />
 			<p class="filename"><strong><?php _e('Attachment Details', 'acf'); ?></strong></p>
 			<p class="uploaded"><?php echo $attachment['dateFormatted']; ?></p>
-			<p class="dimensions"><?php echo $attachment['width']; ?> × <?php echo $attachment['height']; ?></p>
+			<p class="dimensions"><?php echo $attachment['width']; ?> × <?php echo $attachment['height']; ?> </p>
+			<p class="actions"><a href="#" class="edit-attachment" data-id="<?php echo $id; ?>">Edit</a> <a href="#" class="remove-attachment" data-id="<?php echo $id; ?>">Remove</a></p>
 		</div>
 		<table class="form-table">
 			<tbody>
@@ -388,6 +389,11 @@ class acf_field_gallery extends acf_field {
 			'data-max'			=> $field['max'],
 		);
 		
+		// vars
+		$height = acf_get_user_setting('gallery_height', 400);
+		$height = max( $height, 200 ); // minimum height is 200
+		$atts['style'] = "height:{$height}px";
+		
 		?>
 <div <?php acf_esc_attr_e($atts); ?>>
 	
@@ -433,7 +439,7 @@ class acf_field_gallery extends acf_field {
 							<img src="<?php echo $src; ?>" alt="" />
 						</div>
 						<div class="actions acf-soh-target">
-							<a class="acf-icon dark" data-name="remove-attachment-button" data-id="<?php echo $id; ?>" href="#">
+							<a class="acf-icon dark remove-attachment" data-id="<?php echo $id; ?>" href="#">
 								<i class="acf-sprite-delete"></i>
 							</a>
 						</div>
@@ -450,17 +456,16 @@ class acf_field_gallery extends acf_field {
 			
 			<ul class="acf-hl">
 				<li>
-					<a data-name="add-attachment-button" class="acf-button blue"><?php _e('Add to gallery', 'acf'); ?></a>
+					<a href="#" class="acf-button blue add-attachment"><?php _e('Add to gallery', 'acf'); ?></a>
 				</li>
 				<li class="acf-fr">
-					<select data-name="bulk-actions-select">
+					<select class="bulk-actions">
 						<option value=""><?php _e('Bulk actions', 'acf'); ?></option>
 						<option value="date"><?php _e('Sort by date uploaded', 'acf'); ?></option>
 						<option value="modified"><?php _e('Sort by date modified', 'acf'); ?></option>
 						<option value="title"><?php _e('Sort by title', 'acf'); ?></option>
 						<option value="reverse"><?php _e('Reverse current order', 'acf'); ?></option>
 					</select>
-					<!-- <a class="acf-button bulk-actions-apply"><?php _e('Apply', 'acf'); ?></a> -->
 				</li>
 			</ul>
 			
@@ -471,20 +476,16 @@ class acf_field_gallery extends acf_field {
 	<div class="acf-gallery-side">
 	<div class="acf-gallery-side-inner">
 			
-		<div class="acf-gallery-side-data">
-		
-			<?php //echo get_media_item( 158 ); ?>
-			
-		</div>
+		<div class="acf-gallery-side-data"></div>
 						
 		<div class="acf-gallery-toolbar">
 			
 			<ul class="acf-hl">
 				<li>
-					<a data-name="close-attachment-button" class="acf-button"><?php _e('Close', 'acf'); ?></a>
+					<a href="#" class="acf-button close-sidebar"><?php _e('Close', 'acf'); ?></a>
 				</li>
 				<li class="acf-fr">
-					<a data-name="save-attachment-button" class="acf-button blue"><?php _e('Update', 'acf'); ?></a>
+					<a class="acf-button blue update-attachment"><?php _e('Update', 'acf'); ?></a>
 				</li>
 			</ul>
 			

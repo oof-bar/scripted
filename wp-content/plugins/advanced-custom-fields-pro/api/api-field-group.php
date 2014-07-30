@@ -16,16 +16,26 @@
 function acf_is_field_group_key( $group_key = '' ) {
 	
 	// validate type
-	if( ! is_string($group_key) )
-	{
+	if( ! is_string($group_key) ) {
+	
 		return false;
+		
 	}
 	
 	
 	// search for 'field_'
-	if( substr($group_key, 0, 6) === 'group_' )
-	{
+	if( substr($group_key, 0, 6) === 'group_' ) {
+	
 		return true;
+		
+	}
+	
+	
+	// allow local field key to not start with '_field'
+	if( acf_is_local_field_group($group_key) ) {
+		
+		return true;
+		
 	}
 	
 	
@@ -485,7 +495,7 @@ function acf_update_field_group( $field_group = array() ) {
     
     
     // allow field groups to contain the same name
-	add_filter( 'wp_unique_post_slug', 'acf_update_field_group_wp_unique_post_slug', 5, 6 ); 
+	add_filter( 'wp_unique_post_slug', 'acf_update_field_group_wp_unique_post_slug', 100, 6 ); 
 	
     
     // update the field group and update the ID

@@ -50,6 +50,7 @@ class acf_input {
 			'jquery-ui-core',
 			'jquery-ui-tabs',
 			'jquery-ui-sortable',
+			'jquery-ui-resizable',
 			'wp-color-picker',
 			'thickbox',
 			'media-upload',

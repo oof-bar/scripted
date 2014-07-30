@@ -1306,6 +1306,14 @@
 			}
 			
 			
+			// abort XHR if this field is already loading AJAX data
+			if( $el.data('xhr') ) {
+			
+				$el.data('xhr').abort();
+				
+			}
+			
+			
 			// get settings
 			var $settings = $tbody.children('tr[data-setting="' + old_type + '"]'),
 				html = '';
@@ -1380,17 +1388,18 @@
 			
 			
 			// ajax
-			$.ajax({
+			var xhr = $.ajax({
 				url: acf.o.ajaxurl,
 				data: ajax_data,
 				type: 'post',
 				dataType: 'html',
 				success: function( html ){
 					
-					if( ! html )
-					{
-						$tr.remove();
+					// bail early if no html
+					if( !html ) {
+					
 						return;
+						
 					}
 					
 					
@@ -1399,7 +1408,7 @@
 					
 					
 					// replace
-					$tr.replaceWith( $new_tr );
+					$tr.after( $new_tr );
 					
 					
 					// trigger event
@@ -1407,8 +1416,18 @@
 					acf.do_action('change_field_type', $el);
 
 					
+				},
+				complete : function(){
+					
+					// this function will also be triggered by $el.data('xhr').abort();
+					$tr.remove();
+					
 				}
 			});
+			
+			
+			// update el data
+			$el.data('xhr', xhr);
 			
 		},
 		

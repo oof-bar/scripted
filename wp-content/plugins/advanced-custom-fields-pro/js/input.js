@@ -456,6 +456,12 @@ var acf = {
 			
 		},
 		
+		get_closest_field : function( $el ){
+			
+			return $el.closest('.acf-field');
+			
+		},
+		
 		get_field_wrap : function( $el ){
 			
 			return $el.closest('.acf-field');
@@ -1188,7 +1194,6 @@ get_field_data : function( $el, name ){
 			// frame options
 			var options = {
 				'title'			: args.title,
-				'filterable'	: args.filterable,
 				'multiple'		: args.multiple,
 				'library'		: {},
 				'states'		: [],
@@ -1200,6 +1205,26 @@ get_field_data : function( $el, name ){
 				
 				options.library = {
 					'type' : args.type
+				};
+				
+			}
+			
+			
+			// limit query
+			if( args.mode == 'edit' ) {
+				
+				options.library = {
+					'post__in' : [args.id]
+				};
+				
+			}
+			
+			
+			// add button
+			if( args.button ) {
+			
+				options.button = {
+					'text' : args.button
 				};
 				
 			}
@@ -1227,28 +1252,19 @@ get_field_data : function( $el, name ){
 				
 			];
 			
-				
-			// add button
-			if( args.button ) {
 			
-				options.button = {
-					'text' : args.button
-				};
-				
-			}
-
-
-				
 			// create frame
 			var frame = wp.media( options );
 			
 			
 			// log events
-			frame.on('all', function( e ) {
+			/*
+frame.on('all', function( e ) {
 				
-				//console.log( e );
+				console.log( 'frame all: %o', e );
 			
-			}); 
+			});
+*/
 			
 			
 			// edit image view
@@ -1279,7 +1295,7 @@ get_field_data : function( $el, name ){
 				} catch(e) {
 				
 					// one of the objects was 'undefined'... perhaps the frame open is Upload Files
-					console.log( 'error %o', e );
+					// console.log( 'error %o', e );
 					return;
 					
 				}
@@ -1410,7 +1426,11 @@ get_field_data : function( $el, name ){
 			frame.on('open',function() {
 				
 				// set to browse
-				this.content.mode('browse');
+				if( this.content.mode() != 'browse' ) {
+				
+					this.content.mode('browse');
+					
+				}
 				
 				
 				// add class
@@ -1418,18 +1438,11 @@ get_field_data : function( $el, name ){
 					
 				
 				// set selection
-				var selection	=	this.state().get('selection'),
-					attachment	=	wp.media.attachment( args.id );
+				var state 		= this.state(),
+					selection	= state.get('selection'),
+					attachment	= wp.media.attachment( args.id );
 				
 				
-				// to fetch or not to fetch
-				if( $.isEmptyObject(attachment.changed) ) {
-				
-					attachment.fetch();
-					
-				}
-				
-
 				selection.add( attachment );
 						
 			}, frame);
@@ -2166,6 +2179,26 @@ get_field_data : function( $el, name ){
 	
 	
 	/*
+	*  preventDefault helper
+	*
+	*  This function will prevent default of any link with an href of #
+	*
+	*  @type	function
+	*  @date	24/07/2014
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	$(document).on('click', '.acf-field a[href="#"]', function( e ){
+		
+		e.preventDefault();
+		
+	});
+	
+	
+	/*
 	*  Force revisions
 	*
 	*  description
@@ -2675,7 +2708,7 @@ get_field_data : function( $el, name ){
 				
 				$hidden.trigger('change');
 				
-			}, 100);
+			}, 1000);
 			
 		}
 	};
@@ -2702,8 +2735,7 @@ get_field_data : function( $el, name ){
 			
 		});
 		
-	});
-	
+	});	
 
 })(jQuery);
 

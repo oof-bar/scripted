@@ -279,7 +279,7 @@ class acf_field_taxonomy extends acf_field {
 			
 			$terms = get_the_terms( $post_id, $field['taxonomy'] );
 			
-			if( !empty($terms) ) {
+			if( !empty($terms) && !is_wp_error($terms) ) {
 				
 				foreach( $terms as $term ) {
 					

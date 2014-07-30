@@ -70,6 +70,11 @@
     include ( get_template_directory() . '/partials/' . $name .'.php' );
   }
 
+  # Post Embeds
+  function get_embed ( $name ) {
+    include ( get_template_directory() . '/embed/' . $name . '.php' );
+  }
+
 
   /*
     Custom Post Types & Configuration

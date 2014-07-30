@@ -1,16 +1,18 @@
-<? /* Index */ ?>
+<? /* Default Archive and Single Object Display */ ?>
 <? get_header(); ?>
 
-<? include 'partials/blog-navigation.php'; ?>
+<? get_partial('blog-navigation'); ?>
 
 <h1>Updates</h1>
 
 <? if ( have_posts() ) { ?>
-  <? while ( have_posts() ) { the_post(); ?>
-    <? include 'embed/' . get_post_type() . '.php'; ?>
-  <? } ?>
+  <div class="posts">
+    <? while ( have_posts() ) { the_post(); ?>
+      <? get_embed( get_post_type() ); ?>
+    <? } ?>
+  </div>
 <? } ?>
 
-<? include 'partials/pagination.php'; ?>
+<? get_partial('pagination'); ?>
 
 <? get_footer(); ?>

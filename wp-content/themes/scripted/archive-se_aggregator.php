@@ -2,12 +2,12 @@
 
 <h1>Aggregated Archive</h1>
 
-<? include 'partials/blog-navigation.php'; ?>
+<? get_partial('blog-navigation'); ?>
 
 <? if ( have_posts() ) { ?>
   <div class="feed">
     <? while ( have_posts() ) { the_post(); ?>
-      <? include 'embed/' . get_post_type() . '.php'; ?>
+      <? get_embed( get_post_type() ); ?>
     <? } ?>
   </div>
 <? } ?>

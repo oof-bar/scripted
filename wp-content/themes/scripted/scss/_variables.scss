@@ -3,5 +3,25 @@
 */
 
 // Column Configuration
+
 $columns: 12;
 $gutter-width: 2%;
+$gutter-width-desktop: 2%;
+$gutter-width-wide: 2%;
+
+
+// Breakpoints
+
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 960px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1350px;
+
+
+// Type
+
+$family-serif: "Roboto Slab", "Helvetica", "Arial", sans-serif;
+$family-sans: "proxima-nova", "Helvetica", "Arial", sans-serif;
+
+
+// Color

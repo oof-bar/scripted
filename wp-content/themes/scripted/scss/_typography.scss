@@ -1,0 +1,18 @@
+/*
+  Typography
+*/
+
+body {
+  font-size: 17px;
+  line-height: 20px;
+  font-family: $family-sans;
+}
+
+#{headers(all)} {
+  font-family: $family-serif;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 85%;
+}

@@ -75,7 +75,6 @@
     include ( get_template_directory() . '/embed/' . $name . '.php' );
   }
 
-
   /*
     Custom Post Types & Configuration
 
@@ -194,7 +193,7 @@
     } else {
 
       require_once('config/js-production.php');
-
+#//use.typekit.net/fxj8drj.js
     }
   }
 

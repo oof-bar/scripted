@@ -5,26 +5,12 @@
   August W. Miller
 */
 
+@import 'compass/css3';
+@import 'compass/reset';
 @import 'variables';
+@import 'mixins';
 
 @import 'grid';
+@import 'typography';
+@import 'structure';
 // @import 'base';
-
-* {
-  font-weight: inherit;
-}
-
-body {
-  font-family: "Roboto", "Helvetica", sans-serif;
-  // font-family: "Fira Sans", "Helvetica", sans-serif;
-  font-weight: 300;
-}
-
-pre {
-  // font-family: "Fira Mono";
-  font-size: 85%;
-}
-
-#{headers(all)} {
-  font-family: "Roboto Slab", "Helvetica", sans-serif;
-}

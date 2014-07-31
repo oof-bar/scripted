@@ -21,11 +21,11 @@
 
   <div class="wrapper statistics">
 
-    <? $columns = ( $section['layout'] == 'grid' ? 6 : 12 ) ?>
+    <? $columns = ( $section['layout'] == 'grid' ? 'col-6' : 'col-8 centered greedy' ) ?>
 
     <? foreach ( $section['stats'] as $statistic ) { ?>
 
-      <div class="column col-<?= $columns ?> statistic">
+      <div class="column <?= $columns ?> statistic">
 
         <div class="data">
           <?= $statistic['emphasis'] ?>

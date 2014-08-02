@@ -8,6 +8,10 @@ body {
   font-family: $family-sans;
 }
 
+p {
+  margin-bottom: 12px;
+}
+
 // Headers
 
 #{headers(all)} {
@@ -69,14 +73,6 @@ h5 {
   margin-bottom: 1em;
 }
 
-.quote {
-  font-size: 1.5em;
-  font-weight: 300;
-  font-family: $family-serif;
-  line-height: 1.2em;
-  margin-bottom: 1em;
-}
-
 .med {
   font-size: 1.175em;
   font-family: $family-sans;
@@ -84,8 +80,31 @@ h5 {
   margin-bottom: 0.75em;
 }
 
-p {
-  margin-bottom: 12px;
+.testimonials {
+
+  .quote {
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.2em;
+  }
+
+  .attribution {
+    font-size: 1em;
+    margin-top: 1.25em;
+    font-weight: 600;
+  }
+
+}
+
+.featured-quote{
+  .quote {
+    font-weight: 300;
+  }
+
+  .attribution {
+    font-size: 0.8em;
+    margin-top: 1.5em;
+  }
 }
 
 // Helpers
@@ -101,4 +120,23 @@ strong {
 pre {
   font-family: monospace;
   font-size: 85%;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// Special
+
+.data {
+  font-size: 3.3em;
+  font-family: $family-serif;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-bottom: 0.25em;
 }

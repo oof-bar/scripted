@@ -71,8 +71,8 @@
   }
 
   # Post Embeds
-  function get_embed ( $name ) {
-    include ( get_template_directory() . '/embed/' . $name . '.php' );
+  function get_embed ( $name, $version = '' ) {
+    include ( get_template_directory() . '/embed/' . ( $version ? $version . '/' : '' ) . $name . '.php' );
   }
 
   # Formatted Page Titles

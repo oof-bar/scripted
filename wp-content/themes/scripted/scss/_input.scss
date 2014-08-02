@@ -17,6 +17,7 @@ input {
 }
 
 .button {
+  @include border-radius(3px);
   display: inline-block;
   padding: 0.6em 2em 0.5em 2em;
   margin: 0.25em;

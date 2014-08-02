@@ -2,7 +2,9 @@
 <div class="page-navigation">
   <ul>
     <? foreach ( $nearby as $p ) { ?>
-      <li class="menu-item">
+      <? $link_classes = array('menu-item') ?>
+      <? if ( is_page($p->ID) ) array_push($link_classes, 'current-page') ?>
+      <li class="<?= join($link_classes, ' ') ?>">
         <a href="<?= get_permalink($p) ?>">
           <?= get_the_title($p) ?>
         </a>
@@ -10,6 +12,3 @@
     <? } ?>
   </ul>
 </div>
-
-
-<? pp($nearby) ?>

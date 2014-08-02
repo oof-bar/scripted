@@ -75,8 +75,8 @@ class Newsletter
 
 
 
-$(document).on 'ready', ->
-  window.Signup = window.Signup or new Newsletter({
+$ ->
+  window.SE.Signup = window.SE.Signup or new Newsletter({
     form: "#se-newsletter-signup"
     email_field: "#se-email-subscriber"
     api: global.ajax_url
@@ -86,3 +86,15 @@ $(document).on 'ready', ->
     location: 'footer'
     secure_token: $('#se-email-nonce').val()
   })
+
+  $("#se-newsletter-signup").validate
+    debug: true
+    errorElement: "em"
+    rules:
+      email:
+        required: true
+        email: true
+    messages:
+      email:
+        required: "We can't do much without your address!",
+        email: "An email address must be in the format of name@domain.com"

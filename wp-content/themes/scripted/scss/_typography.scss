@@ -100,3 +100,18 @@ pre {
   font-family: monospace;
   font-size: 85%;
 }
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+// Special
+
+.data {
+  font-size: 3.3em;
+  font-family: $family-serif;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-bottom: 0.25em;
+}

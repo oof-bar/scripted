@@ -179,17 +179,17 @@
 
   })();
 
-  $(document).on('ready', function() {
+  $(function() {
     if (($('#give').length)) {
       return window.Donate = window.Donate || new Give({
         name: 'main_give_form',
         key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2',
         form: '#give',
         token: '#stripe-token',
-        cc: '#card-number',
-        cvc: '#card-cvc',
-        exp_month: '#card-expiry-month',
-        exp_year: '#card-expiry-year',
+        cc: '#cc-number',
+        cvc: '#cc-cvc',
+        exp_month: '#cc-expiry-month',
+        exp_year: '#cc-expiry-year',
         zip: '#address-zip',
         amount: '#amount-formatted',
         cents: '#amount-cents',

@@ -9,14 +9,19 @@
       <h3>Header Level 3</h3>
       <h4>Header Level 4</h4>
       <h5>Header Level 5</h5>
+      
+      <div class="data">
+        Data: 1 out of 10
+      </div>
+
       <p class="large">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Large Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p class="quote">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Quote: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p class="med">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Medium Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p>
         ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
@@ -26,7 +31,63 @@
       </p>
 
       <section class="gray-bg">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools.
+        <div class="wrapper">
+          section.gray-bg
+        </div>
+      </section>
+
+      <br>
+
+      <section class="gray-bg large">
+        <div class="wrapper">
+          section.large
+        </div>
+      </section>
+
+      <br>
+
+      <div class="button orange">
+        orange
+      </div>
+
+      <div class="button blue">
+        blue
+      </div>
+
+      <br>
+
+      <div class="button orange outline">
+        orange
+      </div>
+
+      <div class="button blue outline">
+        blue
+      </div>
+
+      <br>
+      <br>
+
+      <section class="gray-bg">
+        <div class="wrapper">
+          <div class="button white">
+            white
+          </div>
+
+          <br>
+
+          <div class="button white outline">
+            white
+          </div>
+        </div>
+      </section>
+
+      <br>
+      <br>
+
+      <section class="border">
+        <div class="wrapper">
+          section.border
+        </div>
       </section>
       
     </div>

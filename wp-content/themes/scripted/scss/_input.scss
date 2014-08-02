@@ -17,5 +17,45 @@ input {
 }
 
 .button {
+  @include border-radius(3px);
   display: inline-block;
+  padding: 0.6em 2em 0.5em 2em;
+  margin: 0.25em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  &.orange {
+    background-color: $orange;
+    color: $white;
+    border: 2px solid $orange;
+
+    &.outline {
+      color: $orange;
+      background-color: transparent;
+    }
+  }
+
+  &.blue {
+    background-color: $blue;
+    color: $white;
+    border: 2px solid $blue;
+
+    &.outline {
+      color: $blue;
+      background-color: transparent;
+    }
+  }
+
+  &.white {
+    background-color: $white;
+    color: $blue;
+    border: 2px solid $white;
+
+    &.outline {
+      color: $white;
+      background-color: transparent;
+    }
+  }
 }

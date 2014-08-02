@@ -8,6 +8,14 @@
 
 section {
   padding: 2em 0;
+
+  &.large {
+    padding: 6em 0;
+  }
+
+  &.border {
+    border-top: thin solid $gray1;
+  }
 }
 
 .wrapper {

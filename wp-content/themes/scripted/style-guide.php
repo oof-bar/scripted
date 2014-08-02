@@ -53,10 +53,6 @@
   </div>
 </section>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 78e2425baa3372bd66b357d9c65ba8463a867629
 <section class="testimonials">
   <div class="wrapper">
     <div class="column col-8 push-2">

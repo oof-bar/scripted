@@ -10,7 +10,16 @@
   </head>
 
   <body <?= body_class(); ?>>
-    <section class="header">
-      <?= bloginfo('title') ?>
-      <? wp_nav_menu('primary') ?>
+    <section class="navigation">
+      <div class="wrapper">
+        <div class="column col-2 tablet-quarter">
+          <?= bloginfo('title') ?>
+        </div>
+        <div class="column col-8 tablet-half">
+          <? wp_nav_menu('primary') ?>
+        </div>
+        <div class="column col-2 tablet-quarter">
+          <a class="button" href="">Donate</a>
+        </div>
+      </div>
     </section>

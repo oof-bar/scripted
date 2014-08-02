@@ -2,10 +2,15 @@
   Structure
 */
 
-img {
-  max-width: 100%;
-}
-
 section {
   padding: 2em 0;
+}
+
+.wrapper {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
 }

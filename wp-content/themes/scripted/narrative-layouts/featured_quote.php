@@ -11,7 +11,7 @@
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-8 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>

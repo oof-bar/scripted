@@ -24,11 +24,11 @@
 
   # Get Site Option
   function se_option ( $option = false ) {
-    # cc(array("\$option",$option));
-    if ( $option ) {
-      return get_fields('option')[$option];
+    $options = get_fields('option');
+    if ( $option && isset($options[$option]) ) {
+      return $options[$option];
     } else {
-      return get_fields('option');
+      return false;
     }
   }
 

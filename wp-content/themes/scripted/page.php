@@ -1,5 +1,6 @@
 <? get_header() ?>
 <? include get_partial('hero') ?>
+<? the_post() ?>
 
 <section class="main index">
   <div class="wrapper">
@@ -9,7 +10,8 @@
     </div>
 
     <div class="column col-7 tablet-three-quarters">
-      <?= the_content() ?>
+      <? pp($post) ?>
+      <? the_content() ?>
     </div>
 
   </div>

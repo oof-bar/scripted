@@ -1,70 +1,101 @@
-<form id="give">
+<section class="give-form">
+  
+  <div class="wrapper">
+    <div class="column col-8 push-2">
+      Explanation?
+    </div>
+  </div>
 
-  <div id="give-error"></div>
+  <form id="give">
 
-  <fieldset class="group name">
-    <label for="name-first">
-      First Name
-      <input type="text" id="name-first" name="name-first" value="August" />
-    </label>
-    <label for="name-last">
-      Last Name
-      <input type="text" id="name-last" name="name-last" value="Miller" />
-    </label>
-    <label for="email">
-      Email
-      <input type="email" id="email" name="email" value="lol@lol.com" />
-    </label>
-  </fieldset>
+    <div class="wrapper">
 
-  <fieldset class="group address">
-    <label for="address-zip">
-      Zip Code
-      <input type="text" id="address-zip" name="zip" class="address zip" value="97202" />
-    </label>
-  </fieldset>
+      <div class="column col-8 push-2">
+        <div id="give-error"></div>
+      </div>
 
-  <fieldset class="group card">
-    <label for="card-number">
-      Card Number
-      <input type="text" id="card-number" value="4242424242424242" />
-    </label>
+    </div>
+    
+    <div class="wrapper field-group name">
 
-    <label for="card-cvc">
-      4-Digit CVC Code
-      <input type="text" id="card-cvc" class="cc cvc" value="123" />
-    </label>
+      <div class="column col-4 tablet-half mobile-full">
+        <label for="name-first">
+          First Name
+          <input type="text" id="name-first" name="name-first" value="August" />
+        </label>
+      </div>
 
-    <label for="card-expiry-month">
-      Expiration
-      <input type="text" id="card-expiry-month" class="cc month" value="12" />
-    </label>
+      <div class="column col-4 tablet-half mobile-full">
+        <label for="name-last">
+          Last Name
+          <input type="text" id="name-last" name="name-last" value="Miller" />
+        </label>
+      </div>
 
-    <label for="card-expiry-year">
-      /
-      <input type="text" id="card-expiry-year" class="cc year" value="2016" />
-    </label>
-  </fieldset>
+      <div class="column col-4 tablet-half mobile-full">
+        <label for="email">
+          Email
+          <input type="email" id="email" name="email" value="lol@lol.com" />
+        </label>
+      </div>
 
-  <fieldset class="group amount">
-    <label for="amount-formatted">
-      Amount
-      <input type="number" min="1" id="amount-formatted" class="amount formatted" value="25" />
-      <input type="text" id="amount-cents" name="amount" class="amount cents" value="2500" />
-    </label>
-  </fieldset>
+    </div>
 
-  <fieldset class="group stripe">
-    <label for="stripe-token">
-      Stripe Token (You shouldn't see this!)
-      <input type="text" id="stripe-token" name="stripe-token" class="cc token" />
-    </label>
-  </fieldset>
+    <div class="wrapper field-group payment">
 
-  <fieldset class="group security">
-    <? $give_nonce = wp_create_nonce('give_nonce'); ?>
-    <input type="text" id="nonce" name="nonce" class="wp nonce" value="<?= $give_nonce ?>" />
-  </fieldset>
+      <div class="column col-2 tablet-third mobile-full">
+        <label for="amount-formatted">
+          Amount
+          <input type="number" min="1" id="amount-formatted" class="amount formatted" value="25" />
+          <input type="text" id="amount-cents" name="amount" class="amount cents" value="2500" />
+        </label>
+      </div>
 
-  <input type="submit" value="Give!" />
-</form>
+      <div class="column col-4 tablet-two-thirds">
+        <label for="card-number">
+          Card Number
+          <input type="text" id="card-number" value="4242424242424242" />
+        </label>
+      </div>
+
+      <div class="column col-2">
+        <label for="card-expiry-month">
+          Expiration
+          <input type="text" id="card-expiry-month" class="cc month" value="12" />
+        </label>
+        <label for="card-expiry-year">
+          /
+          <input type="text" id="card-expiry-year" class="cc year" value="2016" />
+        </label>
+      </div>
+
+      <div class="column col-1">
+        <label for="card-cvc">
+          4-Digit CVC Code
+          <input type="text" id="card-cvc" class="cc cvc" value="123" />
+        </label>
+      </div>
+        
+      <div class="column col-3">
+        <label for="address-zip">
+          Zip Code
+          <input type="text" id="address-zip" name="zip" class="address zip" value="97202" />
+        </label>
+      </div>
+
+    </div>
+
+    <div class="wrapper">
+      <div class="column col-12">
+
+        <? $give_nonce = wp_create_nonce('give_nonce'); ?>
+        <input type="text" id="stripe-token" name="stripe-token" class="cc token" />
+        <input type="text" id="nonce" name="nonce" class="wp nonce" value="<?= $give_nonce ?>" />
+        <input class="button" type="submit" value="Give!" />
+
+      </div>
+    </div>
+
+  </form>
+
+</section>

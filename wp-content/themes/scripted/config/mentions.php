@@ -5,7 +5,7 @@ function add_cpt_pingbacks ( ) {
   register_post_type('se_mention', array(
     'label' => "Media Mentions",
     'labels' => array(  
-      'name' => 'Mention',
+      'name' => 'Mentions',
       'singular_name' => 'Mention',
       'menu_name' => 'Mentions',
       'name_admin_bar' => 'Mention',

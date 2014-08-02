@@ -5,9 +5,11 @@
           <?= bloginfo('title') ?>
           <? if ( se_option("mailchimp_list") ) include "partials/newsletter-signup.php"; ?>
         </div>
+
         <div class="column col-2 push-1 tablet-half">
           <? wp_nav_menu('footer') ?>
         </div>
+        
         <div class="column col-5 tablet-full">
           Sponsors
         </div>
@@ -21,6 +23,6 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <? wp_footer(); ?>
-    
+
   </body>
 </html>

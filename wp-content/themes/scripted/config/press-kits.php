@@ -5,7 +5,7 @@ function add_cpt_press_kits ( ) {
   register_post_type('se_press_kit', array(
     'label' => "Press Kit",
     'labels' => array(  
-      'name' => 'Press Kit',
+      'name' => 'Press Kits',
       'singular_name' => 'Press Kit',
       'menu_name' => 'Press Kits',
       'name_admin_bar' => 'Press Kit',

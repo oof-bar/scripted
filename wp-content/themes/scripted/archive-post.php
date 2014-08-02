@@ -1,18 +1,25 @@
-<? /* Post Archive */ ?>
 <? get_header(); ?>
+<? $page_title = post_type_archive_title(null, false) ?>
+<? include get_partial('hero') ?>
 
-<? get_partial('blog-navigation'); ?>
+<section class="main post-archive">
+  <div class="wrapper">
 
-<h1>News</h1>
+    <div class="column col-3 tablet-quarter">
+      <? include get_partial('blog-navigation') ?>
+    </div>
 
-<? if ( have_posts() ) { ?>
-  <div class="posts">
-    <? while ( have_posts() ) { the_post(); ?>
-      <? get_embed( get_post_type() ); ?>
-    <? } ?>
+    <div class="column col-7 tablet-three-quarters">
+      <? if ( have_posts() ) { ?>
+        <!-- Starting post -->
+        <? while ( have_posts() ) { the_post(); ?>
+          <? get_embed( get_post_type() ); ?>
+        <? } ?>
+      <? } ?>
+      <? include get_partial('pagination') ?>
+    </div>
+    
   </div>
-<? } ?>
-
-<? get_partial('pagination'); ?>
+</section>
 
 <? get_footer(); ?>

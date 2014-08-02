@@ -67,7 +67,7 @@
 
   # Partials
   function get_partial ( $name ) {
-    include ( get_template_directory() . '/partials/' . $name .'.php' );
+    return ( get_template_directory() . '/partials/' . $name .'.php' );
   }
 
   # Post Embeds

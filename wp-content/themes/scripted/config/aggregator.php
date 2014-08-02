@@ -6,6 +6,9 @@ function add_cpt_aggregator ( ) {
 
   register_post_type('se_aggregator', array(
     'label' => "Feed Aggregator",
+    'labels' => array(
+      'name' => 'Updates'
+    ),
     'description' => 'A hacky implementation of a custom archive of multiple post types.',
     'public' => true,
     'show_ui' => true,

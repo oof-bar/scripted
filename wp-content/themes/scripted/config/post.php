@@ -7,8 +7,8 @@ function add_cpt_post_override ( ) {
   register_post_type('post', array(
     'label' => "Post",
     'labels' => array(  
-      'name' => 'Post',
-      'singular_name' => 'Post',
+      'name' => 'News',
+      'singular_name' => 'News',
       'menu_name' => 'Posts',
       'name_admin_bar' => 'Posts',
       'all_items' => 'All Posts',

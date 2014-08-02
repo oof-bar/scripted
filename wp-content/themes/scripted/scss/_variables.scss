@@ -33,4 +33,9 @@ $black: #3F3B39;
 $gray1: #eeeeee;
 
 $orange: #EF5330;
+$light-orange: lighten($orange,5%);
+$dark-orange: darken($orange,5%);
+
 $blue: #15C2D2;
+$light-blue: lighten($blue,5%);
+$dark-blue: darken($blue,5%);

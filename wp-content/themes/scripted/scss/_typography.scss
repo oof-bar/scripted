@@ -8,9 +8,13 @@ body {
   font-family: $family-sans;
 }
 
+// Headers
+
 #{headers(all)} {
   font-family: $family-serif;
 }
+
+// Helpers
 
 em {
   font-style: italic;

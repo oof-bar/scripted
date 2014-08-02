@@ -28,8 +28,6 @@
 
 <? } ?>
 
-<? pp($narrative); ?>
-
 <? foreach ( $narrative['layout'] as $section ) { ?>
   <? include get_narrative_section($section['acf_fc_layout']); ?>
 <? } ?>

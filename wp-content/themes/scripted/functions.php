@@ -77,7 +77,9 @@
 
   # Formatted Page Titles
   function se_page_title ( $post ) {
-    if ( is_archive() ) {
+    if ( is_singular( array( 'post', 'se_news', 'se_event', 'se_press_kit', 'se_project', 'se_resource', 'se_mention' ) ) ) {
+      return '<span class="parent-page archive"><a href="' . get_post_type_archive_link( $post->post_type ) . '">' . get_post_type_object( $post->post_type )->labels->singular_name . '</a>:</span> <span class="subpage-title">' . get_the_title() . '</span>';
+    } else if ( is_archive() ) {
       return post_type_archive_title(null, false);
     } else if ( is_single() or is_page() ) {
       if ( count( $ancestors = get_post_ancestors($post) ) ) {

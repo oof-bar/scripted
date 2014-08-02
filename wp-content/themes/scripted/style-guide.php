@@ -27,7 +27,6 @@
   <div class="wrapper">
     <div class="column col-8 push-2">
       <p class="large">
-<<<<<<< HEAD
         ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p class="quote">
@@ -35,13 +34,6 @@
       </p>
       <p class="med">
         ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
-=======
-        Large Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
-      </p>
-
-      <p class="med">
-        Medium Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
->>>>>>> 78e2425baa3372bd66b357d9c65ba8463a867629
       </p>
       <p>
         Default Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.

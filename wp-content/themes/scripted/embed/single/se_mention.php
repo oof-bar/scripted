@@ -1,14 +1,21 @@
 <? $mention = get_fields(); ?>
 
-<div <? post_class('mention'); ?>>
-  <h2><a href="<?= $mention['url'] ?>" target="_blank"><?= the_title(); ?></a> (Media Mention)</h2>
+<div class="wrapper media-mention">
 
-  <div class="post-meta">
-    <?= pp($mention); ?>
+  <div class="column col-3 tablet-quarter mobile-full">
+    <div class="post-meta">
+      <? if ( $mention['url'] ) { ?>
+        <a class="button" href="<?= $mention['url'] ?>" target="_blank">View</a>
+      <? } else { ?>
+        A link wasn't provided to this article, sorry!
+      <? } ?>
+    </div>
   </div>
 
-  <div class="post-content">
-    <?= the_content(); ?>
+  <div class="column col-7 push-1 tablet-three-quarters">
+    <div class="post-content">
+      <?= the_content(); ?>
+    </div>
   </div>
 
 </div>

@@ -1,14 +1,13 @@
 <? $project = get_fields(); ?>
 
-<div <? post_class('project'); ?>>
-  <h2><?= the_title(); ?></h2>
-
-  <div class="post-meta">
-    <?= pp($project); ?>
+<div class="wrapper student-voice">
+  <div class="column col-3 tablet-quarter mobile-full">
+    <? include get_partial('post-meta') ?>
   </div>
 
-  <div class="post-content">
-    <?= the_content(); ?>
+  <div class="column col-7 push-1 tablet-three-quarters">
+    <div class="post-content">
+      <? the_content() ?>
+    </div>
   </div>
-
 </div>

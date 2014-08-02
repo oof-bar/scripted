@@ -72,7 +72,7 @@
 
   # Post Embeds
   function get_embed ( $name, $version = '' ) {
-    include ( get_template_directory() . '/embed/' . ( $version ? $version . '/' : '' ) . $name . '.php' );
+    return ( get_template_directory() . '/embed/' . ( $version ? $version . '/' : '' ) . $name . '.php' );
   }
 
   # Formatted Page Titles
@@ -92,6 +92,10 @@
       return "lol";
     }
   }
+
+  function se_post_nicename ( $post ) {
+    return get_post_type_object( $post->post_type )->labels->name;
+  } 
 
   # Sibling/Child Page Links
   function se_page_links ( $page ) {

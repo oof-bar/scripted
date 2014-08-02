@@ -1,5 +1,4 @@
 <? get_header(); ?>
-<? $page_title = post_type_archive_title(null, false) ?>
 <? include get_partial('hero') ?>
 
 <section class="main aggregator-archive">

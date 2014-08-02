@@ -1,5 +1,4 @@
 <? get_header(); ?>
-<? $page_title = post_type_archive_title(null, false) ?>
 <? include get_partial('hero') ?>
 
 <section class="main student-project-archive">
@@ -13,7 +12,7 @@
       <? if ( have_posts() ) { ?>
         <!-- Starting post -->
         <? while ( have_posts() ) { the_post(); ?>
-          <? get_embed( get_post_type() ); ?>
+          <? include get_embed( get_post_type() ); ?>
         <? } ?>
       <? } ?>
       <? include get_partial('pagination') ?>

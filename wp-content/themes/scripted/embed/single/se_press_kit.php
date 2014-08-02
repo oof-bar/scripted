@@ -1,20 +1,24 @@
 <? $kit = get_fields(); ?>
 
-<div <? post_class('press-kit'); ?>>
-  <h2>
-    <? if ( $kit['attachment'] ) { ?>
-      <a href="<?= $kit['attachment']['url'] ?>" target="_blank"><?= the_title(); ?></a> (Press Kit)
-    <? } else { ?>
-      <?= the_title(); ?> (Press Kit)
-    <? } ?>
-  </h2>
+<div class="wrapper press-kit">
 
-  <div class="post-meta">
-    <?= pp($kit); ?>
+  <div class="column col-3 tablet-quarter mobile-full">
+    <div class="post-meta">
+      <div class="meta-item">
+        <? if ( $kit['attachment'] ) { ?>
+          <a class="button" href="<?= $kit['attachment']['url'] ?>" target="_blank">Download</a>
+        <? } else { ?>
+          No Download Available
+        <? } ?>
+      </div>
+    </div>
   </div>
 
-  <div class="post-content">
-    <?= the_content(); ?>
+  <div class="column col-7 push-1 tablet-three-quarters">
+    <div class="post-content">
+      <? the_content() ?>
+      <? pp($kit) ?>
+    </div>
   </div>
 
 </div>

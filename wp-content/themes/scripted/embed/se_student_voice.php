@@ -1,11 +1,11 @@
-<? $project = get_fields(); ?>
+<? $voice = get_fields(); ?>
 
-<div <? post_class('project'); ?>>
+<div <? post_class('student-voice'); ?>>
 
-  <h2><a href="<?= get_permalink() ?>"><?= the_title(); ?></a> (Student Voice)</h2>
+  <h2><a href="<? the_permalink() ?>"><?= the_title(); ?></a> (Student Voice)</h2>
 
   <div class="post-meta">
-    <?= pp($project); ?>
+    <?= pp($voice); ?>
   </div>
 
   <div class="post-content">

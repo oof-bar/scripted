@@ -1,7 +1,7 @@
 <section class="header">
   <div class="wrapper">
     <div class="column col-12">
-      <h1><?= ""#$page_title ?><?= se_page_title($post) ?></h1>
+      <h1><?= se_page_title($post) ?></h1>
       <? if ( ! is_archive() and has_excerpt() ) { ?>
         <div class="page-intro">
           <?= the_excerpt(); ?>

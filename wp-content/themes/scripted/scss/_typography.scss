@@ -12,6 +12,14 @@ body {
   font-family: $family-serif;
 }
 
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+}
+
 pre {
   font-family: monospace;
   font-size: 85%;

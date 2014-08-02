@@ -1,6 +1,7 @@
 <? $kit = get_fields(); ?>
 
 <div <? post_class('press-kit'); ?>>
+  
   <h2>
     <? if ( $kit['attachment'] ) { ?>
       <a href="<?= $kit['attachment']['url'] ?>" target="_blank"><?= the_title(); ?></a> (Press Kit)

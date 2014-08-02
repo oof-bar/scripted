@@ -1,13 +1,12 @@
 <? $event = get_fields(); ?>
 
 <div <? post_class('event'); ?>>
-  <div class="post-info">
-    <div class="type">
-      <?= se_post_nicename($post) ?>
-    </div>
-  </div>
+  
+  <? include get_partial('post-info') ?>
+
   <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a> (Event)</h2>
   <?= pp($event); ?>
+
   <div class="post-meta">
 
     <? if ( $event['date_start'] ) { ?>

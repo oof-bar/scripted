@@ -137,4 +137,31 @@
   </div>
 </section>
 
+<br>
+
+<section>
+  <div class="wrapper">
+    <div class="column col-8 push-2">
+      <div class="side-nav">
+        <ul>
+          <li><a href="#">Item 1</a></li>
+          <li class="current-page"><a href="#">Item 2</a></li>
+          <li><a href="#">Item 3</a></li>
+          <li><a href="#">Item 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrapper">
+    <div class="column col-8 push-2">
+      <div class="">
+        <input>
+      </div>
+    </div>
+  </div>
+</section>
+
 <? get_footer() ?>

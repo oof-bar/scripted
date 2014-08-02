@@ -1,7 +1,18 @@
-<? acf_form_head() ?>
 <? get_header() ?>
-<? $page_title = get_the_title() ?>
+<? include get_partial('hero') ?>
 
-Page template.
+<section class="main index">
+  <div class="wrapper">
+
+    <div class="column col-3 tablet-quarter">
+      <? include get_partial('page-navigation') ?>
+    </div>
+
+    <div class="column col-7 tablet-three-quarters">
+      <?= the_content() ?>
+    </div>
+
+  </div>
+</section>
 
 <? get_footer(); ?>

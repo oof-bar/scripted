@@ -75,6 +75,45 @@
     include ( get_template_directory() . '/embed/' . $name . '.php' );
   }
 
+  # Formatted Page Titles
+  function se_page_title ( $post ) {
+    if ( is_archive() ) {
+      return post_type_archive_title(null, false);
+    } else if ( is_single() or is_page() ) {
+      if ( count( $ancestors = get_post_ancestors($post) ) ) {
+        $parent = __::first($ancestors);
+        return '<span class="parent-page"><a href="' . get_permalink($parent) . '">' . get_the_title($parent) . '</a>:</span> <span class="subpage-title">' . get_the_title() . '</span>';
+      } else {
+        return get_the_title();
+      }
+    } else {
+      return "lol";
+    }
+  }
+
+  # Sibling/Child Page Links
+  function se_page_links ( $page ) {
+    $tree = get_post_ancestors( $page );
+    if ( !count( $tree ) ) {
+      // No parent pages. Get the children pages.
+      return get_posts( array(
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'post_parent' => $page->ID,
+        'orderby' => 'menu_order'
+      ));
+    } else {
+      // There are parent pages.
+      return get_posts( array(
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'post_parent' => __::first($tree),
+        'orderby' => 'menu_order'
+      ));
+    }
+  }
+
+
   /*
     Custom Post Types & Configuration
 

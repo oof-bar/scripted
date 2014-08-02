@@ -3,6 +3,6 @@
     <?= se_post_nicename($post) ?>
   </div>
   <div class="date">
-    <?= the_date() ?>
+    <? the_date() ?>
   </div>
 </div>

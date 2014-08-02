@@ -1,11 +1,11 @@
 <? $event = get_fields(); ?>
 
 <div <? post_class('event'); ?>>
-  
+
   <? include get_partial('post-info') ?>
 
   <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a> (Event)</h2>
-  <?= pp($event); ?>
+  <? pp($event); ?>
 
   <div class="post-meta">
 
@@ -55,7 +55,7 @@
   </div>
 
   <div class="post-content">
-    <?= the_content(); ?>
+    <? the_content(); ?>
   </div>
 
 </div>

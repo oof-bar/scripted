@@ -4,6 +4,18 @@
 
 input {
   -webkit-appearance: none;
-  display: block;
-  width: 100%;
+  border: 1px solid black;
+  font: inherit;
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  &[type=text], &[type=email], &[type=number] {
+    width: 100%;
+    display: block;
+  }
+}
+
+.button {
+  display: inline-block;
 }

@@ -144,17 +144,17 @@ class Give
     Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )
 
 
-$(document).on 'ready', ->
+$ ->
   if ( $('#give').length )
     window.Donate = window.Donate or new Give
       name: 'main_give_form'
       key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
       form: '#give'
       token: '#stripe-token'
-      cc: '#card-number'
-      cvc: '#card-cvc'
-      exp_month: '#card-expiry-month'
-      exp_year: '#card-expiry-year'
+      cc: '#cc-number'
+      cvc: '#cc-cvc'
+      exp_month: '#cc-expiry-month'
+      exp_year: '#cc-expiry-year'
       zip: '#address-zip'
       amount: '#amount-formatted'
       cents: '#amount-cents'

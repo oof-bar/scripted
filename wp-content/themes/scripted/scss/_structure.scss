@@ -2,6 +2,10 @@
   Structure
 */
 
+* {
+  @include box-sizing(border-box);
+}
+
 section {
   padding: 2em 0;
 }
@@ -9,6 +13,10 @@ section {
 .wrapper {
   max-width: $max-width;
   margin: 0 auto;
+  padding: 0 2em;
+  @include mobile {
+    padding: 0 1em;
+  }
 }
 
 img {

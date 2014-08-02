@@ -127,6 +127,8 @@
     add_cpt_pingbacks();
     add_cpt_press_kits();
     add_cpt_gifts();
+
+    add_post_type_support('page', 'excerpt');
   }
 
   add_filter( 'pre_get_posts', 'add_cpt_to_main_query' );

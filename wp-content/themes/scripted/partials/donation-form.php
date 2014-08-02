@@ -1,11 +1,5 @@
 <section class="give-form">
 
-  <div class="wrapper">
-    <div class="column col-8 push-2">
-      Explanation?
-    </div>
-  </div>
-
   <form id="give">
 
     <div class="wrapper">

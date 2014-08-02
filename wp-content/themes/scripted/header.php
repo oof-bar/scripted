@@ -11,6 +11,6 @@
 
   <body <?= body_class(); ?>>
     <section class="header">
-      ScriptEd
+      <?= bloginfo('title') ?>
       <? wp_nav_menu('primary') ?>
     </section>

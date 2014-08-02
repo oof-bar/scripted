@@ -24,6 +24,11 @@
       <p>
         ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
+
+      <section class="gray-bg">
+        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools.
+      </section>
+      
     </div>
   </div>
 </section>

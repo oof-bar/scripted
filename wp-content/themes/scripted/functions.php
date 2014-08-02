@@ -141,7 +141,7 @@
   require_once('config/resources.php');
 
   # Student Projects
-  require_once('config/projects.php');
+  require_once('config/student-voices.php');
 
   # Media Mentions
   require_once('config/mentions.php');
@@ -164,7 +164,7 @@
 
     add_cpt_events();
     add_cpt_resources();
-    add_cpt_projects();
+    add_cpt_student_voice();
     add_cpt_pingbacks();
     add_cpt_press_kits();
     add_cpt_gifts();
@@ -176,7 +176,7 @@
 
   function add_cpt_to_main_query ( $query ) {
     if ( $query->get('post_type') == 'se_aggregator' && ! is_admin() ) {
-      $query->set( 'post_type', array( 'post', 'se_event', 'se_resource', 'se_project' ) );
+      $query->set( 'post_type', array( 'post', 'se_event', 'se_resource', 'se_student_voice' ) );
     }
     return $query;
   }

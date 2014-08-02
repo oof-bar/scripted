@@ -1,11 +1,7 @@
 <? $event = get_fields(); ?>
 
 <div <? post_class('event'); ?>>
-  <? if ( is_single() ) { ?>
-    <h2><?= the_title(); ?></h2>
-  <? } else { ?>
-    <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a> (Event)</h2>
-  <? } ?>
+  <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a> (Event)</h2>
   <?= pp($event); ?>
   <div class="post-meta">
 

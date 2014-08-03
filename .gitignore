@@ -6,3 +6,6 @@ wp-content/themes/scripted/.sass-cache
 wp-config.php
 wp-environment.php
 wp-content/uploads
+wp-content/themes/scripted/scripts/newsletter.js
+
+wp-content/themes/scripted/scripts/scripted.js

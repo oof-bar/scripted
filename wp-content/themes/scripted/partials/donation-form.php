@@ -37,7 +37,7 @@
 
     <div class="wrapper field-group payment">
 
-      <div class="column col-2 tablet-third mobile-full">
+      <div class="column col-2 tablet-quarter mobile-full">
         <label>
           Amount
           <input type="number" min="1" id="amount-formatted" class="amount formatted" value="25" />
@@ -45,14 +45,14 @@
         </label>
       </div>
 
-      <div class="column col-4 tablet-two-thirds">
+      <div class="column col-3 tablet-half mobile-full">
         <label>
           Card Number
           <input type="text" id="cc-number" value="4242424242424242" />
         </label>
       </div>
 
-      <div class="column col-2">
+      <div class="column col-2 tablet-quarter mobile-half">
         <label>
           Expiration
           <input type="text" id="cc-expiry-month" class="cc-expiry month combined-field join-right" value="12" />
@@ -60,7 +60,7 @@
         </label>
       </div>
 
-      <div class="column col-1">
+      <div class="column col-2 tablet-quarter mobile-half">
         <label>
           CVC
           <input type="text" id="cc-cvc" class="cc cvc" value="123" />

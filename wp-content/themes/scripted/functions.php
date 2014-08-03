@@ -91,8 +91,10 @@
       } else {
         return get_the_title();
       }
+    } else if ( is_404() ) {
+      return 'Oh no!';
     } else {
-      return "lol";
+      return '';
     }
   }
 

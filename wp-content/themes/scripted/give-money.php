@@ -1,5 +1,6 @@
 <? # Template Name: Give ?>
 <? get_header(); ?>
+<? $giving = get_fields() ?>
 
 <? include get_partial('hero') ?>
 
@@ -14,5 +15,7 @@
 </section>
 
 <? include get_partial('donation-form'); ?>
+
+<? include get_partial('give-faq') ?>
 
 <? get_footer(); ?>

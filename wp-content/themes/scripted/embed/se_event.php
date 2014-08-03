@@ -4,10 +4,10 @@
 
   <? include get_partial('post-info') ?>
 
-  <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a></h2>
+  <h3 class="light"><a href="<? the_permalink(); ?>"><?= the_title(); ?></a></h3>
   <? pp($event); ?>
 
-  <div class="post-meta">
+  <div class="post-meta light">
 
     <? if ( $event['date_start'] ) { ?>
       <div class="meta-item date date-start">
@@ -54,7 +54,7 @@
 
   </div>
 
-  <div class="post-content">
+  <div class="post-content light">
     <? the_content(); ?>
   </div>
 

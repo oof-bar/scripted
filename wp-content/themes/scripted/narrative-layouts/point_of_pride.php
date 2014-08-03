@@ -1,6 +1,6 @@
 <? /* Point of Interest */ ?>
 
-<section class="narrative-section poi">
+<section class="narrative-section poi black-bg white">
 
   <div class="wrapper frame">
 
@@ -11,7 +11,7 @@
     <? } ?>
 
     <? if ( $section['text'] ) { ?>
-      <div class="column col-12 text">
+      <div class="column col-12 text text-center med">
         <?= $section['text'] ?>
       </div>
     <? } ?>

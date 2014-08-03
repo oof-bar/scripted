@@ -9,7 +9,10 @@
 
   a {
     text-decoration: none;
+    color: $blue;
   }
+  
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -66,7 +69,7 @@
 // General
 
 .padded {
-  padding: 1.5em;
+  padding: 2em;
 }
 
 .no-margin {
@@ -89,6 +92,30 @@
   margin-top: 0;
 }
 
+.add-margin-top {
+  margin-top: 2em;
+
+  &.double {
+    margin-top: 4em;
+  }
+}
+
+.add-margin-bottom {
+  margin-bottom: 2em;
+
+  &.double {
+    margin-bottom: 4em;
+  }
+}
+
 .border-top {
   border-top: 1px solid $gray1;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+.rounded-corners {
+  @include border-radius (3px);
 }

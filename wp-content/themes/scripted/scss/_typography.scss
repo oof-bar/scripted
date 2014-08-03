@@ -69,7 +69,7 @@ h5 {
   font-size: 2em;
   font-weight: 300;
   font-family: $family-serif;
-  line-height: 1.1em;
+  line-height: 1.2em;
   margin-bottom: 1em;
 }
 
@@ -91,6 +91,7 @@ h5 {
     font-size: 1.5em;
     font-weight: 300;
     line-height: 1.2em;
+    font-family: $family-serif;
   }
 
   .attribution {
@@ -103,7 +104,8 @@ h5 {
 
 .featured-quote{
   .quote {
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 1.175em;
   }
 
   .attribution {
@@ -138,6 +140,14 @@ pre {
 
 .light {
   font-weight: 300;
+}
+
+.thin {
+  font-weight: 100;
+}
+
+.bold {
+  font-weight: 700;
 }
 
 .italic {

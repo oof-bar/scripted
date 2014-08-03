@@ -1,18 +1,18 @@
 <? /* Impact */ ?>
 
 
-<section class="narrative-section impact">
+<section class="narrative-section impact expanded">
 
   <div class="wrapper intro">
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h2><?= $section['header'] ?></h2>
+        <h4 class="blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-11 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -25,13 +25,13 @@
 
     <? foreach ( $section['stats'] as $statistic ) { ?>
 
-      <div class="column <?= $columns ?> statistic">
+      <div class="column add-margin-top double <?= $columns ?> statistic">
 
-        <div class="data">
+        <div class="data orange text-center">
           <?= $statistic['emphasis'] ?>
         </div>
 
-        <div class="explanation">
+        <div class="explanation text-center">
           <?= $statistic['description'] ?>
         </div>
 

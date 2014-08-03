@@ -8,9 +8,106 @@ body {
   font-family: $family-sans;
 }
 
+p {
+  margin-bottom: 12px;
+}
+
+// Headers
+
 #{headers(all)} {
+  
+}
+
+h1, h2, h3 {
   font-family: $family-serif;
 }
+
+h4{
+  font-family: $family-sans;
+}
+
+h1 {
+  font-size: 2.6em;
+  font-weight: 300;
+  line-height: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 300;
+  line-height: 1em;
+  margin-bottom: 0.75em;
+}
+
+h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+  line-height: 1.2em;
+  margin-bottom: 1em;
+}
+
+h4 {
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+
+h5 {
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+
+// Text Modifiers
+
+.large {
+  font-size: 2em;
+  font-weight: 300;
+  font-family: $family-serif;
+  line-height: 1.1em;
+  margin-bottom: 1em;
+}
+
+.med {
+  font-size: 1.175em;
+  font-family: $family-sans;
+  line-height: 1.2em;
+  margin-bottom: 0.75em;
+}
+
+.testimonials {
+
+  .quote {
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 1.2em;
+  }
+
+  .attribution {
+    font-size: 1em;
+    margin-top: 1.25em;
+    font-weight: 600;
+  }
+
+}
+
+.featured-quote{
+  .quote {
+    font-weight: 300;
+  }
+
+  .attribution {
+    font-size: 0.8em;
+    margin-top: 1.5em;
+  }
+}
+
+// Helpers
 
 em {
   font-style: italic;
@@ -23,4 +120,23 @@ strong {
 pre {
   font-family: monospace;
   font-size: 85%;
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// Special
+
+.data {
+  font-size: 3.3em;
+  font-family: $family-serif;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin-bottom: 0.25em;
 }

@@ -11,7 +11,7 @@
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-8 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -24,9 +24,9 @@
 
       <div class="column col-10 push-1">
 
-        <div class="quote">
+        <div class="blue-bg padded text-center white">
 
-          <blockquote>
+          <blockquote class="quote">
             <?= $section['quote'] ?>
           </blockquote>
 

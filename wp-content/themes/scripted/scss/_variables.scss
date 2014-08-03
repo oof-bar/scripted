@@ -26,3 +26,18 @@ $family-sans: "proxima-nova", "Helvetica", "Arial", sans-serif;
 
 
 // Color
+
+$white: #ffffff;
+$black: #3F3B39;
+
+$gray1: #eeeeee;
+$gray2: #cccccc;
+$gray3: #aaaaaa;
+
+$orange: #EF5330;
+$light-orange: lighten($orange,5%);
+$dark-orange: darken($orange,5%);
+
+$blue: #15C2D2;
+$light-blue: lighten($blue,5%);
+$dark-blue: darken($blue,5%);

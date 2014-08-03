@@ -8,6 +8,14 @@
 
 section {
   padding: 2em 0;
+
+  &.expanded {
+    padding: 6em 0;
+  }
+
+  &.border {
+    border-top: thin solid $gray1;
+  }
 }
 
 .wrapper {
@@ -21,4 +29,8 @@ section {
 
 img {
   max-width: 100%;
+}
+
+.field-group {
+  margin-bottom: 2em;
 }

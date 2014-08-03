@@ -4,7 +4,7 @@
 
   <? foreach ( $section['quotes'] as $quote ) { ?>
 
-    <div class="wrapper quote">
+    <div class="wrapper">
       
       <div class="column col-3 push-2">
         <figure class="portrait">
@@ -13,8 +13,8 @@
       </div>
 
       <div class="column col-5">
-        <blockquote><?= $quote['quote'] ?></blockquote>
-        <div class="attribution">
+        <blockquote class="quote serif"><?= $quote['quote'] ?></blockquote>
+        <div class="attribution blue caps sans">
           <?= $quote['attribution'] ?>
         </div>
       </div>

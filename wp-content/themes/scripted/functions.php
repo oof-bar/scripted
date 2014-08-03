@@ -180,7 +180,7 @@
 
   function add_cpt_to_main_query ( $query ) {
     if ( $query->get('post_type') == 'se_aggregator' && ! is_admin() ) {
-      $query->set( 'post_type', array( 'post', 'se_event', 'se_resource', 'se_student_voice' ) );
+      $query->set( 'post_type', array( 'se_aggregator', 'post', 'se_event', 'se_resource', 'se_student_voice' ) );
     }
     return $query;
   }

@@ -3,3 +3,28 @@
 Sections
 
 */
+
+
+// Blog
+
+.post-info {
+  padding: 2em 0 2em 0;
+  @include clearfix;
+}
+
+.type {
+  float: left;
+}
+
+.date {
+  float: right;
+}
+
+.post {
+
+  h3 {
+    a {
+      color: $blue;
+    }
+  }
+}

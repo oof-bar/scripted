@@ -80,6 +80,11 @@ h5 {
   margin-bottom: 0.75em;
 }
 
+.small {
+  font-size: 0.8em;
+  font-family: $family-sans;
+}
+
 .testimonials {
 
   .quote {
@@ -130,6 +135,16 @@ pre {
 .text-center {
   text-align: center;
 }
+
+.light {
+  font-weight: 300;
+}
+
+.italic {
+  font-style: italic;
+}
+
+
 
 // Special
 

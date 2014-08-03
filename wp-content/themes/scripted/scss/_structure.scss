@@ -34,3 +34,20 @@ img {
 .field-group {
   margin-bottom: 2em;
 }
+
+table {
+  margin: 1em 0;
+  width: 100%;
+  tr {
+    border-top: 1px solid $gray1;
+    &:last-of-type {
+      border-bottom: 1px solid $gray1;
+    }
+    td {
+      padding: 0.75em 1em 0.65em 0;
+      &:first-child {
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -27,16 +27,13 @@
   <div class="wrapper">
     <div class="column col-8 push-2">
       <p class="large">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
-      </p>
-      <p class="quote">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Large: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p class="med">
-        ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Medium: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p>
-        Default Paragraph: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
+        Default: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
       </p>
       <p>
         ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools. Our courses are held twice weekly in our partner schools and taught by software developers on a volunteer basis. During the summer, we link students to internship opportunities where they apply their coding skills.
@@ -100,7 +97,7 @@
 <section>
   <div class="wrapper">
     <div class="column col-8 push-2">
-      <div class="button orange">
+      <div class="button orange" style="margin-bottom: 1em;">
         orange
       </div>
 
@@ -110,12 +107,32 @@
 
       <br>
 
-      <div class="button orange outline">
+      <div class="button orange outline" style="margin-bottom: 1em;">
         orange
       </div>
 
       <div class="button blue outline">
         blue
+      </div>
+
+      <br>
+
+      <div class="button orange small" style="margin-bottom: 1em;">
+        orange.small
+      </div>
+
+      <div class="button blue small">
+        blue.small
+      </div>
+
+      <br>
+
+      <div class="button orange small outline">
+        orange.small
+      </div>
+
+      <div class="button blue small outline">
+        blue.small
       </div>
     </div>
   </div>
@@ -124,14 +141,26 @@
 <section class="black-bg">
   <div class="wrapper">
     <div class="column col-8 push-2">
-      <div class="button white">
+      <div class="button white" style="margin-bottom: 1em;">
         white
       </div>
 
       <br>
 
-      <div class="button white outline">
+      <div class="button white outline" style="margin-bottom: 1em;">
         white
+      </div>
+
+      <br>
+
+      <div class="button white small" style="margin-bottom: 1em;">
+        white.small
+      </div>
+
+      <br>
+
+      <div class="button white small outline">
+        white.small
       </div>
     </div>
   </div>
@@ -156,10 +185,9 @@
 
 <section>
   <div class="wrapper">
-    <div class="column col-8 push-2">
-      <div class="">
-        <input>
-      </div>
+    <div class="column col-3 push-2">
+      <input type="text">
+      <input class="button blue" type="submit" value="Make it so!">
     </div>
   </div>
 </section>

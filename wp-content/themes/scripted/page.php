@@ -10,8 +10,8 @@
     </div>
 
     <div class="column col-7 tablet-three-quarters">
-      <? pp($post) ?>
       <? the_content() ?>
+      <? pp($post) ?>
     </div>
 
   </div>

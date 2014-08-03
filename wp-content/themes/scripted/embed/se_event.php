@@ -1,10 +1,10 @@
 <? $event = get_fields(); ?>
 
-<div <? post_class('event'); ?>>
+<div <? post_class('post event'); ?>>
 
   <? include get_partial('post-info') ?>
 
-  <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a> (Event)</h2>
+  <h2><a href="<? the_permalink(); ?>"><?= the_title(); ?></a></h2>
   <? pp($event); ?>
 
   <div class="post-meta">

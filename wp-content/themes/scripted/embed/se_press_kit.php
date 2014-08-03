@@ -1,10 +1,10 @@
 <? $kit = get_fields(); ?>
 
-<div <? post_class('press-kit'); ?>>
+<div <? post_class('post press-kit'); ?>>
   
   <h2>
     <? if ( $kit['attachment'] ) { ?>
-      <a href="<?= $kit['attachment']['url'] ?>" target="_blank"><? the_title(); ?></a> (Press Kit)
+      <a href="<?= $kit['attachment']['url'] ?>" target="_blank"><? the_title(); ?></a>
     <? } else { ?>
       <? the_title(); ?> (Press Kit)
     <? } ?>

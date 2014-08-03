@@ -6,4 +6,87 @@
   &:focus {
     outline: none;
   }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+
+// Colors
+
+.white-bg {
+  background-color: $white;
+}
+
+.white {
+  color: $white;
+}
+
+.gray-bg {
+  background-color: $gray1;
+}
+
+.gray {
+  color: $gray1;
+}
+
+.black-bg {
+  background-color: $black;
+}
+
+.black {
+  color: $black;
+}
+
+.orange-bg {
+  background-color: $orange;
+}
+
+.orange {
+  color: $orange;
+}
+
+.blue-bg {
+  background-color: $blue;
+}
+
+.blue {
+  color: $blue;
+}
+
+// General
+
+.padded {
+  padding: 1.5em;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-left {
+  margin-left: 0;
+}
+
+.no-margin-right {
+  margin-right: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+// Type
+
+.serif {
+  font-family: $family-serif;
+}
+
+.sans {
+  font-family: $family-sans;
 }

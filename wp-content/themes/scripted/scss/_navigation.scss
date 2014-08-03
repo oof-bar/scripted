@@ -1,0 +1,37 @@
+/*
+
+Navigation
+
+*/
+
+.side-nav {
+  ul {
+    li {
+      border-left: 1px solid $gray2;
+      font-weight: 300;
+
+      a {
+        display: block;
+        color: $gray2;
+        padding-left: 1em;
+        line-height: 2.5em;
+      }
+
+      &:hover {
+        border-left: 1px solid $gray3;
+
+        a {
+          color: $gray3;
+        }
+      }
+
+      &.current-page {
+        border-left: 1px solid $blue;
+
+        a {
+          color: $blue;
+        }
+      }
+    }
+  }
+}

@@ -3,8 +3,9 @@
 */
 
 input {
+  @include border-radius(3px);
   -webkit-appearance: none;
-  border: 1px solid black;
+  border: none;
   font: inherit;
   background: none;
   padding: 0;
@@ -13,9 +14,122 @@ input {
   &[type=text], &[type=email], &[type=number] {
     width: 100%;
     display: block;
+    border: 1px solid $gray1;
+    background-color: $gray1;
+    padding: 0.6em 1em 0.5em 1em;
+    margin-top: 0.5em;
+  }
+
+  &.button{
+    margin-top: 1em;
   }
 }
 
+
 .button {
+  @include border-radius(3px);
   display: inline-block;
+  padding: 0.6em 2em 0.5em 2em;
+  margin-right: 0.25em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  &.small {
+    font-size: 0.7em;
+    padding: 0.6em 1.25em 0.5em 1.25em;
+  }
+
+  &.orange {
+    background-color: $orange;
+    color: $white;
+    border: 2px solid $orange;
+
+    &.small {
+      font-size: 0.7em;
+      padding: 0.6em 1.25em 0.5em 1.25em;
+    }
+
+    &:hover {
+      background-color: $light-orange;
+      border: 2px solid $light-orange;
+    }
+
+    &:active {
+      background-color: $dark-orange;
+      border: 2px solid $dark-orange;
+    }
+  }
+
+  &.orange.outline {
+    color: $orange;
+    background-color: transparent;
+
+    &:hover {
+      color: $light-orange;
+    }
+
+    &:active {
+      color: $dark-orange;
+    }
+  }
+
+  &.blue {
+    background-color: $blue;
+    color: $white;
+    border: 2px solid $blue;
+
+    &:hover {
+      background-color: $light-blue;
+      border: 2px solid $light-blue;
+    }
+
+    &:active {
+      background-color: $dark-blue;
+      border: 2px solid $dark-blue;
+    }
+  }
+
+  &.blue.outline {
+    color: $blue;
+    background-color: transparent;
+
+    &:hover {
+      color: $light-blue;
+    }
+
+    &:active {
+      color: $dark-blue;
+    }
+  }
+
+  &.white {
+    background-color: $white;
+    color: $blue;
+    border: 2px solid $white;
+    opacity: 1;
+
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+
+  &.white.outline {
+    color: $white;
+    background-color: transparent;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
 }

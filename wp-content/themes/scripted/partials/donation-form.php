@@ -29,7 +29,7 @@
       <div class="column col-4 tablet-half mobile-full">
         <label>
           Email
-          <input type="email" id="email" name="email" value="lol@lol.com" />
+          <input type="email" id="email" name="email" value="hello@gusmiller.com" />
         </label>
       </div>
 
@@ -63,7 +63,7 @@
       <div class="column col-1">
         <label>
           CVC
-          <input type="text" id="card-cvc" class="cc cvc" value="123" />
+          <input type="text" id="cc-cvc" class="cc cvc" value="123" />
         </label>
       </div>
         

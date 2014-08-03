@@ -9,12 +9,23 @@
   <div class="wrapper">
 
     <div class="column col-10">
-      <h5><?= $giving['cta'] ?></h5>
+      <h5>
+        <? if ( $giving['cta'] ) { ?>
+          <?= $giving['cta'] ?>
+        <? } else { ?>
+          Missing field: Call to Action
+        <? } ?>
+      </h5>
       <div class="large">
-        <?= $giving['message'] ?>
+        <? if ( $giving['message'] ) { ?>
+          <?= $giving['message'] ?>
+        <? } else { ?>
+          Missing Field: Message
+        <? } ?>
       </div>
       <div class="large">
-        <p><a href="<?= $giving['link'] ?>"><?= $giving['link_label'] ?></a></p>
+        <? $cta_link = ( $giving['link_type'] == 'internal' ? $giving['link_internal'] : $giving['link_external'] ) ?>
+            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?></a><span class="icon-arrow-right"></span></p>
       </div>
     </div>
 

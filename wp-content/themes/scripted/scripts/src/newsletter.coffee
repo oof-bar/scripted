@@ -50,7 +50,7 @@ class Newsletter
     console.log @response
     if ( status && response.data.mc ) then @success() else @error()
     # @hide_form()
-    ga('send', 'event', 'newsletter', 'signup', @options.location, ( Date.now() - ScriptEd.loaded_at ) )
+    ga('send', 'event', 'newsletter', 'signup', @options.location )
 
   success: ->
     console.log "Success"

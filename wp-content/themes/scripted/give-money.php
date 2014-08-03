@@ -14,7 +14,9 @@
   </div>
 </section>
 
-<? include get_partial('donation-form'); ?>
+<? include get_partial('donation-form') ?>
+
+<? include get_partial('give-options') ?>
 
 <? include get_partial('give-faq') ?>
 

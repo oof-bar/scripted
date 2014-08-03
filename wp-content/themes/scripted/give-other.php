@@ -23,4 +23,6 @@
 
 <? include get_partial('give-faq') ?>
 
+<? include get_partial('give-options') ?>
+
 <? get_footer(); ?>

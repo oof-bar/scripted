@@ -7,8 +7,9 @@
   # ACF Customizations
   require_once("config/acf.php");
 
-  # Mailchimp API
+  # Mailchimp & Mandrill APIs
   require_once("lib/Mailchimp.php");
+  require_once("lib/Mandrill.php");
   require_once("config/mc.php");
 
   # Stripe

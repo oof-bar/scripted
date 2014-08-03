@@ -27,8 +27,16 @@
   background-color: $gray1;
 }
 
-.gray {
+.gray-1 {
   color: $gray1;
+}
+
+.gray-2 {
+  color: $gray2;
+}
+
+.gray-3 {
+  color: $gray3;
 }
 
 .black-bg {
@@ -81,12 +89,6 @@
   margin-top: 0;
 }
 
-// Type
-
-.serif {
-  font-family: $family-serif;
-}
-
-.sans {
-  font-family: $family-sans;
+.border-top {
+  border-top: 1px solid $gray1;
 }

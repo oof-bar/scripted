@@ -4,7 +4,7 @@
 
   <? include get_partial('post-info') ?>
   
-  <h2><a href="<? the_permalink() ?>"><?= the_title(); ?></a></h2>
+  <h3><a href="<? the_permalink() ?>"><?= the_title(); ?></a></h3>
 
   <div class="post-meta">
     <?= pp($resource); ?>

@@ -6,4 +6,4 @@ class SE
 
 
 $(document).ready ->
-  window.ScriptEd = window.ScriptEd or new SE()
+  window.SE = window.SE or new SE()

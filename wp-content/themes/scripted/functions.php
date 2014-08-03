@@ -7,8 +7,9 @@
   # ACF Customizations
   require_once("config/acf.php");
 
-  # Mailchimp API
+  # Mailchimp & Mandrill APIs
   require_once("lib/Mailchimp.php");
+  require_once("lib/Mandrill.php");
   require_once("config/mc.php");
 
   # Stripe
@@ -77,7 +78,9 @@
 
   # Formatted Page Titles
   function se_page_title ( $post ) {
-    if ( is_singular( array( 'post', 'se_news', 'se_event', 'se_press_kit', 'se_student_voice', 'se_resource', 'se_mention' ) ) ) {
+    if ( is_singular('se_gift') ) {
+      return 'Thanks!';
+    } else if ( is_singular( array( 'post', 'se_news', 'se_event', 'se_press_kit', 'se_student_voice', 'se_resource', 'se_mention' ) ) ) {
       return '<span class="parent-page archive"><a href="' . get_post_type_archive_link( $post->post_type ) . '">' . get_post_type_object( $post->post_type )->labels->singular_name . '</a>:</span> <span class="subpage-title">' . get_the_title() . '</span>';
     } else if ( is_archive() ) {
       return post_type_archive_title(null, false);
@@ -180,7 +183,7 @@
 
   function add_cpt_to_main_query ( $query ) {
     if ( $query->get('post_type') == 'se_aggregator' && ! is_admin() ) {
-      $query->set( 'post_type', array( 'post', 'se_event', 'se_resource', 'se_student_voice' ) );
+      $query->set( 'post_type', array( 'se_aggregator', 'post', 'se_event', 'se_resource', 'se_student_voice' ) );
     }
     return $query;
   }

@@ -36,3 +36,57 @@
       wp_send_json_error( $payload );
     }
   }
+
+  function mandrill_send_confirmation ( $gift ) {
+    try {
+      $mandrill = new Mandrill(SE_MANDRILL_API_KEY);
+      $template = 'gift-confirmation';
+      $fields = get_fields($gift);
+      $content = array(
+        array(
+          'name' => get_the_title($gift)
+        ),
+        array(
+          'amount' => $fields['amount']
+        ),
+        array(
+          'confirmation_url' => get_permalink($gift)
+        )
+      );
+      wp_mail('hello@gusmiller.com',$fields['amount'], 'the message yo!');
+
+      $message = array(
+        'template_name' => $template, 
+        'template_content' => $content,
+        'to' => array(
+          array(
+            'email' => $fields['email'],
+            'name' => get_the_title($gift)
+          )
+        ),
+        'metadata' => array(
+          'amount' => $fields['amount']
+        ),
+        'global_merge_vars' => array(
+          array(
+            'name' => 'confirmation_url',
+            'content' => get_permalink($gift)
+          ),
+          array(
+            'name' => 'amount',
+            'content' => $fields['amount']
+          ),
+          array(
+            'name' => 'donor_name',
+            'content' => get_the_title($gift)
+          )
+        )
+      );
+
+      return $mandrill->messages->sendTemplate($template, $content, $message);
+
+    } catch(Mandrill_Error $e) {
+      return $e;
+    }
+
+  }

@@ -2,9 +2,9 @@
 
 <div <? post_class('post mention'); ?>>
   
-  <h2><a href="<?= $mention['url'] ?>" target="_blank"><? the_title(); ?></a></h2>
+  <h2 class="light"><a href="<?= $mention['url'] ?>" target="_blank"><? the_title(); ?></a></h2>
 
-  <div class="post-content">
+  <div class="post-content light">
     <? the_content() ?>
     <? pp($mention) ?>
   </div>

@@ -31,10 +31,13 @@
 
       $donation = create_donation( $donor['name-first'], $donor['name-last'], $donor['email'], $donor['amount'], $donor['zip'] );
 
+      $confirmation = mandrill_send_confirmation( $donation );
+
       wp_send_json_success(array(
         'post' => $donor,
         'stripe' => $charge,
-        'confirmation_path' => get_permalink($donation)
+        'confirmation_path' => get_permalink($donation),
+        'confirmation_email' => $confirmation
       ));
 
     } catch ( Stripe_CardError $e ) {

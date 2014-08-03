@@ -146,7 +146,7 @@ class Give
 
 $ ->
   if ( $('#give').length )
-    window.Donate = window.Donate or new Give
+    window.SE.Donate = window.SE.Donate or new Give
       name: 'main_give_form'
       key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
       form: '#give'

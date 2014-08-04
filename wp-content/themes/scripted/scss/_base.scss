@@ -11,17 +11,16 @@
 }
 
 a {
- text-decoration: none;
- color: $blue;
+  text-decoration: none;
+  color: $blue;
 
- &:hover {
-  color: $blue-light;
- }
+  &:hover {
+    color: $blue-light;
+  }
 
- &:active {
-  color: $blue-dark;
- }
-
+  &:active {
+   color: $blue-dark;
+  }
 }
 
 

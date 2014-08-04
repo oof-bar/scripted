@@ -5,19 +5,43 @@ Navigation
 */
 
 .navigation {
+  padding: 1.5em 0;
+
+  .column {
+
+  }
 
   .wordmark {
+    margin-top: 0.35em;
+  }
+
+  .menu {
+    margin-top: 0.75em;
   }
 
   li {
     display: inline-block;
-    vertical-align: middle;
-    margin-right: 1em;
-  }
-}
+    margin: 0 0.75em;
+    position: relative;
 
-section.navigation {
-  padding: 1em 0;
+    ul {
+      position: absolute;
+      display: none;
+
+      li {
+        display: block;
+        text-align: left;
+      }
+    }
+
+    &:hover ul {
+      display: block;
+    }
+  }
+
+  .donate {
+    // position: absolute;
+  }
 }
 
 .side-nav {

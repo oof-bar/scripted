@@ -103,14 +103,14 @@ a {
 
 .link-grey {
   a {
-    color: $grey-mid;
+    color: $grey-dark;
 
     &:hover {
-      color: $grey-dark;
+      color: $grey-mid;
     }
 
     &:active {
-      color: $black;
+      color: $grey-darker;
     }
   }
 }

@@ -1,18 +1,18 @@
 <? /* Checklist */ ?>
 
 
-<section class="narrative-section checklist">
+<section class="narrative-section checklist expanded">
 
   <div class="wrapper intro">
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h2><?= $section['header'] ?></h2>
+        <h4 class="text-blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-11 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -23,7 +23,7 @@
 
     <? foreach ( $section['list'] as $item ) { ?>
 
-      <div class="column col-6 item">
+      <div class="column col-6 item med">
 
         <div class="text">
           <?= $item['item'] ?>

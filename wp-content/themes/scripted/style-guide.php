@@ -48,7 +48,7 @@
       <div class="quote serif">
         Quote Testimonial: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools.
       </div>
-      <div class="attribution caps sans blue">Savannah Julian</div>
+      <div class="attribution caps sans text-blue">Savannah Julian</div>
     </div>
   </div>
 </section>
@@ -56,7 +56,7 @@
 <section class="featured-quote">
   <div class="wrapper">
     <div class="column col-8 push-2">
-      <div class="blue-bg padded text-center white">
+      <div class="blue padded text-center rounded-corners">
         <div class="quote">
           Quote Quote-Box: ScriptEd empowers students to be creators of technology by offering computer programming classes in under resourced high schools.
         </div>
@@ -66,10 +66,10 @@
   </div>
 </section>
 
-<section class="gray-bg">
+<section class="grey-light">
   <div class="wrapper">
     <div class="column col-8 push-2">
-      section.gray-bg
+      section.grey-light
     </div>
   </div>
 </section>
@@ -86,10 +86,10 @@
 
 <br>
 
-<section class="gray-bg expanded">
+<section class="grey-light expanded">
   <div class="wrapper">
     <div class="column col-8 push-2">
-      section.gray-bg.expanded
+      section.grey-light.expanded
     </div>
   </div>
 </section>
@@ -138,7 +138,7 @@
   </div>
 </section>
 
-<section class="black-bg">
+<section class="black">
   <div class="wrapper">
     <div class="column col-8 push-2">
       <div class="button white" style="margin-bottom: 1em;">
@@ -174,7 +174,7 @@
       <div class="side-nav">
         <ul>
           <li><a href="#">Item 1</a></li>
-          <li class="current-page"><a href="#">Item 2</a></li>
+          <li class="current-menu-item"><a href="#">Item 2</a></li>
           <li><a href="#">Item 3</a></li>
           <li><a href="#">Item 4</a></li>
         </ul>

@@ -14,8 +14,8 @@ input {
   &[type=text], &[type=email], &[type=number] {
     width: 100%;
     display: block;
-    border: 1px solid $gray1;
-    background-color: $gray1;
+    border: 1px solid $grey-light;
+    background-color: $grey-light;
     padding: 0.6em 1em 0.5em 1em;
     margin-top: 0.5em;
   }
@@ -34,11 +34,12 @@ input {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 0.9em;
+  font-weight: 600;
   cursor: pointer;
 
   &.small {
     font-size: 0.7em;
-    padding: 0.6em 1.25em 0.5em 1.25em;
+    padding: 0.5em 1.25em 0.25em 1.25em;
   }
 
   &.orange {
@@ -46,19 +47,14 @@ input {
     color: $white;
     border: 2px solid $orange;
 
-    &.small {
-      font-size: 0.7em;
-      padding: 0.6em 1.25em 0.5em 1.25em;
-    }
-
     &:hover {
-      background-color: $light-orange;
-      border: 2px solid $light-orange;
+      background-color: $orange-light;
+      border: 2px solid $orange-light;
     }
 
     &:active {
-      background-color: $dark-orange;
-      border: 2px solid $dark-orange;
+      background-color: $orange-dark;
+      border: 2px solid $orange-dark;
     }
   }
 
@@ -67,11 +63,11 @@ input {
     background-color: transparent;
 
     &:hover {
-      color: $light-orange;
+      color: $orange-light;
     }
 
     &:active {
-      color: $dark-orange;
+      color: $orange-dark;
     }
   }
 
@@ -81,13 +77,13 @@ input {
     border: 2px solid $blue;
 
     &:hover {
-      background-color: $light-blue;
-      border: 2px solid $light-blue;
+      background-color: $blue-light;
+      border: 2px solid $blue-light;
     }
 
     &:active {
-      background-color: $dark-blue;
-      border: 2px solid $dark-blue;
+      background-color: $blue-dark;
+      border: 2px solid $blue-dark;
     }
   }
 
@@ -96,11 +92,11 @@ input {
     background-color: transparent;
 
     &:hover {
-      color: $light-blue;
+      color: $blue-light;
     }
 
     &:active {
-      color: $dark-blue;
+      color: $blue-dark;
     }
   }
 

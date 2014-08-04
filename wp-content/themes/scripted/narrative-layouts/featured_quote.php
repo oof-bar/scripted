@@ -1,6 +1,6 @@
 <? /* Featured Quote */ ?>
 
-<section class="narrative-section featured-quote">
+<section class="narrative-section featured-quote expanded">
 
   <div class="wrapper intro">
 
@@ -11,7 +11,7 @@
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-8 greedy lede large">
+      <div class="column col-11 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -22,9 +22,9 @@
 
     <div class="wrapper box">
 
-      <div class="column col-10 push-1">
+      <div class="column col-10 push-1 add-margin-top">
 
-        <div class="blue-bg padded text-center white">
+        <div class="blue padded text-center rounded-corners">
 
           <blockquote class="quote">
             <?= $section['quote'] ?>

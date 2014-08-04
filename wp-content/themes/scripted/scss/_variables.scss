@@ -32,14 +32,14 @@ $family-sans: "proxima-nova", "Helvetica", "Arial", sans-serif;
 $white: #ffffff;
 $black: #3F3B39;
 
-$gray1: #eeeeee;
-$gray2: #cccccc;
-$gray3: #aaaaaa;
+$grey-light: #eeeeee;
+$grey-mid: #cccccc;
+$grey-dark: #aaaaaa;
 
 $orange: #EF5330;
-$light-orange: lighten($orange,5%);
-$dark-orange: darken($orange,5%);
+$orange-light: lighten($orange,5%);
+$orange-dark: darken($orange,5%);
 
 $blue: #15C2D2;
-$light-blue: lighten($blue,5%);
-$dark-blue: darken($blue,5%);
+$blue-light: lighten($blue,5%);
+$blue-dark: darken($blue,5%);

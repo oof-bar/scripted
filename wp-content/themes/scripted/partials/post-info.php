@@ -1,8 +1,8 @@
 <div class="post-info border-top">
-  <div class="type small gray-2">
+  <div class="type small grey-mid">
     <?= se_post_nicename($post) ?>
   </div>
-  <div class="date small gray-2 italic">
+  <div class="date small grey-mid italic">
     <? the_date() ?>
   </div>
 </div>

@@ -1,5 +1,6 @@
 <? # Template Name: Give ?>
-<? get_header(); ?>
+<? get_header() ?>
+<? the_post() ?>
 <? $giving = get_fields() ?>
 
 <? include get_partial('hero') ?>
@@ -8,7 +9,7 @@
   <div class="wrapper">
 
     <div class="column col-8 push-2">
-      Explanation?
+      <? the_content() ?>
     </div>
 
   </div>

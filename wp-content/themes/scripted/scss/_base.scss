@@ -173,6 +173,22 @@ a {
   }
 }
 
+.no-padding-bottom {
+  padding-bottom: 0;
+}
+
+.no-padding-top {
+  padding-top: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
 .border-top {
   border-top: 1px solid $grey-light;
 }

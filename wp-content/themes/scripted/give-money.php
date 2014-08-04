@@ -4,10 +4,10 @@
 
 <? include get_partial('hero') ?>
 
-<section class="give-intro">  
+<section class="give-intro expanded">  
   <div class="wrapper">
 
-    <div class="column col-8 push-2">
+    <div class="column col-11 large">
       Explanation?
     </div>
 

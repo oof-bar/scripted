@@ -150,8 +150,20 @@ pre {
   font-weight: 700;
 }
 
+.semi-bold {
+  font-weight: 600;
+}
+
 .italic {
   font-style: italic;
+}
+
+.sans {
+  font-family: $family-sans;
+}
+
+.serif {
+  font-family: $family-serif;
 }
 
 
@@ -164,4 +176,9 @@ pre {
   font-weight: 700;
   line-height: 1.1em;
   margin-bottom: 0.25em;
+}
+
+.wordmark {
+  font-size: 2.3em;
+  margin-bottom: 0.75em;
 }

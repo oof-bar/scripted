@@ -7,14 +7,14 @@
 }
 
 section {
-  padding: 3em 0;
+  padding: 4em 0;
 
   &.expanded {
     padding: 7em 0;
   }
 
   &.border {
-    border-top: thin solid $gray1;
+    border-top: thin solid $grey-light;
   }
 }
 
@@ -39,9 +39,9 @@ table {
   margin: 1em 0;
   width: 100%;
   tr {
-    border-top: 1px solid $gray1;
+    border-top: 1px solid $grey-light;
     &:last-of-type {
-      border-bottom: 1px solid $gray1;
+      border-bottom: 1px solid $grey-light;
     }
     td {
       padding: 0.75em 1em 0.65em 0;

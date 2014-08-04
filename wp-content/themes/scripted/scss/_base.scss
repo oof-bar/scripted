@@ -8,8 +8,17 @@
   }
 
   a {
-    text-decoration: none;
-    color: $blue;
+   text-decoration: none;
+   color: $blue;
+
+   &:hover {
+    color: $blue-light;
+   }
+
+   &:active {
+    color: $blue-dark;
+   }
+
   }
   
   -webkit-font-smoothing: antialiased;
@@ -18,51 +27,62 @@
 
 // Colors
 
-.white-bg {
+.white {
   background-color: $white;
 }
 
-.white {
+.text-white {
   color: $white;
 }
 
-.gray-bg {
-  background-color: $gray1;
+.grey-light {
+  background-color: $grey-light;
 }
 
-.gray-1 {
-  color: $gray1;
+.text-grey-light {
+  color: $grey-light;
 }
 
-.gray-2 {
-  color: $gray2;
+.grey-mid {
+  background-color: $grey-mid;
 }
 
-.gray-3 {
-  color: $gray3;
+.text-grey-mid {
+  color: $grey-mid;
 }
 
-.black-bg {
-  background-color: $black;
+.grey-dark {
+  background-color: $grey-dark;
+}
+
+.text-grey-dark {
+  color: $grey-dark;
 }
 
 .black {
+  background-color: $black;
+  color: $white;
+}
+
+.text-black {
   color: $black;
 }
 
-.orange-bg {
+.orange {
   background-color: $orange;
+  color: $white;
 }
 
-.orange {
+.text-orange {
   color: $orange;
 }
 
-.blue-bg {
+.blue {
   background-color: $blue;
+  color: $white;
 }
 
-.blue {
+.text-blue {
   color: $blue;
 }
 
@@ -108,8 +128,24 @@
   }
 }
 
+.add-margin-left {
+  margin-left: 2em;
+
+  &.double {
+    margin-left: 4em;
+  }
+}
+
+.add-margin-right {
+  margin-right: 2em;
+
+  &.double {
+    margin-right: 4em;
+  }
+}
+
 .border-top {
-  border-top: 1px solid $gray1;
+  border-top: 1px solid $grey-light;
 }
 
 .clearfix {

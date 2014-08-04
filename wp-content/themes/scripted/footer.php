@@ -8,7 +8,7 @@
 
         <div class="column col-2 push-1 tablet-half mobile-full">
           <span class="caps semi-bold small">Explore</span> 
-          <div class="add-margin-top caps bold small">
+          <div class="add-margin-top caps bold small link-grey">
             <? wp_nav_menu('footer') ?>
           </div>
         </div>

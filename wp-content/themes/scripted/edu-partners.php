@@ -18,10 +18,14 @@
 
       <div class="school-list">
         <? if ( $education_partners['partners'] ) foreach ( $education_partners['partners'] as $partner ) { ?>
-          <div class="school">
-            <? pp($partner) ?>
+          <div class="school blue">
+            <? if ( $partner['link'] ) { ?>
+              <a href="<?= $partner['link'] ?>" title="<?= $partner['name'] ?>"><?= $partner['name'] ?></a>
+            <? } else { ?>
+              <?= $partner['name'] ?>
+            <? } ?>
           </div>
-        </div>
+        <? } ?>
       </div>
     </div>
 

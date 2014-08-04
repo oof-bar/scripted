@@ -90,12 +90,28 @@ a {
 .link-orange {
   a {
     color: $orange;
+
+    &:hover {
+      color: $orange-light;
+    }
+
+    &:active {
+      color: $orange-dark;
+    }
   }
 }
 
 .link-grey {
   a {
     color: $grey-mid;
+
+    &:hover {
+      color: $grey-dark;
+    }
+
+    &:active {
+      color: $black;
+    }
   }
 }
 

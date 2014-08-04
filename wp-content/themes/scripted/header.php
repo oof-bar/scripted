@@ -14,17 +14,17 @@
     <section class="navigation">
       <div class="wrapper">
 
-        <div class="column col-2 tablet-quarter">
+        <div class="column col-2 tablet-quarter wordmark bold serif link-orange">
           <a href="<?= home_url() ?>"><?= bloginfo('title') ?></a>
         </div>
 
-        <div class="column col-8 tablet-half">
+        <div class="column col-8 tablet-half caps bold small link-grey text-center">
           <? wp_nav_menu('primary') ?>
         </div>
 
         <? if ( $donate_link = se_option('donate_page') ) { ?>
           <div class="column col-2 tablet-quarter">
-            <a class="button" href="<?= $donate_link ?>">Donate</a>
+            <a class="button orange" href="<?= $donate_link ?>">Donate</a>
           </div>
         <? } ?>
 

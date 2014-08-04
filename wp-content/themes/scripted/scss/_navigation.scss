@@ -4,6 +4,22 @@ Navigation
 
 */
 
+.navigation {
+
+  .wordmark {
+  }
+
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1em;
+  }
+}
+
+section.navigation {
+  padding: 1em 0;
+}
+
 .side-nav {
   ul {
     li {

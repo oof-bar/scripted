@@ -39,18 +39,13 @@ input {
 
   &.small {
     font-size: 0.7em;
-    padding: 0.6em 1.25em 0.5em 1.25em;
+    padding: 0.5em 1.25em 0.25em 1.25em;
   }
 
   &.orange {
     background-color: $orange;
     color: $white;
     border: 2px solid $orange;
-
-    &.small {
-      font-size: 0.7em;
-      padding: 0.6em 1.25em 0.5em 1.25em;
-    }
 
     &:hover {
       background-color: $orange-light;

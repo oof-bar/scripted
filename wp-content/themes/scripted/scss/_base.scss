@@ -6,22 +6,22 @@
   &:focus {
     outline: none;
   }
-
-  a {
-   text-decoration: none;
-   color: $blue;
-
-   &:hover {
-    color: $blue-light;
-   }
-
-   &:active {
-    color: $blue-dark;
-   }
-
-  }
   
   -webkit-font-smoothing: antialiased;
+}
+
+a {
+ text-decoration: none;
+ color: $blue;
+
+ &:hover {
+  color: $blue-light;
+ }
+
+ &:active {
+  color: $blue-dark;
+ }
+
 }
 
 
@@ -84,6 +84,20 @@
 
 .text-blue {
   color: $blue;
+}
+
+// Links
+
+.link-orange {
+  a {
+    color: $orange;
+  }
+}
+
+.link-grey {
+  a {
+    color: $grey-mid;
+  }
 }
 
 // General

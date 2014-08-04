@@ -10,14 +10,14 @@ Sections
 .post-info {
   padding: 2em 0 2em 0;
   @include clearfix;
-}
 
-.type {
-  float: left;
-}
+  .type {
+    float: left;
+  }
 
-.date {
-  float: right;
+  .date {
+    float: right;
+  }
 }
 
 .post {

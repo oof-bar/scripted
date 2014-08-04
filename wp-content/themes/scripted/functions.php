@@ -209,8 +209,8 @@
   # Press Sections
   register_nav_menu( 'press', 'Press Information Sidebar' );
 
-  # About
-  register_nav_menu( 'about', 'About ScriptEd page collection');
+  # Team
+  register_nav_menu( 'team', 'Team Sidebar');
 
 
   # Spiff up the Administration Interface

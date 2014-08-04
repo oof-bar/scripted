@@ -28,6 +28,7 @@
  
 [data-icon]:before {
   display: inline-block;
+  font-size: 16px;
   font-family: "feather";
   content: attr(data-icon);
   font-style: normal;
@@ -45,6 +46,7 @@
 [class^="icon-"],
 [class*=" icon-"] {
   display: inline-block;
+  font-size: 15px;
   font-family: "feather";
   font-style: normal;
   font-weight: normal;

@@ -10,8 +10,11 @@
     </div>
 
     <div class="column col-7 tablet-three-quarters">
-      <? the_content() ?>
-      <? pp($post) ?>
+
+      <div class="page-content">
+        <? the_content() ?>
+      </div>
+      
     </div>
 
   </div>

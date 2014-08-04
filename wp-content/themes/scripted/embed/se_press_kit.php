@@ -2,20 +2,23 @@
 
 <div <? post_class('post press-kit'); ?>>
   
-  <h2>
+  <a class="button small blue float-right" href="<?= $kit['attachment']['url'] ?>" target="_blank">
+    Download
+  </a>
+
+  <h3>
     <? if ( $kit['attachment'] ) { ?>
-      <a href="<?= $kit['attachment']['url'] ?>" target="_blank"><? the_title(); ?></a>
+      <a href="<?= $kit['attachment']['url'] ?>" target="_blank">
+        <? the_title() ?>
+
+      </a>
     <? } else { ?>
-      <? the_title(); ?> (Press Kit)
+      <? the_title(); ?>
     <? } ?>
-  </h2>
+  </h3>
 
-  <div class="post-meta">
-    <? pp($kit); ?>
-  </div>
-
-  <div class="post-content">
-    <? the_content(); ?>
+  <div class="date small text-grey-light">
+    <? the_date() ?>
   </div>
 
 </div>

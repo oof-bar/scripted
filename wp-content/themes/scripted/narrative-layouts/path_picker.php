@@ -34,7 +34,7 @@
 
         <? if ( $route['name'] ) { ?>
           <div class="add-margin-top">
-            <h3 class="blue-text"><?= $route['name'] ?></h3>
+            <h3 class="text-blue"><?= $route['name'] ?></h3>
           </div>
         <? } ?>
 

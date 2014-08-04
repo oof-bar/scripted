@@ -1,6 +1,6 @@
 <? /* Point of Interest */ ?>
 
-<section class="narrative-section poi black-bg white">
+<section class="narrative-section poi black">
 
   <div class="wrapper frame">
 

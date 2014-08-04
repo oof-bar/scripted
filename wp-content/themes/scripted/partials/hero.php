@@ -1,4 +1,4 @@
-<section class="header orange-bg white">
+<section class="header orange">
   <div class="wrapper">
     <div class="column col-12">
       <h1 class="bold"><?= se_page_title($post) ?></h1>

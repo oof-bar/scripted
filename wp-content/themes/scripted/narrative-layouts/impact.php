@@ -1,13 +1,12 @@
 <? /* Impact */ ?>
 
-
-<section class="narrative-section impact expanded">
+<section class="narrative-section impact expanded <?= $section['color'] ?>">
 
   <div class="wrapper intro">
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h4 class="blue"><?= $section['header'] ?></h4>
+        <h4 class="text-blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 
@@ -27,7 +26,7 @@
 
       <div class="column add-margin-top double <?= $columns ?> statistic">
 
-        <div class="data orange text-center">
+        <div class="data text-orange text-center">
           <?= $statistic['emphasis'] ?>
         </div>
 

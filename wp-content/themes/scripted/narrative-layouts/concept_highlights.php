@@ -1,17 +1,17 @@
 <? /* Concept Highlights */ ?>
 
-<section class="narrative-section concept-highlights">
+<section class="narrative-section concept-highlights expanded">
 
   <div class="wrapper intro">
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h2><?= $section['header'] ?></h2>
+        <h4 class="text-blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-11 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -30,7 +30,7 @@
           <img src="<?= $concept['illustration']['sizes']['medium'] ?>" />
         </figure>
 
-        <h4><?= $concept['name'] ?></h4>
+        <h3 class="add-margin-top"><?= $concept['name'] ?></h3>
 
         <div class="explanation">
           <?= $concept['explanation'] ?>

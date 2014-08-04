@@ -24,7 +24,7 @@
 
       <div class="column col-10 push-1 add-margin-top">
 
-        <div class="blue-bg padded text-center white rounded-corners">
+        <div class="blue padded text-center rounded-corners">
 
           <blockquote class="quote">
             <?= $section['quote'] ?>

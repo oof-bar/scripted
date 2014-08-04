@@ -7,7 +7,7 @@
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h4 class="blue caps"><?= $section['header'] ?></h4>
+        <h4 class="text-blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 

@@ -1,17 +1,17 @@
 <? /* Path Picker */ ?>
 
-<section class="narrative-section path-picker">
+<section class="narrative-section path-picker expanded">
 
   <div class="wrapper intro">
 
     <? if ( $section['header'] ) { ?>
       <div class="column col-6 greedy header">
-        <h2><?= $section['header'] ?></h2>
+        <h4 class="text-blue"><?= $section['header'] ?></h4>
       </div>
     <? } ?>
 
     <? if ( $section['lede'] ) { ?>
-      <div class="column col-6 greedy lede">
+      <div class="column col-11 greedy lede large">
         <?= $section['lede'] ?>
       </div>
     <? } ?>
@@ -33,7 +33,9 @@
         <? } ?>
 
         <? if ( $route['name'] ) { ?>
-          <h4><?= $route['name'] ?></h4>
+          <div class="add-margin-top">
+            <h3 class="blue-text"><?= $route['name'] ?></h3>
+          </div>
         <? } ?>
 
         <? if ( $route['description'] ) { ?>
@@ -43,8 +45,8 @@
         <? } ?>
 
         <? if ( $route['destination'] ) { ?>
-          <div class="action">
-            <a href="<?= $route['destination'] ?>" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?></a>
+          <div class="action add-margin-top">
+            <a href="<?= $route['destination'] ?>" class="button blue outline" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?></a>
           </div>
         <? } ?>
 

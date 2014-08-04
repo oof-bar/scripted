@@ -7,7 +7,7 @@
       <div class="column col-8">
 
         <? if ( $section['header'] ) { ?>
-          <h4 class="blue"><?= $section['header'] ?></h4>
+          <h4 class="text-blue"><?= $section['header'] ?></h4>
         <? } ?>
 
         <? if ( $section['message'] ) { ?>

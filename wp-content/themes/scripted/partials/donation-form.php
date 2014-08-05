@@ -1,4 +1,4 @@
-<section class="give-form">
+<section class="give-form expanded">
 
   <form id="give">
 

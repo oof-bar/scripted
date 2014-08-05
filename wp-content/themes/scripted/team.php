@@ -13,7 +13,7 @@
 
     <div class="column col-7 tablet-three-quarters">
 
-      <div class="page-content">
+      <div class="page-content med">
         <? the_content() ?>
       </div>
 
@@ -33,7 +33,7 @@
             <h5 class="name text-blue">
               <?= $person['name'] ?>
             </h5>
-            <div class="title small text-grey-light">
+            <div class="title small text-grey-dark">
               <?= $person['title'] ?>
             </div>
             <div class="bio">

@@ -5,5 +5,8 @@ class SE
     console.log "loaded"
 
 
-$(document).ready ->
+$ ->
   window.SE = window.SE or new SE()
+
+  $('.navigation .menu-item-has-children').hover ->
+      $(this).toggleClass 'menu-open'

@@ -1,7 +1,7 @@
 # Require any additional compass plugins here.
 
 # Set this to the root of your project when deployed:
-http_path = "/"
+http_path = "/wp-content/themes/scripted/"
 css_dir = "stylesheets"
 sass_dir = "scss"
 images_dir = "images"

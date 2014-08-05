@@ -10,3 +10,7 @@ $ ->
 
   $('.navigation .menu-item-has-children').hover ->
       $(this).toggleClass 'menu-open'
+
+  $('.faq .question').on 'click', ->
+    $(this).parent('.faq-item').toggleClass('open')
+    $(this).siblings('.answer').slideToggle()

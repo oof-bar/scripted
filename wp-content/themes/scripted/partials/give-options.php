@@ -1,17 +1,17 @@
 <? if ( $giving['routes'] ) { ?>
 
-  <section class="giving path-picker">
+  <section class="giving path-picker expanded border">
 
     <div class="wrapper intro">
 
       <? if ( $giving['header'] ) { ?>
-        <div class="column col-6 greedy header">
-          <h2><?= $giving['header'] ?></h2>
+        <div class="column col-6 greedy header text-blue">
+          <h4><?= $giving['header'] ?></h4>
         </div>
       <? } ?>
 
       <? if ( $giving['lede'] ) { ?>
-        <div class="column col-6 greedy lede">
+        <div class="column col-11 greedy lede large">
           <?= $giving['lede'] ?>
         </div>
       <? } ?>
@@ -33,7 +33,9 @@
           <? } ?>
 
           <? if ( $route['name'] ) { ?>
-            <h4><?= $route['name'] ?></h4>
+            <div class="add-margin-top text-blue">
+              <h3><?= $route['name'] ?></h3>
+            </div>
           <? } ?>
 
           <? if ( $route['description'] ) { ?>
@@ -43,8 +45,8 @@
           <? } ?>
 
           <? if ( $route['destination'] ) { ?>
-            <div class="action">
-              <a href="<?= $route['destination'] ?>" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?></a>
+            <div class="action add-margin-top">
+              <a href="<?= $route['destination'] ?>" class="button blue outline" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?></a>
             </div>
           <? } ?>
 

@@ -17,7 +17,7 @@
     <? } ?>
   </h3>
 
-  <div class="date small text-grey-light">
+  <div class="date small text-grey-dark">
     <? the_date() ?>
   </div>
 

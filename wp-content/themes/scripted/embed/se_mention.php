@@ -9,7 +9,7 @@
   </h3>
   
   <? if ( $mention['source'] ) { ?>
-    <div class="source text-grey-light">
+    <div class="source text-grey-dark">
       <?= $mention['source'] ?>
     </div>
   <? } ?>

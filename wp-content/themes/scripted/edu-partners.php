@@ -12,7 +12,7 @@
     </div>
 
     <div class="column col-7 tablet-three-quarters">
-      <div class="page-content">
+      <div class="page-content med">
         <? the_content() ?>
       </div>
 

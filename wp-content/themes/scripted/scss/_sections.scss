@@ -28,3 +28,11 @@ Sections
     }
   }
 }
+
+.link-white {
+  .parent-page {
+    a {
+      border-bottom: 2px solid $white;
+    }
+  }
+}

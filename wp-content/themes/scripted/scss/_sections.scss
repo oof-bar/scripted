@@ -36,3 +36,30 @@ Sections
     }
   }
 }
+
+/*
+  Giving
+*/
+
+// FAQ
+
+.faq {
+  .faq-item {
+    .question {
+      cursor: pointer;
+      padding: 1em 0;
+      background: transparent image-url('arrow-open.png') right center no-repeat;
+    }
+    .answer {
+      display: none;
+      .answer-wrap {
+        padding: 1em 0 2em 0;
+      }
+    }
+    &.open {
+      .question {
+        background-image: image-url('arrow-close.png');
+      }
+    }
+  }
+}

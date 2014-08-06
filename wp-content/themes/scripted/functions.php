@@ -201,16 +201,19 @@
   */
 
   # Header
-  register_nav_menu( 'primary', 'Header Navigation Menu' );
+  register_nav_menu('primary', 'Header Navigation Menu');
 
   # Blog Sections
-  register_nav_menu( 'blog', 'Blog Sidebar' );
+  register_nav_menu('blog', 'Blog Sidebar');
 
   # Press Sections
-  register_nav_menu( 'press', 'Press Information Sidebar' );
+  register_nav_menu('press', 'Press Information Sidebar');
 
   # Team
-  register_nav_menu( 'team', 'Team Sidebar');
+  register_nav_menu('team', 'Team Sidebar');
+
+  # Footer
+  register_nav_menu('footer', 'Footer');
 
 
   # Spiff up the Administration Interface

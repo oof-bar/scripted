@@ -28,7 +28,7 @@
  
 [data-icon]:before {
   display: inline-block;
-  font-size: 16px;
+  font-size: 12px;
   font-family: "feather";
   content: attr(data-icon);
   font-style: normal;
@@ -39,6 +39,9 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &.large {
+    font-size: 24px;
+  }
 }
 
 /* CSS Class Mapping Method */
@@ -46,7 +49,7 @@
 [class^="icon-"],
 [class*=" icon-"] {
   display: inline-block;
-  font-size: 15px;
+  font-size: 12px;
   font-family: "feather";
   font-style: normal;
   font-weight: normal;
@@ -56,6 +59,9 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &.large {
+    font-size: 24px;
+  }
 }
 
 $icons: (

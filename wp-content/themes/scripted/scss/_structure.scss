@@ -8,13 +8,21 @@
 
 section {
   padding: 4em 0;
+  position: relative;
 
   &.expanded {
     padding: 7em 0;
+    @include mobile {
+      padding: 3em 0;
+    }
   }
 
   &.border {
-    border-top: thin solid $grey-light;
+    @include border-top;
+  }
+
+  @include mobile {
+    padding: 2em 0;
   }
 }
 

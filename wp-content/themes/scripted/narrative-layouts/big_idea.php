@@ -2,7 +2,7 @@
 
 <? $image = ( $section['image'] ? $section['image']['sizes']['large'] : '' ) ?>
 
-<section class="narrative-section big-idea gradient expanded text-center blue" data-background-image="<?= $image ?>">
+<section class="narrative-section big-idea gradient expanded text-center blue" style="background-image: url('<?= $image ?>')">
 
   <div class="wrapper">
 

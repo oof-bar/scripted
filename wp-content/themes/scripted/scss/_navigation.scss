@@ -6,6 +6,7 @@ Navigation
 
 .navigation {
   padding: 1.5em 0;
+  z-index: 1000;
 
   .column {
 
@@ -48,6 +49,7 @@ Navigation
 }
 
 .side-nav {
+  margin-bottom: 2em;
   ul {
     li {
       border-left: 1px solid $grey-mid;

@@ -81,13 +81,13 @@
     if ( is_singular('se_gift') ) {
       return 'Thanks!';
     } else if ( is_singular( array( 'post', 'se_news', 'se_event', 'se_press_kit', 'se_student_voice', 'se_resource', 'se_mention' ) ) ) {
-      return '<span class="parent-page archive"><a href="' . get_post_type_archive_link( $post->post_type ) . '">' . get_post_type_object( $post->post_type )->labels->singular_name . '</a>:</span> <span class="subpage-title">' . get_the_title() . '</span>';
+      return '<span class="parent-page archive"><a href="' . get_post_type_archive_link( $post->post_type ) . '">' . get_post_type_object( $post->post_type )->labels->singular_name . '</a>:</span> <span class="subpage-title light">' . get_the_title() . '</span>';
     } else if ( is_archive() ) {
       return post_type_archive_title(null, false);
     } else if ( is_single() or is_page() ) {
       if ( count( $ancestors = get_post_ancestors($post) ) ) {
         $parent = __::first($ancestors);
-        return '<span class="parent-page"><a href="' . get_permalink($parent) . '">' . get_the_title($parent) . '</a>:</span> <span class="subpage-title">' . get_the_title() . '</span>';
+        return '<span class="parent-page"><a href="' . get_permalink($parent) . '">' . get_the_title($parent) . '</a>:</span> <span class="subpage-title light">' . get_the_title() . '</span>';
       } else {
         return get_the_title();
       }

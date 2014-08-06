@@ -138,6 +138,14 @@ pre {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .light {
   font-weight: 300;
 }
@@ -164,6 +172,14 @@ pre {
 
 .serif {
   font-family: $family-serif;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 

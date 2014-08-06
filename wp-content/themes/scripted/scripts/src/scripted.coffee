@@ -1,5 +1,6 @@
 class SE
   loaded_at: Date.now()
+  Validators: {}
 
   constructor: ->
     console.log "loaded"

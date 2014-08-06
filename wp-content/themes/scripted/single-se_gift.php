@@ -3,7 +3,7 @@
 
 <? include get_partial('hero') ?>
 
-<section class="">
+<section class="give-confirmation">
   <div class="wrapper intro">
 
     <div class="column col-8 push-2 greedy">
@@ -11,55 +11,40 @@
     </div>
 
     <div class="column col-8 push-2 greedy">
-      Please find a record of your donation, below. A copy has been mailed to <strong><?= $gift['email'] ?></strong>
+      Please find a confirmation of your donation, below. A copy has been mailed to <strong><?= $gift['email'] ?></strong> for your records.
     </div>
   </div>
 
   <div class="wrapper gift-info">
-    <div class="column col-8 push-2">
+    <div class="column col-8 push-2 mobile-full">
 
       <table>
         <tbody>
           <tr>
             <td>Name</td>
-            <td><? the_title() ?></td>
+            <td class="monospace"><? the_title() ?></td>
           </tr>
           <tr>
             <td>Amount</td>
-            <td><?= money_format('$%n', $gift['amount']) ?></td>
+            <td class="monospace"><?= money_format('$%n', $gift['amount']) ?></td>
           </tr>
           <tr>
             <td>Date</td>
-            <td><?= get_the_date('F d, Y') ?></td>
+            <td class="monospace"><?= get_the_date('F d, Y') ?></td>
           </tr>
         </tbody>
       </table>
     </div>
-<? /*
-    <div class="column col-2 push-2">
-      Name
-    </div>
-    <div class="column col-3 greedy">
-      <? the_title() ?>
-    </div>
-
-    <div class="column col-2 push-2">
-      Amount
-    </div>
-    <div class="column col-3 greedy">
-      <?= money_format('$%n', $gift['amount']) ?>
-    </div>
-
-    <div class="column col-2 push-2">
-      Date
-    </div>
-    <div class="column col-3">
-      <?= get_the_date('F d, Y') ?>
-    </div>
-*/ ?>
-
-    <? # pp($gift) ?>
   </div>
+
+  <div class="wrapper">
+    <div class="column col-8 push-2 mobile-full">
+      <div class="disclaimer small text-grey-mid">
+        No information about your chosen payment method was recorded on our servers during this transaction. We only keep the information below so we can remind ourselves of the enourmous generosity of our supporters.
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <? get_footer(); ?>

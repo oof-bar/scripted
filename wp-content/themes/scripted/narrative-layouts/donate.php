@@ -2,14 +2,19 @@
 
 <section class="narrative-section donate expanded orange text-center <?= $section['color'] ?>">
 
-  <div class="wrapper donate-form">
+  <div class="wrapper donate-widget">
 
-    <div class="column col-12 centered large no-margin-bottom">
-      I want to donate _____ to support future developers.
+    <div class="column col-12">
+      <form action="<?= se_option('donate_page') ?>" method="post">
+        <p class="centered large">
+          I want to donate <span class="nowrap"><span class="amount-prefix">$</span><input type="number" min="1" name="amount" class="amount inline" /></span> to support future developers.
+        </p>
+        <p>
+          <input class="button white outline" type="submit" value="Give" />
+        </p>
+      </form>
     </div>
 
   </div>
-
-  <? # pp($section); ?>
   
 </section>

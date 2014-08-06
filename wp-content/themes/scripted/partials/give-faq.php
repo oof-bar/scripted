@@ -9,13 +9,12 @@
 
     </div>
 
-    <? foreach ( $giving['faq'] as $item ) { ?>
+    <div class="wrapper">
+      <div class="column col-12">
 
-      <div class="wrapper">
-        <div class="column col-12">
+        <? foreach ( $giving['faq'] as $item ) { ?>
 
-
-          <div class="faq-item border-top">
+          <div class="faq-item">
 
             <h6 class="question">
               <?= $item['question'] ?>
@@ -29,10 +28,10 @@
 
           </div>
 
-        </div>
-      </div>
+        <? } ?>
 
-    <? } ?>
+      </div>
+    </div>
 
   </section>
   

@@ -78,6 +78,32 @@ Navigation
   }
 }
 
+.header {
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .parent-page {
+    a {
+      border-bottom: 2px solid transparentize($white, 0.5);
+      color: inherit;
+      &:hover {
+        border-bottom-color: $white;
+      }
+    }
+  }
+
+  .page-intro {
+    margin-top: 1em;
+    margin-bottom: 0;
+    font-size: 1.25em;
+    line-height: 1.15em;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .footer {
   a {
     line-height: 2em;

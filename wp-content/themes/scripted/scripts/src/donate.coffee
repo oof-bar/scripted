@@ -32,7 +32,11 @@ class Give
 
   watch: ->
     @options.form.on 'submit.stripe', {skip_stripe: false}, (e) =>
-      @handle(e)
+      if @validate
+        @handle(e)
+      else
+        e.preventDefault()
+        @abort()
 
     @options.amount_input.on 'change', (e) =>
       console.log "Amount Modified."
@@ -51,13 +55,7 @@ class Give
       ###
 
   handle: (e) ->
-      unless @validate()
-        @unlock()
-        return false
-
-      if !e.data.skip_stripe
-        @get_token()
-        false
+    @get_token()
 
   get_token: ->
     console.log "Starting Stripe Query..."
@@ -71,7 +69,7 @@ class Give
       @unlock()
     else
       @add_token()
-      @submit({skip_stripe: true})
+      @submit()
 
   add_token: ->
     @options.token.val(@response.id)
@@ -119,20 +117,7 @@ class Give
     }
 
   validate: ->
-    valid = true
-
-    @options.cc.removeClass('error')
-    @options.cvc.removeClass('error')
-
-    unless Stripe.card.validateCardNumber @options.cc.val()
-      @options.cc.addClass('error')
-      valid = false
-
-    unless Stripe.card.validateCVC @options.cvc.val()
-      @options.cvc.addClass('error')
-      valid = false
-
-    valid
+    window.SE.Validators.Donate.valid()
 
   lock: ->
     @options.form.find('input').prop 'readonly', true
@@ -162,3 +147,9 @@ $ ->
       name_first: '#name-first'
       name_last: '#name-last'
       nonce: '#nonce'
+
+    window.SE.Validators.Donate = $('#give').validate
+      debug: true
+      rules:
+        "name-first":
+          required: true

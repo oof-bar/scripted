@@ -1,7 +1,5 @@
 /*
-
-Sections
-
+  Sections
 */
 
 
@@ -29,26 +27,78 @@ Sections
   }
 }
 
-.link-white {
-  .parent-page {
-    a {
-      border-bottom: 2px solid $white;
+/*
+  Narrative
+*/
+
+// Donate Widget
+
+.donate-widget {
+  .amount-prefix {
+    display: inline-block;
+    margin: 0 0.5em;
+    z-index: 100;
+    position: relative;
+  }
+  .amount {
+    position: relative;
+    top: -1px;
+    padding: 0.1em 0.1em 0.1em 1em;
+    margin: 0 0.1em 0 -1.4em;
+    display: inline-block;
+    width: 4em;
+    color: inherit;
+    background-color: transparentize($black, 0.9);
+    border-color: transparentize($black, 0.8);
+    &:focus {
+      background-color: transparentize($black, 0.9);
+      border-color: transparentize($black, 0.5);
+    }
+    &:hover {
+      border-color: transparentize($black, 0.7);
     }
   }
 }
+
 
 /*
   Giving
 */
 
+// Form
+
+.give-form {
+  .field-group {
+    
+  }
+  .cc-expiry {
+    &.month {
+      width: 3.2em;
+    }
+    &.year {
+      width: 4.4em;
+    }
+  }
+}
+
 // FAQ
 
 .faq {
   .faq-item {
+    border-top: 1px solid $grey-light;
+    &:last-of-type {
+      border-bottom: 1px solid $grey-light;
+    }
     .question {
+      font-weight: 600;
+      color: $grey-darker;
       cursor: pointer;
       padding: 1em 0;
       background: transparent image-url('arrow-open.png') right center no-repeat;
+      @include animate($property: color);
+      &:hover {
+        color: $black;
+      }
     }
     .answer {
       display: none;
@@ -59,7 +109,47 @@ Sections
     &.open {
       .question {
         background-image: image-url('arrow-close.png');
+        color: $black;
       }
     }
   }
 }
+
+// Gift Receipt
+
+.give-confirmation {
+  table {
+    .monospace {
+      color: $grey-darker;
+      font-weight: normal;
+    }
+  }
+  .disclaimer {
+    margin-top: 2em;
+  }
+}
+
+/*
+  Press
+*/
+
+.press-mention-archive {
+  .mention {
+    border-top: 1px solid $grey-light;
+    padding: 2em 0;
+
+    &:last-child {
+      border-bottom: 1px solid $grey-light;
+    }
+    h3 {
+      margin-bottom: 0.25em;
+    }
+    .source {
+      margin-bottom: 1em;
+    }
+    .button {
+      margin-left: 5em;
+    }
+  }
+}
+

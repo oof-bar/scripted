@@ -5,16 +5,6 @@
 
 <? include get_partial('hero') ?>
 
-<section class="give-intro expanded">  
-  <div class="wrapper">
-
-    <div class="column col-8 push-2">
-      <? the_content() ?>
-    </div>
-
-  </div>
-</section>
-
 <? include get_partial('donation-form') ?>
 
 <? include get_partial('give-faq') ?>

@@ -2,6 +2,13 @@
   Input/UI
 */
 
+label {
+  display: block;
+  cursor: pointer;
+  color: $grey-dark;
+  margin-top: 1.5em;
+}
+
 input {
   @include border-radius(3px);
   -webkit-appearance: none;
@@ -10,14 +17,25 @@ input {
   background: none;
   padding: 0;
   margin: 0;
+  @include animate();
 
   &[type=text], &[type=email], &[type=number] {
     width: 100%;
     display: block;
-    border: 1px solid $grey-light;
+    border: 2px solid $grey-light;
     background-color: $grey-light;
-    padding: 0.6em 1em 0.5em 1em;
+    padding: 0.8em 1em 0.8em 1em;
     margin-top: 0.5em;
+    &:hover {
+      border-color: $grey-mid;
+    }
+    &:focus {
+      border-color: $grey-dark;
+      background: $white;
+    }
+    &.error {
+      border-color: $orange;
+    }
   }
 
   &.button{
@@ -25,11 +43,32 @@ input {
   }
 }
 
+.combined-field {
+  display: inline;
+  width: auto;
+  input {
+    display: inline-block;
+  }
+  &.join-right {
+    text-align: right;
+    padding-right: 0.15em;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &.join-left {
+    padding-left: 0.15em;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
 
 .button {
   @include border-radius(3px);
   display: inline-block;
-  padding: 0.6em 2em 0.5em 2em;
+  padding: 0.8em 2em 0.65em 2em;
   margin-right: 0.25em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -39,7 +78,7 @@ input {
 
   &.small {
     font-size: 0.7em;
-    padding: 0.5em 1.25em 0.25em 1.25em;
+    padding: 0.5em 1.25em 0.35em 1.25em;
   }
 
   &.orange {

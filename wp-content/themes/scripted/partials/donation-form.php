@@ -1,4 +1,6 @@
-<section class="give-form expanded">
+<section class="give-form">
+
+  <? $amount = ( isset($_POST['amount']) ? $_POST['amount'] : 25 ); ?>
 
   <form id="give">
 
@@ -13,24 +15,24 @@
     <div class="wrapper field-group name">
 
       <div class="column col-4 tablet-half mobile-full">
-        <label>
+        <label for="name-first">
           First Name
-          <input type="text" id="name-first" name="name-first" value="August" />
         </label>
+        <input type="text" id="name-first" name="name-first" value="August" />
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
-        <label>
+        <label for="name-last">
           Last Name
-          <input type="text" id="name-last" name="name-last" value="Miller" />
         </label>
+        <input type="text" id="name-last" name="name-last" value="Miller" />
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
-        <label>
+        <label for="email">
           Email
-          <input type="email" id="email" name="email" value="hello@gusmiller.com" />
         </label>
+        <input type="email" id="email" name="email" value="hello@gusmiller.com" />
       </div>
 
     </div>
@@ -38,26 +40,29 @@
     <div class="wrapper field-group payment">
 
       <div class="column col-2 tablet-quarter mobile-full">
-        <label>
-          Amount
-          <input type="number" min="1" id="amount-formatted" class="amount formatted" value="25" />
-          <input type="hidden" id="amount-cents" name="amount" class="amount cents" value="2500" />
+        <label for="amount-formatted">
+          Amount (USD)
         </label>
+        <input type="number" min="1" id="amount-formatted" class="amount formatted" value="<?= $amount ?>" />
+        <input type="hidden" id="amount-cents" name="amount" class="amount cents" value="<?= ( $amount * 100 ) ?>" />
       </div>
 
       <div class="column col-3 tablet-half mobile-full">
-        <label>
+        <label for="cc-number">
           Card Number
-          <input type="text" id="cc-number" value="4242424242424242" />
         </label>
+        <input type="text" id="cc-number" value="4242424242424242" />
       </div>
 
       <div class="column col-2 tablet-quarter mobile-half">
         <label>
           Expiration
-          <input type="text" id="cc-expiry-month" class="cc-expiry month combined-field join-right" value="12" />
-          <input type="text" id="cc-expiry-year" class="cc-expiry year combined-field join-left" value="2016" />
         </label>
+        <span class="combined-field nowrap">
+          <input type="text" id="cc-expiry-month" class="cc-expiry month" value="12" />
+          <span class="spacer">/</span>
+          <input type="text" id="cc-expiry-year" class="cc-expiry year" value="2016" />
+        </span>
       </div>
 
       <div class="column col-2 tablet-quarter mobile-half">

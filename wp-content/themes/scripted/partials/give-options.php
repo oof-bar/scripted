@@ -34,7 +34,13 @@
 
           <? if ( $route['name'] ) { ?>
             <div class="add-margin-top text-blue">
-              <h3><?= $route['name'] ?></h3>
+              <h3>
+                <? if ( $route['destination'] ) { ?>
+                  <a href="<?= $route[''] ?>"><?= $route['name'] ?></a>
+                <? } else { ?>
+                  <?= $route['name'] ?>
+                <? } ?>
+              </h3>
             </div>
           <? } ?>
 

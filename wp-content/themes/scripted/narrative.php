@@ -5,17 +5,17 @@
 
 <? if ( $narrative['hero'] ) { ?>
 
-  <section class="hero" style="background-image: url('<?= $narrative['hero']['url'] ?>');">
+  <section class="hero expanded text-center text-white" style="background-image: url('<?= $narrative['hero']['url'] ?>');">
 
     <? if ( $narrative['media'] ) { ?>
       <div class="wrapper">
-        <div class="column col-2 center">
+        <div class="column col-2 centered">
           Media Button Thing
         </div>
       </div>
     <? } ?>
     <div class="wrapper">
-      <div class="column col-10">
+      <div class="column col-10 centered">
         <h1><?= $narrative['header_text'] ?></h1>
       </div>
     </div>

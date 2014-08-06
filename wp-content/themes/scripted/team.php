@@ -7,7 +7,7 @@
 <section class="team <?= $team['layout'] ?>">
   <div class="wrapper">
 
-    <div class="column col-3 tablet-quarter">
+    <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('team-navigation') ?>
     </div>
 
@@ -17,33 +17,59 @@
         <? the_content() ?>
       </div>
 
-      <? if ( $team['people'] ) foreach ( $team['people'] as $person ) { ?>
+      <div class="people <?= $team['layout'] ?>">
 
-        <div class="profile">
+        <? if ( $team['people'] ) foreach ( $team['people'] as $person ) { ?>
 
-          <div class="portrait">
-            <? if ( $person['portrait'] ) { ?>
-              <img src="<?= $person['portrait']['sizes']['thumb'] ?>" alt="<?= $person['name'] ?>"/>
-            <? } else { ?>
-              Portrait Missing
-            <? } ?>
-          </div>
+          <? if ( $team['layout'] == 'full' ) { ?>
 
-          <div class="details">
-            <h5 class="name text-blue">
-              <?= $person['name'] ?>
-            </h5>
-            <div class="title small text-grey-dark">
-              <?= $person['title'] ?>
+            <div class="profile clearfix">
+
+              <div class="column col-3 tablet-quarter mobile-full portrait">
+                <div class="portrait-mask">
+                  <? if ( $person['portrait'] ) { ?>
+                      <img src="<?= $person['portrait']['sizes']['thumb'] ?>" alt="<?= $person['name'] ?>"/>
+                  <? } else { ?>
+                  <? } ?>
+                </div>
+              </div>
+
+              <div class="column col-8 push-1 tablet-three-quarters mobile-full details">
+                <h5 class="name text-blue">
+                  <?= $person['name'] ?>
+                </h5>
+                <div class="title small text-grey-dark">
+                  <?= $person['title'] ?>
+                </div>
+                <div class="bio">
+                  <?= $person['bio'] ?>
+                </div>
+              </div>
+
             </div>
-            <div class="bio">
-              <?= $person['bio'] ?>
-            </div>
-          </div>
+          
+          <? } else { ?>
 
-        </div>
-        
-      <? } ?>
+            <div class="column col-3 push-1 profile">
+              <div class="portrait">
+                <div class="portrait-mask">
+                  <? if ( $person['portrait'] ) { ?>
+                      <img src="<?= $person['portrait']['sizes']['thumb'] ?>" alt="<?= $person['name'] ?>"/>
+                  <? } else { ?>
+                  <? } ?>
+                </div>
+              </div>
+              <div class="details">
+                <div class="name"><?= $person['name'] ?></div>
+                <div class="title small text-grey-mid"><?= $person['title'] ?></div>
+              </div>
+            </div>
+
+          <? } ?>
+
+        <? } ?>
+
+      </div>
 
     </div>
 

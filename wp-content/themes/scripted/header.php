@@ -23,8 +23,8 @@
         </div>
 
         <? if ( $donate_link = se_option('donate_page') ) { ?>
-          <div class="column col-2 tablet-quarter">
-            <a class="button orange donate" href="<?= $donate_link ?>">Donate</a>
+          <div class="column col-2 tablet-quarter text-right">
+            <a class="button small orange donate" href="<?= $donate_link ?>">Donate</a>
           </div>
         <? } ?>
 

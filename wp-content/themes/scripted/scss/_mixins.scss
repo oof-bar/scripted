@@ -54,3 +54,13 @@
   -webkit-transform: rotate(0deg);
   }
 }
+
+// Appearance
+
+@mixin border-top ( $color: $grey-light ) {
+  border-top: 1px solid $color;
+}
+
+@mixin text-on-image ( $color: $blue ) {
+  text-shadow: 0 1px 1px darken(transparentize($color, 0.5), 35%);
+}

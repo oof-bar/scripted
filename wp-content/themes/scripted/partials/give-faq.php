@@ -3,19 +3,27 @@
   <section class="faq expanded border">
     <div class="wrapper">
 
-      <div class="column col-12">
+      <div class="column col-6 tablet-full">
         <h4 class="text-blue">FAQ</h4>
+      </div>
+
+    </div>
+
+    <div class="wrapper">
+      <div class="column col-12">
 
         <? foreach ( $giving['faq'] as $item ) { ?>
 
-          <div class="faq-item border-top">
+          <div class="faq-item">
 
-            <div class="question add-margin-top add-margin-bottom">
-              <h3><?= $item['question'] ?></h3>
-            </div>
+            <h6 class="question">
+              <?= $item['question'] ?>
+            </h6>
 
-            <div class="answer add-margin-bottom med">
-              <?= $item['answer'] ?>
+            <div class="answer">
+              <div class="answer-wrap">
+                <?= $item['answer'] ?>
+              </div>
             </div>
 
           </div>
@@ -23,8 +31,8 @@
         <? } ?>
 
       </div>
-
     </div>
+
   </section>
   
 <? } ?>

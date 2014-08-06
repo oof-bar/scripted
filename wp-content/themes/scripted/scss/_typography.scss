@@ -31,6 +31,9 @@ h1 {
   font-weight: 300;
   line-height: 1.1em;
   margin-bottom: 0.5em;
+  @include mobile {
+    font-size: 2em;
+  }
 }
 
 h2 {
@@ -71,6 +74,9 @@ h5 {
   font-family: $family-serif;
   line-height: 1.2em;
   margin-bottom: 1em;
+  @include mobile {
+    font-size: 1.25em;
+  }
 }
 
 .med {
@@ -138,6 +144,14 @@ pre {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
 .light {
   font-weight: 300;
 }
@@ -166,6 +180,14 @@ pre {
   font-family: $family-serif;
 }
 
+.monospace {
+  font-family: monospace;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
 
 
 // Special
@@ -176,6 +198,9 @@ pre {
   font-weight: 700;
   line-height: 1.1em;
   margin-bottom: 0.25em;
+  @include mobile {
+    font-size: 2.5em;
+  }
 }
 
 .wordmark {

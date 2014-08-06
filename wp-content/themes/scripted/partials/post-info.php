@@ -1,4 +1,4 @@
-<div class="post-info border-top">
+<div class="post-info">
   <div class="type small text-grey-dark">
     <?= se_post_nicename($post) ?>
   </div>

@@ -1,11 +1,11 @@
 <? /* Point of Interest */ ?>
 
-<section class="narrative-section poi black">
+<section class="narrative-section pride black">
 
   <div class="wrapper frame">
 
     <? if ( $section['icon'] ) { ?>
-      <div class="column col-1 greedy mobile-quarter icon">
+      <div class="icon">
         <img src="<?= $section['icon']['sizes']['thumbnail'] ?>" alt="Point of Pride" />
       </div>
     <? } ?>

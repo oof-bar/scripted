@@ -1,0 +1,63 @@
+{
+    "key": "group_53bf59c6153dc",
+    "title": "Press Kit",
+    "fields": [
+        {
+            "key": "field_53bf90552ce7d",
+            "label": "Source",
+            "name": "source",
+            "prefix": "",
+            "type": "text",
+            "instructions": "An attribution, if this resource did not originate within ScriptEd.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf90942ce7e",
+            "label": "Attachment",
+            "name": "attachment",
+            "prefix": "",
+            "type": "file",
+            "instructions": "Attach a file.",
+            "required": 1,
+            "conditional_logic": 0,
+            "return_format": "array",
+            "library": "all"
+        },
+        {
+            "key": "field_53bf90ab2ce7f",
+            "label": "Expiration",
+            "name": "expiration_date",
+            "prefix": "",
+            "type": "date_picker",
+            "instructions": "Set an expiration date on the resource. The appearance will change based on whether or not the resource is active. Leave this blank the resource should never expire.",
+            "required": 0,
+            "conditional_logic": 0,
+            "display_format": "F j, Y",
+            "return_format": "F j, Y",
+            "first_day": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "se_press_kit"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

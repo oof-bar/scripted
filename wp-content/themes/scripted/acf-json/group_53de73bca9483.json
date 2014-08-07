@@ -1,0 +1,144 @@
+{
+    "key": "group_53de73bca9483",
+    "title": "Giving (Other)",
+    "fields": [
+        {
+            "key": "field_53de73c1798c3",
+            "label": "Call to Action",
+            "name": "cta",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Invite the user to act.",
+            "required": 1,
+            "conditional_logic": 0,
+            "default_value": "Give us a Hand",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53de73e7798c4",
+            "label": "Message",
+            "name": "message",
+            "prefix": "",
+            "type": "textarea",
+            "instructions": "Offer some context for the action, or what it helps ScriptEd accomplish.",
+            "required": 1,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "wpautop",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53de7484798c7",
+            "label": "Link Type",
+            "name": "link_type",
+            "prefix": "",
+            "type": "radio",
+            "instructions": "Should the link point to something inside the ScriptEd website, or on the wider Internet?",
+            "required": 0,
+            "conditional_logic": 0,
+            "choices": {
+                "internal": "Internal",
+                "external": "External"
+            },
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "internal",
+            "layout": "vertical"
+        },
+        {
+            "key": "field_53de740a798c5",
+            "label": "Link (Internal)",
+            "name": "link_internal",
+            "prefix": "",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                {
+                    "rule_0": {
+                        "field": "field_53de7484798c7",
+                        "operator": "==",
+                        "value": "internal"
+                    }
+                }
+            ],
+            "post_type": [
+                "page",
+                "se_aggregator",
+                "post",
+                "se_event",
+                "se_resource",
+                "se_student_voice"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0
+        },
+        {
+            "key": "field_53de7546798c8",
+            "label": "Link (External)",
+            "name": "link_external",
+            "prefix": "",
+            "type": "text",
+            "instructions": "The full link to the external resource. Please include http:\/\/ or https:\/\/",
+            "required": 1,
+            "conditional_logic": [
+                {
+                    "rule_0": {
+                        "field": "field_53de7484798c7",
+                        "operator": "==",
+                        "value": "external"
+                    }
+                }
+            ],
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53de7447798c6",
+            "label": "Link Label",
+            "name": "link_label",
+            "prefix": "",
+            "type": "text",
+            "instructions": "The linked prompt",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "give-other.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

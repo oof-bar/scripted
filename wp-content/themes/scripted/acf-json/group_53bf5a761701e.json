@@ -1,0 +1,84 @@
+{
+    "key": "group_53bf5a761701e",
+    "title": "Education Resource",
+    "fields": [
+        {
+            "key": "field_53bf6e9494ff4",
+            "label": "Quote",
+            "name": "quote",
+            "prefix": "",
+            "type": "textarea",
+            "instructions": "Add content from the linked page, if it's appropriate. Markdown is supported.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf6e7394ff3",
+            "label": "Link",
+            "name": "link",
+            "prefix": "",
+            "type": "text",
+            "instructions": "A URL, if the resources is on the web.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53e1c91e6a03b",
+            "label": "Link Source",
+            "name": "link_source",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Who originally published the quote? This could be a Twitter user, news syndicate, JavaScript Library\u2014 you name it!",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf6ecb94ff5",
+            "label": "Attachment",
+            "name": "attachment",
+            "prefix": "",
+            "type": "file",
+            "instructions": "If the resource is a document, it can be uploaded and attached here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "return_format": "array",
+            "library": "all"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "se_resource"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

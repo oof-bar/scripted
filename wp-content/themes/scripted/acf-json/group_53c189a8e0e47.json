@@ -1,0 +1,118 @@
+{
+    "key": "group_53c189a8e0e47",
+    "title": "Site Options",
+    "fields": [
+        {
+            "key": "field_53c189b1efa0d",
+            "label": "Tags",
+            "name": "tags",
+            "prefix": "",
+            "type": "repeater",
+            "instructions": "Add tags that describe ScriptEd's content. These will be used in a \"meta tag\" to offer search engines an easy way to index it and associate the content with terms that might not naturally appear in the writing.",
+            "required": 0,
+            "conditional_logic": 0,
+            "min": "",
+            "max": "",
+            "layout": "table",
+            "button_label": "Add Tag",
+            "sub_fields": [
+                {
+                    "key": "field_53c18a48efa0e",
+                    "label": "Tag",
+                    "name": "tag",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ]
+        },
+        {
+            "key": "field_53c34008cb898",
+            "label": "MailChimp List",
+            "name": "mailchimp_list",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Use the ID of the MailChimp list you wish to use for subscriptions through the footer. The signup form will not appear without this.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53dd39a7c5782",
+            "label": "Donate Page",
+            "name": "donate_page",
+            "prefix": "",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_53ddba4efc63e",
+            "label": "Give Memo",
+            "name": "give_memo",
+            "prefix": "",
+            "type": "wysiwyg",
+            "instructions": "This will appear on a successful donation page, above information about the specific gift.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "toolbar": "basic",
+            "media_upload": 1
+        },
+        {
+            "key": "field_53dee2ae349d0",
+            "label": "Non-profit Notice",
+            "name": "np_notice",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "ScriptEd is a New York based 501(c)(3) not for profit organization.",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "se_site_options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

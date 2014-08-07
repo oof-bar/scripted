@@ -1,0 +1,141 @@
+{
+    "key": "group_53ded3576d56a",
+    "title": "People",
+    "fields": [
+        {
+            "key": "field_53ded5620d84a",
+            "label": "Layout",
+            "name": "layout",
+            "prefix": "",
+            "type": "radio",
+            "instructions": "Does this page need full profiles, or just names and pictures?",
+            "required": 1,
+            "conditional_logic": 0,
+            "choices": {
+                "full": "Full Bios",
+                "abbreviated": "Just Names and Photos"
+            },
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "full",
+            "layout": "vertical"
+        },
+        {
+            "key": "field_53ded35ef214a",
+            "label": "People",
+            "name": "people",
+            "prefix": "",
+            "type": "repeater",
+            "instructions": "Add people to be featured on this page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "min": "",
+            "max": "",
+            "layout": "table",
+            "button_label": "Add Person",
+            "sub_fields": [
+                {
+                    "key": "field_53ded37ef214c",
+                    "label": "Name",
+                    "name": "name",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "Try and keep this consistent\u2014 if it's likely that one group would prefer anonymity, formatting all the names \"J. Seinfeld\" or \"Jerry S.\" is acceptable.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53ded374f214b",
+                    "label": "Portrait",
+                    "name": "portrait",
+                    "prefix": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all"
+                },
+                {
+                    "key": "field_53ded3c9f214d",
+                    "label": "Title",
+                    "name": "title",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "Title or Position that the person holds or refers to themselves as. \"CEO, Shopify,\" \"Founding Board Member\" or \"Software Engineer\" are some examples.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53ded470f214e",
+                    "label": "Bio",
+                    "name": "bio",
+                    "prefix": "",
+                    "type": "textarea",
+                    "instructions": "A few sentences about the person. Try and keep these roughly equal in length for each profile.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "wpautop",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53ded5af0d84b",
+                    "label": "Link",
+                    "name": "link",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "Provide a link, if the person would like their name and title to lead to a personal or business website.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "team.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

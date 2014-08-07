@@ -1,0 +1,167 @@
+{
+    "key": "group_53de69c73a79f",
+    "title": "Giving Type Information",
+    "fields": [
+        {
+            "key": "field_53de69dadaa54",
+            "label": "Header",
+            "name": "header",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "Other Ways to Give",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53de6a74daa55",
+            "label": "Lede",
+            "name": "lede",
+            "prefix": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "wpautop",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53de6a8adaa56",
+            "label": "Links",
+            "name": "routes",
+            "prefix": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "min": "",
+            "max": "",
+            "layout": "row",
+            "button_label": "Add Link",
+            "sub_fields": [
+                {
+                    "key": "field_53de6adbdaa57",
+                    "label": "Name",
+                    "name": "name",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53de6aebdaa58",
+                    "label": "Destination",
+                    "name": "destination",
+                    "prefix": "",
+                    "type": "page_link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "post_type": [
+                        "page",
+                        "post",
+                        "se_event",
+                        "se_resource",
+                        "se_student_voice"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0
+                },
+                {
+                    "key": "field_53de6d18daa59",
+                    "label": "Image",
+                    "name": "image",
+                    "prefix": "",
+                    "type": "image",
+                    "instructions": "A photograph or illustration representing the action.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all"
+                },
+                {
+                    "key": "field_53de6d2fdaa5a",
+                    "label": "Description",
+                    "name": "description",
+                    "prefix": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "Describe the action that the user might take.",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "wpautop",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53de6d96daa5b",
+                    "label": "Action Label",
+                    "name": "action_label",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "Linked text, inside a button, that leads to the Destination above.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "Go",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 50,
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "give-money.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "give-other.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

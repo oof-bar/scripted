@@ -237,7 +237,9 @@
 
 .checklist {
   .item {
-    span {}
+    span {
+      padding-right: 0.25em;
+    }
   }
 }
 

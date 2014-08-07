@@ -26,7 +26,7 @@
       <div class="column col-6 item med">
 
         <div class="text">
-          <span class="icon-check text-blue"></span>
+          <span class="icon-check large text-blue"></span>
           <?= $item['item'] ?>
         </div>
 

@@ -386,7 +386,7 @@ ul.acf-checkbox-list li label {
 }
 
 .acf-wysiwyg-wrap iframe{ 
-	min-height: 250px;
+	min-height: 200px;
 }
 
 .acf-wysiwyg-wrap .wp-editor-container{ 

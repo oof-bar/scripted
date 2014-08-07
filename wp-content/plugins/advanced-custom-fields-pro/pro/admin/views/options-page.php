@@ -22,6 +22,8 @@ $page = acf_get_options_page( $slug );
 			'nonce'		=> 'options',
 		));
 		
+		wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+		
 		?>
 		
 		<div id="poststuff">
@@ -80,27 +82,69 @@ $page = acf_get_options_page( $slug );
 <script type="text/javascript">
 (function($){
 	
-	$(document).on('click', '.postbox .handlediv', function(){
+	var acf_options_page = {
+		
+		initialize : function(){
+			
+			// reference
+			var self = this;
+			
+			
+			// events
+			$(document).on('click', '.postbox .handlediv, .postbox .hndle', function(){
 				
-		var postbox = $(this).closest('.postbox');
+				self.toggle( $(this) );
+				
+			});
+			
+			$(document).on('submit', '#post', function(){
+				
+				self.submit();
+				
+			});
+			
+			
+			// return
+			return this;
+		},
 		
-		if( postbox.hasClass('closed') )
-		{
-			postbox.removeClass('closed');
-		}
-		else
-		{
-			postbox.addClass('closed');
+		toggle : function( $el ){
+			
+			var postbox = $el.closest('.postbox');
+		
+			if( postbox.hasClass('closed') ) {
+			
+				postbox.removeClass('closed');
+				
+			} else {
+			
+				postbox.addClass('closed');
+				
+			}
+			
+			
+			// get all closed postboxes
+			var closed = $('.postbox').filter('.closed').map(function() { return this.id; }).get().join(',');
+
+			$.post(ajaxurl, {
+				action: 'closed-postboxes',
+				closed: closed,
+				closedpostboxesnonce: $('#closedpostboxesnonce').val(),
+				page: 'acf_options_page'
+			});
+			
+		},
+		
+		submit : function(){
+			
+			$('#publishing-action .spinner').css('display', 'inline-block');
+			$('#publishing-action #publish').addClass('button-primary-disabled');
+			
 		}
 		
-	});
+		
+	}.initialize();
 	
-	$(document).on('submit', '#post', function(){
-		
-		$('#publishing-action .spinner').css('display', 'inline-block');
-		$('#publishing-action #publish').addClass('button-primary-disabled');
-		
-	});
 	
 })(jQuery);
 </script>

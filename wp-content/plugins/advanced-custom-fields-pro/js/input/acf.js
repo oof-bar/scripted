@@ -303,6 +303,10 @@ get_field_data : function( $el, name ){
 		
 		is_field : function( $el, args ){
 			
+			// defaults
+			args = args || {};
+			
+			
 			// var
 			var r = true;
 			
@@ -1042,7 +1046,7 @@ frame.on('all', function( e ) {
 				
 				
 				// uploaded to post
-				if( args.library == 'uploadedTo' ) {
+				if( args.library == 'uploadedTo' && $.isNumeric(acf.get('post_id')) ) {
 					
 					// remove 'uploaded' option
 					filters.$el.find('option[value="uploaded"]').remove();
@@ -1364,42 +1368,22 @@ frame.on('all', function( e ) {
 			// override save
 			_prototype.save = function( event ) {
 			
-				var data = {},
-					names = {};
-				
-				if ( event )
+				if( event ) {
+					
 					event.preventDefault();
 					
-					
-				_.each( this.$el.serializeArray(), function( pair ) {
+				}
 				
-					// initiate name
-					if( pair.name.slice(-2) === '[]' )
-					{
-						// remove []
-						pair.name = pair.name.replace('[]', '');
-						
-						
-						// initiate counter
-						if( typeof names[ pair.name ] === 'undefined'){
-							
-							names[ pair.name ] = -1;
-							//console.log( names[ pair.name ] );
-							
-						}
-						
-						
-						names[ pair.name ]++
-						
-						pair.name += '[' + names[ pair.name ] +']';
-						
-						
-					}
- 
-					data[ pair.name ] = pair.value;
-				});
- 
+				
+				// serialize form
+				var data = acf.serialize_form(this.$el);
+				
+				
+				// ignore render
 				this.ignore_render = true;
+				
+				
+				// save
 				this.model.saveCompat( data );
 				
 			};
@@ -1409,23 +1393,16 @@ frame.on('all', function( e ) {
 			setTimeout(function(){
 			
 				// Hack for CPT without a content editor
-				try
-				{
+				try {
+				
 					// post_id may be string (user_1) and therefore, the uploaded image cannot be attached to the post
-					if( $.isNumeric(acf.o.post_id) )
-					{
+					if( $.isNumeric(acf.o.post_id) ) {
+					
 						wp.media.view.settings.post.id = acf.o.post_id;
+						
 					}
 					
-				} 
-				catch(e)
-				{
-					// one of the objects was 'undefined'...
-				}
-				
-				
-				// setup fields
-				//$(document).trigger('acf/setup_fields', [ $(document) ]);
+				} catch(e) {}
 				
 			}, 10);
 			
@@ -1461,32 +1438,39 @@ frame.on('all', function( e ) {
 		
 		init : function(){
 			
+			// debug
+			//console.log( 'conditional_logic.init(%o)', this );
+			
+			
 			// reference
-			var _this = this;
+			var self = this;
 			
 			
 			// events
 			$(document).on('change', '.acf-field input, .acf-field textarea, .acf-field select', function(){
 				
-				_this.change( $(this) );
+				self.change( $(this) );
 				
 			});
 			
 			
 			// actions
+			acf.add_action('ready', function( $el ){
+				
+				self.render( $el );
+				
+			}, 20);
+			
+						
 			acf.add_action('append', function( $el ){
 				
-				_this.render( $el );
+				self.render( $el );
 				
-			});
+			}, 20);
 			
 			
-			// debug
-			//console.log( 'conditional_logic.init(%o)', this );
-			
-			
-			// render
-			_this.render();
+			// return
+			return this;
 			
 		},
 		
@@ -1866,13 +1850,7 @@ frame.on('all', function( e ) {
 			
 		}
 		
-	}; 
-	
-	acf.add_action('ready', function(){
-		
-		acf.conditional_logic.init();
-		
-	}, 100);
+	}.init();
 	
 	
 	

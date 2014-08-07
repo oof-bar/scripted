@@ -310,7 +310,11 @@ class acf_pro_options_page {
 				
 				
 				// tweaks to vars
-				if( $context == 'side' ) {
+				if( $context == 'acf_after_title' ) {
+					
+					$context = 'normal';
+					
+				} elseif( $context == 'side' ) {
 				
 					$priority = 'core';
 					

@@ -713,9 +713,10 @@ function _acf_get_field_by_name( $name = '' ) {
 function acf_update_field( $field = false, $specific = false ) {
 	
 	// $field must be an array
-	if( !is_array($field) )
-	{
+	if( !is_array($field) ) {
+	
 		return false;
+		
 	}
 	
 	
@@ -734,20 +735,22 @@ function acf_update_field( $field = false, $specific = false ) {
 		$groups = acf_extract_var( $field, 'conditional_logic' );
 		
 		
-		// reset conditional logic
-		$field['conditional_logic'] = array();
+		// clean array
+		$groups = array_filter($groups);
+		$groups = array_values($groups);
 		
 		
-		// remove empty rules
-		foreach( $groups as $group ) {
+		// clean rules
+		foreach( array_keys($groups) as $i ) {
 			
-			if( !empty($group) ) {
-				
-				$field['conditional_logic'][] = $group;
-				
-			}
+			$groups[ $i ] = array_filter($groups[ $i ]);
+			$groups[ $i ] = array_values($groups[ $i ]);
 			
 		}
+		
+		
+		// reset conditional logic
+		$field['conditional_logic'] = $groups;
 		
 	}
 	
@@ -775,8 +778,6 @@ function acf_update_field( $field = false, $specific = false ) {
 		'id',
 		'class',
 		'parent',
-		//'ancestors',
-		//'field_group',
 		'_name',
 		'_input',
 		'_valid',

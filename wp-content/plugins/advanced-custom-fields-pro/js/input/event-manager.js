@@ -1,6 +1,5 @@
 ( function( window, undefined ) {
 	"use strict";
-	var document = window.document;
 
 	/**
 	 * Handles managing all events for whatever you plug it into. Priorities for hooks are based on lowest to highest in
@@ -33,15 +32,15 @@
 		 *
 		 * @param action Must contain namespace.identifier
 		 * @param callback Must be a valid callback function before this action is added
-		 * @param priority Defaults to 10
+		 * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+		 * @param [context] Supply a value to be used for this
 		 */
-		function addAction( action, callback, priority ) {
-			if( _validateNamespace( action ) === false || typeof callback !== 'function' ) {
-				return MethodsAvailable;
+		function addAction( action, callback, priority, context ) {
+			if( typeof action === 'string' && typeof callback === 'function' ) {
+				priority = parseInt( ( priority || 10 ), 10 );
+				_addHook( 'actions', action, callback, priority, context );
 			}
 
-			priority = parseInt( ( priority || 10 ), 10 );
-			_addHook( 'actions', action, callback, priority );
 			return MethodsAvailable;
 		}
 
@@ -53,11 +52,9 @@
 			var args = Array.prototype.slice.call( arguments );
 			var action = args.shift();
 
-			if( _validateNamespace( action ) === false ) {
-				return MethodsAvailable;
+			if( typeof action === 'string' ) {
+				_runHook( 'actions', action, args );
 			}
-
-			_runHook( 'actions', action, args );
 
 			return MethodsAvailable;
 		}
@@ -66,13 +63,13 @@
 		 * Removes the specified action if it contains a namespace.identifier & exists.
 		 *
 		 * @param action The action to remove
+		 * @param [callback] Callback function to remove
 		 */
-		function removeAction( action ) {
-			if( _validateNamespace( action ) === false ) {
-				return MethodsAvailable;
+		function removeAction( action, callback ) {
+			if( typeof action === 'string' ) {
+				_removeHook( 'actions', action, callback );
 			}
 
-			_removeHook( 'actions', action );
 			return MethodsAvailable;
 		}
 
@@ -81,15 +78,15 @@
 		 *
 		 * @param filter Must contain namespace.identifier
 		 * @param callback Must be a valid callback function before this action is added
-		 * @param priority Defaults to 10
+		 * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+		 * @param [context] Supply a value to be used for this
 		 */
-		function addFilter( filter, callback, priority ) {
-			if( _validateNamespace( filter ) === false || typeof callback !== 'function' ) {
-				return MethodsAvailable;
+		function addFilter( filter, callback, priority, context ) {
+			if( typeof filter === 'string' && typeof callback === 'function' ) {
+				priority = parseInt( ( priority || 10 ), 10 );
+				_addHook( 'filters', filter, callback, priority );
 			}
 
-			priority = parseInt( ( priority || 10 ), 10 );
-			_addHook( 'filters', filter, callback, priority );
 			return MethodsAvailable;
 		}
 
@@ -98,28 +95,27 @@
 		 * the first argument must always be the filter.
 		 */
 		function applyFilters( /* filter, filtered arg, arg2, ... */ ) {
-
 			var args = Array.prototype.slice.call( arguments );
 			var filter = args.shift();
 
-			if( _validateNamespace( filter ) === false ) {
-				return MethodsAvailable;
+			if( typeof filter === 'string' ) {
+				return _runHook( 'filters', filter, args );
 			}
 
-			return _runHook( 'filters', filter, args );
+			return MethodsAvailable;
 		}
 
 		/**
 		 * Removes the specified filter if it contains a namespace.identifier & exists.
 		 *
 		 * @param filter The action to remove
+		 * @param [callback] Callback function to remove
 		 */
-		function removeFilter( filter ) {
-			if( _validateNamespace( filter ) === false ) {
-				return MethodsAvailable;
+		function removeFilter( filter, callback ) {
+			if( typeof filter === 'string') {
+				_removeHook( 'filters', filter, callback );
 			}
 
-			_removeHook( 'filters', filter );
 			return MethodsAvailable;
 		}
 
@@ -130,28 +126,31 @@
 		 * @param hook The hook (namespace.identifier) to remove
 		 * @private
 		 */
-		function _removeHook( type, hook ) {
-			if( STORAGE[ type ][ hook ] ) {
+		function _removeHook( type, hook, callback, context ) {
+			if ( !STORAGE[ type ][ hook ] ) {
+				return;
+			}
+			if ( !callback ) {
 				STORAGE[ type ][ hook ] = [];
+			} else {
+				var handlers = STORAGE[ type ][ hook ];
+				var i;
+				if ( !context ) {
+					for ( i = handlers.length; i--; ) {
+						if ( handlers[i].callback === callback ) {
+							handlers.splice( i, 1 );
+						}
+					}
+				}
+				else {
+					for ( i = handlers.length; i--; ) {
+						var handler = handlers[i];
+						if ( handler.callback === callback && handler.context === context) {
+							handlers.splice( i, 1 );
+						}
+					}
+				}
 			}
-		}
-
-		/**
-		 * Validates that the hook has both a namespace and an identifier.
-		 *
-		 * @param hook The hook we are checking for namespace and identifier for.
-		 * @return {Boolean} False if it does not contain both or is incorrect. True if it has an appropriate namespace & identifier.
-		 * @private
-		 */
-		function _validateNamespace( hook ) {
-			if( typeof hook !== 'string' ) {
-				return false;
-			}
-			var identifier = hook.replace( /^\s+|\s+$/i, '' ).split( '.' );
-			var namespace = identifier.shift();
-			identifier = identifier.join( '.' );
-
-			return ( namespace !== '' && identifier !== '' );
 		}
 
 		/**
@@ -161,12 +160,14 @@
 		 * @param hook The hook (namespace.identifier) to add to our event manager
 		 * @param callback The function that will be called when the hook is executed.
 		 * @param priority The priority of this hook. Must be an integer.
+		 * @param [context] A value to be used for this
 		 * @private
 		 */
-		function _addHook( type, hook, callback, priority ) {
+		function _addHook( type, hook, callback, priority, context ) {
 			var hookObject = {
 				callback : callback,
-				priority : priority
+				priority : priority,
+				context : context
 			};
 
 			// Utilize 'prop itself' : http://jsperf.com/hasownproperty-vs-in-vs-undefined/19
@@ -213,28 +214,24 @@
 		 * @private
 		 */
 		function _runHook( type, hook, args ) {
-			var hooks = STORAGE[ type ][ hook ];
-			if( typeof hooks === 'undefined' ) {
-				if( type === 'filters' ) {
-					return args[0];
-				}
-				return false;
+			var handlers = STORAGE[ type ][ hook ];
+			
+			if ( !handlers ) {
+				return (type === 'filters') ? args[0] : false;
 			}
 
-			for( var i = 0, len = hooks.length; i < len; i++ ) {
-				if( type === 'actions' ) {
-					hooks[ i ].callback.apply( undefined, args );
+			var i = 0, len = handlers.length;
+			if ( type === 'filters' ) {
+				for ( ; i < len; i++ ) {
+					args[ 0 ] = handlers[ i ].callback.apply( handlers[ i ].context, args );
 				}
-				else {
-					args[ 0 ] = hooks[ i ].callback.apply( undefined, args );
+			} else {
+				for ( ; i < len; i++ ) {
+					handlers[ i ].callback.apply( handlers[ i ].context, args );
 				}
 			}
 
-			if( type === 'actions' ) {
-				return true;
-			}
-
-			return args[ 0 ];
+			return ( type === 'filters' ) ? args[ 0 ] : true;
 		}
 
 		// return all of the publicly available methods

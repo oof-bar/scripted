@@ -6,7 +6,6 @@
 
 ( function( window, undefined ) {
 	"use strict";
-	var document = window.document;
 
 	/**
 	 * Handles managing all events for whatever you plug it into. Priorities for hooks are based on lowest to highest in
@@ -39,15 +38,15 @@
 		 *
 		 * @param action Must contain namespace.identifier
 		 * @param callback Must be a valid callback function before this action is added
-		 * @param priority Defaults to 10
+		 * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+		 * @param [context] Supply a value to be used for this
 		 */
-		function addAction( action, callback, priority ) {
-			if( _validateNamespace( action ) === false || typeof callback !== 'function' ) {
-				return MethodsAvailable;
+		function addAction( action, callback, priority, context ) {
+			if( typeof action === 'string' && typeof callback === 'function' ) {
+				priority = parseInt( ( priority || 10 ), 10 );
+				_addHook( 'actions', action, callback, priority, context );
 			}
 
-			priority = parseInt( ( priority || 10 ), 10 );
-			_addHook( 'actions', action, callback, priority );
 			return MethodsAvailable;
 		}
 
@@ -59,11 +58,9 @@
 			var args = Array.prototype.slice.call( arguments );
 			var action = args.shift();
 
-			if( _validateNamespace( action ) === false ) {
-				return MethodsAvailable;
+			if( typeof action === 'string' ) {
+				_runHook( 'actions', action, args );
 			}
-
-			_runHook( 'actions', action, args );
 
 			return MethodsAvailable;
 		}
@@ -72,13 +69,13 @@
 		 * Removes the specified action if it contains a namespace.identifier & exists.
 		 *
 		 * @param action The action to remove
+		 * @param [callback] Callback function to remove
 		 */
-		function removeAction( action ) {
-			if( _validateNamespace( action ) === false ) {
-				return MethodsAvailable;
+		function removeAction( action, callback ) {
+			if( typeof action === 'string' ) {
+				_removeHook( 'actions', action, callback );
 			}
 
-			_removeHook( 'actions', action );
 			return MethodsAvailable;
 		}
 
@@ -87,15 +84,15 @@
 		 *
 		 * @param filter Must contain namespace.identifier
 		 * @param callback Must be a valid callback function before this action is added
-		 * @param priority Defaults to 10
+		 * @param [priority=10] Used to control when the function is executed in relation to other callbacks bound to the same hook
+		 * @param [context] Supply a value to be used for this
 		 */
-		function addFilter( filter, callback, priority ) {
-			if( _validateNamespace( filter ) === false || typeof callback !== 'function' ) {
-				return MethodsAvailable;
+		function addFilter( filter, callback, priority, context ) {
+			if( typeof filter === 'string' && typeof callback === 'function' ) {
+				priority = parseInt( ( priority || 10 ), 10 );
+				_addHook( 'filters', filter, callback, priority );
 			}
 
-			priority = parseInt( ( priority || 10 ), 10 );
-			_addHook( 'filters', filter, callback, priority );
 			return MethodsAvailable;
 		}
 
@@ -104,28 +101,27 @@
 		 * the first argument must always be the filter.
 		 */
 		function applyFilters( /* filter, filtered arg, arg2, ... */ ) {
-
 			var args = Array.prototype.slice.call( arguments );
 			var filter = args.shift();
 
-			if( _validateNamespace( filter ) === false ) {
-				return MethodsAvailable;
+			if( typeof filter === 'string' ) {
+				return _runHook( 'filters', filter, args );
 			}
 
-			return _runHook( 'filters', filter, args );
+			return MethodsAvailable;
 		}
 
 		/**
 		 * Removes the specified filter if it contains a namespace.identifier & exists.
 		 *
 		 * @param filter The action to remove
+		 * @param [callback] Callback function to remove
 		 */
-		function removeFilter( filter ) {
-			if( _validateNamespace( filter ) === false ) {
-				return MethodsAvailable;
+		function removeFilter( filter, callback ) {
+			if( typeof filter === 'string') {
+				_removeHook( 'filters', filter, callback );
 			}
 
-			_removeHook( 'filters', filter );
 			return MethodsAvailable;
 		}
 
@@ -136,28 +132,31 @@
 		 * @param hook The hook (namespace.identifier) to remove
 		 * @private
 		 */
-		function _removeHook( type, hook ) {
-			if( STORAGE[ type ][ hook ] ) {
+		function _removeHook( type, hook, callback, context ) {
+			if ( !STORAGE[ type ][ hook ] ) {
+				return;
+			}
+			if ( !callback ) {
 				STORAGE[ type ][ hook ] = [];
+			} else {
+				var handlers = STORAGE[ type ][ hook ];
+				var i;
+				if ( !context ) {
+					for ( i = handlers.length; i--; ) {
+						if ( handlers[i].callback === callback ) {
+							handlers.splice( i, 1 );
+						}
+					}
+				}
+				else {
+					for ( i = handlers.length; i--; ) {
+						var handler = handlers[i];
+						if ( handler.callback === callback && handler.context === context) {
+							handlers.splice( i, 1 );
+						}
+					}
+				}
 			}
-		}
-
-		/**
-		 * Validates that the hook has both a namespace and an identifier.
-		 *
-		 * @param hook The hook we are checking for namespace and identifier for.
-		 * @return {Boolean} False if it does not contain both or is incorrect. True if it has an appropriate namespace & identifier.
-		 * @private
-		 */
-		function _validateNamespace( hook ) {
-			if( typeof hook !== 'string' ) {
-				return false;
-			}
-			var identifier = hook.replace( /^\s+|\s+$/i, '' ).split( '.' );
-			var namespace = identifier.shift();
-			identifier = identifier.join( '.' );
-
-			return ( namespace !== '' && identifier !== '' );
 		}
 
 		/**
@@ -167,12 +166,14 @@
 		 * @param hook The hook (namespace.identifier) to add to our event manager
 		 * @param callback The function that will be called when the hook is executed.
 		 * @param priority The priority of this hook. Must be an integer.
+		 * @param [context] A value to be used for this
 		 * @private
 		 */
-		function _addHook( type, hook, callback, priority ) {
+		function _addHook( type, hook, callback, priority, context ) {
 			var hookObject = {
 				callback : callback,
-				priority : priority
+				priority : priority,
+				context : context
 			};
 
 			// Utilize 'prop itself' : http://jsperf.com/hasownproperty-vs-in-vs-undefined/19
@@ -219,28 +220,24 @@
 		 * @private
 		 */
 		function _runHook( type, hook, args ) {
-			var hooks = STORAGE[ type ][ hook ];
-			if( typeof hooks === 'undefined' ) {
-				if( type === 'filters' ) {
-					return args[0];
-				}
-				return false;
+			var handlers = STORAGE[ type ][ hook ];
+			
+			if ( !handlers ) {
+				return (type === 'filters') ? args[0] : false;
 			}
 
-			for( var i = 0, len = hooks.length; i < len; i++ ) {
-				if( type === 'actions' ) {
-					hooks[ i ].callback.apply( undefined, args );
+			var i = 0, len = handlers.length;
+			if ( type === 'filters' ) {
+				for ( ; i < len; i++ ) {
+					args[ 0 ] = handlers[ i ].callback.apply( handlers[ i ].context, args );
 				}
-				else {
-					args[ 0 ] = hooks[ i ].callback.apply( undefined, args );
+			} else {
+				for ( ; i < len; i++ ) {
+					handlers[ i ].callback.apply( handlers[ i ].context, args );
 				}
 			}
 
-			if( type === 'actions' ) {
-				return true;
-			}
-
-			return args[ 0 ];
+			return ( type === 'filters' ) ? args[ 0 ] : true;
 		}
 
 		// return all of the publicly available methods
@@ -562,6 +559,10 @@ get_field_data : function( $el, name ){
 		},
 		
 		is_field : function( $el, args ){
+			
+			// defaults
+			args = args || {};
+			
 			
 			// var
 			var r = true;
@@ -1302,7 +1303,7 @@ frame.on('all', function( e ) {
 				
 				
 				// uploaded to post
-				if( args.library == 'uploadedTo' ) {
+				if( args.library == 'uploadedTo' && $.isNumeric(acf.get('post_id')) ) {
 					
 					// remove 'uploaded' option
 					filters.$el.find('option[value="uploaded"]').remove();
@@ -1624,42 +1625,22 @@ frame.on('all', function( e ) {
 			// override save
 			_prototype.save = function( event ) {
 			
-				var data = {},
-					names = {};
-				
-				if ( event )
+				if( event ) {
+					
 					event.preventDefault();
 					
-					
-				_.each( this.$el.serializeArray(), function( pair ) {
+				}
 				
-					// initiate name
-					if( pair.name.slice(-2) === '[]' )
-					{
-						// remove []
-						pair.name = pair.name.replace('[]', '');
-						
-						
-						// initiate counter
-						if( typeof names[ pair.name ] === 'undefined'){
-							
-							names[ pair.name ] = -1;
-							//console.log( names[ pair.name ] );
-							
-						}
-						
-						
-						names[ pair.name ]++
-						
-						pair.name += '[' + names[ pair.name ] +']';
-						
-						
-					}
- 
-					data[ pair.name ] = pair.value;
-				});
- 
+				
+				// serialize form
+				var data = acf.serialize_form(this.$el);
+				
+				
+				// ignore render
 				this.ignore_render = true;
+				
+				
+				// save
 				this.model.saveCompat( data );
 				
 			};
@@ -1669,23 +1650,16 @@ frame.on('all', function( e ) {
 			setTimeout(function(){
 			
 				// Hack for CPT without a content editor
-				try
-				{
+				try {
+				
 					// post_id may be string (user_1) and therefore, the uploaded image cannot be attached to the post
-					if( $.isNumeric(acf.o.post_id) )
-					{
+					if( $.isNumeric(acf.o.post_id) ) {
+					
 						wp.media.view.settings.post.id = acf.o.post_id;
+						
 					}
 					
-				} 
-				catch(e)
-				{
-					// one of the objects was 'undefined'...
-				}
-				
-				
-				// setup fields
-				//$(document).trigger('acf/setup_fields', [ $(document) ]);
+				} catch(e) {}
 				
 			}, 10);
 			
@@ -1721,32 +1695,39 @@ frame.on('all', function( e ) {
 		
 		init : function(){
 			
+			// debug
+			//console.log( 'conditional_logic.init(%o)', this );
+			
+			
 			// reference
-			var _this = this;
+			var self = this;
 			
 			
 			// events
 			$(document).on('change', '.acf-field input, .acf-field textarea, .acf-field select', function(){
 				
-				_this.change( $(this) );
+				self.change( $(this) );
 				
 			});
 			
 			
 			// actions
+			acf.add_action('ready', function( $el ){
+				
+				self.render( $el );
+				
+			}, 20);
+			
+						
 			acf.add_action('append', function( $el ){
 				
-				_this.render( $el );
+				self.render( $el );
 				
-			});
+			}, 20);
 			
 			
-			// debug
-			//console.log( 'conditional_logic.init(%o)', this );
-			
-			
-			// render
-			_this.render();
+			// return
+			return this;
 			
 		},
 		
@@ -2126,13 +2107,7 @@ frame.on('all', function( e ) {
 			
 		}
 		
-	}; 
-	
-	acf.add_action('ready', function(){
-		
-		acf.conditional_logic.init();
-		
-	}, 100);
+	}.init();
 	
 	
 	
@@ -4842,46 +4817,49 @@ acf.add_action('ready append', function( $el ){
 
 	acf.fields.tab = {
 		
-		add_group : function( $wrap ){
+		add_group : function( $field ){
 			
 			// vars
-			var html = '';
+			var $wrap = $field.parent(),
+				html = '';
 			
 			
 			// generate html
-			if( $wrap.is('tbody') )
-			{
+			if( $wrap.is('tbody') ) {
+				
 				html = '<tr class="acf-tab-wrap"><td colspan="2"><ul class="acf-hl acf-tab-group"></ul></td></tr>';
-			}
-			else
-			{
+			
+			} else {
+			
 				html = '<div class="acf-tab-wrap"><ul class="acf-hl acf-tab-group"></ul></div>';
+				
 			}
 			
 			
 			// append html
-			acf.get_fields({ type : 'tab'}, $wrap).first().before( html );
+			$field.before( html );
 			
 		},
 		
 		add_tab : function( $field ){
 			
 			// vars
-			var $wrap	= $field.parent(),
-				$tab	= $field.find('.acf-tab'),
+			var $tab	= $field.find('.acf-tab'),
 				
 				key		= acf.get_data( $field, 'key'),
 				label 	= $tab.text();
 				
 				
 			// create tab group if it doesn't exist
-			if( ! $wrap.children('.acf-tab-wrap').exists() )
-			{
-				this.add_group( $wrap );
+			if( ! $field.siblings('.acf-tab-wrap').exists() ) {
+			
+				this.add_group( $field );
+				
 			}
 			
+			
 			// add tab
-			$wrap.children('.acf-tab-wrap').find('.acf-tab-group').append('<li><a class="acf-tab-button" href="#" data-key="' + key + '">' + label + '</a></li>');
+			$field.siblings('.acf-tab-wrap').find('.acf-tab-group').append('<li><a class="acf-tab-button" href="#" data-key="' + key + '">' + label + '</a></li>');
 			
 		},
 		
@@ -4892,32 +4870,35 @@ acf.add_action('ready append', function( $el ){
 			
 			
 			// vars
-			var $wrap	= $a.closest('.acf-tab-wrap').parent(),
-				key		= $a.attr('data-key');
-			
-			
-			// classes
-			$a.parent('li').addClass('active').siblings('li').removeClass('active');
-			
-			
-			// hide / show
-			acf.get_fields({ type : 'tab'}, $wrap).each(function(){
+			var $wrap = $a.closest('.acf-tab-wrap');
 				
-				// vars
-				var $tab = $(this);
+				
+			// add and remove classes
+			$a.parent().addClass('active').siblings().removeClass('active');
+			
+			
+			// loop over 
+			$wrap.siblings('.acf-field[data-type="tab"]').each(function(){
+				
+				// show fields
+				if( $(this).attr('data-key') === $a.attr('data-key') ) {
 					
-				
-				if( acf.is_field( $(this), {key : key} ) )
-				{
 					self.show_tab_fields( $(this) );
+					return;
+					
 				}
-				else
-				{
+				
+				
+				// hide fields
+				if( ! $(this).hasClass('hidden-by-tab') ) {
+					
 					self.hide_tab_fields( $(this) );
+					return;
+					
 				}
 				
 			});
-			
+
 		},
 		
 		show_tab_fields : function( $field ) {
@@ -4925,16 +4906,23 @@ acf.add_action('ready append', function( $el ){
 			// debug
 			//console.log('show tab fields %o', $field);
 			
+			$field.removeClass('hidden-by-tab');
+			
 			$field.nextAll('.acf-field').each(function(){
 				
-				// bail early if hid another tab
-				if( acf.is_field( $(this), {type : 'tab'} ) ) {
+				// bail early if this is a tab field
+				if( $(this).attr('data-type') == 'tab' ) {
 					
 					return false;
+					
 				}
 				
 				
+				// remove class
 				$(this).removeClass('hidden-by-tab');
+				
+				
+				// do action
 				acf.do_action('show_field', $(this));
 				
 			});
@@ -4945,15 +4933,23 @@ acf.add_action('ready append', function( $el ){
 			// debug
 			//console.log('hide tab fields %o', $field);
 			
+			$field.addClass('hidden-by-tab');
+			
 			$field.nextAll('.acf-field').each(function(){
 				
-				// bail early if hid another tab
-				if( acf.is_field( $(this), {type : 'tab'} ) ) {
+				// bail early if this is a tab field
+				if( $(this).attr('data-type') == 'tab' ) {
 					
 					return false;
+					
 				}
 				
+				
+				// add class
 				$(this).addClass('hidden-by-tab');
+				
+				
+				// do action
 				acf.do_action('hide_field', $(this));
 				
 			});
@@ -5538,65 +5534,272 @@ if( ! this.$trigger )
 
 (function($){
 	
-	/*
-	*  WYSIWYG
-	*
-	*  jQuery functionality for this field type
-	*
-	*  @type	object
-	*  @date	20/07/13
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-	
 	acf.fields.wysiwyg = {
 		
-		$el : null,
-		$textarea : null,
+		$field:		null,
+		$textarea:	null,	
+		settings:	{},
+		toolbars:	{},
 		
-		o : {},
-		
-		set : function( o ){
-			
-			// merge in new option
-			$.extend( this, o );
+		focus: function( $field ){
 			
 			
-			// find textarea
+			// $field may be an internal element
+			if( !acf.is_field($field) ) {
+				
+				$field = acf.get_closest_field( $field );
+				
+			}
+			
+			
+			// update vars
+			this.$field = $field;
+			this.$el = $field.find('.wp-editor-wrap');
 			this.$textarea = this.$el.find('textarea');
+			this.settings = acf.get_data( this.$el );
 			
 			
-			// get options
-			this.o = acf.get_data( this.$el );
-			
-			
-			// add ID
-			this.o.id = this.$textarea.attr('id');
+			// custom
+			this.settings.id = this.$textarea.attr('id');
 			
 			
 			// return this for chaining
 			return this;
 			
 		},
-		has_tinymce : function(){
 		
-			var r = false;
+		initialize: function(){
 			
-			if( typeof(tinyMCE) == "object" )
-			{
-				r = true;
+			// bail early if no tinymce
+			if( typeof tinyMCEPreInit === 'undefined' ) {
+				
+				return false;
+				
 			}
 			
-			return r;
+			
+			// vars
+			var mceInit = this.get_mceInit(),
+				qtInit = this.get_qtInit();
+			
+				
+			// append settings
+			tinyMCEPreInit.mceInit[ mceInit.id ] = mceInit;
+			tinyMCEPreInit.qtInit[ qtInit.id ] = qtInit;
+			
+			
+			// initialize mceInit
+			if( this.$el.hasClass('tmce-active') ) {
+				
+				try {
+					
+					tinymce.init( mceInit );
+					
+				} catch(e){}
+				
+			}
+			
+
+			// initialize qtInit
+			try {
+				
+				var qtag = quicktags( qtInit );
+				
+				this._buttonsInit( qtag );
+				
+			} catch(e){}
 			
 		},
-		get_toolbar : function(){
+		
+		get_mceInit : function(){
 			
-			// safely get toolbar
-			if( acf.isset( this, 'toolbars', this.o.toolbar ) ) {
+			// reference
+			var $field = this.$field;
 				
-				return this.toolbars[ this.o.toolbar ];
+				
+			// vars
+			var toolbar = this.get_toolbar( this.settings.toolbar ),
+				mceInit = $.extend({}, tinyMCEPreInit.mceInit.acf_content);
+			
+			
+			// selector
+			mceInit.selector = '#' + this.settings.id;
+			
+			
+			// id
+			mceInit.id = this.settings.id; // tinymce v4
+			mceInit.elements = this.settings.id; // tinymce v3
+			
+			
+			// toolbar
+			if( toolbar ) {
+				
+				var k = (tinymce.majorVersion < 4) ? 'theme_advanced_buttons' : 'toolbar';
+				
+				for( var i = 1; i < 5; i++ ) {
+					
+					mceInit[ k + i ] = acf.isset(toolbar, i) ? toolbar[i] : '';
+					
+				}
+				
+			}
+			
+			
+			// events
+			if( tinymce.majorVersion < 4 ) {
+				
+				mceInit.setup = function( ed ){
+					
+					ed.onInit.add(function(ed, event) {
+						
+						// focus
+						$(ed.getBody()).on('focus', function(){
+					
+							acf.validation.remove_error( $field );
+							
+						});
+						
+						$(ed.getBody()).on('blur', function(){
+							
+							// update the hidden textarea
+							// - This fixes a bug when adding a taxonomy term as the form is not posted and the hidden textarea is never populated!
+			
+							// save to textarea	
+							ed.save();
+							
+							
+							// trigger change on textarea
+							$field.find('textarea').trigger('change');
+							
+						});
+					
+					});
+					
+				};
+			
+			} else {
+			
+				mceInit.setup = function( ed ){
+					
+					ed.on('focus', function(e) {
+				
+						acf.validation.remove_error( $field );
+						
+					});
+					
+					ed.on('blur', function(e) {
+						
+						// update the hidden textarea
+						// - This fixes a but when adding a taxonomy term as the form is not posted and the hidden textarea is never populated!
+		
+						// save to textarea	
+						ed.save();
+						
+						
+						// trigger change on textarea
+						$field.find('textarea').trigger('change');
+						
+					});
+					
+				};
+			
+			}
+			
+			
+			// hook for 3rd party customization
+			mceInit = acf.apply_filters('wysiwyg_tinymce_settings', mceInit, mceInit.id);
+			
+			
+			// return
+			return mceInit;
+			
+		},
+		
+		get_qtInit : function(){
+				
+			// vars
+			var qtInit = $.extend({}, tinyMCEPreInit.qtInit.acf_content);
+			
+			
+			// id
+			qtInit.id = this.settings.id;
+			
+			
+			// hook for 3rd party customization
+			qtInit = acf.apply_filters('wysiwyg_quicktags_settings', qtInit, qtInit.id);
+			
+			
+			// return
+			return qtInit;
+			
+		},
+		
+		/*
+		*  disable
+		*
+		*  This function will disable the tinymce for a given field
+		*  Note: txtarea_el is different from $textarea.val() and is the value that you see, not the value that you save.
+		*        this allows text like <--more--> to wok instead of showing as an image when the tinymce is removed
+		*
+		*  @type	function
+		*  @date	1/08/2014
+		*  @since	5.0.0
+		*
+		*  @param	n/a
+		*  @return	n/a
+		*/
+		
+		disable: function(){
+			
+			try {
+				
+				// vars
+				var ed = tinyMCE.get( this.settings.id ),
+					txtarea_el = tinyMCE.DOM.get( this.settings.id );
+					val = txtarea_el.value;
+					
+				
+				// destory
+				ed.destroy();
+				
+				
+				// update value
+				if( this.$field.find('.wp-editor-wrap').hasClass('html-active') ) {
+				
+					txtarea_el.value = val;
+				
+				}
+
+				
+			} catch(e) {}
+			
+		},
+		
+		enable: function(){
+			
+			// bail early if html mode
+			if( this.$field.find('.wp-editor-wrap').hasClass('html-active') ) {
+				
+				return;
+				
+			}
+			
+			
+			try {
+				
+				tinyMCE.init( tinyMCEPreInit.mceInit[ this.settings.id ] );
+				
+			} catch(e) {}
+			
+			
+		},
+		
+		get_toolbar : function( name ){
+			
+			// bail early if toolbar doesn't exist
+			if( typeof this.toolbars[ name ] !== 'undefined' ) {
+				
+				return this.toolbars[ name ];
 				
 			}
 			
@@ -5606,352 +5809,139 @@ if( ! this.$trigger )
 			
 		},
 		
-		init : function(){
-			
-			// vars
-			var toolbar = this.get_toolbar(),
-				command = 'mceAddControl',
-				setting = 'theme_advanced_buttons{i}';
-			
-			
-			// backup
-			var _settings = $.extend( {}, tinyMCE.settings );
-			
-			
-			// v4 settings
-			if( tinymce.majorVersion == 4 ) {
-				
-				command = 'mceAddEditor';
-				setting = 'toolbar{i}';
-				
-			}
-			
-			
-			// add toolbars
-			if( toolbar ) {
-					
-				for( var i = 1; i < 5; i++ ) {
-					
-					// vars
-					var v = '';
-					
-					
-					// load toolbar
-					if( acf.isset( toolbar, 'theme_advanced_buttons' + i ) ) {
-						
-						v = toolbar['theme_advanced_buttons' + i];
-						
-					}
-					
-					
-					// update setting
-					tinyMCE.settings[ setting.replace('{i}', i) ] = v;
-					
-				}
-				
-			}
-			
-			
-			// hook for 3rd party customization
-			tinyMCE.settings = acf.apply_filters('wysiwyg_tinymce_settings', tinyMCE.settings, this.o.id);
-			
-			
-			// add editor
-			tinyMCE.execCommand( command, false, this.o.id);
-			
-			
-			// add events (click, focus, blur) for inserting image into correct editor
-			this.add_events();
-				
-			
-			// restore tinyMCE.settings
-			tinyMCE.settings = _settings;
-			
-			
-			// set active editor to null
-			wpActiveEditor = null;
-					
-		},
 		
-		add_events : function(){
+		/*
+		*  _buttonsInit
+		*
+		*  This function will add the quicktags HTML to a WYSIWYG field. Normaly, this is added via quicktags on document ready,
+		*  however, there is no support for 'append'. Source: wp-includes/js/quicktags.js:245
+		*
+		*  @type	function
+		*  @date	1/08/2014
+		*  @since	5.0.0
+		*
+		*  @param	ed (object) quicktag object
+		*  @return	n/a
+		*/
 		
-			// vars
-			var id = this.o.id,
-				editor = tinyMCE.get( id );
-			
-			
-			// validate
-			if( !editor )
-			{
-				return;
-			}
-			
-			
-			// vars
-			var	$container = $('#wp-' + id + '-wrap'),
-				$body = $( editor.getBody() ),
-				$textarea = $( editor.getElement() );
+		_buttonsInit: function( ed ) {
+			var defaults = ',strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,';
 	
-			
-			// events
-			$container.on('click', function(){
-				
-				acf.validation.remove_error( $container.closest('.acf-field') );
-				
-			});
-			
-			$body.on('focus', function(){
-			
-				wpActiveEditor = id;
-		
-				acf.validation.remove_error( $container.closest('.acf-field') );
-				
-			});
-			
-			$body.on('blur', function(){
-			
-				wpActiveEditor = null;
-				
-				// update the hidden textarea
-				// - This fixes a but when adding a taxonomy term as the form is not posted and the hidden textarea is never populated!
+			canvas = ed.canvas;
+			name = ed.name;
+			settings = ed.settings;
+			html = '';
+			theButtons = {};
+			use = '';
 
-				// save to textarea	
-				editor.save();
-				
-				
-				// trigger change on textarea
-				$textarea.trigger('change');
-				
-			});
-			
+			// set buttons
+			if ( settings.buttons ) {
+				use = ','+settings.buttons+',';
+			}
+
+			for ( i in edButtons ) {
+				if ( !edButtons[i] ) {
+					continue;
+				}
+
+				id = edButtons[i].id;
+				if ( use && defaults.indexOf( ',' + id + ',' ) !== -1 && use.indexOf( ',' + id + ',' ) === -1 ) {
+					continue;
+				}
+
+				if ( !edButtons[i].instance || edButtons[i].instance === inst ) {
+					theButtons[id] = edButtons[i];
+
+					if ( edButtons[i].html ) {
+						html += edButtons[i].html(name + '_');
+					}
+				}
+			}
+
+			if ( use && use.indexOf(',fullscreen,') !== -1 ) {
+				theButtons.fullscreen = new qt.FullscreenButton();
+				html += theButtons.fullscreen.html(name + '_');
+			}
+
+
+			if ( 'rtl' === document.getElementsByTagName('html')[0].dir ) {
+				theButtons.textdirection = new qt.TextDirectionButton();
+				html += theButtons.textdirection.html(name + '_');
+			}
+
+			ed.toolbar.innerHTML = html;
+			ed.theButtons = theButtons;
 			
 		},
-		destroy : function(){
+		
+		add_actions: function(){
 			
-			// vars
-			var id = this.o.id,
-				command = 'mceRemoveControl';
+			// add actions
+			acf.add_action('ready', this.on_ready);
+			acf.add_action('append', this.on_append);
+			acf.add_action('remove', this.on_remove);
+			acf.add_action('sortstart', this.on_sortstart);
+			acf.add_action('sortstop', this.on_sortstop);
+					
+		},
+		
+		on_ready : function( $el ){
 			
-			
-			// Remove tinymce functionality.
-			// Due to the media popup destroying and creating the field within such a short amount of time,
-			// a JS error will be thrown when launching the edit window twice in a row.
-			try {
+			// move acf_content wysiwyg
+			if( $('#wp-acf_content-wrap').exists() ) {
 				
-				// vars
-				var editor = tinyMCE.get( id );
-				
-				
-				// validate
-				if( !editor ) {
-					
-					return;
-					
-				}
-				
-				
-				// v4 settings
-				if( tinymce.majorVersion == 4 ) {
-					
-					command = 'mceRemoveEditor';
-					
-				}
-				
-				
-				// store value
-				var val = editor.getContent();
-				
-				
-				// remove editor
-				tinyMCE.execCommand(command, false, id);
-				
-				
-				// set value
-				this.$textarea.val( val );
-				
-				
-			} catch(e) {
-				
-				//console.log( e );
+				$('#wp-acf_content-wrap').parent().appendTo('body');
 				
 			}
 			
+			acf.fields.wysiwyg.on_append( $el );
 			
-			// set active editor to null
-			wpActiveEditor = null;
+		},
+		
+		on_append: function( $el ){
+			
+			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
+				
+				acf.fields.wysiwyg.focus( $(this) ).initialize();
+			
+			});
+			
+		},
+		
+		on_remove: function( $el ){
+		
+			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
+				
+				acf.fields.wysiwyg.focus( $(this) ).disable();
+				
+			});
+			
+		},
+		
+		on_sortstart: function( $item, $placeholder ){
+			
+			acf.get_fields({ type : 'wysiwyg'}, $item).each(function(){
+				
+				acf.fields.wysiwyg.focus( $(this) ).disable();
+				
+			});
+			
+		},
+		
+		on_sortstop: function( $el ){
+		
+			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
+				
+				acf.fields.wysiwyg.focus( $(this) ).enable();
+				
+			});
 			
 		}
 		
 	};
 	
 	
-	/*
-	*  acf/setup_fields
-	*
-	*  run init function on all elements for this field
-	*
-	*  @type	event
-	*  @date	20/07/13
-	*
-	*  @param	{object}	e		event object
-	*  @param	{object}	el		DOM object which may contain new ACF elements
-	*  @return	N/A
-	*/
-	
-	acf.add_action('ready', function( $el ){
-		
-		// validate
-		if( ! acf.fields.wysiwyg.has_tinymce() ) {
-		
-			return;
-			
-		}
-		
-		
-		// vars
-		var $the_content = $('#wp-content-wrap'),
-			$acf_content = $('#wp-acf_content-wrap'),
-			mode = 'tmce';
-		
-		
-		// move editor to bottom of page
-		if( $acf_content.exists() ) {
-			
-			$acf_content.parent().appendTo('body');
-			
-		}
-				
-		
-		// events
-		acf.add_action('remove', function( $el ){
-		
-			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
-				
-				acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).destroy();
-				
-			});
-			
-		}).add_action('sortstart', function( $el ){
-			
-			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
-			
-				acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).destroy();
-				
-			});
-			
-		}).add_action('sortstop', function( $el ){
-		
-			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
-				
-				acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).init();
-				
-			});
-			
-		}).add_action('append', function( $el ){
-		
-			acf.get_fields({ type : 'wysiwyg'}, $el).each(function(){
-				
-				acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).init();
-				
-			});
-			
-		}).add_action('load', function( $el ){
-			
-			// vars
-			var $fields = acf.get_fields({ type : 'wysiwyg'}, $el);
-			
-			
-			// define mode
-			if( $acf_content.exists() && $acf_content.hasClass('html-active') ) {
-				
-				mode = 'html';
-				
-			}
-			
-			
-			// Add events to content editor
-			if( $the_content.exists() ) {
-			
-				acf.fields.wysiwyg.set({ $el : $the_content }).add_events();
-				
-			}
-			
-			
-			// temp change wysiwyg to visual tab
-			setTimeout(function(){
-				
-				// trigger click on hidden WYSIWYG (to get in HTML mode)
-				if( $acf_content.exists() && mode == 'html' ) {
-					
-					$acf_content.find('#acf_content-tmce').trigger('click');
-				}
-				
-			}, 1);
-			
-			
-			// destroy all WYSIWYG fields
-			// This hack will fix a problem when the WP popup is created and hidden, then the ACF popup (image/file field) is opened
-			setTimeout(function(){
-				
-				$fields.each(function(){
-					
-					acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).destroy();
-					
-				});
-				
-			}, 10);
-			
-			
-			// initialize all WYSIWYG fields
-			setTimeout(function(){
-				
-				$fields.each(function(){
-					
-					acf.fields.wysiwyg.set({ $el : $(this).find('.acf-wysiwyg-wrap') }).init();
-					
-				});
-				
-			}, 11);
-			
-			
-			setTimeout(function(){
-				
-				// trigger click on hidden WYSIWYG (to get in HTML mode)
-				if( $acf_content.exists() && mode == 'html' ) {
-					
-					$acf_content.find('#acf_content-html').trigger('click');
-				}				
-				
-			}, 12);
-			
-			
-		});
-		
-		
-	});
-	
-	
-	/*
-	*  Full screen
-	*
-	*  @description: this hack will hide the 'image upload' button in the WYSIWYG full screen mode if the field has disabled image uploads!
-	*  @since: 3.6
-	*  @created: 26/02/13
-	*/
-	
-	$(document).on('click', '.acf-wysiwyg-wrap .mce_fullscreen', function(){
-		
-		// vars
-		var $wrap = $(this).closest('.acf-wysiwyg-wrap');
-		
-		
-		if( ! acf.get_data( $wrap, 'upload' ) ) {
-		
-			$('#mce_fullscreen_container #mce_fullscreen_add_media').hide();
-			
-		}
-		
-	});
-	
+	// add actions
+	acf.fields.wysiwyg.add_actions();		
 
 })(jQuery);

@@ -107,6 +107,15 @@ http://support.advancedcustomfields.com/
 
 == Changelog ==
 
+= 5.0.4 =
+* WYSIWYG field: Major improvement adding visual and text tabs
+* Image field: Fixed uploadedTo bug on non post edit page
+* Tab field: Fixed various JS bugs
+* Options page: Fixed bug causing field groups with position setting of 'High' to not appear
+* Options page: Added functionality to toggle and save state of postbox
+* Core: Fixed nested bug in get_sub_field_object()
+* Language: Updated Brazil translation - thanks to André Felipe
+
 = 5.0.3 =
 * Gallery field: Added new edit button within sidebar to launch edit/crop popup
 * Gallery field: Changed placement of remove button when sidebar is open

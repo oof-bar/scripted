@@ -538,73 +538,74 @@ function have_rows( $field_name, $post_id = false ) {
 	
 	
 	// empty?
-	if( empty($GLOBALS['acf_field']) )
-	{
+	if( empty($GLOBALS['acf_field']) ) {
+		
 		// reset
 		reset_rows( true );
 		
 		
 		// create a new loop
 		$new_parent_loop = true;
-	}
-	else
-	{
+	
+	} else {
+		
 		// vars
 		$row = end( $GLOBALS['acf_field'] );
 		$prev = prev( $GLOBALS['acf_field'] );
 		
 		
 		// If post_id has changed, this is most likely an archive loop
-		if( $post_id != $row['post_id'] )
-		{
-			if( $prev && $prev['post_id'] == $post_id )
-			{
+		if( $post_id != $row['post_id'] ) {
+			
+			if( $prev && $prev['post_id'] == $post_id ) {
+				
 				// case: Change in $post_id was due to a nested loop ending
 				// action: move up one level through the loops
 				reset_rows();
-			}
-			elseif( empty($_post_id) && isset($row['value'][ $row['i'] ][ $field_name ]) )
-			{
+			
+			} elseif( empty($_post_id) && isset($row['value'][ $row['i'] ][ $field_name ]) ) {
+				
 				// case: Change in $post_id was due to this being a nested loop and not specifying the $post_id
 				// action: move down one level into a new loop
 				$new_child_loop = true;
-			}
-			else
-			{
+			
+			} else {
+				
 				// case: Chang in $post_id is the most obvious, used in an WP_Query loop with multiple $post objects
 				// action: leave this current loop alone and create a new parent loop
 				$new_parent_loop = true;
+				
 			}
-		}
-		elseif( $field_name != $row['name'] )
-		{
-			if( $prev && $prev['name'] == $field_name && $prev['post_id'] == $post_id )
-			{
+			
+		} elseif( $field_name != $row['name'] ) {
+			
+			if( $prev && $prev['name'] == $field_name && $prev['post_id'] == $post_id ) {
+				
 				// case: Change in $field_name was due to a nested loop ending
 				// action: move up one level through the loops
 				reset_rows();
-			}
-			elseif( isset($row['value'][ $row['i'] ][ $field_name ]) )
-			{
+				
+			} elseif( isset($row['value'][ $row['i'] ][ $field_name ]) ) {
+				
 				// case: Change in $field_name was due to this being a nested loop
 				// action: move down one level into a new loop
 				$new_child_loop = true;
 				
-			}
-			else
-			{
+			} else {
+				
 				// case: Chang in $field_name is the most obvious, this is a new loop for a different field within the $post
 				// action: leave this current loop alone and create a new parent loop
 				$new_parent_loop = true;
+				
 			}
 			
-			
 		}
+		
 	}
 	
 	
-	if( $new_parent_loop )
-	{
+	if( $new_parent_loop ) {
+		
 		// vars
 		$f = get_field_object( $field_name, $post_id );
 		$v = $f['value'];
@@ -620,11 +621,10 @@ function have_rows( $field_name, $post_id = false ) {
 			'post_id'	=> $post_id,
 		);
 		
-	}
-	elseif( $new_child_loop )
-	{
+	} elseif( $new_child_loop ) {
+		
 		// vars
-		$f = get_field_object( $field_name, $post_id );
+		$f = acf_get_sub_field( $field_name, $row['field'] );
 		$v = $row['value'][ $row['i'] ][ $field_name ];
 		
 		$GLOBALS['acf_field'][] = array(
@@ -642,10 +642,11 @@ function have_rows( $field_name, $post_id = false ) {
 	$row = end( $GLOBALS['acf_field'] );
 	
 	
-	if( is_array($row['value']) && array_key_exists( $row['i']+1, $row['value'] ) )
-	{
+	if( is_array($row['value']) && array_key_exists( $row['i']+1, $row['value'] ) ) {
+	
 		// next row exists
 		return true;
+		
 	}
 	
 	

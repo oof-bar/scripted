@@ -15,3 +15,10 @@ $ ->
   $('.faq .question').on 'click', ->
     $(this).parent('.faq-item').toggleClass('open')
     $(this).siblings('.answer').slideToggle()
+
+  if $('.media-play').length
+    $('.media-play').on 'click', ->
+      $('.media-content').fadeIn()
+
+    $('.overlay').on 'click', ->
+      $('.media-content').fadeOut()

@@ -4,7 +4,7 @@
 <section class="main press-kits-archive">
   <div class="wrapper">
 
-    <div class="column col-3 tablet-quarter">
+    <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('press-navigation') ?>
     </div>
 

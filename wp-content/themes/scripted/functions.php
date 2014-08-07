@@ -190,6 +190,15 @@
     return $query;
   }
 
+  function last_post ( $type = 'post' ) {
+    return new WP_Query( array(
+      'post_type' => $type,
+      'posts_per_page' => 1,
+      'orderby' => 'date',
+      'order' => 'DESC'
+    ));
+  }
+
   /*
     Site-wide Options
   */

@@ -43,18 +43,30 @@ img {
   margin-bottom: 2em;
 }
 
-table {
+.table {
+  display: table;
   margin: 1em 0;
   width: 100%;
-  tr {
+
+  .row {
+    display: table-row;
     border-top: 1px solid $grey-light;
+
     &:last-of-type {
       border-bottom: 1px solid $grey-light;
     }
-    td {
+
+    .cell {
+      position: relative;
+      display: table-cell;
       padding: 0.75em 1em 0.65em 0;
+
+      @include mobile {
+        display: block;
+      }
+
       &:first-child {
-        font-weight: 600;
+        // font-weight: 600;
       }
     }
   }

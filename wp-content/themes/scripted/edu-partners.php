@@ -18,7 +18,7 @@
 
       <div class="school-list">
         <? if ( $education_partners['partners'] ) foreach ( $education_partners['partners'] as $partner ) { ?>
-          <div class="school blue">
+          <div class="school text-blue">
             <? if ( $partner['link'] ) { ?>
               <a href="<?= $partner['link'] ?>" title="<?= $partner['name'] ?>"><?= $partner['name'] ?></a>
             <? } else { ?>

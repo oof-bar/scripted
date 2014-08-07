@@ -1,4 +1,4 @@
-<div class="wrapper post">
+<div class="wrapper single-post">
   <div class="column col-3 tablet-quarter mobile-full">
     <? include get_partial('post-meta') ?>
   </div>

@@ -1,0 +1,129 @@
+{
+    "key": "group_53bf5a6d7796d",
+    "title": "Event",
+    "fields": [
+        {
+            "key": "field_53bf5b73d5cde",
+            "label": "Start Date",
+            "name": "date_start",
+            "prefix": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "display_format": "m\/d\/Y",
+            "return_format": "F j, Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_53bf5bbbd5cdf",
+            "label": "End Date",
+            "name": "date_end",
+            "prefix": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "display_format": "m\/d\/Y",
+            "return_format": "F j, Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_53bf5bd2d5ce0",
+            "label": "Start Time",
+            "name": "time_start",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "12:00 PM",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf5c0ed5ce1",
+            "label": "End Time",
+            "name": "time_end",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "1:30 PM",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf5c9cd5ce3",
+            "label": "Host",
+            "name": "host",
+            "prefix": "",
+            "type": "text",
+            "instructions": "If there is an organizer (including ScriptEd), add them here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf5cb7d5ce4",
+            "label": "Host URL",
+            "name": "host_url",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Include a url for the host, if available, including the leading \"http:\/\/\". A \"mailto:\" link is acceptable, with the understanding that it will potentially be exposed to spam bots.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53bf5c32d5ce2",
+            "label": "Location",
+            "name": "location",
+            "prefix": "",
+            "type": "google_map",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "center_lat": "40.7056308",
+            "center_lng": "-73.9780035",
+            "zoom": 11,
+            "height": 300
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "se_event"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

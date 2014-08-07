@@ -1,0 +1,105 @@
+{
+    "key": "group_53bf5acfaca4d",
+    "title": "Media Link",
+    "fields": [
+        {
+            "key": "field_53dee6101fd2a",
+            "label": "Source",
+            "name": "source",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Who published the content?",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53c15190df619",
+            "label": "URL",
+            "name": "url",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Provide the link to the story where a user can go to read it.",
+            "required": 1,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "http:\/\/",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53c151e0df61a",
+            "label": "Paywall",
+            "name": "paywall",
+            "prefix": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "message": "This content is behind a paywall",
+            "default_value": 0
+        },
+        {
+            "key": "field_53dee5b451c2d",
+            "label": "Description",
+            "name": "description",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Quick note about what the reader is to expect from the content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53dee56a51c2c",
+            "label": "Action",
+            "name": "action",
+            "prefix": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "choices": {
+                "Watch": "Watch",
+                "Read": "Read",
+                "Listen": "Listen",
+                "Visit": "Visit",
+                "Attend": "Attend"
+            },
+            "other_choice": 1,
+            "save_other_choice": 0,
+            "default_value": "Read",
+            "layout": "vertical"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "se_mention"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

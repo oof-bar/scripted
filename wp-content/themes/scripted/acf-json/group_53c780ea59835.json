@@ -1,0 +1,74 @@
+{
+    "key": "group_53c780ea59835",
+    "title": "Gift",
+    "fields": [
+        {
+            "key": "field_53c780f0a5d3d",
+            "label": "Amount",
+            "name": "amount",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Only adjust this if records need to be adjusted, or an invoice is to be made for a donor. Otherwise, this is intended as a permanent record of the donation!",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "$",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53c78208a5d3e",
+            "label": "Email",
+            "name": "email",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Email of the donor. Optional in the form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53c8c6ade6597",
+            "label": "Zipcode",
+            "name": "zip",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "se_gift"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "slug"
+    ]
+}

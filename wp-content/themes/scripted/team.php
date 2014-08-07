@@ -8,7 +8,7 @@
   <div class="wrapper">
 
     <div class="column col-3 tablet-quarter mobile-full">
-      <? include get_partial('team-navigation') ?>
+      <? include get_partial('page-navigation') ?>
     </div>
 
     <div class="column col-7 tablet-three-quarters">

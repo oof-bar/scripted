@@ -107,21 +107,26 @@
     $tree = get_post_ancestors( $page );
     if ( !count( $tree ) ) {
       // No parent pages. Get the children pages.
-      return get_posts( array(
+      $list = get_posts( array(
         'post_type' => 'page',
         'post_status' => 'publish',
         'post_parent' => $page->ID,
         'orderby' => 'menu_order'
       ));
+      # Prepend this page, because it won't be in the results.
+      array_unshift($list, $page);
     } else {
       // There are parent pages.
-      return get_posts( array(
+      $list = get_posts( array(
         'post_type' => 'page',
         'post_status' => 'publish',
         'post_parent' => __::first($tree),
         'orderby' => 'menu_order'
       ));
+      # Prepend the parent page, because it won't be in the results.
+      array_unshift($list, get_post(__::first($tree)));
     }
+    return $list;
   }
 
 

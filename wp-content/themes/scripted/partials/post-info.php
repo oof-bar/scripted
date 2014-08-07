@@ -3,6 +3,6 @@
     <?= se_post_nicename($post) ?>
   </div>
   <div class="date small text-grey-dark italic">
-    <? the_date() ?>
+    <?= get_the_time('F j, Y') ?>
   </div>
 </div>

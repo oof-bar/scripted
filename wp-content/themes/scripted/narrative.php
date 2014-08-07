@@ -9,15 +9,19 @@
 
     <? if ( $narrative['media'] ) { ?>
       <div class="wrapper">
-        <div class="column col-2 centered">
-          Media Button Thing
+        <div class="column col-2 centered static">
+          <div class="media-play"></div>
+          <div class="media-content">
+            <div class="overlay">
+              <div class="video-wrap">
+                <?= $narrative['media_embed'] ?>
+              </div>
+          </div>
         </div>
       </div>
     <? } ?>
-    <div class="wrapper">
-      <div class="column col-10 centered">
-        <h1><?= $narrative['header_text'] ?></h1>
-      </div>
+    <div class="column col-10 centered static tablet-full">
+      <h1><?= $narrative['header_text'] ?></h1>
     </div>
 
   </section>

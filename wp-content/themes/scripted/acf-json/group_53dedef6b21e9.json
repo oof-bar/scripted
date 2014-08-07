@@ -58,7 +58,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "default"
+                "value": "edu-partners.php"
             }
         ]
     ],

@@ -34,18 +34,18 @@
             "prefix": "",
             "type": "oembed",
             "instructions": "Paste a link to the media you want to feature (i.e. YouTube, Vimeo, etc.)",
-            "required": 0,
+            "required": 1,
             "conditional_logic": [
                 {
-                    "rule_0": {
+                    "rule_rule_0": {
                         "field": "field_53d87832d779a",
                         "operator": "==",
                         "value": "1"
                     }
                 }
             ],
-            "width": "",
-            "height": ""
+            "width": 600,
+            "height": 350
         },
         {
             "key": "field_53dc80edce13d",

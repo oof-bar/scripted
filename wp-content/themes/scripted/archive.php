@@ -1,16 +1,17 @@
 <? get_header(); ?>
 <? include get_partial('hero') ?>
 
-<section class="main student-project-archive">
+<? include get_partial('blog-latest') ?>
+
+<section class="main archive">
   <div class="wrapper">
 
-    <div class="column col-3 tablet-quarter">
+    <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('blog-navigation') ?>
     </div>
 
-    <div class="column col-7 tablet-three-quarters">
+    <div class="column col-7 tablet-three-quarters mobile-full">
       <? if ( have_posts() ) { ?>
-        <!-- Starting post -->
         <? while ( have_posts() ) { the_post(); ?>
           <? include get_embed( get_post_type() ); ?>
         <? } ?>

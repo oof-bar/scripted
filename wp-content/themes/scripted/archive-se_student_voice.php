@@ -1,7 +1,7 @@
 <? get_header(); ?>
 <? include get_partial('hero') ?>
 
-<section class="main event-archive">
+<section class="main student-voice-archive">
   <div class="wrapper">
 
     <div class="column col-3 tablet-quarter mobile-full">
@@ -10,7 +10,6 @@
 
     <div class="column col-7 tablet-three-quarters">
       <? if ( have_posts() ) { ?>
-        <!-- Starting post -->
         <? while ( have_posts() ) { the_post(); ?>
           <? include get_embed( get_post_type() ); ?>
         <? } ?>

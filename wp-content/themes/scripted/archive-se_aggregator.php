@@ -7,10 +7,9 @@
     <div class="column col-3 tablet-quarter">
       <? include get_partial('blog-navigation') ?>
     </div>
-
+asdf
     <div class="column col-7 tablet-three-quarters">
       <? if ( have_posts() ) { ?>
-        <!-- Starting post -->
         <? while ( have_posts() ) { the_post(); ?>
           <? get_embed( get_post_type() ); ?>
         <? } ?>

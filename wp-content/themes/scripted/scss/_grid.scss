@@ -27,9 +27,13 @@
    @include box-sizing( border-box );
    @include clearfix();
    @media screen and ( max-width: $breakpoint-mobile ) {
+      float: none;
       clear: both;
       width: auto;
       // padding: 0;
+   }
+   &.static {
+      position: static;
    }
 }
 
@@ -60,6 +64,11 @@
 @include tablet {
    .tablet-full {
       width: 100%;
+      margin-left: 0;
+   }
+
+   .tablet-three-quarters {
+      width: ( 100% / 4 ) * 3;
       margin-left: 0;
    }
 

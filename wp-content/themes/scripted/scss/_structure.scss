@@ -64,10 +64,6 @@ img {
       @include mobile {
         display: block;
       }
-
-      &:first-child {
-        // font-weight: 600;
-      }
     }
   }
 }

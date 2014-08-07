@@ -18,29 +18,27 @@
   <div class="wrapper gift-info">
     <div class="column col-8 push-2 mobile-full">
 
-      <table>
-        <tbody>
-          <tr>
-            <td>Name</td>
-            <td class="monospace"><? the_title() ?></td>
-          </tr>
-          <tr>
-            <td>Amount</td>
-            <td class="monospace"><?= money_format('$%n', $gift['amount']) ?></td>
-          </tr>
-          <tr>
-            <td>Date</td>
-            <td class="monospace"><?= get_the_date('F d, Y') ?></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table">
+          <div class="row">
+            <div class="cell">Name</div>
+            <div class="cell monospace"><? the_title() ?></div>
+          </div>
+          <div class="row">
+            <div class="cell">Amount</div>
+            <div class="cell monospace"><?= money_format('$%n', $gift['amount']) ?></div>
+          </div>
+          <div class="row">
+            <div class="cell">Date</div>
+            <div class="cell monospace"><?= get_the_date('F d, Y') ?></div>
+          </div>
+      </div>
     </div>
   </div>
 
   <div class="wrapper">
     <div class="column col-8 push-2 mobile-full">
-      <div class="disclaimer small text-grey-mid">
-        No information about your chosen payment method was recorded on our servers during this transaction. We only keep the information below so we can remind ourselves of the enourmous generosity of our supporters.
+      <div class="disclaimer small text-grey-dark">
+        No information about your chosen payment method was recorded on our servers during this transaction. We only keep the information above so we can remind ourselves of the enourmous generosity of our supporters.
       </div>
     </div>
   </div>

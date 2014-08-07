@@ -338,6 +338,24 @@
   .disclaimer {
     margin-top: 2em;
   }
+
+  .table {
+    .row {
+      .cell {
+      @include border-top;
+        padding: 1em 0;
+        &:first-child {
+          font-weight: 600;
+        }
+      }
+      
+      &:last-child {
+        .cell {
+          border-bottom: 1px solid $grey-light;
+        }
+      }
+    }
+  }
 }
 
 /*

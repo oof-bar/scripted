@@ -1,4 +1,4 @@
-<section class="header">
+<section class="header orange">
   <div class="wrapper">
     <div class="column col-12">
       <h1 class="bold">Search</h1>

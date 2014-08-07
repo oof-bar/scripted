@@ -19,7 +19,7 @@ input {
   margin: 0;
   @include animate();
 
-  &[type=text], &[type=email], &[type=number] {
+  &[type=text], &[type=email], &[type=number], &[type=password] {
     width: 100%;
     display: block;
     border: 2px solid $grey-light;
@@ -65,7 +65,7 @@ input {
 }
 
 
-.button {
+.button, button, input[type=submit] {
   @include border-radius(3px);
   display: inline-block;
   padding: 0.8em 2em 0.65em 2em;

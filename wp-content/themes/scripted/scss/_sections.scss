@@ -21,25 +21,26 @@
 // General Post Format
 
 .post {
-  padding: 2em 0;
+  padding: 1.5em 0 2em 0;
   @include border-top;
-
-  .post-info {
-    @include clearfix;
-
-    .type {
-      float: left;
-    }
-
-    .date {
-      float: right;
-    }
-  }
 
   h3 {
     a {
       color: $blue;
     }
+  }
+}
+
+.post-info {
+  margin-bottom: 1em;
+  @include clearfix;
+
+  .type {
+    // float: left;
+  }
+
+  .date {
+    // float: right;
   }
 }
 
@@ -348,7 +349,7 @@
           font-weight: 600;
         }
       }
-      
+
       &:last-child {
         .cell {
           border-bottom: 1px solid $grey-light;

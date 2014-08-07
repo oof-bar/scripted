@@ -53,7 +53,8 @@
           'confirmation_url' => get_permalink($gift)
         )
       );
-      wp_mail('hello@gusmiller.com',$fields['amount'], 'the message yo!');
+
+      # wp_mail('hello@gusmiller.com',$fields['amount'], 'the message yo!');
 
       $message = array(
         'template_name' => $template, 

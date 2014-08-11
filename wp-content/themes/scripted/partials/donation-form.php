@@ -18,21 +18,21 @@
         <label for="name-first">
           First Name
         </label>
-        <input type="text" id="name-first" name="name-first" value="August" />
+        <input type="text" id="name-first" name="name-first" />
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
         <label for="name-last">
           Last Name
         </label>
-        <input type="text" id="name-last" name="name-last" value="Miller" />
+        <input type="text" id="name-last" name="name-last" />
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
         <label for="email">
           Email
         </label>
-        <input type="email" id="email" name="email" value="hello@gusmiller.com" />
+        <input type="email" id="email" name="email" />
       </div>
 
     </div>
@@ -51,7 +51,7 @@
         <label for="cc-number">
           Card Number
         </label>
-        <input type="text" id="cc-number" value="4242424242424242" />
+        <input type="text" id="cc-number" />
       </div>
 
       <div class="column col-2 tablet-quarter mobile-half">
@@ -59,23 +59,23 @@
           Expiration
         </label>
         <span class="combined-field nowrap">
-          <input type="text" id="cc-expiry-month" class="cc-expiry month" value="12" />
+          <input type="text" id="cc-expiry-month" class="cc-expiry month" />
           <span class="spacer">/</span>
-          <input type="text" id="cc-expiry-year" class="cc-expiry year" value="2016" />
+          <input type="text" id="cc-expiry-year" class="cc-expiry year" />
         </span>
       </div>
 
       <div class="column col-2 tablet-quarter mobile-half">
         <label>
           CVC
-          <input type="text" id="cc-cvc" class="cc cvc" value="123" />
+          <input type="text" id="cc-cvc" class="cc cvc" />
         </label>
       </div>
         
       <div class="column col-3">
         <label>
           Zip Code
-          <input type="text" id="address-zip" name="zip" class="address zip" value="97202" />
+          <input type="text" id="address-zip" name="zip" class="address zip" />
         </label>
       </div>
 

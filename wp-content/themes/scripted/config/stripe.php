@@ -41,8 +41,14 @@
       ));
 
     } catch ( Stripe_CardError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
+      wp_send_json_error(array( 
+        'stripe' => $e,
+        'post' => $donor
+      ));
     } catch ( Stripe_AuthenticationError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
+      wp_send_json_error(array(
+        'stripe' => $e,
+        'post' => $donor
+      ));
     }
   }

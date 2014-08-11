@@ -2,7 +2,7 @@
 # Newsletter Signup
 #
 
-class Newsletter
+window.Newsletter = window.Newsletter or class Newsletter
   constructor: (settings) ->
     @options =
       form: $(settings.form or "#newsletter-signup")

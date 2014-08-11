@@ -7,9 +7,10 @@ label {
   cursor: pointer;
   color: $grey-dark;
   margin-top: 1.5em;
+  position: relative;
 }
 
-input {
+input, .input {
   @include border-radius(3px);
   -webkit-appearance: none;
   border: none;
@@ -43,6 +44,12 @@ input {
   }
 }
 
+em.error {
+  display: block;
+  color: $orange-light;
+  margin-top: 0.5em;
+}
+
 .combined-field {
   display: inline;
   width: auto;
@@ -61,6 +68,67 @@ input {
     border-left: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+  }
+}
+
+.placeholder {
+  position: relative;
+
+}
+
+#select-cc-expiry-month {
+  // display: inline-block;
+  // width: 3em;
+}
+
+#select-cc-expiry-year {
+  // display: inline-block;
+  // width: 5em;
+}
+
+.select {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1500;
+  padding: 0;
+  width: 100%;
+  display: block;
+  border: 2px solid $grey-light;
+  background-color: $grey-light;
+  margin-top: 0.5em;
+  max-height: 15em;
+  color: $black;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  @include animate();
+
+  &:hover {
+    border-color: $grey-mid;
+  }
+
+  .option {
+    position: relative;
+    padding: 0.8em 1em 0.8em 1em;
+    @include animate($property: background-color);
+
+    span {
+      @extend .icon-check;
+      display: none;
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      right: 0.8em;
+      color: $grey-mid;
+    }
+
+    &:hover {
+      color: $black;
+      background-color: darken($grey-light, 5%);
+    }
+    
+    &.active span {
+      display: inline;
+    }
   }
 }
 

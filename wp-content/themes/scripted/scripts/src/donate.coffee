@@ -153,3 +153,19 @@ $ ->
       rules:
         "name-first":
           required: true
+        "name-last":
+          required: true
+        "email":
+          required: true
+          email: true
+        "amount-formatted":
+          required: true
+      messages:
+        "name-first":
+          required: "What do we call you?"
+        "name-last":
+          required: true
+        "email":
+          required: true
+        "amount-formatted":
+          required: true

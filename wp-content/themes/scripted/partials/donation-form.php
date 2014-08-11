@@ -1,6 +1,6 @@
 <section class="give-form">
 
-  <? $amount = ( isset($_POST['amount']) ? $_POST['amount'] : 25 ); ?>
+  <? $amount = ( ( isset($_POST['amount']) && $_POST['amount'] ) ? $_POST['amount'] : 25 ); ?>
 
   <form id="give">
 

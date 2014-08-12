@@ -15,8 +15,8 @@
 
     if ( !wp_verify_nonce($donor['nonce'], 'give_nonce') || !isset($donor['stripe-token']) ) {
       wp_send_json_error(array(
-        'post' => $donor,
-        'message' => 'Sorry, your payment couldn\'t be completed, because we identified a potentially malicious request.'
+        'message' => 'Sorry, your payment couldn\'t be completed, because we identified a potentially malicious request.',
+        # 'post' => $donor
       ));
     }
 
@@ -34,15 +34,32 @@
       $confirmation = mandrill_send_confirmation( $donation );
 
       wp_send_json_success(array(
-        'post' => $donor,
+        # 'post' => $donor,
         'stripe' => $charge,
         'confirmation_path' => get_permalink($donation),
         'confirmation_email' => $confirmation
       ));
 
     } catch ( Stripe_CardError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
+      $error = $e->getJsonBody()['error'];
+
+      wp_send_json_error(array( 
+        'message' => $error['message'],
+        # 'post' => $donor
+      ));
     } catch ( Stripe_AuthenticationError $e ) {
-      wp_send_json_error( array( 'stripe' => $e, 'post' => $donor ) );
+      $error = $e->getJsonBody()['error'];
+      
+      wp_send_json_error(array(
+        'message' => $error['message'],
+        # 'post' => $donor
+      ));
+    } catch ( Stripe_InvalidRequestError $e ) {
+      $error = $e->getJsonBody()['error'];
+      
+      wp_send_json_error(array(
+        'message' => $error['message'],
+        # 'post' => $donor
+      ));
     }
   }

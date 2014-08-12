@@ -1,171 +1,197 @@
 # Stripe Donation Integration
 
+# Give            Workflow handler
+# Give.Auth       Interface to Stripe
+# Give.Messenger  Error and notification handling
 
-class Give
+window.Give = window.Give or class Give
   constructor: (settings) ->
-    @response = {}
+    @form = $('#give')
     @price_format = /^\d{1,}(\.\d{2})?/
-
-    @options =
-      publishable_key: settings.key
-      identifier: settings.name or 'give_default'
-      form: $( settings.form or '#give' )
-      token: $( settings.token or '#stripe-token' )
-      nonce: $( settings.nonce or '#nonce' )
-      cc: $( settings.cc or '#card-number' )
-      cvc: $( settings.cvc or '#card-cvc' )
-      exp_month: $( settings.exp_month or '#card-expiry-month' )
-      exp_year: $( settings.exp_year or '#card-expiry-year' )
-      zip: $( settings.zip or '#address-zip' )
-      amount_input: $( settings.amount or '#amount-formatted' )
-      amount_converted: $( settings.cents or '#amount-cents' )
-      minimum_donation: settings.minimum_donation or 1
-      error_output: $( settings.error_output or '#give-error' )
-      name_first: $( settings.name_first or '' )
-      name_last: $( settings.name_last or '' )
+    @payment = new window.Give.Auth @
+    @errors = []
 
     @watch()
 
-    Stripe.setPublishableKey @options.publishable_key
-
-    console.log @
+    # console.log @
 
   watch: ->
-    @options.form.on 'submit.stripe', {skip_stripe: false}, (e) =>
-      if @validate
-        @handle(e)
-      else
-        e.preventDefault()
-        @abort()
 
-    @options.amount_input.on 'change', (e) =>
-      console.log "Amount Modified."
+    @form.on 'submit', (e) =>
+      # console.log "Preventing Real Submit"
+      e.preventDefault()
+      if @validate() then @authorize() else false
 
-      if @options.amount_input.val() < @options.minimum_donation
-        @options.amount_input.val(@options.minimum_donation)
-        
-      if amount = @price_format.test @options.amount_input.val().toString()
-        console.log amount
-        @options.amount_converted.val(@to_cents())
-        return false
-      ###
-      else
-        console.log "Not a price"
-        @options.amount_converted.val(0)
-      ###
+    # This picks up inline data-* attributes and builds the rules.
+    @form.validate
+      debug: ( (global.environment == 'production') ? false : true )
+      errorElement: 'em'
+      ignore: ""
 
-  handle: (e) ->
-    @get_token()
-
-  get_token: ->
-    console.log "Starting Stripe Query..."
-    Stripe.card.createToken @stripe_params(), @process
-    @lock()
-
-  process: (status, response) =>
-    @response = response
-    if @response.error
-      @options.error_output.text(@response.error)
-      @unlock()
-    else
-      @add_token()
-      @submit()
-
-  add_token: ->
-    @options.token.val(@response.id)
-
-  submit: ->
-    console.log "Real submit"
-    @get_donation()
-
-  get_donation: ->
-    $.ajax {
-      type: 'POST'
-      url: global.ajax_url
-      data: @donation_params()
-      success: (data) =>
-        @complete data, true
-      error: (data) ->
-        @complete data, false
-    }
-
-  complete: (data, success) ->
-    @donor = data
-    if @donor.success == true
-      window.location = @donor.data.confirmation_path
-    else
-      @unlock()
-    console.log @donor
-
-  abort: ->
-    @unlock()
-
-  donation_params: ->
-    {
-      action: 'give'
-      payload: @options.form.serializeArray()
-    }
-
-  stripe_params: ->
-    {
-      number: @options.cc.val()
-      cvc: @options.cvc.val()
-      exp_month: @options.exp_month.val()
-      exp_year: @options.exp_year.val()
-      address_zip: @options.zip.val()
-      name: @options.name_first.val() + ' ' + @options.name_last.val()
-    }
+    $('#amount-formatted').on 'change', (e) =>
+      $('#amount-cents').val @to_cents($(e.target).val())
 
   validate: ->
-    window.SE.Validators.Donate.valid()
+    @form.valid()
+
+  authorize: (token_present) ->
+    if token_present
+      @add_token()
+      @create()
+    else
+      @payment.charge()
+
+  add_token: ->
+    $('#stripe-token').val @payment.stripe.id
+
+  create: ->
+    @clear_errors()
+    @response = {}
+
+    $.ajax
+      url: global.ajax_url
+      type: 'POST'
+      data: @params()
+      success: (data, status, jqxhr) =>
+        @after_create data
+
+
+  params: ->
+    {
+      action: 'give'
+      payload: @form.find(':input:not(.exclude)').serializeArray()
+    }
+
+  after_create: (response) ->
+    @response = response
+    # console.log response
+
+    if response.success
+      # console.log response
+      window.location = response.data.confirmation_path
+    else
+      @errors.push new window.Give.Message( response.data.message, 'error', true )
 
   lock: ->
-    @options.form.find('input').prop 'readonly', true
+    @form.addClass 'locked'
+    @form.find('input').prop 'readonly', true
 
   unlock: ->
-    @options.form.find('input').prop 'readonly', false
+    @form.removeClass 'locked'
+    @form.find('input').prop 'readonly', false
 
-  to_cents: ->
-    Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )
+  clear_errors: ->
+    for error in @errors
+      error.destroy()
+    @errors = []
 
+  strip_names: ->
+    # We might use this to pull name attributes off payment method fields,
+    # or potentially just pick and choose which elements we actually want
+    # to submit to ScriptEd...
+
+  to_cents: (val) ->
+    Math.round( parseFloat(val) * 100 )
+
+# Our interface with Stripe
+window.Give.Auth = window.Give.Auth or class Auth
+  constructor: (parent) ->
+    @parent = parent
+    @errors = []
+
+  charge: ->
+    @clear_errors()
+    Stripe.card.createToken @params(), @after_auth
+
+  after_auth: (status, response) =>
+    @stripe = response
+    # A Hashrocket here, because we need to preserve the state of the callback
+    if response.error
+      @errors.push new window.Give.Message( response.error.message, 'error', true )
+    else
+      # console.log response
+      @parent.authorize true
+
+  clear_errors: ->
+    for error in @errors
+      error.destroy()
+    @errors = []
+
+
+  params: ->
+    {
+      number: $('#cc-number').val().replace(/[^\d]/g, '');
+      cvc: $('#cc-cvc').val()
+      exp_month: $('#cc-expiry-month').val()
+      exp_year: $('#cc-expiry-year').val()
+      address_zip: $('#address-zip').val()
+      name: $('#name-first').val() + ' ' + $('#name-last').val()
+    }
+
+
+# Our way of communicating with the user
+window.Give.Message = window.Give.Message or class Message
+  constructor: (message, level, dismissable) ->
+
+    @message = message
+    @level = level
+    @dismissable = dismissable or false
+    @error_element = $('<div/>')
+      .addClass 'error'
+      .addClass @level
+      .text @message
+      .hide()
+      .appendTo '#give-error'
+
+    @display()
+
+  display: ->
+    @error_element.fadeIn()
+    @visible = true
+
+
+  dismiss: ->
+    @error_element.fadeOut()
+    @visible = false
+
+  destroy: ->
+    @error_element.remove()
+    delete @
 
 $ ->
   if ( $('#give').length )
-    window.SE.Donate = window.SE.Donate or new Give
-      name: 'main_give_form'
-      key: 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
-      form: '#give'
-      token: '#stripe-token'
-      cc: '#cc-number'
-      cvc: '#cc-cvc'
-      exp_month: '#cc-expiry-month'
-      exp_year: '#cc-expiry-year'
-      zip: '#address-zip'
-      amount: '#amount-formatted'
-      cents: '#amount-cents'
-      error_output: '#give-error'
-      name_first: '#name-first'
-      name_last: '#name-last'
-      nonce: '#nonce'
+    window.SE.Donate = window.SE.Donate or new window.Give()
 
-    window.SE.Validators.Donate = $('#give').validate
-      debug: true
-      rules:
-        "name-first":
-          required: true
-        "name-last":
-          required: true
-        "email":
-          required: true
-          email: true
-        "amount-formatted":
-          required: true
-      messages:
-        "name-first":
-          required: "What do we call you?"
-        "name-last":
-          required: true
-        "email":
-          required: true
-        "amount-formatted":
-          required: true
+    Stripe.setPublishableKey 'pk_test_o9ORAHflgRIKsxfx2JDutxu0'
+
+    window.SE.UI.select_month = new window.Select 
+      location: '#select-cc-expiry-month'
+      input: '#cc-expiry-month'
+      default: 10
+      speed: 150
+    ,
+    (->
+      months = []
+      for month in [1..12]
+        months.push
+          name: month.toString()
+          value: month
+      months
+    ).call()
+
+
+    window.SE.UI.select_year = new window.Select
+      location: '#select-cc-expiry-year'
+      input: '#cc-expiry-year'
+      default: 0
+      speed: 150
+    ,
+    (->
+      years = []
+      now = new Date()
+      for year in [now.getFullYear()..(now.getFullYear()+10)]
+        years.push
+          name: year.toString()
+          value: year
+      years
+    ).call()

@@ -5,7 +5,8 @@
   # ScriptEd
   wp_register_script('scripted', $scripts_path . 'scripted.js', array('jquery'), '0.1.0', true);
   wp_localize_script('scripted', 'global', array(
-    'ajax_url' => admin_url('admin-ajax.php')
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'environment' => 'development'
   ));
   wp_enqueue_script('scripted');
 
@@ -25,11 +26,14 @@
   wp_register_script('volunteer', $scripts_path . 'volunteer.js', array('jquery'), '0.1.0', true);
   wp_enqueue_script('volunteer');
 
+  # Select Menu
+  wp_register_script('select', $scripts_path . 'select.js', array('jquery'), '', true);
+  wp_enqueue_script('select');
+
   # Stripe
   wp_register_script('stripe', 'https://js.stripe.com/v2/stripe-debug.js', array('jquery'), '', false);
   wp_enqueue_script('stripe');
 
-  
   # jQuery
   wp_register_script('jquery-se', get_template_directory_uri() . '/scripts/src/lib/jquery.min.js', array(), '1.11.1', false);
   wp_enqueue_script('jquery-se');

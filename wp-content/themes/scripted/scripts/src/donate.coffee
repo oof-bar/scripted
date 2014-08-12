@@ -27,10 +27,12 @@ window.Give = window.Give or class Give
     @options.form.valid()
 
   lock: ->
-    @options.form.find('input').prop 'readonly', true
+    @form.addClass 'locked'
+    @form.find('input').prop 'readonly', true
 
   unlock: ->
-    @options.form.find('input').prop 'readonly', false
+    @form.removeClass 'locked'
+    @form.find('input').prop 'readonly', false
 
   to_cents: ->
     Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )

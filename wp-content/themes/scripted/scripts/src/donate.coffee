@@ -94,43 +94,15 @@ $ ->
       default: 0
       speed: 150
     ,
-    [
-      name: "1"
-      value: 1
-    ,
-      name: "2"
-      value: 2
-    ,
-      name: "3"
-      value: 3
-    ,
-      name: "4"
-      value: 4
-    ,
-      name: "5"
-      value: 5
-    ,
-      name: "6"
-      value: 6
-    ,
-      name: "7"
-      value: 7
-    ,
-      name: "8"
-      value: 8
-    ,
-      name: "9"
-      value: 9
-    ,
-      name: "10"
-      value: 10
-    ,
-      name: "11"
-      value: 11
-    ,
-      name: "12"
-      value: 12
-    ]
+    (->
+      months = []
+      for month in [1..12]
+        months.push
+          name: month.toString()
+          value: month
+      months
+    ).call()
+
 
     window.SE.UI.select_year = new window.Select
       location: '#select-cc-expiry-year'
@@ -138,10 +110,12 @@ $ ->
       default: 0
       speed: 150
     ,
-    [
-      name: "2014"
-      value: 2014
-    ,
-      name: "2015"
-      value: 2015
-    ]
+    (->
+      years = []
+      now = new Date()
+      for year in [now.getFullYear()..(now.getFullYear()+10)]
+        years.push
+          name: year.toString()
+          value: year
+      years
+    ).call()

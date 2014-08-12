@@ -16,21 +16,21 @@
 
       <div class="column col-4 tablet-half mobile-full">
         <label for="name-first">
-          First Name
+          <span>First Name</span>
           <input type="text" id="name-first" name="name-first" data-rule-required="true" data-msg-required="We need your name. Don't worry, we won't publish it." />
         </label>
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
         <label for="name-last">
-          Last Name
+          <span>Last Name</span>
           <input type="text" id="name-last" name="name-last"  data-rule-required="true" data-msg-required="Last name, too!" />
         </label>
       </div>
 
       <div class="column col-4 tablet-half mobile-full">
         <label for="email">
-          Email
+          <span>Email</span>
           <input type="email" id="email" name="email" data-rule-required="true" data-rule-email="true" data-msg-required="We'll send a confirmation to this address, so it's important you provide it." data-msg-email="A correctly formatted email address is required." />
         </label>
       </div>
@@ -41,22 +41,22 @@
 
       <div class="column col-2 tablet-quarter mobile-full">
         <label for="amount-formatted">
-          Amount (USD)
+          <span>Amount (USD)</span>
           <input type="number" min="1" id="amount-formatted" name="amount-formatted" class="amount formatted" value="<?= $amount ?>" data-rule-required="true" data-msg-required="We can only authorize donations of a specific amount." data-msg-min="Sorry, the minimum donation is $1 USD." />
           <input type="hidden" id="amount-cents" name="amount" class="amount cents" value="<?= ( $amount * 100 ) ?>" />
         </label>
       </div>
 
-      <div class="column col-3 tablet-half mobile-full">
+      <div class="column col-3 tablet-three-quarters mobile-full">
         <label for="cc-number">
-          Card Number
+          <span>Card Number</span>
           <input type="text" id="cc-number" name="cc-number" data-rule-required="true" data-msg-required="We accept all major credit cards." data-msg-creditcard="A valid credit card number is required." />
         </label>
       </div>
 
       <div class="column col-1 tablet-quarter mobile-half">
         <label for="cc-expiry-month">
-          Expiration
+          <span>Expiration</span>
           <div id="select-cc-expiry-month" class="placeholder"></div>
           <input type="hidden" id="cc-expiry-month" class="cc-expiry month" data-rule-required="true" />
         </label>
@@ -64,7 +64,7 @@
 
       <div class="column col-2 tablet-quarter mobile-half">
         <label>
-          &nbsp;
+          <span>&nbsp;</span>
           <div id="select-cc-expiry-year" class="placeholder"></div>
           <input type="hidden" id="cc-expiry-year" class="cc-expiry year" />
         </label>
@@ -72,14 +72,14 @@
 
       <div class="column col-2 tablet-quarter mobile-half">
         <label>
-          CVC
+          <span>CVC</span>
           <input type="text" id="cc-cvc" class="cc cvc" />
         </label>
       </div>
         
       <div class="column col-2">
         <label>
-          Zip Code
+          <span>Zip Code</span>
           <input type="text" id="address-zip" name="zip" class="address zip" data-rule-required="true" data-msg-required="Your ZIP code is required to authorize the transaction." />
         </label>
       </div>

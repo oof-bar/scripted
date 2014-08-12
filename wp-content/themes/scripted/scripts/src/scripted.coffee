@@ -23,3 +23,7 @@ $ ->
 
     $('.overlay').on 'click', ->
       $('.media-content').fadeOut()
+
+  if $('#drawer-toggle').length
+    $('#drawer-toggle').on 'click touchend', (e) ->
+      $(document.body).toggleClass 'drawer-open'

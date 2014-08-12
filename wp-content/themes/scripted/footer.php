@@ -2,7 +2,12 @@
       <div class="wrapper">
 
         <div class="column col-4 tablet-half mobile-full">
-        <div class="wordmark bold serif text-orange"><?= bloginfo('title') ?></div>
+          <div class="wordmark bold serif text-orange">
+            <?= bloginfo('title') ?>
+          </div>
+          <div class="non-profit-note">
+            <?= se_option('np_notice') ?>
+          </div>
           <? if ( se_option("mailchimp_list") ) include "partials/newsletter-signup.php"; ?>
         </div>
 

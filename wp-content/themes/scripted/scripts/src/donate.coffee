@@ -174,7 +174,7 @@ $ ->
     window.SE.UI.select_month = new window.Select 
       location: '#select-cc-expiry-month'
       input: '#cc-expiry-month'
-      default: 10
+      default: ( new Date().getMonth() )
       speed: 150
     ,
     (->

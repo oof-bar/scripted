@@ -28,7 +28,7 @@
               <div class="column col-3 tablet-quarter mobile-full portrait">
                 <div class="portrait-mask">
                   <? if ( $person['portrait'] ) { ?>
-                      <img src="<?= $person['portrait']['sizes']['thumb'] ?>" alt="<?= $person['name'] ?>"/>
+                      <img src="<?= $person['portrait']['sizes']['thumbnail'] ?>" alt="<?= $person['name'] ?>"/>
                   <? } else { ?>
                   <? } ?>
                 </div>
@@ -54,7 +54,7 @@
               <div class="portrait">
                 <div class="portrait-mask">
                   <? if ( $person['portrait'] ) { ?>
-                      <img src="<?= $person['portrait']['sizes']['thumb'] ?>" alt="<?= $person['name'] ?>"/>
+                      <img src="<?= $person['portrait']['sizes']['thumbnail'] ?>" alt="<?= $person['name'] ?>"/>
                   <? } else { ?>
                   <? } ?>
                 </div>

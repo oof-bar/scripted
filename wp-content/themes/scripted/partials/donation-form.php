@@ -87,13 +87,11 @@
     </div>
 
     <div class="wrapper">
-      <div class="column col-12">
-
+      <div class="column col-3 tablet-half mobile-full">
         <? $give_nonce = wp_create_nonce('give_nonce'); ?>
         <input type="hidden" id="stripe-token" name="stripe-token" class="cc token" />
         <input type="hidden" id="nonce" name="nonce" class="wp nonce" value="<?= $give_nonce ?>" />
         <input class="button blue exclude" type="submit" value="Make it so!" />
-
       </div>
     </div>
 

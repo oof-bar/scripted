@@ -20,7 +20,10 @@ window.Give = window.Give or class Give
     @form.on 'submit', (e) =>
       # console.log "Preventing Real Submit"
       e.preventDefault()
-      if @validate() then @authorize() else false
+      if @validate() && !@locked
+        @lock()
+        @authorize()
+      else false
 
     # This picks up inline data-* attributes and builds the rules.
     @form.validate
@@ -70,15 +73,18 @@ window.Give = window.Give or class Give
       # console.log response
       window.location = response.data.confirmation_path
     else
+      @unlock()
       @errors.push new window.Give.Message( response.data.message, 'error', true )
 
   lock: ->
     @form.addClass 'locked'
     @form.find('input').prop 'readonly', true
+    @locked = true
 
   unlock: ->
     @form.removeClass 'locked'
     @form.find('input').prop 'readonly', false
+    @locked = false
 
   clear_errors: ->
     for error in @errors
@@ -108,6 +114,7 @@ window.Give.Auth = window.Give.Auth or class Auth
     # A Hashrocket here, because we need to preserve the state of the callback
     if response.error
       @errors.push new window.Give.Message( response.error.message, 'error', true )
+      @parent.unlock()
     else
       # console.log response
       @parent.authorize true

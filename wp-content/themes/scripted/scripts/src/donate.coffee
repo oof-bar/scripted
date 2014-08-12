@@ -8,23 +8,69 @@ window.Give = window.Give or class Give
   constructor: (settings) ->
     @form = $('#give')
     @price_format = /^\d{1,}(\.\d{2})?/
+    @payment = new window.Give.Auth @
+    @errors = []
 
     @watch()
 
-    console.log @
+    # console.log @
 
   watch: ->
 
     @form.on 'submit', (e) =>
+      # console.log "Preventing Real Submit"
       e.preventDefault()
+      if @validate() then @authorize() else false
 
+    # This picks up inline data-* attributes and builds the rules.
     @form.validate
       debug: ( (global.environment == 'production') ? false : true )
       errorElement: 'em'
       ignore: ""
 
+    $('#amount-formatted').on 'change', (e) =>
+      $('#amount-cents').val @to_cents($(e.target).val())
+
   validate: ->
-    @options.form.valid()
+    @form.valid()
+
+  authorize: (token_present) ->
+    if token_present
+      @add_token()
+      @create()
+    else
+      @payment.charge()
+
+  add_token: ->
+    $('#stripe-token').val @payment.stripe.id
+
+  create: ->
+    @clear_errors()
+    @response = {}
+
+    $.ajax
+      url: global.ajax_url
+      type: 'POST'
+      data: @params()
+      success: (data, status, jqxhr) =>
+        @after_create data
+
+
+  params: ->
+    {
+      action: 'give'
+      payload: @form.find(':input:not(.exclude)').serializeArray()
+    }
+
+  after_create: (response) ->
+    @response = response
+    # console.log response
+
+    if response.success
+      # console.log response
+      window.location = response.data.confirmation_path
+    else
+      @errors.push new window.Give.Message( response.data.message, 'error', true )
 
   lock: ->
     @form.addClass 'locked'
@@ -34,24 +80,48 @@ window.Give = window.Give or class Give
     @form.removeClass 'locked'
     @form.find('input').prop 'readonly', false
 
-  to_cents: ->
-    Math.round( parseFloat(@options.amount_input.val().replace '$', '') * 100 )
+  clear_errors: ->
+    for error in @errors
+      error.destroy()
+    @errors = []
+
+  strip_names: ->
+    # We might use this to pull name attributes off payment method fields,
+    # or potentially just pick and choose which elements we actually want
+    # to submit to ScriptEd...
+
+  to_cents: (val) ->
+    Math.round( parseFloat(val) * 100 )
 
 # Our interface with Stripe
 window.Give.Auth = window.Give.Auth or class Auth
-  constructor: (params) ->
-    if !params
-      new window.Give.Message("No information was provided to process.", "error", true)
-
-    @charge()
+  constructor: (parent) ->
+    @parent = parent
+    @errors = []
 
   charge: ->
-    Stripe.card.createToken @params()
+    @clear_errors()
+    Stripe.card.createToken @params(), @after_auth
+
+  after_auth: (status, response) =>
+    @stripe = response
+    # A Hashrocket here, because we need to preserve the state of the callback
+    if response.error
+      @errors.push new window.Give.Message( response.error.message, 'error', true )
+    else
+      # console.log response
+      @parent.authorize true
+
+  clear_errors: ->
+    for error in @errors
+      error.destroy()
+    @errors = []
+
 
   params: ->
     {
-      number: $('#cc-number').val()
-      cvc: $('#cc-val').val()
+      number: $('#cc-number').val().replace(/[^\d]/g, '');
+      cvc: $('#cc-cvc').val()
       exp_month: $('#cc-expiry-month').val()
       exp_year: $('#cc-expiry-year').val()
       address_zip: $('#address-zip').val()
@@ -70,30 +140,34 @@ window.Give.Message = window.Give.Message or class Message
       .addClass 'error'
       .addClass @level
       .text @message
+      .hide()
       .appendTo '#give-error'
 
     @display()
 
   display: ->
-    @error_element.show()
+    @error_element.fadeIn()
     @visible = true
 
 
   dismiss: ->
-    @error_element.hide()
+    @error_element.fadeOut()
     @visible = false
 
+  destroy: ->
+    @error_element.remove()
+    delete @
 
 $ ->
   if ( $('#give').length )
     window.SE.Donate = window.SE.Donate or new window.Give()
 
-    Stripe.setPublishableKey 'pk_test_4PvrOvarKQVmAgGkdn8fdze2'
+    Stripe.setPublishableKey 'pk_test_o9ORAHflgRIKsxfx2JDutxu0'
 
     window.SE.UI.select_month = new window.Select 
       location: '#select-cc-expiry-month'
       input: '#cc-expiry-month'
-      default: 0
+      default: 10
       speed: 150
     ,
     (->

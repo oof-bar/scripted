@@ -293,6 +293,19 @@
   }
 }
 
+// Errors
+
+#give-error {
+  .error {
+    margin-bottom: 2em;
+    background: $orange;
+    color: white;
+    padding: 1em;
+    font-style: italic;
+    border-radius: 3px;
+  }
+}
+
 // FAQ
 
 .faq {

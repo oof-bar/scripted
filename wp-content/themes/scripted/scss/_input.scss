@@ -8,7 +8,7 @@ label {
   color: $grey-dark;
   margin-top: 1.5em;
   position: relative;
-  span {
+  .field-label {
     display: block;
     margin-bottom: 1em;
   }
@@ -118,7 +118,7 @@ em.error {
       display: none;
       position: absolute;
       top: 50%;
-      margin-top: -8px;
+      margin-top: -12px;
       right: 0.8em;
       color: $grey-dark;
     }

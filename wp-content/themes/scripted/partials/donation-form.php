@@ -77,7 +77,7 @@
         </label>
       </div>
         
-      <div class="column col-2">
+      <div class="column col-2 tablet-quarter mobile-half">
         <label>
           <span class="field-label">Zip Code</span>
           <input type="text" id="address-zip" name="zip" class="address zip" data-rule-required="true" data-rule-digits="true" data-msg-required="Your ZIP code is required to authorize the transaction." />

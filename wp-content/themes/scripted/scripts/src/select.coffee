@@ -25,7 +25,7 @@ window.Select = window.Select or class Select
     @build()
     @pick @settings.default
     @deactivate()
-    #@resize()
+    @resize()
     @watch()
 
     console.log @
@@ -47,7 +47,7 @@ window.Select = window.Select or class Select
         @activate()
 
     $(window).on 'resize', =>
-      #@resize()
+      @resize()
 
   activate: ->
     for s in @selectables
@@ -79,7 +79,7 @@ window.Select = window.Select or class Select
   resize: ->
     @settings.location.css
       height: @selectables[@current].el.outerHeight()
-      width: @selectables[@current].el.outerWidth()
+      # width: @selectables[@current].el.outerWidth()
 
 
 window.SelectOption = window.SelectOption or class SelectOption

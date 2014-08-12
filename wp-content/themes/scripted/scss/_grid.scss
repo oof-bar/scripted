@@ -27,7 +27,7 @@
    @include box-sizing( border-box );
    @include clearfix();
    @media screen and ( max-width: $breakpoint-mobile ) {
-      float: none;
+      // float: none;
       clear: both;
       width: auto;
       // padding: 0;

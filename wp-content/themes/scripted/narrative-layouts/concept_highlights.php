@@ -30,7 +30,7 @@
           <img src="<?= $concept['illustration']['sizes']['medium'] ?>" />
         </figure>
 
-        <h3 class="add-margin-top"><?= $concept['name'] ?></h3>
+        <h3 class="add-margin-top text-blue"><?= $concept['name'] ?></h3>
 
         <div class="explanation">
           <?= $concept['explanation'] ?>

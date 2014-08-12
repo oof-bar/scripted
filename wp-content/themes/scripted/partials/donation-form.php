@@ -50,7 +50,7 @@
       <div class="column col-3 tablet-three-quarters mobile-full">
         <label for="cc-number">
           <span class="field-label">Card Number</span>
-          <input type="text" id="cc-number" class="exclude" name="cc-number" data-rule-required="true" data-rule-creditcard="false" data-msg-required="We accept all major credit cards." data-msg-creditcard="A valid credit card number is required." />
+          <input type="text" id="cc-number" class="exclude" name="cc-number" data-rule-required="true" data-rule-creditcard="true" data-msg-required="We accept all major credit cards." data-msg-creditcard="A valid credit card number is required." />
         </label>
       </div>
 

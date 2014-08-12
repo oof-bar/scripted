@@ -60,7 +60,8 @@
 }
 
 body.drawer-open {
-  left: 250px;
+  // left: 250px;
+  @include transform(translate(250px,0));
 }
 
 .navigation {

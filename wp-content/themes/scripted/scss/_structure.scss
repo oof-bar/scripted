@@ -13,8 +13,9 @@ html {
 
 body {
   position: relative;
-  left: 0;
-  @include animate($property: left);
+  // left: 0;
+  @include transform(translate(0,0));
+  @include animate($property: transform);
 }
 
 section {

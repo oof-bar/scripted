@@ -5,7 +5,7 @@
             <div class="wordmark bold serif text-orange">
               <?= bloginfo('title') ?>
             </div>
-            <div class="non-profit-note">
+            <div class="non-profit-note add-margin-bottom">
               <?= se_option('np_notice') ?>
             </div>
             <? if ( se_option("mailchimp_list") ) include "partials/newsletter-signup.php"; ?>

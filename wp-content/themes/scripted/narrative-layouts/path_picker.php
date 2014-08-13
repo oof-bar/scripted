@@ -46,7 +46,7 @@
 
         <? if ( $route['destination'] ) { ?>
           <div class="action add-margin-top">
-            <a href="<?= $route['destination'] ?>" class="button blue outline" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?></a>
+          <a href="<?= $route['destination'] ?>" class="button blue outline" title="<?= $route['action_label']?>" class="button go"><?= $route['action_label'] ?><span class="icon-arrow-right"></span></a>
           </div>
         <? } ?>
 

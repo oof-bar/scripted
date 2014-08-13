@@ -7,7 +7,7 @@
     <div class="wrapper">
 
       <div class="column col-8 push-2">
-        <div id="give-error"></div>
+        <div id="give-messages"></div>
       </div>
 
     </div>

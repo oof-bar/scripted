@@ -6,6 +6,17 @@
   @include box-sizing(border-box);
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.content-wrapper {
+  // left: 0;
+  @include transform(translate(0,0));
+  @include animate($property: transform);
+}
+
 section {
   padding: 4em 0;
   position: relative;

@@ -11,22 +11,34 @@
 
   <body <?= body_class(); ?>>
     
-    <section class="navigation">
-      <div class="wrapper">
+    <div class="content-wrapper">
+      
+      <? include get_partial('mobile-drawer') ?>
 
-        <div class="column col-2 tablet-quarter wordmark bold serif link-orange">
-          <a href="<?= home_url() ?>"><?= bloginfo('title') ?></a>
-        </div>
+      <section class="navigation">
+        <div class="wrapper">
 
-        <div class="column col-8 tablet-half caps bold small link-grey text-center">
-          <? wp_nav_menu('primary') ?>
-        </div>
-
-        <? if ( $donate_link = se_option('donate_page') ) { ?>
-          <div class="column col-2 tablet-quarter text-right">
-            <a class="button small orange donate" href="<?= $donate_link ?>">Donate</a>
+          <div class="column col-1 tablet-quarter desktop-hide tablet-show">
+            <div id="drawer-toggle" class="hamburger">
+              <div class="piece bun top"></div>
+              <div class="piece patty"></div>
+              <div class="piece bun bottom"></div>
+            </div>
           </div>
-        <? } ?>
 
-      </div>
-    </section>
+          <div class="column col-2 tablet-half wordmark bold serif link-orange">
+            <a href="<?= home_url() ?>"><?= bloginfo('title') ?></a>
+          </div>
+
+          <div class="column col-8 tablet-hide caps bold small link-grey text-center">
+            <? wp_nav_menu('primary') ?>
+          </div>
+
+          <? if ( $donate_link = se_option('donate_page') ) { ?>
+            <div class="column col-2 tablet-quarter mobile-hide text-right">
+              <a class="button small orange donate" href="<?= $donate_link ?>">Donate</a>
+            </div>
+          <? } ?>
+
+        </div>
+      </section>

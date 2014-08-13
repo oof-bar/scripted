@@ -15,7 +15,7 @@
 
     if ( !isset($donor['stripe-token']) || !isset($donor['nonce']) || !wp_verify_nonce($donor['nonce'], 'give_nonce')  ) {
       wp_send_json_error(array(
-        'message' => 'Sorry, your payment couldn\'t be completed, because we identified a potentially malicious request.',
+        'message' => 'Sorry, your payment couldn\'t be completed. Our server did not receive all the information it requires to move forward. Please reload the page and try again.',
         # 'post' => $donor
       ));
     }

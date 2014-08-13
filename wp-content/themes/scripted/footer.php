@@ -28,6 +28,8 @@
         </div>
       </section>
 
+      <? include get_partial('outreach-footer') ?>
+
     </div>
 
     <? include get_partial('analytics'); ?>

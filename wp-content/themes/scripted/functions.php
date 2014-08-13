@@ -229,9 +229,6 @@
   # Footer
   register_nav_menu('footer', 'Footer');
 
-  # Social Footer
-  register_nav_menu('social', 'Social');
-
   # Mobile
   register_nav_menu('mobile', 'Mobile Drawer');
 

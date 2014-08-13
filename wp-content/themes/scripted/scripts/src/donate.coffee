@@ -74,7 +74,7 @@ window.Give = window.Give or class Give
       window.location = response.data.confirmation_path
     else
       @unlock()
-      @errors.push new window.Give.Message( response.data.message, 'error', true )
+      @errors.push new window.Give.Message( response.data.message, 'error', true, 'icon-ban' )
 
   lock: ->
     @form.addClass 'locked'
@@ -113,7 +113,7 @@ window.Give.Auth = window.Give.Auth or class Auth
     @stripe = response
     # A Hashrocket here, because we need to preserve the state of the callback
     if response.error
-      @errors.push new window.Give.Message( response.error.message, 'error', true )
+      @errors.push new window.Give.Message( response.error.message, 'error', true, 'icon-ban' )
       @parent.unlock()
     else
       # console.log response
@@ -138,17 +138,21 @@ window.Give.Auth = window.Give.Auth or class Auth
 
 # Our way of communicating with the user
 window.Give.Message = window.Give.Message or class Message
-  constructor: (message, level, dismissable) ->
+  constructor: (message, level, dismissable, classes) ->
 
     @message = message
     @level = level
     @dismissable = dismissable or false
     @error_element = $('<div/>')
-      .addClass 'error'
+      .addClass 'message' + ' ' + @level + ' ' + classes
       .addClass @level
-      .text @message
+      .html @message
       .hide()
-      .appendTo '#give-error'
+      .prependTo '#give-messages'
+
+    if dismissable
+      @error_element.on 'click', =>
+        @dismiss()
 
     @display()
 

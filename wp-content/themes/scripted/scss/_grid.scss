@@ -35,6 +35,11 @@
    &.static {
       position: static;
    }
+   & + .column {
+      @include mobile {
+         margin-top: 2em;
+      }
+   }
 }
 
 .wrapper {

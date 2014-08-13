@@ -22,7 +22,7 @@
         <? foreach ( $section['actions'] as $action ) { ?>
           <? if ( $action['destination_type'] == 'internal' ) { ?>
             <div class="add-margin-top">
-              <a href="<?= $action['destination_internal'] ?>" class="button white outline" title="<?= ( $action['label'] ? $action['label'] : "Find Out More" ) ?>"><?= ( $action['label'] ? $action['label'] : "Find Out More" ) ?></a>
+              <a href="<?= $action['destination_internal'] ?>" class="button white outline" title="<?= ( $action['label'] ? $action['label'] : "Find Out More" ) ?>"><?= ( $action['label'] ? $action['label'] : "Find Out More" ) ?><span class="icon-arrow-right"></span></a>
             </div>
           <? } ?>
         <? } ?>

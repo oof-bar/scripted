@@ -531,3 +531,21 @@
 #email-response {
   @extend em, em.error;
 }
+
+
+/*
+  Sponsors
+*/
+
+.sponsors {
+  .sponsor {
+    max-width: 100px;
+    opacity: 0.35;
+    display: inline-block;
+    margin: 0 1.5em 1.5em 0;
+    @include animate($property: opacity);
+    &:hover {
+      opacity: 0.65;
+    }
+  }
+}

@@ -21,8 +21,19 @@
             </div>
           </div>
           
-          <div class="column col-5 tablet-full caps add-margin-bottom semi-bold small">
-            Sponsors
+          <div class="column col-5 tablet-full">
+            <span class="caps semi-bold small">Sponsors</span>
+            <? if ( $sponsors = se_option('sponsors') ) { ?>
+              <div class="sponsors add-margin-top">
+                <? foreach ( $sponsors as $sponsor ) { ?>
+                  <div class="sponsor">
+                    <a href="<?= $sponsor['link'] ?>" target="_blank" title="<?= $sponsor['name'] ?>">
+                      <img src="<?= $sponsor['logo']['url'] ?>" />
+                    </a>
+                  </div>
+                <? } ?>
+              </div>
+            <? } ?>
           </div>
 
         </div>

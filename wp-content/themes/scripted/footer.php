@@ -8,7 +8,7 @@
             <div class="non-profit-note add-margin-bottom">
               <?= se_option('np_notice') ?>
             </div>
-            <? if ( se_option("mailchimp_list") ) include "partials/newsletter-signup.php"; ?>
+            <? if ( se_option("mailchimp_list") ) include get_partial('newsletter-signup') ?>
           </div>
 
           <div class="column col-2 push-1 tablet-half mobile-full">
@@ -27,6 +27,8 @@
 
         </div>
       </section>
+
+      <? include get_partial('outreach-footer') ?>
 
     </div>
 

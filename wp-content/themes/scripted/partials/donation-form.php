@@ -72,8 +72,8 @@
 
       <div class="column col-2 tablet-quarter mobile-half">
         <label>
-          <span class="field-label">CVC</span>
-          <input type="text" id="cc-cvc" class="cc cvc exclude" name="cc-cvc" data-rule-required="true" data-msg-required="Required." data-rule-minlength="3" data-rule-maxlength="3" data-rule-digits="true" />
+          <span class="field-label">Security Code</span>
+          <input type="text" id="cc-cvc" class="cc cvc exclude" name="cc-cvc" data-rule-required="true" data-msg-required="Required." data-rule-minlength="3" data-rule-maxlength="4" data-rule-digits="true" />
         </label>
       </div>
         

@@ -7,15 +7,21 @@
     </div>
     <div class="column col-9 tablet-full">
       <div class="outreach-links">
-        <span class="small caps link email">
-          Send Us An <a href="mailto:<?= se_option('contact_email') ?>">email</a>
-        </span>
-        <span class="small caps link twitter">
-          Follow Us On <a href="https://twitter.com/<?= se_option('twitter') ?>" target="_blank">Twitter</a>
-        </span>
-        <span class="small caps link facebook">
-          Like Us On <a href="<?= se_option('facebook') ?>" target="_blank">FaceBook</a>
-        </span>
+        <? if ( $contact_email = se_option('contact_email') ) { ?>
+          <span class="small caps link email">
+            Send Us An <a href="mailto:<?= $contact_email ?>">email</a>
+          </span>
+        <? } ?>
+        <? if ( $twitter = se_option('twitter') ) { ?>
+          <span class="small caps link twitter">
+            Follow Us On <a href="https://twitter.com/<?= $twitter ?>" target="_blank">Twitter</a>
+          </span>
+        <? } ?>
+        <? if ( se_option('facebook') ) { ?>
+          <span class="small caps link facebook">
+            Like Us On <a href="<?= $facebook ?>" target="_blank">FaceBook</a>
+          </span>
+        <? } ?>
       </div>
     </div>
   </div>

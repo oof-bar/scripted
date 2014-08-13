@@ -12,6 +12,9 @@
   #{headers(all)} {
     color: $grey-dark;
   }
+  @include mobile {
+    margin-top: 2em;
+  }
 }
 
 /*
@@ -237,9 +240,13 @@
 // Bulleted List
 
 .checklist {
+  .text {
+    padding-left: 40px;
+  }
   .item {
     span {
-      padding-right: 0.25em;
+      padding-right: 7px;
+      margin-left: -36px;
     }
   }
 }
@@ -256,6 +263,11 @@
 
 .pride {
   padding-top: 6em;
+  
+  @include mobile {
+    margin-top: 2em;
+  }
+
   .icon {
     background-color: $blue;
     background-size: cover;
@@ -462,6 +474,9 @@
 
 .people {
   &.abbreviated {
+    .portrait-mask {
+      margin: 0 auto;
+    }
     .details {
       text-align: center;
     }
@@ -473,7 +488,8 @@
 
   @include mobile {
     .profile {
-      text-align: center;
+      // text-align: center;
+      margin-bottom: 2em;
     }
 
     .portrait-mask {
@@ -498,15 +514,16 @@
   }
 
   .portrait-mask {
-    margin: 0 auto;
+    margin: 0;
     height: 100px;
     width: 100px;
     border-radius: 100px;
     background: #DDD;
     overflow: hidden;
   }
+
   .details {
-    float: left;
+    // float: left;
   }
 }
 

@@ -35,7 +35,7 @@
       position: static;
    }
 
-   & + .column {
+   & + .column:not(.collapse-space) {
       @include mobile {
          margin-top: 2em;
       }

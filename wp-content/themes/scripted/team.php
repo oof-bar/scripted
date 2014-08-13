@@ -11,11 +11,13 @@
       <? include get_partial('page-navigation') ?>
     </div>
 
-    <div class="column col-9 tablet-three-quarters">
+    <div class="column col-9 tablet-three-quarters mobile-full">
 
-      <div class="page-content">
-        <? the_content() ?>
-      </div>
+      <? if ( $post->post_content != '' ) { ?>
+        <div class="page-content">
+          <? the_content() ?>
+        </div>
+      <? } ?>
 
       <div class="people <?= $team['layout'] ?>">
 
@@ -34,13 +36,21 @@
                 </div>
               </div>
 
-              <div class="column col-8 push-1 tablet-three-quarters mobile-full details">
-                <h5 class="name text-blue">
-                  <?= $person['name'] ?>
-                </h5>
-                <div class="title small text-grey-dark">
-                  <?= $person['title'] ?>
-                </div>
+              <div class="column col-8 tablet-three-quarters mobile-full details">
+                <? if ( $person['link'] ) { ?>
+                  <a href="<?= $person['link'] ?>" target="_blank" title="<? $person['name'] ?>">
+                <? } ?>
+
+                  <h5 class="name text-blue">
+                    <?= $person['name'] ?>
+                  </h5>
+                  <div class="title small text-grey-dark">
+                    <?= $person['title'] ?>
+                  </div>
+
+                <? if ( $person['link'] ) { ?>
+                  </a>
+                <? } ?>
                 <div class="bio">
                   <?= $person['bio'] ?>
                 </div>
@@ -50,7 +60,7 @@
           
           <? } else { ?>
 
-            <div class="column col-3 push-1 profile">
+            <div class="column col-4 text-center mobile-half profile">
               <div class="portrait">
                 <div class="portrait-mask">
                   <? if ( $person['portrait'] ) { ?>
@@ -60,8 +70,16 @@
                 </div>
               </div>
               <div class="details">
-                <div class="name"><?= $person['name'] ?></div>
-                <div class="title small text-grey-mid"><?= $person['title'] ?></div>
+                <? if ( $person['link'] ) { ?>
+                  <a href="<?= $person['link'] ?>" target="_blank" title="<? $person['name'] ?>">
+                <? } ?>
+
+                  <div class="name"><?= $person['name'] ?></div>
+                  <div class="title small text-grey-mid"><?= $person['title'] ?></div>
+
+                <? if ( $person['link'] ) { ?>
+                  </a>
+                <? } ?>
               </div>
             </div>
 

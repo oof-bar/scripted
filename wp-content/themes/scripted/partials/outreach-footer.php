@@ -17,7 +17,7 @@
             Follow Us On <a href="https://twitter.com/<?= $twitter ?>" target="_blank">Twitter</a>
           </span>
         <? } ?>
-        <? if ( se_option('facebook') ) { ?>
+        <? if ( $facebook = se_option('facebook') ) { ?>
           <span class="small caps link facebook">
             Like Us On <a href="<?= $facebook ?>" target="_blank">FaceBook</a>
           </span>

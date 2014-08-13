@@ -11,7 +11,7 @@
       <? include get_partial('page-navigation') ?>
     </div>
 
-    <div class="column col-7 tablet-three-quarters">
+    <div class="column col-9 tablet-three-quarters">
 
       <div class="page-content">
         <? the_content() ?>

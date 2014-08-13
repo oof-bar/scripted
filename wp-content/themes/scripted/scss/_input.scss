@@ -237,4 +237,12 @@ em.error {
       opacity: 0.9;
     }
   }
+
+  [class^="icon-"]:before,
+  [class*=" icon-"]:before {
+    margin-left: 0.5em;
+    font-size: inherit;
+    position: relative;
+    bottom: 0.1em;
+  }
 }

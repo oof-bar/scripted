@@ -524,3 +524,10 @@
   }
 }
 
+/*
+  Newsletter Signup
+*/
+
+#email-response {
+  @extend em, em.error;
+}

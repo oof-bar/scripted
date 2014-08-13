@@ -21,10 +21,19 @@ window.Newsletter = window.Newsletter or class Newsletter
     console.log @
 
   setup: ->
+    @options.form.validate
+      errorElement: 'em'
+
+    @options.email_field.on 'keyup', (e) =>
+      @write ''
+      
     @options.form.on 'submit', (e) =>
-      console.log "Submitted"
-      @signup()
       e.preventDefault()
+      if @validate()
+        @signup()
+
+  validate: ->
+    @options.form.valid()
 
   signup: ->
     console.log ".signup()"
@@ -86,15 +95,3 @@ $ ->
     location: 'footer'
     secure_token: $('#se-email-nonce').val()
   })
-
-  $("#se-newsletter-signup").validate
-    debug: true
-    errorElement: "em"
-    rules:
-      email:
-        required: true
-        email: true
-    messages:
-      email:
-        required: "We can't do much without your address!",
-        email: "An email address must be in the format of name@domain.com"

@@ -170,7 +170,56 @@
 }
 
 .footer {
-  a {
-    line-height: 2em;
+  .non-profit-note {
+    margin-bottom: 2em;
+  }
+
+  .footer-nav {
+    li {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.outreach {
+  padding: 2em 0;
+
+  .copyright {
+    @include tablet {
+      text-align: center;
+    }
+  }
+
+  .outreach-links {
+    text-align: right;
+
+    @include tablet {
+      text-align: center;
+    }
+
+    .link {
+      margin-left: 2em;
+
+      @include mobile {
+        display: block;
+        margin-bottom: 1em;
+      }
+
+      a {
+        //color: $orange;
+      }
+
+      &.email {
+
+      }
+
+      &.twitter {
+
+      }
+
+      &.facebook {
+
+      }
+    }
   }
 }

@@ -13,7 +13,7 @@
       $donor[$param['name']] = $param['value'];
     }
 
-    if ( !wp_verify_nonce($donor['nonce'], 'give_nonce') || !isset($donor['stripe-token']) ) {
+    if ( !isset($donor['stripe-token']) || !isset($donor['nonce']) || !wp_verify_nonce($donor['nonce'], 'give_nonce')  ) {
       wp_send_json_error(array(
         'message' => 'Sorry, your payment couldn\'t be completed, because we identified a potentially malicious request.',
         # 'post' => $donor

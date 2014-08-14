@@ -25,7 +25,7 @@
       </div>
       <div class="large">
         <? $cta_link = ( $giving['link_type'] == 'internal' ? $giving['link_internal'] : $giving['link_external'] ) ?>
-            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?></a><span class="icon-arrow-right"></span></p>
+            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?></a><span class="icon-arrow-right large text-grey-dark"></span></p>
       </div>
     </div>
 

@@ -26,7 +26,7 @@
       <div class="column col-6 tablet-half mobile-full collapse-space item med">
 
         <div class="text">
-          <span class="icon-check large text-blue"></span>
+          <span class="icon-check large text-orange"></span>
           <?= $item['item'] ?>
         </div>
 

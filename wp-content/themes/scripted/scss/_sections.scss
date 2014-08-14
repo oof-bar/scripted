@@ -243,6 +243,7 @@
   }
   .item {
     span {
+      vertical-align: sub;
       padding-right: 7px;
       margin-left: -36px;
     }
@@ -279,6 +280,76 @@
     height: 100px;
     border-radius: 100%;
     overflow: hidden;
+  }
+}
+
+// Testimonials / Quotes
+
+.testimonials {
+  padding-bottom: 6em;
+
+  @include mobile {
+    padding-bottom: 4em;
+  }
+
+  .slider-wrap {
+    position: relative;
+  }
+
+  .testimonial {
+    position: absolute;
+    width: 100%;
+    display: none;
+    @include mobile {
+      text-align: center;
+      font-size: 80%;
+    }
+  }
+
+  .portrait {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+    @include border-radius(100em);
+
+    @include mobile {
+      margin: 0 auto 2em auto;
+      width: 150px;
+      height: 150px;
+      padding-bottom: 0;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .slide-pagination {
+    position: absolute;
+    bottom: 3em;
+    width: 100%;
+    text-align: center;
+
+    @include mobile {
+      bottom: 2em;
+    }
+
+    .indicator {
+      display: inline-block;
+      margin: 0 0.5em;
+      width: 5px;
+      height: 5px;
+      background-color: $grey-mid;
+      cursor: pointer;
+      @include border-radius(5px);
+
+      &.active, &:hover {
+        background-color: $grey-dark;
+      }
+    }
   }
 }
 

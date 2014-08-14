@@ -23,11 +23,15 @@
   wp_enqueue_script('donate');
 
   # Volunteer
-  wp_register_script('volunteer', $scripts_path . 'volunteer.js', array('jquery'), '0.1.0', true);
-  wp_enqueue_script('volunteer');
+  # wp_register_script('volunteer', $scripts_path . 'volunteer.js', array('jquery'), '0.1.0', true);
+  # wp_enqueue_script('volunteer');
+
+  # Testimonial Slider
+  wp_register_script('testimonials', $scripts_path . 'testimonials.js', array('jquery'), '0.1.0', true);
+  wp_enqueue_script('testimonials');
 
   # Select Menu
-  wp_register_script('select', $scripts_path . 'select.js', array('jquery'), '', true);
+  wp_register_script('select', $scripts_path . 'select.js', array('jquery'), '0.1.0', true);
   wp_enqueue_script('select');
 
   # Stripe

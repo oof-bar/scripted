@@ -283,6 +283,52 @@
   }
 }
 
+// Testimonials / Quotes
+
+.testimonials {
+  padding-bottom: 6em;
+
+  .testimonial {
+    position: absolute;
+    display: none;
+  }
+
+  .portrait {
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+    @include border-radius(100em);
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .slide-pagination {
+    position: absolute;
+    bottom: 3em;
+    width: 100%;
+    text-align: center;
+
+    .indicator {
+      display: inline-block;
+      margin: 0 0.5em;
+      width: 5px;
+      height: 5px;
+      background-color: $grey-mid;
+      cursor: pointer;
+      @include border-radius(5px);
+
+      &.active, &:hover {
+        background-color: $grey-dark;
+      }
+    }
+  }
+}
+
 
 /*
   Giving

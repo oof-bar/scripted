@@ -2,27 +2,31 @@
 
 <section class="narrative-section testimonials grey-light">
 
-  <? foreach ( $section['quotes'] as $quote ) { ?>
+  <div class="wrapper slider">
 
-    <div class="wrapper">
-      
-      <div class="column col-3">
-        <figure class="portrait">
-          <img src="<?= $quote['image']['sizes']['medium'] ?>" alt="<?= $quote['attribution'] ?>" />
-        </figure>
-      </div>
+    <? foreach ( $section['quotes'] as $quote ) { ?>
 
-      <div class="column col-8 add-margin-left">
-        <blockquote class="quote serif"><?= $quote['quote'] ?></blockquote>
-        <div class="attribution text-blue caps sans">
-          <?= $quote['attribution'] ?>
+      <div class="testimonial clearfix">
+        
+        <div class="column col-3 mobile-full">
+          <figure class="portrait">
+            <img src="<?= $quote['image']['sizes']['medium'] ?>" alt="<?= $quote['attribution'] ?>" />
+          </figure>
         </div>
+
+        <div class="column col-8 push-1 mobile-full">
+          <blockquote class="quote serif"><?= $quote['quote'] ?></blockquote>
+          <div class="attribution text-blue caps sans">
+            <?= $quote['attribution'] ?>
+          </div>
+        </div>
+
       </div>
 
-    </div>
+    <? } ?>
 
-  <? } ?>
+  </div>
 
-  <? # pp($section); ?>
-  
+  <div class="slide-pagination"></div>
+
 </section>

@@ -27,3 +27,10 @@ $ ->
   if $('#drawer-toggle').length
     $('#drawer-toggle').on 'click touchend', (e) ->
       $(document.body).toggleClass 'drawer-open'
+
+  if $('.testimonials').length
+    window.SE.UI.TestimonialSlider = new window.Slider
+      container: '.slider'
+      quotes: '.testimonial'
+      timing: 8000
+      indicator_container: '.slide-pagination'

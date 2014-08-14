@@ -44,22 +44,42 @@
   }
 }
 
-.single {
+.post-meta {
+  border: 1px solid $grey-light;
+  margin-bottom: 2em;
+  @include border-radius(3px);
 
+  .meta-item {
+    padding: 1em;
+    border-bottom: 1px solid $grey-light;
+
+    .meta-content {
+
+    }
+
+    .button {
+      margin-top: 1em;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h6 {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.archive {
   .post-meta {
-    border: 1px solid $grey-light;
-    @include border-radius(3px);
-
     .meta-item {
-      padding: 1em;
-      border-bottom: 1px solid $grey-light;
-
+      float: left;
+      width: 50%;
+      border-right: 1px solid $grey-light;
+      border-bottom: none;
       &:last-child {
-        border-bottom: none;
-      }
-
-      h6 {
-        margin-bottom: 0.5em;
+        border-right: none;
       }
     }
   }
@@ -136,6 +156,20 @@
   }
   .prev {
 
+  }
+}
+
+// Events
+
+.event {
+  .excerpt {
+    margin-bottom: 1em;
+  }
+  .map {
+    margin-bottom: 2em;
+  }
+  .button {
+    display: block;
   }
 }
 

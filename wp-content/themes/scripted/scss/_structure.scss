@@ -42,6 +42,9 @@ section {
   max-width: $max-width;
   margin: 0 auto;
   padding: 0 2em;
+  &.static {
+    position: static;
+  }
   @include mobile {
     padding: 0 1em;
   }

@@ -288,16 +288,36 @@
 .testimonials {
   padding-bottom: 6em;
 
+  @include mobile {
+    padding-bottom: 4em;
+  }
+
+  .slider-wrap {
+    position: relative;
+  }
+
   .testimonial {
     position: absolute;
+    width: 100%;
     display: none;
+    @include mobile {
+      text-align: center;
+      font-size: 80%;
+    }
   }
 
   .portrait {
     position: relative;
-    padding-top: 100%;
+    padding-bottom: 100%;
     overflow: hidden;
     @include border-radius(100em);
+
+    @include mobile {
+      margin: 0 auto 2em auto;
+      width: 150px;
+      height: 150px;
+      padding-bottom: 0;
+    }
 
     img {
       position: absolute;
@@ -312,6 +332,10 @@
     bottom: 3em;
     width: 100%;
     text-align: center;
+
+    @include mobile {
+      bottom: 2em;
+    }
 
     .indicator {
       display: inline-block;

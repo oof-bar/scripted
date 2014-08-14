@@ -30,7 +30,7 @@ $ ->
 
   if $('.testimonials').length
     window.SE.UI.TestimonialSlider = new window.Slider
-      container: '.slider'
+      container: '.slider-wrap'
       quotes: '.testimonial'
       timing: 8000
       indicator_container: '.slide-pagination'

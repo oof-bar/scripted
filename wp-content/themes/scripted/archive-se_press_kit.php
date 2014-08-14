@@ -4,19 +4,14 @@
 <section class="main press-kits-archive">
   <div class="wrapper">
 
-    <div class="column col-3 tablet-quarter mobile-full">
-      <? include get_partial('press-navigation') ?>
-    </div>
+    <? include get_partial('press-navigation') ?>
 
-    <div class="column col-9 tablet-three-quarters">
+    <div class="column col-9 tablet-three-quarters mobile-full">
       
-      <? if ( have_posts() ) { ?>
-        <? while ( have_posts() ) { the_post(); ?>
-          <? include get_embed( get_post_type() ); ?>
-        <? } ?>
-      <? } ?>
+      <? include get_partial('archive-loop') ?>
 
       <? include get_partial('pagination') ?>
+
     </div>
     
   </div>

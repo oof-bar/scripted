@@ -3,18 +3,15 @@
 
 <section class="main aggregator-archive">
   <div class="wrapper">
+    
+    <? include get_partial('blog-navigation') ?>
 
-    <div class="column col-3 tablet-quarter">
-      <? include get_partial('blog-navigation') ?>
-    </div>
-asdf
-    <div class="column col-7 tablet-three-quarters">
-      <? if ( have_posts() ) { ?>
-        <? while ( have_posts() ) { the_post(); ?>
-          <? get_embed( get_post_type() ); ?>
-        <? } ?>
-      <? } ?>
+    <div class="column col-7 tablet-three-quarters mobile-full">
+
+      <? include get_partial('archive-loop') ?>
+
       <? include get_partial('pagination') ?>
+
     </div>
     
   </div>

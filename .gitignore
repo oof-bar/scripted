@@ -7,5 +7,5 @@ wp-config.php
 wp-environment.php
 wp-content/uploads
 wp-content/themes/scripted/scripts/newsletter.js
-
 wp-content/themes/scripted/scripts/scripted.js
+.rsync-ignore

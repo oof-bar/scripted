@@ -2,7 +2,23 @@
     "key": "group_53bf5a885dd06",
     "title": "Student Voice",
     "fields": [
-
+        {
+            "key": "field_53ec6badccad7",
+            "label": "Sign-Off",
+            "name": "signoff",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Close the message with something fun! It can also just be your name. No pressure!",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "\u2014",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        }
     ],
     "location": [
         [

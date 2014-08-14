@@ -42,6 +42,9 @@ section {
   max-width: $max-width;
   margin: 0 auto;
   padding: 0 2em;
+  &.static {
+    position: static;
+  }
   @include mobile {
     padding: 0 1em;
   }
@@ -57,7 +60,7 @@ img {
 
 .table {
   display: table;
-  margin: 1em 0;
+  margin: 0 0 1em 0;
   width: 100%;
 
   .row {

@@ -8,7 +8,7 @@
   <section class="hero expanded text-center text-white" style="background-image: url('<?= $narrative['hero']['url'] ?>');">
 
     <? if ( $narrative['media'] ) { ?>
-      <div class="wrapper">
+      <div class="wrapper static">
         <div class="column col-2 centered static">
           <div class="media-play"></div>
           <div class="media-content">

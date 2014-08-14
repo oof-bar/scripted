@@ -36,7 +36,7 @@
             <div class="add-margin-top text-blue">
               <h3>
                 <? if ( $route['destination'] ) { ?>
-                  <a href="<?= $route[''] ?>"><?= $route['name'] ?></a>
+                  <a href="<?= $route['destination'] ?>"><?= $route['name'] ?></a>
                 <? } else { ?>
                   <?= $route['name'] ?>
                 <? } ?>

@@ -23,7 +23,7 @@
 
     <? foreach ( $section['list'] as $item ) { ?>
 
-      <div class="column col-6 item med">
+      <div class="column col-6 tablet-half mobile-full collapse-space item med">
 
         <div class="text">
           <span class="icon-check large text-blue"></span>

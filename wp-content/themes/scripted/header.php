@@ -26,7 +26,7 @@
             </div>
           </div>
 
-          <div class="column col-2 tablet-half wordmark bold serif link-orange">
+          <div class="column col-2 tablet-half mobile-half collapse-space wordmark bold serif link-orange">
             <a href="<?= home_url() ?>"><?= bloginfo('title') ?></a>
           </div>
 

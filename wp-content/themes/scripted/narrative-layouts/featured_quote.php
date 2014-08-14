@@ -22,7 +22,7 @@
 
     <div class="wrapper box">
 
-      <div class="column col-10 push-1 add-margin-top">
+      <div class="column col-10 centered mobile-full add-margin-top">
 
         <div class="blue padded text-center rounded-corners">
 

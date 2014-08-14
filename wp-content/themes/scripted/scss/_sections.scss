@@ -44,6 +44,27 @@
   }
 }
 
+.single {
+
+  .post-meta {
+    border: 1px solid $grey-light;
+    @include border-radius(3px);
+
+    .meta-item {
+      padding: 1em;
+      border-bottom: 1px solid $grey-light;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      h6 {
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+}
+
 // Latest
 
 .latest-posts {
@@ -145,6 +166,22 @@
     }
   }
 }
+
+// Student Voice
+
+.student-voice {
+  .sign-off {
+    margin-top: 2em;
+    font-style: italic;
+    color: $grey-dark;
+    text-indent: 1em;
+    &:before {
+      content: '—';
+      margin-right: 0.25em;
+    }
+  }
+}
+
 
 /*
   Narrative

@@ -12,10 +12,13 @@
     </div>
 
     <div class="column col-7 tablet-three-quarters mobile-full">
-      <div class="page-content">
-        <? the_content() ?>
-      </div>
 
+      <? if ( $post->post_content != '' ) { ?>
+        <div class="page-content">
+          <? the_content() ?>
+        </div>
+      <? } ?>
+      
       <div class="school-list">
         <? if ( $education_partners['partners'] ) foreach ( $education_partners['partners'] as $partner ) { ?>
           <div class="school">

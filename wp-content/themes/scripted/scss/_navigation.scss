@@ -112,7 +112,7 @@
 }
 
 .side-nav {
-  // margin-bottom: 2em;
+  margin-bottom: 2em;
   ul {
     li {
       border-left: 1px solid $grey-mid;
@@ -155,6 +155,13 @@
       &:hover {
         border-bottom-color: $white;
       }
+    }
+  }
+
+  .subpage-title {
+    @include tablet {
+      display: block;
+      margin-top: 0.25em;
     }
   }
 

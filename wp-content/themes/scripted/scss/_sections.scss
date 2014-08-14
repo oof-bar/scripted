@@ -12,9 +12,6 @@
   #{headers(all)} {
     color: $grey-dark;
   }
-  @include mobile {
-    margin-top: 2em;
-  }
 }
 
 /*
@@ -108,7 +105,11 @@
 
 .pagination {
   padding-top: 4em;
-  
+
+  @include mobile {
+    padding-top: 2em;
+  }
+
   .next {
 
   }
@@ -449,6 +450,9 @@
     }
     .button {
       margin-left: 5em;
+      @include mobile {
+        margin-left: 2em;
+      }
     }
   }
 }
@@ -470,6 +474,7 @@
 */
 
 .people {
+  // padding-top: 2em;
   &.abbreviated {
     .portrait-mask {
       margin: 0 auto;
@@ -482,17 +487,6 @@
   &.full {
 
   }
-
-  @include mobile {
-    .profile {
-      // text-align: center;
-      margin-bottom: 2em;
-    }
-
-    .portrait-mask {
-    }
-  }
-  
 }
 
 .profile {

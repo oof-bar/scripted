@@ -19,7 +19,7 @@
         </div>
       <? } ?>
 
-      <div class="people <?= $team['layout'] ?>">
+      <div class="people <?= $team['layout'] ?> clearfix">
 
         <? if ( $team['people'] ) foreach ( $team['people'] as $person ) { ?>
 

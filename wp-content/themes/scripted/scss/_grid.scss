@@ -27,19 +27,15 @@
    float: left;
    @include box-sizing( border-box );
    @include clearfix();
-   @media screen and ( max-width: $breakpoint-mobile ) {
+   @include mobile {
       clear: both;
       width: 100%;
+      padding-left: 0;
+      padding-right: 0;
    }
 
    &.static {
       position: static;
-   }
-
-   & + .column:not(.collapse-space) {
-      @include mobile {
-         margin-top: 2em;
-      }
    }
 }
 

@@ -6,7 +6,8 @@
   wp_register_script('scripted', $scripts_path . 'scripted.js', array('jquery'), '0.1.0', true);
   wp_localize_script('scripted', 'global', array(
     'ajax_url' => admin_url('admin-ajax.php'),
-    'environment' => 'development'
+    'environment' => SE_ENVIRONMENT,
+    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY
   ));
   wp_enqueue_script('scripted');
 

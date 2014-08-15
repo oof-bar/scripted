@@ -4,7 +4,8 @@
 
   wp_localize_script('app', 'global', array(
     'ajax_url' => admin_url('admin-ajax.php'),
-    'environment' => 'production'
+    'environment' => SE_ENVIRONMENT,
+    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY
   ));
 
   wp_enqueue_script('app');
@@ -14,5 +15,5 @@
   wp_enqueue_script('vendor');
 
   # Stripe
-  wp_register_script('stripe', 'https://js.stripe.com/v2/', array('jquery'), '', false);
+  wp_register_script('stripe', 'https://js.stripe.com/v2/', array('vendor'), '', false);
   wp_enqueue_script('stripe');

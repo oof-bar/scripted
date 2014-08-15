@@ -546,15 +546,21 @@
       font-weight: normal;
     }
   }
+
   .disclaimer {
+    margin-top: 2em;
+  }
+
+  .gift-info {
     margin-top: 2em;
   }
 
   .table {
     .row {
       .cell {
-      @include border-top;
         padding: 1em 0;
+        @include border-top;
+        
         &:first-child {
           font-weight: 600;
         }

@@ -51,6 +51,9 @@
         ),
         array(
           'confirmation_url' => get_permalink($gift)
+        ),
+        array(
+          'date' => get_the_date('F d, Y', $gift)
         )
       );
 
@@ -80,6 +83,10 @@
           array(
             'name' => 'donor_name',
             'content' => get_the_title($gift)
+          ),
+          array(
+            'name' => 'date',
+            'content' => get_the_date('F d, Y', $gift)
           )
         )
       );

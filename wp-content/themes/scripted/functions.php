@@ -258,14 +258,10 @@
   # Scripts
 
   function se_register_theme_scripts ( ) {
-    if ( SE_ENVIRONMENT == 'development' ) {
-
-      require_once('config/js-development.php');
-
-    } else {
-
+    if ( SE_ENVIRONMENT == 'production' ) {
       require_once('config/js-production.php');
-#//use.typekit.net/fxj8drj.js
+    } else {
+      require_once('config/js-development.php');
     }
   }
 

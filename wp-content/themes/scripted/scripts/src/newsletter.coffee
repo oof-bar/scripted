@@ -22,6 +22,7 @@ window.Newsletter = window.Newsletter or class Newsletter
 
   setup: ->
     @options.form.validate
+      debug: ( (global.environment == 'production') ? false : true )
       errorElement: 'em'
 
     @options.email_field.on 'keyup', (e) =>

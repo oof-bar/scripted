@@ -173,7 +173,7 @@ $ ->
   if ( $('#give').length )
     window.SE.Donate = window.SE.Donate or new window.Give()
 
-    Stripe.setPublishableKey 'pk_test_o9ORAHflgRIKsxfx2JDutxu0'
+    Stripe.setPublishableKey global.stripe_publishable_key
 
     window.SE.UI.select_month = new window.Select 
       location: '#select-cc-expiry-month'

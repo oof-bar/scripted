@@ -27,7 +27,7 @@
       <div class="column col-<?= $columns ?>">
 
         <figure>
-          <img src="<?= $concept['illustration']['sizes']['medium'] ?>" />
+          <img src="<?= $concept['illustration']['url'] ?>" />
         </figure>
 
         <h3 class="add-margin-top text-blue"><?= $concept['name'] ?></h3>

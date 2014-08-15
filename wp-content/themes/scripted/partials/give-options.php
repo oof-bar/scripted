@@ -28,7 +28,7 @@
 
           <? if ( $route['image'] ) { ?>
             <figure>
-              <img src="<?= $route['image']['sizes']['medium'] ?>" alt="<?= ( $route['name'] || 'Path Image' ) ?>" />
+              <img src="<?= $route['image']['url'] ?>" alt="<?= ( $route['name'] || 'Path Image' ) ?>" />
             </figure>
           <? } ?>
 

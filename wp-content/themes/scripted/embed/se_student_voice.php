@@ -6,14 +6,10 @@
 
   <h3><a href="<? the_permalink() ?>"><?= the_title(); ?></a></h3>
 
-  <div class="post-meta">
-
-  </div>
-
   <div class="post-content light">
     <? the_content(); ?>
 
-    <? if ( $voice['signoff'] ) { ?>
+    <? if ( isset($voice['signoff']) ) { ?>
       <div class="sign-off">
         <?= $voice['signoff'] ?>
       </div>

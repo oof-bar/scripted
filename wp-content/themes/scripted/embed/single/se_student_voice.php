@@ -10,7 +10,7 @@
     <div class="post-content">
       <? the_content() ?>
 
-      <? if ( $voice['signoff'] ) { ?>
+      <? if ( isset($voice['signoff']) ) { ?>
         <div class="sign-off">
           <?= $voice['signoff'] ?>
         </div>

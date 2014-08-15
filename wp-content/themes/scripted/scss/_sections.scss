@@ -701,7 +701,7 @@
     max-width: 100px;
     opacity: 0.35;
     display: inline-block;
-    margin: 0 1.5em 1.5em 0;
+    margin-right: 1em;
     @include animate($property: opacity);
     &:hover {
       opacity: 0.65;

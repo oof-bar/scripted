@@ -27,7 +27,7 @@
   <? if ( isset($event['location']['address']) ) { ?>
     <div class="map">
       <a href="http://maps.google.com/?q=<?= urlencode($event['location']['address']) ?>" target="_blank">
-        <img src="<?= 'http://maps.googleapis.com/maps/api/staticmap?center=' . urlencode($event['location']['address']). '&zoom=15&size=800x300&markers=label:1%7C' . ( $event['location']['lat'] . ',' . $event['location']['lng'] ) ?>" />
+        <img src="<?= '//maps.googleapis.com/maps/api/staticmap?center=' . urlencode($event['location']['address']). '&zoom=15&size=800x300&markers=label:1%7C' . ( $event['location']['lat'] . ',' . $event['location']['lng'] ) ?>" />
       </a>
     </div>
   <? } ?>

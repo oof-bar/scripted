@@ -20,7 +20,7 @@
 
   <div class="wrapper statistics">
 
-    <? $columns = ( $section['layout'] == 'grid' ? 'col-6' : 'col-8 centered greedy' ) ?>
+    <? $columns = ( $section['layout'] == 'grid' ? 'col-6' : 'col-9 centered greedy' ) ?>
 
     <? foreach ( $section['stats'] as $statistic ) { ?>
 
@@ -30,7 +30,7 @@
           <?= $statistic['emphasis'] ?>
         </div>
 
-        <div class="explanation text-center">
+        <div class="explanation text-center med">
           <?= $statistic['description'] ?>
         </div>
 

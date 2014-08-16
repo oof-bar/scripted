@@ -9,7 +9,7 @@
   <div class="wrapper">
 
     <div class="column col-10">
-      <h5>
+      <h5 class="text-blue">
         <? if ( $giving['cta'] ) { ?>
           <?= $giving['cta'] ?>
         <? } else { ?>
@@ -25,7 +25,7 @@
       </div>
       <div class="large">
         <? $cta_link = ( $giving['link_type'] == 'internal' ? $giving['link_internal'] : $giving['link_external'] ) ?>
-            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?></a><span class="icon-arrow-right large text-grey-dark"></span></p>
+            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?><span class="icon-arrow-right large"></span></a></p>
       </div>
     </div>
 

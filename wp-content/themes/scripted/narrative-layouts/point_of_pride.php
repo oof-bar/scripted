@@ -11,8 +11,10 @@
     <? } ?>
 
     <? if ( $section['text'] ) { ?>
-      <div class="column col-12 text text-center med">
-        <?= $section['text'] ?>
+      <div class="column col-12 text text-center featured-quote">
+        <blockquote class="quote">
+          <?= $section['text'] ?>
+        </blockquote>
       </div>
     <? } ?>
 

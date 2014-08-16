@@ -6,12 +6,6 @@
 
     <div class="wrapper">
 
-      <? if ( $post->post_content != "" ) { ?>
-        <div class="column col-8 push-2 greedy">
-          <? the_content() ?>
-        </div>
-      <? } ?>
-
       <div class="column col-8 push-2 greedy">
         <div id="give-messages"></div>
       </div>

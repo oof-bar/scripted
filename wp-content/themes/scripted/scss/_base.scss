@@ -106,11 +106,11 @@ a {
     color: $grey-dark;
 
     &:hover {
-      color: $grey-mid;
+      color: $grey-darker;
     }
 
     &:active {
-      color: $grey-darker;
+      color: $black;
     }
   }
 }

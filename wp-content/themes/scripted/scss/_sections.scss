@@ -427,10 +427,10 @@
       width: 5px;
       height: 5px;
       background-color: $grey-mid;
-      cursor: pointer;
+      // cursor: pointer;
       @include border-radius(5px);
 
-      &.active, &:hover {
+      &.active {
         background-color: $grey-dark;
       }
     }

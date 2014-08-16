@@ -89,8 +89,8 @@ window.Quote = window.Quote or class Quote
 
   build: ->
     @indicator.appendTo @parent.options.indicator_container
-    @indicator.on 'click', =>
-      @pick()
+    # @indicator.on 'click', =>
+    #   @pick()
 
   pick: ->
     @parent.goto(@id)

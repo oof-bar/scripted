@@ -1,6 +1,6 @@
 <? if ( isset($giving['faq']) && count($giving['faq']) ) { ?>
 
-  <section class="faq expanded border">
+  <section class="faq border">
     <div class="wrapper">
 
       <div class="column col-6 tablet-full">

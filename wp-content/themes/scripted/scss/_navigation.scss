@@ -90,19 +90,37 @@
 
     ul { 
       position: absolute;
-      display: none;
-      background: $white;
-      left: -14px;
+      visibility: hidden;
+      opacity: 0;
+      background: white;
+      left: 0;
+      margin-left: -1em;
+      margin-top: 1em;
+      @include border-radius(3px);
+      @include box-shadow(0 0.1em 0.25em 0.1em rgba(0,0,0,0.15));
+      @include transform(translate3d(0, -1em, 0));
+      @include animate($duration: 150ms);
 
       li {
         display: block;
         text-align: left;
-        margin: 1em;
+        margin: 0;
+        &:not(:last-child) {
+          border-bottom: 1px solid $grey-light;
+        }
+        a {
+          display: block;
+          padding: 1em 2em 1em 1em;
+          white-space: nowrap;
+        }
       }
     }
 
-    &:hover ul {
-      display: block;
+    &.open ul {
+      // display: block;
+      visibility: visible;
+      opacity: 1;
+      @include transform(translate(0, 0));
     }
   }
 

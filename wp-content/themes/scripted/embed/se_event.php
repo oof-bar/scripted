@@ -6,7 +6,7 @@
 
   <h3><a href="<? the_permalink(); ?>"><?= the_title(); ?></a></h3>
 
-  <div class="post-meta light clearfix">
+  <div class="post-meta clearfix">
 
     <? if ( isset($event['date_start']) ) { ?>
       <div class="meta-item date date-start">
@@ -32,7 +32,7 @@
     </div>
   <? } ?>
 
-  <div class="post-content light">
+  <div class="post-content">
     <? the_content(); ?>
   </div>
 

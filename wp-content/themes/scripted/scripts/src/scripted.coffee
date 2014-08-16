@@ -59,5 +59,5 @@ $ ->
         console.log 'Leave'
         $(this).data 'delay', window.setTimeout =>
           $(this).removeClass('open')
-        , 1000
+        , 250
 

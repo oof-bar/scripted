@@ -18,22 +18,28 @@
 
   </div>
 
-  <div class="wrapper statistics">
+  <div class="wrapper statistics add-margin-top double">
 
     <? $columns = ( $section['layout'] == 'grid' ? 'col-6' : 'col-9 centered greedy' ) ?>
 
     <? foreach ( $section['stats'] as $statistic ) { ?>
 
-      <div class="column add-margin-top double <?= $columns ?> statistic">
+      <div class="column <?= $columns ?>">
+        <div class="statistic rounded-corners table">
 
-        <div class="data text-orange text-center">
-          <?= $statistic['emphasis'] ?>
+          <div class="row">
+            <div class="cell">
+              <div class="data text-orange text-center">
+                <?= $statistic['emphasis'] ?>
+              </div>
+
+              <div class="explanation text-center med">
+                <?= $statistic['description'] ?>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <div class="explanation text-center med">
-          <?= $statistic['description'] ?>
-        </div>
-
       </div>
 
     <? } ?>

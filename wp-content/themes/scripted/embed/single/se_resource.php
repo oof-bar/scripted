@@ -24,10 +24,10 @@
     </div>
 
     <? if ( $resource['attachment'] ) { ?>
-      <div class="post-meta download-box clearfix">
+      <div class="download-box clearfix">
         <a class="button small blue float-right" href="<?= $resource['attachment']['url'] ?>">Download</a>
         <h6>
-          <span class="icon-file icon large text-blue"></span>
+          <span class="icon-file icon float-left large text-blue"></span>
           <?= $resource['attachment']['title'] ?>
         </h6>
       </div>

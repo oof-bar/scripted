@@ -2,7 +2,7 @@
 
 <section class="narrative-section pride black<?= ( !empty($section['icon']) ? ' with-icon' : '' ) ?>">
 
-  <div class="wrapper frame">
+  <div class="wrapper static">
 
     <? if ( !empty($section['icon']) ) { ?>
       <div class="icon">

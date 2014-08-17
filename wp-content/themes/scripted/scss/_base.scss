@@ -132,6 +132,11 @@ a {
 
 // General
 
+hr {
+  border: none;
+  border-bottom: 1px solid $grey-light;
+}
+
 .padded {
   padding: 2em;
 }

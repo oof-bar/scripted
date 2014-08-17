@@ -1,0 +1,125 @@
+{
+    "key": "group_53f001e258bb0",
+    "title": "Page Call to Action",
+    "fields": [
+        {
+            "key": "field_53f001ef94516",
+            "label": "Action Destination",
+            "name": "action_destination",
+            "prefix": "",
+            "type": "radio",
+            "instructions": "Does this page require a distinct call-to-action after the main text, and if so, does it point inside ScriptEd or to an external site?",
+            "required": 1,
+            "conditional_logic": 0,
+            "choices": {
+                "internal": "Internal",
+                "external": "External",
+                "none": "No Action on this Page"
+            },
+            "other_choice": 0,
+            "save_other_choice": 0,
+            "default_value": "none",
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_53f003d9e0e45",
+            "label": "Link Label",
+            "name": "link_label",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_53f001ef94516",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53f0034ac627a",
+            "label": "Link External",
+            "name": "link_external",
+            "prefix": "",
+            "type": "text",
+            "instructions": "Paste in the external link.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_53f001ef94516",
+                        "operator": "==",
+                        "value": "external"
+                    }
+                ]
+            ],
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_53f00376c627b",
+            "label": "Link Internal",
+            "name": "link_internal",
+            "prefix": "",
+            "type": "page_link",
+            "instructions": "Select the page you want to link to.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_53f001ef94516",
+                        "operator": "==",
+                        "value": "internal"
+                    }
+                ]
+            ],
+            "post_type": [
+                "page",
+                "se_aggregator",
+                "attachment",
+                "post",
+                "se_event",
+                "se_resource",
+                "se_student_voice"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            },
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "default"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

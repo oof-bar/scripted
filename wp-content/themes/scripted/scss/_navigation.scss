@@ -137,16 +137,16 @@
 
       a {
         display: block;
-        color: $grey-mid;
+        color: $grey-dark;
         padding-left: 1em;
         line-height: 2.5em;
       }
 
       &:hover {
-        border-left-color: $grey-dark;
+        border-left-color: $grey-darker;
 
         a {
-          color: $grey-dark;
+          color: $grey-darker;
         }
       }
 

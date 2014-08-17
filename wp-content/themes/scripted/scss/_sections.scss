@@ -332,6 +332,11 @@
 // Bulleted List
 
 .checklist {
+
+  .list {
+    margin-top: 2em;
+  }
+
   .text {
     padding-left: 40px;
   }
@@ -366,7 +371,7 @@
     background-size: cover;
     background-position: center center;
     position: absolute;
-    top: 0;
+    top: -150%;
     left: 50%;
     margin-left: -50px;
     margin-top: -50px;

@@ -305,13 +305,13 @@
   .amount {
     position: relative;
     top: -1px;
-    padding: 0.1em 0.1em 0.1em 1em;
+    padding: 0 0.1em 0.1em 1em;
     margin: 0 0.1em 0 -1.4em;
     display: inline-block;
     width: 4em;
     color: inherit;
     background-color: transparentize($black, 0.9);
-    border-color: transparentize($black, 0.8);
+    border: 2px solid transparentize($black, 0.8);
     &:focus {
       background-color: transparentize($black, 0.9);
       border-color: transparentize($black, 0.5);

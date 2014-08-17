@@ -405,8 +405,13 @@
 // Path Picker
 
 .path-picker {
+  .path {
+    margin-bottom: 2em;
+    text-align: center;
+  }
   figure {
     max-width: 200px;
+    margin: 0 auto;
   }
 }
 

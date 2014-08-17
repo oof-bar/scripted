@@ -770,6 +770,9 @@
 */
 
 .sponsors {
+  @include tablet {
+    text-align: center;
+  }
   .sponsor {
     max-width: 100px;
     opacity: 0.35;
@@ -778,6 +781,10 @@
     @include animate($property: opacity);
     &:hover {
       opacity: 0.65;
+    }
+    @include tablet {
+      display: inline-block;
+      margin: 0 0.5em;
     }
   }
 }

@@ -18,7 +18,7 @@
 
   </div>
 
-  <div class="wrapper statistics">
+  <div class="wrapper statistics add-margin-top double">
 
     <? $columns = ( $section['layout'] == 'grid' ? 'col-6' : 'col-12 greedy special' ) ?>
 

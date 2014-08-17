@@ -81,6 +81,12 @@
 
   .menu {
     margin-top: 0.75em;
+
+    .menu-item-has-children {
+      padding-right: 1.5em;
+      background: transparent url('../images/arrow-close.svg') right center no-repeat;
+      background-size: 14px;
+    }
   }
 
   li {

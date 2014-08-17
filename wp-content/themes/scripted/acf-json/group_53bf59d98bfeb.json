@@ -899,7 +899,7 @@
                             "prefix": "",
                             "type": "image",
                             "instructions": "Add a line-art graphic to occupy the seal.",
-                            "required": 1,
+                            "required": 0,
                             "conditional_logic": 0,
                             "column_width": "",
                             "return_format": "array",
@@ -921,6 +921,24 @@
                             "maxlength": "",
                             "rows": "",
                             "new_lines": "wpautop",
+                            "readonly": 0,
+                            "disabled": 0
+                        },
+                        {
+                            "key": "field_53f01555d29bc",
+                            "label": "Attribution",
+                            "name": "attribution",
+                            "prefix": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "column_width": "",
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "\u2014",
+                            "append": "",
+                            "maxlength": "",
                             "readonly": 0,
                             "disabled": 0
                         }

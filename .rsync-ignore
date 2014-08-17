@@ -1,0 +1,6 @@
+wp-content/uploads
+.htaccess
+.git
+wp-content/themes/scripted/.sass-cache
+wp-content/themes/scripted/node_modules
+deploy.php

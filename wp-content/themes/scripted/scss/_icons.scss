@@ -23,7 +23,7 @@
  
 [data-icon]:before {
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.7em;
   font-family: "feather";
   content: attr(data-icon);
   font-style: normal;
@@ -35,6 +35,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 [data-icon].large:before {
   font-size: 24px;
 }
@@ -44,7 +45,7 @@
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.7em;
   font-family: "feather";
   font-style: normal;
   font-weight: normal;

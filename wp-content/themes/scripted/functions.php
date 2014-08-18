@@ -238,7 +238,7 @@
   add_action('admin_init', 'init_admin_customizations');
 
   function init_admin_customizations ( ) {
-    
+    add_editor_style();
   }
 
   /*

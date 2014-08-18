@@ -403,6 +403,18 @@
   }
 }
 
+// Photo Message
+
+.photo-message {
+  figure {
+    text-align: center;
+
+    @include tablet {
+      margin-top: 2em;
+    }
+  }
+}
+
 // Path Picker
 
 .path-picker {
@@ -776,8 +788,9 @@
 
 .sponsors {
   @include tablet {
-    text-align: center;
+    text-align: left;
   }
+
   .sponsor {
     max-width: 100px;
     opacity: 0.35;
@@ -810,6 +823,11 @@
     border-left: 3px solid $orange;
     border-top: 0;
     padding: 1em 5em;
+
+    @include mobile {
+      min-height: 0;
+      padding: 1em 2em;
+    }
   }
 }
 
@@ -819,6 +837,11 @@
   border-top: 3px solid $orange;
   min-height: 270px;
   padding: 1em 3em;
+  
+  @include mobile {
+    min-height: 0;
+    padding: 1em 2em;
+  }
 
   .cell {
     vertical-align: middle;

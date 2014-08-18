@@ -134,7 +134,8 @@ a {
 
 hr {
   border: none;
-  border-bottom: 1px solid $grey-light;
+  border-bottom: 1px dashed $grey-light;
+  margin: 1.5em 0;
 }
 
 .padded {

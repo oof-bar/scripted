@@ -11,7 +11,7 @@
             <? if ( se_option("mailchimp_list") ) include get_partial('newsletter-signup') ?>
           </div>
 
-          <div class="column col-2 push-1 tablet-half mobile-full">
+          <div class="column col-2 push-1 tablet-half mobile-hide secondary-nav">
             <span class="caps semi-bold small">Explore</span> 
             <div class="add-margin-top caps bold small link-grey">
               <? wp_nav_menu(array(

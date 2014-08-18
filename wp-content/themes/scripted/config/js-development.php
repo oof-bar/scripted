@@ -40,9 +40,14 @@
   wp_enqueue_script('stripe');
 
   # jQuery
-  wp_register_script('jquery-se', get_template_directory_uri() . '/scripts/src/lib/jquery.min.js', array(), '1.11.1', false);
+  wp_register_script('jquery-se', $scripts_path . 'src/lib/jquery.min.js', array(), '1.11.1', false);
   wp_enqueue_script('jquery-se');
 
   # jQuery Validate
-  wp_register_script('jquery-validate', get_template_directory_uri() . '/scripts/src/lib/jquery.validate.js', array('jquery'), '1.13.0');
+  wp_register_script('jquery-validate', $scripts_path . 'src/lib/jquery.validate.js', array('jquery'), '1.13.0');
   wp_enqueue_script('jquery-validate');
+
+  wp_register_script('jquery-validate-extras', $scripts_path . 'src/lib/additional-methods.js', array('jquery', 'jquery-validate'), '1.13.0');
+  wp_enqueue_script('jquery-validate-extras');
+
+

@@ -241,6 +241,10 @@ section.header {
     text-align: right;
 
     @include tablet {
+      text-align: center;
+    }
+
+    @include mobile {
       text-align: left;
     }
 

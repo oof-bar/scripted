@@ -17,14 +17,14 @@
       <div class="column col-4 tablet-half mobile-full collapse-space">
         <label for="name-first">
           <span class="field-label">First Name</span>
-          <input type="text" id="name-first" name="name-first" data-rule-required="true" data-msg-required="We need your name. Don't worry, we won't publish it." />
+          <input type="text" id="name-first" name="name-first" data-rule-required="true" data-rule-alphanumeric="true" data-msg-required="We need your name. Don't worry, we won't publish it." />
         </label>
       </div>
 
       <div class="column col-4 tablet-half mobile-full collapse-space">
         <label for="name-last">
           <span class="field-label">Last Name</span>
-          <input type="text" id="name-last" name="name-last"  data-rule-required="true" data-msg-required="Last name, too!" />
+          <input type="text" id="name-last" name="name-last"  data-rule-required="true" data-rule-alphanumeric="true" data-msg-required="Last name, too!" />
         </label>
       </div>
 

@@ -1,0 +1,18 @@
+@import 'compass/reset';
+@import 'variables';
+
+body {
+  font-family: Helvetica, sans-serif;
+  line-height: 1.35em;
+  padding: 1em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+#{headers(all)} {
+  margin: 2em 0 1em 0;
+  font-weight: bold;
+  color: $blue;
+}

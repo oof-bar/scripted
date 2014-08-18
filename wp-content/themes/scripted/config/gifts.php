@@ -70,7 +70,7 @@ function create_donation ( $name_first, $name_last, $email, $amount, $zip ) {
 
   $donation = wp_insert_post( array(
     'post_name' => md5(microtime(true)),
-    'post_title' => ( $name_first . ' ' . $name_last ),
+    'post_title' => sanitize_text_field( $name_first ) . ' ' . sanitize_text_field( $name_last ),
     'post_type' => 'se_gift',
     'post_status' => 'publish',
     'ping_status' => 'closed'

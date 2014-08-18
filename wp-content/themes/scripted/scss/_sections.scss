@@ -398,7 +398,8 @@
 
 .concept-highlights {
   figure {
-    max-width: 200px;
+    max-width: 230px;
+    margin: 0 auto 1.5em auto;
   }
 }
 
@@ -407,11 +408,11 @@
 .path-picker {
   .path {
     margin-bottom: 2em;
-    text-align: center;
+    //text-align: center;
   }
   figure {
-    max-width: 200px;
-    margin: 0 auto;
+    max-width: 230px;
+    margin: 0 auto 1em auto;
   }
 }
 

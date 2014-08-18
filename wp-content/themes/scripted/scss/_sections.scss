@@ -687,6 +687,10 @@
     border-top: 1px solid $grey-light;
     padding: 2em 0;
 
+    h3 {
+      margin-bottom: 0.25em;
+    }
+
     &:last-of-type {
       border-bottom: 1px solid $grey-light;
     }

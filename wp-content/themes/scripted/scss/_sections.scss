@@ -772,8 +772,9 @@
 
 .sponsors {
   @include tablet {
-    text-align: center;
+    text-align: left;
   }
+  
   .sponsor {
     max-width: 100px;
     opacity: 0.35;
@@ -815,6 +816,10 @@
   border-top: 3px solid $orange;
   min-height: 270px;
   padding: 1em 3em;
+  @include mobile {
+    min-height: 0;
+    padding: 1em 2em;
+  }
 
   .cell {
     vertical-align: middle;

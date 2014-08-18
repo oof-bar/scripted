@@ -56,6 +56,9 @@ h4 {
   letter-spacing: 0.1em;
   font-weight: 600;
   margin-bottom: 1em;
+  @include mobile {
+    font-size: 1em;
+  }
 }
 
 h5 {
@@ -163,12 +166,12 @@ pre {
 // Special
 
 .data {
-  font-size: 4em;
+  font-size: 3.5em;
   font-family: $family-serif;
   font-weight: 700;
   line-height: 0.9em;
   margin-bottom: 0.25em;
-  @include mobile {
+  @include tablet {
     font-size: 2.5em;
   }
 }

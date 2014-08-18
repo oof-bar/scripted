@@ -218,12 +218,22 @@ section.header {
   }
 }
 
+.secondary-nav {
+  @include tablet {
+    padding-left: 4em;
+  }
+}
+
 .outreach {
   padding: 2em 0;
 
   .copyright {
     @include tablet {
       text-align: center;
+      @include mobile {
+        text-align: left;
+        margin-bottom: 1em;
+      }
     }
   }
 
@@ -231,7 +241,7 @@ section.header {
     text-align: right;
 
     @include tablet {
-      text-align: center;
+      text-align: left;
     }
 
     .link {
@@ -240,6 +250,7 @@ section.header {
       @include mobile {
         display: block;
         margin-bottom: 1em;
+        margin-left: 0;
       }
 
       a {

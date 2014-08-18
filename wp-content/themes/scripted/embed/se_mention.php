@@ -2,7 +2,7 @@
 
 <div <? post_class('post mention'); ?>>
 
-  <a class="button small blue float-right" href="<?= $mention['url'] ?>"><?= $mention['action'] ?></a>
+  <a class="button small blue float-right" href="<?= $mention['url'] ?>" target="_blank"><?= $mention['action'] ?></a>
 
   <h3>
     <a href="<?= $mention['url'] ?>" target="_blank"><? the_title(); ?></a>

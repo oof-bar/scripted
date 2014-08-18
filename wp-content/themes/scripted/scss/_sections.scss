@@ -851,3 +851,13 @@
     vertical-align: middle;
   }
 }
+
+/*
+  Static Content page-break-inside
+*/
+
+.page-content, .post-content {
+  h5 {
+    color: $blue;
+  }
+}

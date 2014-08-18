@@ -386,6 +386,10 @@
     font-weight: 400;
     font-size: 1.4em;
     line-height: 1.2em;
+
+    @include mobile {
+      font-size: 1.25em;
+    }
   }
 
   .attribution {
@@ -787,6 +791,10 @@
     text-align: left;
   }
 
+  @include mobile {
+    text-align: center;
+  }
+
   .sponsor {
     max-width: 100px;
     opacity: 0.35;
@@ -833,7 +841,7 @@
   border-top: 3px solid $orange;
   min-height: 270px;
   padding: 1em 3em;
-  
+
   @include mobile {
     min-height: 0;
     padding: 1em 2em;

@@ -68,6 +68,10 @@
   padding: 1.5em 0;
   z-index: 1000;
 
+  @include mobile {
+    padding: 1em 0 0.75em 0;
+  }
+
   .column {
 
   }

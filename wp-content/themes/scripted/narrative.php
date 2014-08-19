@@ -5,7 +5,7 @@
 
 <? if ( $narrative['hero'] ) { ?>
 
-  <section class="hero expanded text-center text-white" style="background-image: url('<?= $narrative['hero']['url'] ?>');">
+  <section class="hero expanded text-center text-white" style="background-image: url('<?= $narrative['hero']['sizes']['jumbo'] ?>');">
 
     <? if ( $narrative['media'] ) { ?>
       <div class="wrapper static">

@@ -1,14 +1,10 @@
-class SE
+window.SE =
   loaded_at: Date.now()
   Validators: {}
   UI: {}
 
-  constructor: ->
-    console.log "loaded"
-
 
 $ ->
-  window.SE = window.SE or new SE()
   window.SE.UI.Blinker = window.setInterval ->
     $('.blink').toggleClass 'visible'
   , 1000

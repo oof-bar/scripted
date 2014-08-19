@@ -2,8 +2,8 @@
 Contributors: Ipstenu
 Tags: cloud, dreamhost, dreamspeed, backup
 Requires at least: 3.8
-Tested up to: 3.9
-Stable tag: 0.3.1
+Tested up to: 4.0
+Stable tag: 0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,15 +15,10 @@ Connect your WordPress install to your DreamHost DreamSpeed CDN for supercharged
 
 This plugin automatically copies images, videos, documents, and any other media added through WordPress' media uploader to DreamSpeed. It then automatically replaces the URL to each media file with their respective DreamObjects URL or, if you have configured a CDN Alias, the respective custom URL. Image thumbnails are also copied to DreamSpeed and delivered similarly.
 
-Uploading files directly to DreamSpeed is not supported by this plugin. They are uploaded to your server first, via the WordPress media uploader, then copied to DreamSpeed.
+Uploading files directly to DreamSpeed is not supported by this plugin. They are uploaded to your server first, via the WordPress media uploader, then copied to DreamSpeed. This allows you to roll back if needed!
 
 Development happens on <a href="https://github.com/Ipstenu/dreamspeed/">Github</a>. Issues and Pull Requests welcome.
 
-= Known Conflicts =
-
-* Broken Link Checker - This plugin will cause the "Migrate Exisiting Files" to fail.
-
-= Credits =
 <em>This plugin is a spork (fork and combination) of <a href="https://wordpress.org/plugins/amazon-s3-and-cloudfront/">Amazon S3 and Cloudfront</a> and <a href="https://github.com/deliciousbrains/wp-amazon-web-services">Amazon Web Services</a>, both by the awesome Brad Touesnard.</em>
 
 == Installation ==
@@ -64,10 +59,6 @@ Yes. Go to the CDN page and at the bottom is a section "Migrate Exisiting Files"
 
 The uploader runs in chunks per hour, since it has to upload <em>all</em> image sizes, as well as edit your posts.
 
-<strong>How long will it take to upload everything?</strong>
-
-That depends on how many files you have. It averages uploading 20 images per-hour, though that can change based on how large the images are and how many resizes you use.
-
 <strong>How can I check if an image is uploaded?</strong>
 
 Go to the Media Library. There's a column called 'CDN' and that will have a checkmark if it's uploaded.
@@ -79,6 +70,12 @@ Generally no. The Migrate Existing Files features will edit the posts for you.
 <strong>It <em>edits</em> my posts? Why not use a filter?</strong?>
 
 It does edit. It saves as a post revision, so you can roll back. But there's no filter because you may not have all your images uploaded to the cloud yet.
+
+= Advanced Stuff =
+
+<strong>Can I use SSL?</strong>
+
+Yes. If you set your WordPress home/site URLs to https, then the plugin will auto-detect that you're on https and attempt to serve up the files securely. If for any reason that doesn't work, there's an option to activate force SSL on the settings page.
 
 = Errors, Bugs, and Weird Stuff =
 
@@ -94,7 +91,7 @@ Of note: Currently the official WordPress importers aren't standardized, so ther
 
 <strong>Why aren't my images found?</strong>
 
-Check if they're failing on the CDN alias, but they do work at the objects.dreamhost.com URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor and set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
+Check if they're failing on the CDN alias, but they do work at the objects.dreamhost.com URL. If so, you somehow goofed your permissions. You have to go into the DreamObjects editor andf set permissions from PRIVATE to PUBLIC. This happens usually because the bucket was private when you made it.
 
 == Screenshots ==
 
@@ -108,6 +105,10 @@ Check if they're failing on the CDN alias, but they do work at the objects.dream
 8. Migrate Exisiting Files section (on DreamSpeed CDN Configuration page)
 
 == Changelog ==
+
+= 0.4 =
+* Aug 7, 2014, by Ipstenu
+* Enabled SSL force option
 
 = 0.3.1 =
 * July 24, 2014, by Ipstenu

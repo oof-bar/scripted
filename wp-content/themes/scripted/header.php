@@ -27,7 +27,7 @@
           </div>
 
           <div class="column col-2 tablet-half mobile-half collapse-space wordmark bold serif link-orange">
-            <a href="<?= home_url() ?>"><?= bloginfo('title') ?><span id="blink">_</span></a>
+            <a href="<?= home_url() ?>"><?= bloginfo('title') ?><span class="blink">_</span></a>
           </div>
 
           <div class="column col-8 tablet-hide caps bold small link-grey text-center">

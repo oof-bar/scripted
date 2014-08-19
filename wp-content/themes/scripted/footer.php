@@ -51,4 +51,9 @@
     <? wp_footer(); ?>
 
   </body>
+  <!--
+    Designed and Developed by
+    August Miller & Savannah Julian
+    Summer, 2014
+  -->
 </html>

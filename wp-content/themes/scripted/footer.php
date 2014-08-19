@@ -3,7 +3,7 @@
 
           <div class="column col-4 tablet-half mobile-full">
             <div class="wordmark bold serif text-orange">
-              <?= bloginfo('title') ?>
+              <?= bloginfo('title') ?><span class="blink">_</span>
             </div>
             <div class="non-profit-note add-margin-bottom">
               <?= se_option('np_notice') ?>

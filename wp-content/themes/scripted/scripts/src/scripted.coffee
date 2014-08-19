@@ -9,6 +9,9 @@ class SE
 
 $ ->
   window.SE = window.SE or new SE()
+  window.SE.UI.Blinker = window.setInterval ->
+    $('.blink').toggleClass 'visible'
+  , 1000
 
   $('.faq .question').on 'click', ->
     $(this).parent('.faq-item').toggleClass('open')

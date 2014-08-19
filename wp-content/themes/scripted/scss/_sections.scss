@@ -7,6 +7,16 @@
   General Page Content
 */
 
+.blink {
+  visibility: hidden;
+  opacity: 0;
+  @include transition(0.1s linear opacity);
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 .page-content {
   margin-bottom: 2em;
   #{headers(all)} {

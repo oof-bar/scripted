@@ -4,6 +4,9 @@
     Helpers
   */
 
+  # Custom Image Sizes
+  require_once("config/images.php");
+
   # ACF Customizations
   require_once("config/acf.php");
 

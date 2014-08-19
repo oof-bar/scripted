@@ -1,6 +1,6 @@
 <? /* Big Idea */ ?>
 
-<? $image = ( $section['image'] ? $section['image']['sizes']['large'] : '' ) ?>
+<? $image = ( $section['image'] ? $section['image']['sizes']['jumbo'] : '' ) ?>
 
 <section class="narrative-section big-idea gradient expanded text-center blue" style="background-image: url('<?= $image ?>')">
 

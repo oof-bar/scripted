@@ -60,7 +60,7 @@
           
           <? } else { ?>
 
-            <div class="column col-4 text-center mobile-half profile">
+            <div class="column col-4 tablet-third mobile-half text-center profile">
               <div class="portrait">
                 <div class="portrait-mask">
                   <? if ( $person['portrait'] ) { ?>

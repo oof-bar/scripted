@@ -761,6 +761,9 @@
 
 .profile {
   margin-bottom: 1.5em;
+  .abbreviated & {
+    min-height: 12em;
+  }
 
   h5 {
     margin-bottom: 0.25em;

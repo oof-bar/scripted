@@ -1,118 +1,195 @@
 (function($){
 	
-	/*
-	*  Relationship
-	*
-	*  static model for this field
-	*
-	*  @type	event
-	*  @date	1/06/13
-	*
-	*/
-	
-	acf.fields.relationship = {
+	acf.fields.relationship = acf.field.extend({
 		
-		$el : null,
-		$wrap : null,
-		$input : null,
-		$filters : null,
-		$choices : null,
-		$values : null,
-				
-		o : {},
+		type: 'relationship',
 		
-		set : function( o ){
+		$el: null,
+		$input: null,
+		$filters: null,
+		$choices: null,
+		$values: null,
+		
+		actions: {
+			'ready':	'initialize',
+			'append':	'initialize'
+		},
+		
+		events: {
+			'keypress [data-filter]': 			'submit_filter',
+			'change [data-filter]': 			'change_filter',
+			'keyup [data-filter]': 				'change_filter',
+			'click .choices .acf-rel-item': 	'add_item',
+			'click [data-name="remove_item"]': 	'remove_item'
+		},
+		
+		focus: function(){
 			
-			// merge in new option
-			$.extend( this, o );
+			this.$el = this.$field.find('.acf-relationship');
+			this.$input = this.$el.find('.acf-hidden input');
+			this.$choices = this.$el.find('.choices'),
+			this.$values = this.$el.find('.values');
 			
-			
-			// find elements
-			this.$wrap = this.$el.find('.acf-relationship');
-			this.$input = this.$wrap.find('.acf-hidden input');
-			this.$choices = this.$wrap.find('.choices'),
-			this.$values = this.$wrap.find('.values');
-			
-			
-			// get options
-			this.o = acf.get_data( this.$wrap );
-			
-			
-			// return this for chaining
-			return this;
+			this.settings = acf.get_data( this.$el );
 			
 		},
 		
-		init : function(){
+		initialize: function(){
 			
 			// reference
-			var _this = this;
+			var self = this,
+				$field = this.$field,
+				$el = this.$el,
+				$input = this.$input;
 			
 			
 			// right sortable
 			this.$values.children('.list').sortable({
-				//axis					:	'y',
-				items					:	'li',
-				forceHelperSize			:	true,
-				forcePlaceholderSize	:	true,
-				scroll					:	true,
-				update					:	function(){
+			
+				items:					'li',
+				forceHelperSize:		true,
+				forcePlaceholderSize:	true,
+				scroll:					true,
+				
+				update:	function(){
 					
-					_this.$input.trigger('change');
+					$input.trigger('change');
 					
 				}
+				
 			});
 			
 			
+			this.$choices.children('.list').scrollTop(0).on('scroll', function(e){
+				
+				// bail early if no more results
+				if( $el.hasClass('is-loading') || $el.hasClass('is-empty') ) {
+				
+					return;
+					
+				}
+				
+				
+				// Scrolled to bottom
+				if( $(this).scrollTop() + $(this).innerHeight() >= $(this).get(0).scrollHeight ) {
+					
+					var paged = parseInt( $el.attr('data-paged') );
+					
+					
+					// update paged
+					$el.attr('data-paged', (paged + 1) );
+					
+					
+					// fetch
+					self.doFocus($field);
+					self.fetch();
+				}
+				
+			});
+			
+			
+			/*
+var scroll_timer = null;
+			var scroll_event = function( e ){
+				
+				console.log( 'scroll_event' );
+				
+				if( scroll_timer) {
+					
+			        clearTimeout( scroll_timer );
+			        
+			    }
+			    
+			    
+			    scroll_timer = setTimeout(function(){
+				    
+				    
+				    if( $field.is(':visible') && acf.is_in_view($field) ) {
+						
+						// fetch
+						self.doFocus($field);
+						self.fetch();
+						
+						
+						$(window).off('scroll', scroll_event);
+						
+					}
+				    
+				    
+			    }, 100);			    
+			    				
+				
+			};
+			
+						
+			$(window).on('scroll', scroll_event);
+			
+*/
 			// ajax fetch values for left side
 			this.fetch();
-					
+			
 		},
 		
-		fetch : function(){
+		fetch: function(){
 			
 			// reference
-			var _this = this,
-				$el = this.$el;
+			var self = this,
+				$field = this.$field;
 			
 			
-			// add loading class, stops scroll loading
-			this.$choices.children('.list').html('<p>' + acf._e('relationship', 'loading') + '...</p>');
+			// add class
+			this.$el.addClass('is-loading');
 			
 			
 			// vars
-			var data = {
-				action		: 'acf/fields/relationship/query',
-				field_key	: this.$el.attr('data-key'),
-				nonce		: acf.get('nonce'),
-				post_id		: acf.get('post_id'),
-			};
+			var data = acf.prepare_for_ajax({
+				action:		'acf/fields/relationship/query',
+				field_key:	acf.get_field_key($field),
+				post_id:	acf.get('post_id'),
+			});
 			
 			
 			// merge in wrap data
-			$.extend(data, this.o);
+			// don't use this.settings becuase they are outdated
+			$.extend(data, acf.get_data( this.$el ));
+			
+			
+			// clear html if is new query
+			if( data.paged == 1 ) {
+				
+				this.$choices.children('.list').html('')
+				
+			}
+			
+			
+			// add message
+			this.$choices.children('.list').append('<p>' + acf._e('relationship', 'loading') + '...</p>');
 
 			
 			// abort XHR if this field is already loading AJAX data
-			if( this.$el.data('xhr') )
-			{
+			if( this.$el.data('xhr') ) {
+			
 				this.$el.data('xhr').abort();
+				
 			}
 			
 			
 			// get results
 		    var xhr = $.ajax({
-		    	url			: acf.get('ajaxurl'),
-				dataType	: 'json',
-				type		: 'get',
-				cache		: true,
-				data		: data,
-				success			:	function( json ){
+		    
+		    	url:		acf.get('ajaxurl'),
+				dataType:	'json',
+				type:		'post',
+				data:		data,
+				
+				success: function( json ){
 					
 					// render
-					_this.set({ $el : $el }).render( json );
+					self.doFocus($field);
+					self.render(json);
 					
 				}
+				
 			});
 			
 			
@@ -121,122 +198,217 @@
 			
 		},
 		
-		render : function( json ){
+		render: function( json ){
 			
-			// reference
-			var _this = this;
+			// remove loading class
+			this.$el.removeClass('is-loading is-empty');
+			
+			
+			// remove p tag
+			this.$choices.children('.list').children('p').remove();
 			
 			
 			// no results?
-			if( ! json || ! json.length )
-			{
-				this.$choices.children('.list').html( '<li><p>' + acf._e('relationship', 'empty') + '</p></li>' );
+			if( !json || !json.length ) {
+			
+				// add class
+				this.$el.addClass('is-empty');
+			
+				
+				// add message
+				if( this.settings.paged == 1 ) {
+				
+					this.$choices.children('.list').append('<p>' + acf._e('relationship', 'empty') + '</p>');
+			
+				}
 
+				
+				// return
 				return;
+				
 			}
 			
 			
-			// append new results
-			this.$choices.children('.list').html( this.walker(json) );
+			// get new results
+			var $new = $( this.walker(json) );
 			
-						
+				
 			// apply .disabled to left li's
-			this.$values.find('.acf-relationship-item').each(function(){
+			this.$values.find('.acf-rel-item').each(function(){
 				
 				var id = $(this).attr('data-id');
 				
-				_this.$choices.find('.acf-relationship-item[data-id="' + id + '"]').addClass('disabled');
+				$new.find('.acf-rel-item[data-id="' + id + '"]').addClass('disabled');
 				
 			});
 			
 			
 			// underline search match
-			if( this.o.s )
-			{
-				var s = this.o.s;
+			if( this.settings.s ) {
+			
+				var s = this.settings.s;
 				
-				this.$choices.find('.acf-relationship-item:contains("' + s + '")').each(function(){
+				$new.find('.acf-rel-item').each(function(){
 					
-					var html = $(this).html().replace( s, '<span class="match">' + s + '</span>');
+					// vars
+					var find = $(this).text(),
+						replace = find.replace( new RegExp('(' + s + ')', 'gi'), '<b>$1</b>');
 					
-					$(this).html( html );
+					$(this).html( $(this).html().replace(find, replace) );	
+									
 				});
 				
 			}
 			
+			
+			// append
+			this.$choices.children('.list').append( $new );
+			
+			
+			// merge together groups
+			var label = '',
+				$list = null;
+				
+			this.$choices.find('.acf-rel-label').each(function(){
+				
+				if( $(this).text() == label ) {
+					
+					$list.append( $(this).siblings('ul').html() );
+					
+					$(this).parent().remove();
+					
+					return;
+				}
+				
+				
+				// update vars
+				label = $(this).text();
+				$list = $(this).siblings('ul');
+				
+			});
+			
+			
 		},
 		
-		walker : function( data ){
+		walker: function( data ){
 			
 			// vars
 			var s = '';
 			
 			
 			// loop through data
-			if( $.isArray(data) )
-			{
-				for( var k in data )
-				{
+			if( $.isArray(data) ) {
+			
+				for( var k in data ) {
+				
 					s += this.walker( data[ k ] );
+					
 				}
-			}
-			else if( $.isPlainObject(data) )
-			{
+				
+			} else if( $.isPlainObject(data) ) {
+				
 				// optgroup
-				if( data.children !== undefined )
-				{
-					s += '<li><span class="acf-relationship-label">' + data.text + '</span><ul class="acf-bl">';
+				if( data.children !== undefined ) {
+					
+					s += '<li><span class="acf-rel-label">' + data.text + '</span><ul class="acf-bl">';
 					
 						s += this.walker( data.children );
 					
 					s += '</ul></li>';
+					
+				} else {
+				
+					s += '<li><span class="acf-rel-item" data-id="' + data.id + '">' + data.text + '</span></li>';
+					
 				}
-				else
-				{
-					s += '<li><span class="acf-relationship-item" data-id="' + data.id + '">' + data.text + '</span></li>';
-				}
+				
 			}
 			
 			
+			// return
 			return s;
+			
 		},
 		
-		add : function( $span ){
+		submit_filter: function( e ){
+			
+			// don't submit form
+			if( e.which == 13 ) {
+				
+				e.preventDefault();
+				
+			}
+			
+		},
+		
+		change_filter: function( e ){
+			
+			// vars
+			var val = e.$el.val(),
+				filter = e.$el.attr('data-filter');
+				
+			
+			// Bail early if filter has not changed
+			if( this.$el.attr('data-' + filter) == val ) {
+			
+				return;
+				
+			}
+			
+			
+			// update attr
+			this.$el.attr('data-' + filter, val);
+			
+			
+			// reset paged
+			this.$el.attr('data-paged', 1);
+		    
+		    
+		    // fetch
+		    this.fetch();
+			
+		},
+		
+		add_item: function( e ){
 			
 			// max posts
-			if( this.o.max > 0 )
-			{
-				if( this.$values.find('.acf-relationship-item').length >= this.o.max )
-				{
-					alert( acf.l10n.relationship.max.replace('{max}', this.o.max) );
-					return false;
+			if( this.settings.max > 0 ) {
+			
+				if( this.$values.find('.acf-rel-item').length >= this.settings.max ) {
+				
+					alert( acf._e('relationship', 'max').replace('{max}', this.settings.max) );
+					
+					return;
+					
 				}
+				
 			}
 			
 			
 			// can be added?
-			if( $span.hasClass('disabled') )
-			{
+			if( e.$el.hasClass('disabled') ) {
+			
 				return false;
+				
 			}
 			
 			
 			// disable
-			$span.addClass('disabled');
+			e.$el.addClass('disabled');
 			
 			
 			// template
-			var data = {
-					value	:	$span.attr('data-id'),
-					text	:	$span.html(),
-					name	:	this.$input.attr('name')
-				},
-				tmpl = _.template(acf.l10n.relationship.tmpl_li, data);
+			var html = [
+				'<li>',
+					'<input type="hidden" name="' + this.$input.attr('name') + '[]" value="' + e.$el.attr('data-id') + '" />',
+					'<span data-id="' + e.$el.attr('data-id') + '" class="acf-rel-item">' + e.$el.html(),
+						'<a href="#" class="acf-icon small dark" data-name="remove_item"><i class="acf-sprite-remove"></i></a>',
+					'</span>',
+				'</li>'].join('');
+						
 			
-			
-	
 			// add new li
-			this.$values.children('.list').append( tmpl )
+			this.$values.children('.list').append( html )
 			
 			
 			// trigger change on new_li
@@ -244,13 +416,15 @@
 			
 			
 			// validation
-			this.$el.removeClass('error');
+			acf.validation.remove_error( this.$field );
 			
 		},
-		remove : function( $span ){
+		
+		remove_item : function( e ){
 			
 			// vars
-			var id = $span.attr('data-id');
+			var $span = e.$el.parent(),
+				id = $span.attr('data-id');
 			
 			
 			// remove
@@ -258,7 +432,7 @@
 			
 			
 			// show
-			this.$choices.find('.acf-relationship-item[data-id="' + id + '"]').removeClass('disabled');
+			this.$choices.find('.acf-rel-item[data-id="' + id + '"]').removeClass('disabled');
 			
 			
 			// trigger change on new_li
@@ -266,104 +440,7 @@
 			
 		}
 		
-	};
-	
-	
-	/*
-	*  acf/setup_fields
-	*
-	*  run init function on all elements for this field
-	*
-	*  @type	event
-	*  @date	20/07/13
-	*
-	*  @param	{object}	e		event object
-	*  @param	{object}	el		DOM object which may contain new ACF elements
-	*  @return	N/A
-	*/
-	
-	acf.add_action('ready append', function( $el ){
-		
-		acf.get_fields({ type : 'relationship'}, $el).each(function(){
-			
-			acf.fields.relationship.set({ $el : $(this) }).init();
-			
-		});
-		
 	});
-	
-	
-	/*
-	*  Events
-	*
-	*  jQuery events for this field
-	*
-	*  @type	function
-	*  @date	1/03/2011
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-	
-	$(document).on('keypress', '.acf-relationship .filters [data-filter]', function( e ){
-		
-		// don't submit form
-		if( e.which == 13 )
-		{
-			e.preventDefault();
-		}
-		
-	});
-	
-	
-	$(document).on('change keyup', '.acf-relationship .filters [data-filter]', function(e){
-		
-		// vars
-		var val = $(this).val(),
-			filter = $(this).attr('data-filter'),
-			$wrap = $(this).closest('.acf-relationship');
-			$el = $wrap.closest('.acf-field');
-			
-		
-		// Bail early if filter has not changed
-		if( $wrap.attr('data-' + filter) == val )
-		{
-			return;
-		}
-		
-		
-		// update attr
-		$wrap.attr('data-' + filter, val);
-		
-	    
-	    // fetch
-	    acf.fields.relationship.set({ $el : $el }).fetch();
-		
-	});
-
-	
-	$(document).on('click', '.acf-relationship .choices .acf-relationship-item', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.relationship.set({ $el : $(this).closest('.acf-field') }).add( $(this) );
-		
-		$(this).blur();
-		
-	});
-	
-	$(document).on('click', '.acf-relationship .values .acf-icon', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.relationship.set({ $el : $(this).closest('.acf-field') }).remove( $(this).closest('.acf-relationship-item') );
-		
-		$(this).blur();
-		
-	});
-	
-	
-	
 	
 
 })(jQuery);

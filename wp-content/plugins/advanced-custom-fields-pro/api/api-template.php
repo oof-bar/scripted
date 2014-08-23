@@ -1294,7 +1294,16 @@ function acf_form( $args = array() ) {
 		
 		foreach( $field_groups as $field_group ) {
 			
-			$fields = array_merge($fields, acf_get_fields( $field_group ));
+			$field_group_fields = acf_get_fields( $field_group );
+			
+			if( !empty($field_group_fields) ) {
+				
+				foreach( array_keys($field_group_fields) as $i ) {
+					
+					$fields[] = acf_extract_var($field_group_fields, $i);
+				}
+				
+			}
 		
 		}
 	

@@ -128,14 +128,14 @@ class acf_field_file extends acf_field {
 			</p>
 			
 			<ul class="acf-hl acf-soh-target">
-				<li><a class="acf-icon dark" data-name="edit-button" href="#"><i class="acf-sprite-edit"></i></a></li>
-				<li><a class="acf-icon dark" data-name="remove-button" href="#"><i class="acf-sprite-delete"></i></a></li>
+				<li><a class="acf-icon dark" data-name="edit" href="#"><i class="acf-sprite-edit"></i></a></li>
+				<li><a class="acf-icon dark" data-name="remove" href="#"><i class="acf-sprite-delete"></i></a></li>
 			</ul>
 			
 		</div>
 	</div>
 	<div class="hide-if-value">
-		<p><?php _e('No File selected','acf'); ?> <a data-name="add-button" class="acf-button" href="#"><?php _e('Add File','acf'); ?></a></p>
+		<p><?php _e('No File selected','acf'); ?> <a data-name="add" class="acf-button" href="#"><?php _e('Add File','acf'); ?></a></p>
 	</div>
 </div>
 <?php

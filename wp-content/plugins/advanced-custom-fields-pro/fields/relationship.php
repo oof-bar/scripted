@@ -47,13 +47,6 @@ class acf_field_relationship extends acf_field {
 			'max'		=> __("Maximum values reached ( {max} values )",'acf'),
 			'loading'	=> __('Loading','acf'),
 			'empty'		=> __('No matches found','acf'),
-			'tmpl_li'	=> '<li>
-								<input type="hidden" name="<%= name %>[]" value="<%= value %>" />
-								<span data-id="<%= value %>" class="acf-relationship-item">
-									<%= text %>
-									<a href="#" class="acf-icon small dark"><i class="acf-sprite-remove"></i></a>
-								</span>
-							</li>'
 		);
 		
 		
@@ -84,14 +77,15 @@ class acf_field_relationship extends acf_field {
 	function ajax_query() {
 		
    		// options
-   		$options = acf_parse_args( $_GET, array(
-			'post_id'		=> 0,
-			's'				=> '',
-			'post_type'		=> '',
-			'taxonomy'		=> '',
-			'lang'			=> false,
-			'field_key'		=> '',
-			'nonce'			=> '',
+   		$options = acf_parse_args( $_POST, array(
+			'post_id'			=> 0,
+			's'					=> '',
+			'post_type'			=> '',
+			'taxonomy'			=> '',
+			'lang'				=> false,
+			'field_key'			=> '',
+			'nonce'				=> '',
+			'paged'				=> 1
 		));
 		
 		
@@ -106,6 +100,11 @@ class acf_field_relationship extends acf_field {
 		// vars
    		$r = array();
    		$args = array();
+   		
+   		
+   		// paged
+   		$args['posts_per_page'] = 20;
+   		$args['paged'] = $options['paged'];
    		
 		
 		// load field
@@ -144,7 +143,6 @@ class acf_field_relationship extends acf_field {
 			
 			$args['post_type'] = acf_get_post_types();
 		}
-		
 		
 		
 		// update taxonomy
@@ -428,6 +426,7 @@ class acf_field_relationship extends acf_field {
 			'data-s'			=> '',
 			'data-post_type'	=> '',
 			'data-taxonomy'		=> '',
+			'data-paged'		=> 1,
 		);
 		
 		
@@ -670,7 +669,7 @@ class acf_field_relationship extends acf_field {
 							
 							?><li>
 								<input type="hidden" name="<?php echo $field['name']; ?>[]" value="<?php echo $post->ID; ?>" />
-								<span data-id="<?php echo $post->ID; ?>" class="acf-relationship-item">
+								<span data-id="<?php echo $post->ID; ?>" class="acf-rel-item">
 									<?php echo $this->get_post_title( $post, $field ); ?>
 									<a href="#" class="acf-icon small dark"><i class="acf-sprite-remove"></i></a>
 								</span>

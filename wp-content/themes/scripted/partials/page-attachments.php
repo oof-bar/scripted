@@ -1,4 +1,4 @@
-<? if ( isset($page_fields['attachments']) ) { ?>
+<? if ( isset($page_fields['attachments']) && is_array($page_fields['attachments']) ) { ?>
   <div class="post-meta">
     <? foreach ( $page_fields['attachments'] as $attachment ) { ?>
       <div class="meta-item">

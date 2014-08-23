@@ -53,9 +53,23 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "page_template",
                 "operator": "==",
-                "value": "page"
+                "value": "default"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "team.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "edu-partners.php"
             }
         ]
     ],

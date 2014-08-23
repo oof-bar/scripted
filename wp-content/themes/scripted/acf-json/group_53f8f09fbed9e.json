@@ -1,0 +1,68 @@
+{
+    "key": "group_53f8f09fbed9e",
+    "title": "Page Attachment",
+    "fields": [
+        {
+            "key": "field_53f8f0c211f44",
+            "label": "Attachments",
+            "name": "attachments",
+            "prefix": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "min": "",
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add File",
+            "sub_fields": [
+                {
+                    "key": "field_53f8f0f411f46",
+                    "label": "Name",
+                    "name": "name",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_53f8f0d511f45",
+                    "label": "File",
+                    "name": "file",
+                    "prefix": "",
+                    "type": "file",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "column_width": "",
+                    "return_format": "array",
+                    "library": "all"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": ""
+}

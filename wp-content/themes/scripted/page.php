@@ -9,6 +9,7 @@
 
     <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('page-navigation') ?>
+      <? include get_partial('page-attachments') ?>
     </div>
 
     <div class="column col-7 tablet-three-quarters mobile-full">
@@ -25,7 +26,6 @@
       <? } ?>
       
     </div>
-
 
   </div>
 </section>

@@ -74,6 +74,16 @@ class acf_wpml_compatibility {
 	
 	function settings_save_json( $path ) {
 		
+		// bail early if field group is not translatable
+		global $sitepress_settings;
+		
+		if( empty($sitepress_settings['custom_posts_sync_option']['acf-field-group']) ) {
+			
+			return $path;
+			
+		}
+				
+		
 		// bail early if dir does not exist
 		if( !is_writable($path) ) {
 			
@@ -120,6 +130,16 @@ class acf_wpml_compatibility {
 	function settings_load_json( $paths ) {
 		
 		if( !empty($paths) ) {
+			
+			// bail early if field group is not translatable
+			global $sitepress_settings;
+			
+			if( empty($sitepress_settings['custom_posts_sync_option']['acf-field-group']) ) {
+				
+				return $paths;
+				
+			}
+
 			
 			foreach( $paths as $i => $path ) {
 				
@@ -198,9 +218,10 @@ class acf_wpml_compatibility {
 				
 		acf.add_filter('prepare_for_ajax', function( args ){
 			
-			if( typeof icl_this_lang != 'undefined' )
-			{
+			if( typeof icl_this_lang != 'undefined' ) {
+			
 				args.lang = icl_this_lang;
+				
 			}
 			
 			return args;

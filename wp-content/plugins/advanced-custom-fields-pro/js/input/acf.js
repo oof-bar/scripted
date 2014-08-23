@@ -196,9 +196,25 @@ var acf = {
 			
 		},
 		
-		get_closest_field : function( $el ){
+		get_closest_field : function( $el, args ){
 			
-			return $el.closest('.acf-field');
+			// defaults
+			args = args || {};
+			
+			
+			// vars
+			var selector = '.acf-field';
+			
+			
+			// add selector
+			for( k in args ) {
+				
+				selector += '[data-' + k + '="' + args[k] + '"]';
+				
+			}
+			
+			
+			return $el.closest( selector );
 			
 		},
 		
@@ -786,8 +802,20 @@ get_field_data : function( $el, name ){
 			
 			this.update_cookie(name,"",-1);
 			
+		},
+		
+		is_in_view: function( $el ) {
+			
+			var docViewTop = $(window).scrollTop();
+		    var docViewBottom = docViewTop + $(window).height();
+		
+		    var elemTop = $el.offset().top;
+		    var elemBottom = elemTop + $el.height();
+		
+		    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+					
 		}
-				
+		
 	});
 	
 	
@@ -2029,5 +2057,194 @@ frame.on('all', function( e ) {
 		
 	});
 	
+	
+	/*
+	*  field model
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	14/08/2014
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	acf.add_action('ready', function( $el ){
+				
+		acf.get_fields({}, $el).each(function(){
+			
+			acf.do_action('ready_field', $(this));
+			acf.do_action('ready_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	acf.add_action('append', function( $el ){
+				
+		acf.get_fields({}, $el).each(function(){
+			
+			acf.do_action('append_field', $(this));
+			acf.do_action('append_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	acf.add_action('load', function( $el ){
+				
+		acf.get_fields({}, $el).each(function(){
+			
+			acf.do_action('load_field', $(this));
+			acf.do_action('load_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	
+	acf.add_action('remove', function( $el ){
+				
+		acf.get_fields({}, $el).each(function(){
+			
+			acf.do_action('remove_field', $(this));
+			acf.do_action('remove_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	acf.add_action('sortstart', function( $item, $placeholder ){
+				
+		acf.get_fields({}, $item).each(function(){
+			
+			acf.do_action('sortstart_field', $(this));
+			acf.do_action('sortstart_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	acf.add_action('sortstop', function( $item, $placeholder ){
+				
+		acf.get_fields({}, $item).each(function(){
+			
+			acf.do_action('sortstop_field', $(this));
+			acf.do_action('sortstop_field/type=' + acf.get_field_type($(this)), $(this));
+			
+		});
+		
+	});
+	
+	acf.field = {
+		
+		// vars
+		type:		'',
+		settings:	{},
+		actions:	{},
+		events:		{},
+		$field:		null,
+		
+		extend: function( args ){
+			
+			// extend
+			var model = $.extend( {}, this, args );
+			
+			
+			// setup actions
+			$.each(model.actions, function( action, callback ){
+				
+				// vars
+				var action = action + '_field/type=' + model.type;
+				
+				acf.add_action(action, function(){
+					
+					[].unshift.apply(arguments, [callback]);
+					
+					model.doAction.apply(model, arguments);
+					
+				});
+			
+			});
+			
+			
+			// setup events
+			$.each(model.events, function( k, callback ){
+				
+				var event = k.substr(0,k.indexOf(' ')),
+					selector = k.substr(k.indexOf(' ')+1);
+				
+				$(document).on(event, '.acf-field[data-type="' + model.type + '"] ' + selector, function( e ){
+					
+					e.$el = $(this);
+					
+					model.doEvent.apply(model, [ callback, e ]);
+					
+				});
+				
+			});
+			
+			
+			// return
+			return model;
+			
+		},
+		
+		doFocus: function( $field ){
+			
+			// focus on $field
+			this.$field = $field;
+			
+			
+			// merge in field's data
+			$.extend(this.settings, acf.get_data($field));
+			
+			
+			// callback
+			if( typeof this.focus === 'function' ) {
+				
+				this.focus();
+				
+			}
+			
+		},
+		
+		doAction: function(){
+			
+			// debug
+			//console.log('doAction(%o)', arguments);
+			
+			
+			// remove callback from arguments
+			var callback = [].shift.apply(arguments);
+			
+			
+			// focus
+			this.doFocus( arguments[0] );
+			
+			
+			// callback
+			this[ callback ].apply(this, arguments);
+			
+		},
+		
+		doEvent: function( callback, e ){
+			
+			// debug
+			//console.log('doEvent(%o, %o, %o)', callback, $el, e);
+			
+			
+			// focus
+			this.doFocus( acf.get_closest_field( e.$el ) );
+			
+			
+			// callback
+			this[ callback ].apply(this, [e]);
+			
+		},
+		
+	};
 	
 })(jQuery);

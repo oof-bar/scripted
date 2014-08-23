@@ -91,9 +91,9 @@ class acf_field_color_picker extends acf_field {
 	        1
 	    );
 	    $colorpicker_l10n = array(
-	        'clear' => __( 'Clear' ),
-	        'defaultString' => __( 'Default' ),
-	        'pick' => __( 'Select Color' )
+	        'clear'			=> __('Clear', 'acf' ),
+	        'defaultString'	=> __('Default', 'acf' ),
+	        'pick'			=> __('Select Color', 'acf' )
 	    );
 	    wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n ); 
 			

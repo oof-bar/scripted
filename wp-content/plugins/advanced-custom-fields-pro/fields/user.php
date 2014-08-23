@@ -69,7 +69,7 @@ class acf_field_user extends acf_field {
 	function ajax_query() {
 
    		// options
-   		$options = acf_parse_args( $_GET, array(
+   		$options = acf_parse_args( $_POST, array(
 			'post_id'		=>	0,
 			's'				=>	'',
 			'field_key'		=>	'',

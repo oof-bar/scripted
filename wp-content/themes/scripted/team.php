@@ -9,6 +9,7 @@
 
     <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('page-navigation') ?>
+      <? if ( is_array( $attachments = $team['attachments'] ) ) include get_partial('page-attachments') ?>
     </div>
 
     <div class="column col-9 tablet-three-quarters mobile-full">

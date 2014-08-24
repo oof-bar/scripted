@@ -20,8 +20,9 @@
 
       <? if ( isset($page_fields['action_destination']) && $page_fields['action_destination'] != 'none' ) { ?>
         <div class="large">
-          <? $link = ( $page_fields['action_destination'] == 'internal' ? $page_fields['link_internal'] : $page_fields['link_external'] ) ?>
-              <p><a href="<?= $link ?>"><?= $page_fields['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
+          <? $internal = ( $page_fields['action_destination'] == 'internal' ) ?>
+          <? $link = ( $internal ? $page_fields['link_internal'] : $page_fields['link_external'] ) ?>
+              <p><a href="<?= $link ?>" title="<?= $page_fields['link_label'] ?>" <?= ( $internal ? '' : ' target="_blank"' ) ?>><?= $page_fields['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
         </div>
       <? } ?>
       

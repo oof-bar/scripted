@@ -4,6 +4,14 @@
     <title><?php bloginfo('name'); ?><?php wp_title(' / ', true, 'RIGHT'); ?></title>
     <meta name="tags" content="<?= se_meta_tags() ?>">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <meta property="og:site_name" content="<?= bloginfo('name') ?>"/>
+    <meta property="og:title" content="ScriptEd"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="<?= bloginfo('template_directory') ?>/images/social-thumbnail.png"/>
+    <meta property="og:url" content="<?= bloginfo('url') ?>"/>
+    <meta property="og:description" content="ScriptEd equips students in under-resourced schools with both fundamental coding skills and professional experiences that together create access to careers in technology."/>
+
     <!-- <link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css"> -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Roboto:100,300,400,500,700,900,100italic,300italic,400italic,500italic,700italic,900italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <? wp_head(); ?>

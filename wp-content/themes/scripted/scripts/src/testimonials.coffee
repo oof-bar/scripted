@@ -28,7 +28,7 @@ window.Slider = window.Slider or class Slider
       if e.keyCode == 37
         @prev()
 
-    console.log @
+    # console.log @
 
   queue: ->
     @interval = window.setInterval =>

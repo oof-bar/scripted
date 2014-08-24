@@ -43,7 +43,7 @@ $ ->
         e.preventDefault()
 
     $('.donate-widget .amount').on 'focus', (e) ->
-      console.log "Focused"
+      # console.log "Focused"
       $('.donate-widget .instructions').addClass('active').slideDown()
 
 
@@ -55,7 +55,7 @@ $ ->
         window.clearTimeout $(this).data('delay')
         $(this).addClass('open')
       else
-        console.log 'Leave'
+        # console.log 'Leave'
         $(this).data 'delay', window.setTimeout =>
           $(this).removeClass('open')
         , 250

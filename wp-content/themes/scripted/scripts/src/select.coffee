@@ -28,7 +28,7 @@ window.Select = window.Select or class Select
     @resize()
     @watch()
 
-    console.log @
+    # console.log @
 
   build: ->
     # @placeholder = $('<div/>').addClass('input select-placeholder').appendTo(@settings.location)
@@ -109,8 +109,3 @@ window.SelectOption = window.SelectOption or class SelectOption
   deactivate: ->
     @el.removeClass 'active'
     @active = false
-
-
-
-$ ->
-  

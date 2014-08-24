@@ -18,7 +18,7 @@ window.Newsletter = window.Newsletter or class Newsletter
     @response = {}
 
     @setup()
-    console.log @
+    # console.log @
 
   setup: ->
     @options.form.validate
@@ -37,7 +37,7 @@ window.Newsletter = window.Newsletter or class Newsletter
     @options.form.valid()
 
   signup: ->
-    console.log ".signup()"
+    # console.log ".signup()"
     @lock()
     @payload =
       action: @options.action
@@ -57,21 +57,21 @@ window.Newsletter = window.Newsletter or class Newsletter
 
   complete: (status, response) ->
     @response = response
-    console.log @response
+    # console.log @response
     if ( status && response.data.mc ) then @success() else @error()
     # @hide_form()
     ga('send', 'event', 'newsletter', 'signup', @options.location )
 
   success: ->
-    console.log "Success"
+    # console.log "Success"
     @write @response.data.message
 
   error: ->
-    console.log "Error"
+    # console.log "Error"
     @write @response.data.message
 
   write: (message) ->
-    console.log "Printing Message..."
+    # console.log "Printing Message..."
     @options.output.html(message)
 
   lock: ->

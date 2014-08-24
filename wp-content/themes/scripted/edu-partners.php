@@ -24,7 +24,7 @@
         <? if ( $education_partners['partners'] ) foreach ( $education_partners['partners'] as $partner ) { ?>
           <div class="school">
             <? if ( $partner['link'] ) { ?>
-              <a href="<?= $partner['link'] ?>" title="<?= $partner['name'] ?>">
+              <a href="<?= $partner['link'] ?>" title="<?= $partner['name'] ?>" target="_blank">
                 <?= $partner['name'] ?>
                 <span class="icon-arrow-right"></span>
               </a>

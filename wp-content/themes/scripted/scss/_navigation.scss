@@ -207,8 +207,10 @@ section.header {
 
 .footer {
 
-  .column {
-    margin-bottom: 2em;
+  @include tablet{
+    .column {
+      margin-bottom: 2em;
+    }
   }
   
   .non-profit-note {

@@ -1,7 +1,7 @@
       <section class="footer border">
         <div class="wrapper">
 
-          <div class="column col-4 tablet-half mobile-full">
+          <div class="column col-3 tablet-half mobile-full">
             <div class="wordmark bold serif text-orange">
               <?= bloginfo('title') ?><span class="blink">_</span>
             </div>
@@ -21,7 +21,7 @@
             </div>
           </div>
           
-          <div class="column col-5 tablet-full">
+          <div class="column col-6 tablet-full">
             <span class="caps semi-bold small">Sponsors</span>
             <? if ( $sponsors = se_option('sponsors') ) { ?>
               <div class="sponsors add-margin-top">

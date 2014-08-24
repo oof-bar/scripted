@@ -6,7 +6,7 @@
   <div class="wrapper">
     <div class="column col-8 push-2 tablet-three-quarters mobile-full">
       <p>
-        We couldn&rsquo;t figure out exactly what you were looking for. The <a href="<?= home_url() ?>">homepage</a> is a great starting point if you&rsquo;d like to learn about <?= bloginfo('title') ?>. If you still can&rsquo;t find what you&rsquo;re looking for, please <a href="#">get in touch</a>.
+        <?= se_option('error_text') ?>
       </p>
     </div>
   </div>

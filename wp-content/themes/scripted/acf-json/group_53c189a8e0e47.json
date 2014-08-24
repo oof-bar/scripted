@@ -80,7 +80,8 @@
             "conditional_logic": 0,
             "default_value": "",
             "toolbar": "basic",
-            "media_upload": 1
+            "media_upload": 1,
+            "tabs": "all"
         },
         {
             "key": "field_53dee2ae349d0",
@@ -146,6 +147,20 @@
             "maxlength": "",
             "readonly": 0,
             "disabled": 0
+        },
+        {
+            "key": "field_53f958ea9793c",
+            "label": "Error 404 Text",
+            "name": "error_text",
+            "prefix": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1
         }
     ],
     "location": [

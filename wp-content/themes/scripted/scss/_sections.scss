@@ -264,7 +264,9 @@
 .hero {
   background-size: cover;
   background-position: center center;
+  padding: 15% 0;
   @include text-on-image;
+
   .media-play {
     width: 100px;
     height: 100px;

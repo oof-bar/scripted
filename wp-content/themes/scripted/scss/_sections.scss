@@ -431,6 +431,10 @@
   figure {
     max-width: 230px;
     margin: 0 auto 1.5em auto;
+    @include mobile {
+      max-width: 50%;
+      margin: 0;
+    }
   }
 }
 
@@ -456,6 +460,10 @@
   figure {
     max-width: 230px;
     margin: 0 auto 1em auto;
+    @include mobile {
+      max-width: 50%;
+      margin: 0;
+    }
   }
 }
 

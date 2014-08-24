@@ -20,11 +20,9 @@
 
   <div class="wrapper concepts">
 
-    <? $columns = intval( 12 / count($section['concepts']) ); ?>
+    <? foreach ( $section['concepts'] as $index => $concept ) { ?>
 
-    <? foreach ( $section['concepts'] as $concept ) { ?>
-
-      <div class="column col-<?= $columns ?>">
+      <div class="column col-3 <?= $index % 3 == 0 ? "" : "push-1" ?> tablet-third mobile-full">
 
         <figure>
           <img src="<?= $concept['illustration']['url'] ?>" />

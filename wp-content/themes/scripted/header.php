@@ -5,11 +5,11 @@
     <meta name="tags" content="<?= se_meta_tags() ?>">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-    <meta property="og:site_name" content="ScriptEd"/>
+    <meta property="og:site_name" content="<?= bloginfo('name') ?>"/>
     <meta property="og:title" content="ScriptEd"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="https://scripted.org/social-thumbnail.png"/>
-    <meta property="og:url" content="https://scripted.org"/>
+    <meta property="og:image" content="<?= bloginfo('template_directory') ?>/images/social-thumbnail.png"/>
+    <meta property="og:url" content="<?= bloginfo('url') ?>"/>
     <meta property="og:description" content="ScriptEd equips students in under-resourced schools with both fundamental coding skills and professional experiences that together create access to careers in technology."/>
 
     <!-- <link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css"> -->

@@ -4,6 +4,9 @@ wp-content/uploads
 .git
 wp-content/themes/scripted/.sass-cache
 wp-content/themes/scripted/node_modules
-deploy.sh
+deploy-staging.sh
+deploy-prod.sh
+.rsync-log
+.rsync-log-production
 .DS_Store
 **/.DS_Store

@@ -11,3 +11,4 @@ wp-content/themes/scripted/scripts/scripted.js
 .rsync-log
 deploy-staging.sh
 deploy-prod.sh
+.rsync-log-production

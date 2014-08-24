@@ -25,9 +25,8 @@ module.exports = (grunt) ->
     concat:
       dist:
         files:
-
           '<%= output %>app.js': ['<%= output %>scripted.js', '<%= output %>*.js']
-          '<%= output %>vendor.js': ['<%= cwd %>src/lib/*.js']
+          '<%= output %>vendor.js': ['<%= cwd %>src/lib/jquery.min.js', '<%= cwd %>src/lib/jquery.validate.js', '<%= cwd %>src/lib/additional-methods.js', '<%= cwd %>src/lib/*.js']
 
     clean: ["<%= output %>*.js"]
 

@@ -4,7 +4,7 @@
 
     <div class="wrapper">
 
-      <div class="column col-8 tablet-full">
+      <div class="column col-9 tablet-full">
 
         <? if ( !empty($section['header']) ) { ?>
           <h4 class="text-blue"><?= $section['header'] ?></h4>
@@ -18,7 +18,7 @@
 
       </div>
       
-      <div class="column col-4 tablet-hide mobile-show">
+      <div class="column col-3 tablet-hide mobile-show">
         <? if ( !empty($section['illustration']) ) { ?>
           <figure>
             <img src="<?= $section['illustration']['url'] ?>" alt="<?= $section['header'] ?>" />

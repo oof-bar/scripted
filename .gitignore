@@ -9,4 +9,5 @@ wp-content/uploads
 wp-content/themes/scripted/scripts/newsletter.js
 wp-content/themes/scripted/scripts/scripted.js
 .rsync-log
-deploy.sh
+deploy-staging.sh
+deploy-prod.sh

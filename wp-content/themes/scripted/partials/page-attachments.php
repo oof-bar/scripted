@@ -6,7 +6,7 @@
         <?= $attachment_name ?>
       </h6>
       <? $download_link = $attachment['file']['url'] ?>
-      <a href="<?= $download_link ?>" title="Download <?= $attachment_name ?>" class="button small blue" target="_blank">Download</a>
+      <a href="<?= $download_link ?>" title="Download <?= $attachment_name ?>" class="button small blue" target="_blank" download>Download</a>
     </div>
   <? } ?>
 </div>

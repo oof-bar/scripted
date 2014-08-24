@@ -18,7 +18,7 @@
 
       </div>
       
-      <div class="column col-4 tablet-full">
+      <div class="column col-4 tablet-hide mobile-show">
         <? if ( !empty($section['illustration']) ) { ?>
           <figure>
             <img src="<?= $section['illustration']['url'] ?>" alt="<?= $section['header'] ?>" />

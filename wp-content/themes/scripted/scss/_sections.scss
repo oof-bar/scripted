@@ -524,6 +524,7 @@
     overflow: hidden;
     width: 175px;
     height: 175px;
+    margin: 0 auto;
     @include border-radius(100em);
 
     @include mobile {

@@ -24,8 +24,9 @@
         <? } ?>
       </div>
       <div class="large">
-        <? $cta_link = ( $giving['link_type'] == 'internal' ? $giving['link_internal'] : $giving['link_external'] ) ?>
-            <p><a href="<?= $cta_link ?>"><?= $giving['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
+        <? $internal = ( $giving['link_type'] == 'internal' ) ?>
+        <? $cta_link = ( $internal ? $giving['link_internal'] : $giving['link_external'] ) ?>
+            <p><a href="<?= $cta_link ?>"<?= $internal ? '' : ' target="_blank"' ?>><?= $giving['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
       </div>
     </div>
 

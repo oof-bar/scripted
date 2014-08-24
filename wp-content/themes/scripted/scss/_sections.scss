@@ -485,7 +485,10 @@
   .testimonial {
     position: absolute;
     width: 100%;
-    display: none;
+    z-index: 1000;
+    opacity: 0;
+    @include animate($duration: 1000ms, $property: opacity);
+
     .quote {
       font-size: 1.5em;
       font-weight: 300;
@@ -499,16 +502,28 @@
       font-weight: 600;
     }
 
+    .cell {
+      vertical-align: middle;
+      float: none;
+    }
+
+    &.active {
+      z-index: 1500;
+      opacity: 1;
+    }
+
     @include mobile {
       text-align: center;
       font-size: 80%;
+      display: block;
     }
   }
 
   .portrait {
     position: relative;
-    padding-bottom: 100%;
     overflow: hidden;
+    width: 175px;
+    height: 175px;
     @include border-radius(100em);
 
     @include mobile {

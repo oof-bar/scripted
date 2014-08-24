@@ -97,12 +97,12 @@ window.Quote = window.Quote or class Quote
 
   activate: ->
     if !@active
-      @el.fadeIn()
+      @el.addClass 'active'
       @indicator.addClass 'active'
       @active = true
 
   deactivate: ->
     if @active
-      @el.fadeOut()
+      @el.removeClass 'active'
       @indicator.removeClass 'active'
       @active = false

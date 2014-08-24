@@ -819,6 +819,7 @@
     opacity: 0.35;
     display: inline-block;
     margin-right: 1em;
+    margin-bottom: 0.5em;
     @include animate($property: opacity);
     &:hover {
       opacity: 0.65;
@@ -845,11 +846,12 @@
     @include border-radius (0 3px 3px 0);
     border-left: 3px solid $orange;
     border-top: 0;
-    padding: 1em 5em;
+    padding: 1em 3em;
+    min-height: 200px;
 
     @include mobile {
       min-height: 0;
-      padding: 1em 2em;
+      padding: 2em 2em;
     }
   }
 }
@@ -863,7 +865,7 @@
 
   @include mobile {
     min-height: 0;
-    padding: 1em 2em;
+    padding: 2em 2em;
   }
 
   .cell {

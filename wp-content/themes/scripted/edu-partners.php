@@ -9,7 +9,7 @@
 
     <div class="column col-3 tablet-quarter mobile-full">
       <? include get_partial('page-navigation') ?>
-      <? if ( is_array( $attachments = $education_partners['attachments'] ) ) include get_partial('page-attachments') ?>
+      <? if ( isset($education_partners['attachments']) && is_array( $attachments = $education_partners['attachments'] ) ) include get_partial('page-attachments') ?>
     </div>
 
     <div class="column col-7 tablet-three-quarters mobile-full">

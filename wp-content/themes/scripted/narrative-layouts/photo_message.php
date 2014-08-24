@@ -21,7 +21,7 @@
       <div class="column col-4 tablet-full">
         <? if ( !empty($section['illustration']) ) { ?>
           <figure>
-            <img src="<?= $section['illustration']['sizes']['medium'] ?>" alt="<?= $quote['header'] ?>" />
+            <img src="<?= $section['illustration']['url'] ?>" alt="<?= $section['header'] ?>" />
           </figure>
         <? } ?>
       </div>

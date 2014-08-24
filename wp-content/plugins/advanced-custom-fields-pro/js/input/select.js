@@ -1,376 +1,293 @@
 (function($){
 	
-	function add_select2( $select, settings ) {
+	acf.fields.select = {
 		
-		// vars
-		settings = $.extend({
-			'allow_null':	false,
-			'placeholder':	'',
-			'multiple':		false,
-			'ajax':			false,
-			'action':		'',
-			'pagination':	false
-		}, settings);
-		
-				
-		// vars
-		var $input = $select.siblings('input');
-		
-		
-		// select2 args
-		var args = {
-			width			: '100%',
-			allowClear		: settings.allow_null,
-			placeholder		: settings.placeholder,
-			multiple		: settings.multiple,
-			data			: [],
-			escapeMarkup	: function( m ){ return m; }
-		};
-		
-		
-		// customize HTML for selected choices
-		if( settings.multiple ) {
+		init : function( $select ){
 			
-			args.formatSelection = function( object, $div ){
-				
-				$div.parent().append('<input type="hidden" class="acf-select2-multi-choice" name="' + $select.attr('name') + '" value="' + object.id + '" />');
-				
-				return object.text;
-			}
-		}
-		
-		
-		// remove the blank option as we have a clear all button!
-		if( settings.allow_null ) {
-			
-			args.placeholder = settings.placeholder;
-			$select.find('option[value=""]').remove();
-			
-		}
-		
-		
-		// vars
-		var selection = $input.val().split(','),
-			initial_selection = [];
-			
-		
-		// populate args.data
-		var optgroups = {};
-		
-		$select.find('option').each(function( i ){
-			
-			// var
-			var parent = '_root';
-			
-			
-			// optgroup?
-			if( $(this).parent().is('optgroup') ) {
-			
-				parent = $(this).parent().attr('label');
-				
+			// validate $select
+			if( ! $select.exists() )
+			{
+				return false;
 			}
 			
 			
-			// append to choices
-			if( ! optgroups[ parent ] ) {
+			// vars
+			var o = acf.get_data( $select );
 			
-				optgroups[ parent ] = [];
-				
+			
+			// bail early if no ui
+			if( ! o.ui )
+			{
+				return false;
 			}
 			
-			optgroups[ parent ].push({
-				id		: $(this).attr('value'),
-				text	: $(this).text()
-			});
 			
-		});
-		
-
-		$.each( optgroups, function( label, children ){
+			// vars
+			var $field = acf.get_field_wrap( $select ),
+				$input = $select.siblings('input');
 			
-			if( label == '_root' ) {
 			
-				$.each( children, function( i, child ){
-					
-					args.data.push( child );
-					
-				});
-				
-			} else {
-			
-				args.data.push({
-					text		: label,
-					children	: children
-				});
-				
-			}
-						
-		});
-
-		
-		// re-order options
-		$.each( selection, function( k, value ){
-			
-			$.each( args.data, function( i, choice ){
-				
-				if( value == choice.id ) {
-				
-					initial_selection.push( choice );
-					
-				}
-				
-			});
-						
-		});
-		
-		
-		// ajax
-		if( settings.ajax ) {
-			
-			args.ajax = {
-				url			: acf.get('ajaxurl'),
-				dataType	: 'json',
-				type		: 'post',
-				cache		: false,
-				data		: function (term, page) {
-					
-					// vars
-					var data = {
-						action		: settings.action,
-						field_key	: settings.key,
-						nonce		: acf.get('nonce'),
-						post_id		: acf.get('post_id'),
-						s			: term,
-						paged		: page
-					};
-
-					
-					// return
-					return data;
-					
-				},
-				results: function(data, page){
-					
-					return {
-						results	: data
-					};
-					
-				}
+			// select2 args
+			var args = {
+				width			: '100%',
+				allowClear		: o.allow_null,
+				placeholder		: o.placeholder,
+				multiple		: o.multiple,
+				data			: [],
+				escapeMarkup	: function( m ){ return m; }
 			};
 			
-			if( settings.pagination ) {
-				
-				args.ajax.results = function( data, page ) {
+			
+			// customize HTML for selected choices
+			if( o.multiple )
+			{
+				args.formatSelection = function( object, $div ){
 					
-					var i = 0;
+					$div.parent().append('<input type="hidden" class="acf-select2-multi-choice" name="' + $select.attr('name') + '" value="' + object.id + '" />');
 					
-					$.each(data, function(k, v){
-						
-						l = 1;
-						
-						if( typeof v.children !== 'undefined' ) {
-							
-							l = v.children.length;
-							
-						}
-						
-						i += l;
-						
-					});
-					
-					
-					// vars
-					return {
-						results	: data,
-						more	: (i >= 20)
-					};
-					
-				};
-				
-				$input.on("select2-loaded", function(e) { 
-					
-					// merge together groups
-					var label = '',
-						$list = null;
-						
-					$('#select2-drop .select2-results > li > .select2-result-label').each(function(){
-						
-						if( $(this).text() == label ) {
-							
-							$list.append( $(this).siblings('ul').html() );
-							
-							$(this).parent().remove();
-							
-							return;
-						}
-						
-						
-						// update vars
-						label = $(this).text();
-						$list = $(this).siblings('ul');
-						
-					});
-											
-				});	
+					return object.text;
+				}
 			}
 			
 			
-			args.initSelection = function (element, callback) {
+			// remove the blank option as we have a clear all button!
+			if( o.allow_null )
+			{
+				args.placeholder = o.placeholder;
+				$select.find('option[value=""]').remove();
+			}
+			
+			
+			// vars
+			var selection = $input.val().split(','),
+				initial_selection = [];
 				
-				// single select requires 1 val, not an array
-				if( ! settings.multiple ) {
+			
+			// populate args.data
+			var optgroups = {};
+			
+			$select.find('option').each(function( i ){
 				
-					initial_selection = initial_selection[0];
-					
+				// var
+				var parent = '_root';
+				
+				
+				// optgroup?
+				if( $(this).parent().is('optgroup') )
+				{
+					parent = $(this).parent().attr('label');
 				}
 				
-					        
-		        // callback
-		        callback( initial_selection );
-		        
-		    };
-		}
-		
-		
-		// attachment z-index fix
-		args.dropdownCss = {
-			'z-index' : '999999999'
-		};
-		
-		
-		// filter for 3rd party customization
-		args = acf.apply_filters( 'select2_args', args, $select, settings );
-		
-		
-		// add select2
-		$input.select2( args );
-
-		
-		// reorder DOM
-		$input.select2('container').before( $input );
-		
-		
-		// multiple
-		if( settings.multiple ) {
-			
-			// clear input value (allow nothing to be saved) - only for multiple
-			//$input.val('');
-			
-			
-			// sortable
-			$input.select2('container').find('ul.select2-choices').sortable({
-				 //containment: 'parent',
-				 start: function() {
-				 	$input.select2("onSortStart");
-				 },
-				 update: function() {
-				 	$input.select2("onSortEnd");
-				 }
+				
+				// append to choices
+				if( ! optgroups[ parent ] )
+				{
+					optgroups[ parent ] = [];
+				}
+				
+				optgroups[ parent ].push({
+					id		: $(this).attr('value'),
+					text	: $(this).text()
+				});
+				
 			});
-		}
-		
-		
-		// make sure select is disabled (repeater / flex may enable it!)
-		$select.attr('disabled', 'disabled').addClass('acf-disabled');
+			
 
-
-	}
-	
-	function remove_select2( $select ) {
-		
-		$select.siblings('.select2-container').remove();
-		
-	}
-	
-	
-	// select
-	acf.fields.select = acf.field.extend({
-		
-		type: 'select',
-		
-		$select: null,
-		settings: {
-			'action':		'',
-			'pagination':	false
-		},
-		
-		actions: {
-			'ready':	'render',
-			'append':	'render',
-			'remove':	'remove'
-		},
-
-		focus: function(){
-			
-			// focus on $select
-			this.$select = this.$field.find('select');
-			
-			
-			// merge in select's settings
-			$.extend(this.settings, acf.get_data( this.$select ));
-			
-			
-			// update action based on type			
-			this.settings.action = 'acf/fields/' + this.type + '/query';
-			
-		},
-		
-		render: function(){
-			
-			// validate ui
-			if( !this.settings.ui ) {
+			$.each( optgroups, function( label, children ){
 				
-				return false;
+				if( label == '_root' )
+				{
+					$.each( children, function( i, child ){
+						
+						args.data.push( child );
+						
+					});
+				}
+				else
+				{
+					args.data.push({
+						text		: label,
+						children	: children
+					});
+				}
+							
+			});
+
+			
+			// re-order options
+			$.each( selection, function( k, value ){
 				
+				$.each( args.data, function( i, choice ){
+					
+					if( value == choice.id )
+					{
+						initial_selection.push( choice );
+					}
+					
+				});
+							
+			});
+			
+			
+			// ajax
+			if( o.ajax )
+			{
+				args.ajax = {
+					url			: acf.get('ajaxurl'),
+					dataType	: 'json',
+					type		: 'get',
+					cache		: true,
+					data		: function (term, page) {
+						
+						// Allow for dynamic action because post_object and user fields use this JS
+						var action = 'acf/fields/' + acf.get_data($field, 'type') + '/query';
+						
+						
+						// vars
+						var data = {
+							action		: action,
+							field_key	: acf.get_data($field, 'key'),
+							nonce		: acf.get('nonce'),
+							post_id		: acf.get('post_id'),
+							s			: term
+						};
+						
+						
+						// return
+						return data;
+						
+					},
+					results		: function (data, page) {
+					
+						// vars
+						return {
+							results : data
+						};
+						
+					}
+				};
+				
+				args.initSelection = function (element, callback) {
+					
+					// single select requires 1 val, not an array
+					if( ! o.multiple )
+					{
+						initial_selection = initial_selection[0];
+					}
+					
+						        
+			        // callback
+			        callback( initial_selection );
+			        
+			    };
 			}
 			
-			add_select2( this.$select, this.settings );
 			
+			// filter for 3rd party customization
+			args = acf.apply_filters( 'select2_args', args, $field );
+			
+			
+			// add select2
+			$input.select2( args );
+
+			
+			// reorder DOM
+			$input.select2('container').before( $input );
+			
+			
+			// multiple
+			if( o.multiple )
+			{
+				// clear input value (allow nothing to be saved) - only for multiple
+				//$input.val('');
+				
+				
+				// sortable
+				$input.select2('container').find('ul.select2-choices').sortable({
+					 //containment: 'parent',
+					 start: function() {
+					 	$input.select2("onSortStart");
+					 },
+					 update: function() {
+					 	$input.select2("onSortEnd");
+					 }
+				});
+			}
+			
+			
+			// make sure select is disabled (repeater / flex may enable it!)
+			$select.attr('disabled', 'disabled').addClass('acf-disabled');
 		},
 		
-		remove: function(){
-			
-			remove_select2( this.$select );
-			
+		remove : function( $select ){
+		
+			if( acf.get_data( $select, 'ui' ) ) {
+				
+				$select.siblings('.select2-container').remove();
+
+			}
+						
 		}
+	};
+	
+	
+	/*
+	*  acf/setup_fields
+	*
+	*  run init function on all elements for this field
+	*
+	*  @type	event
+	*  @date	20/07/13
+	*
+	*  @param	{object}	e		event object
+	*  @param	{object}	el		DOM object which may contain new ACF elements
+	*  @return	N/A
+	*/
+	
+	acf.add_action('ready append', function( $el ){
+		
+		acf.get_fields({ type : 'select'}, $el).each(function(){
+			
+			acf.fields.select.init( $(this).find('select') );
+			
+		});
+		
+		acf.get_fields({ type : 'user'}, $el).each(function(){
+			
+			acf.fields.select.init( $(this).find('select') );
+			
+		});
+		
+		acf.get_fields({ type : 'post_object'}, $el).each(function(){
+			
+			acf.fields.select.init( $(this).find('select') );
+			
+		});
+		
+		acf.get_fields({ type : 'page_link'}, $el).each(function(){
+			
+			acf.fields.select.init( $(this).find('select') );
+			
+		});
+		
+		acf.get_fields({ type : 'taxonomy'}, $el).each(function(){
+			
+			acf.fields.select.init( $(this).find('select') );
+			
+		});
 		
 	});
 	
+	acf.add_action('remove', function( $el ){
+		
+		acf.get_fields({ type : 'select'}, $el).each(function(){
+			
+			acf.fields.select.remove( $(this).find('select') );
+			
+		});
+		
+	})
 	
-	// taxonomy
-	acf.fields.taxonomy = acf.fields.select.extend({
-		
-		type: 'taxonomy'
-		
-	});
-	
-	
-	// user
-	acf.fields.user = acf.fields.select.extend({
-		
-		type: 'user'
-		
-	});	
-	
-	
-	// post_object
-	acf.fields.post_object = acf.fields.select.extend({
-		
-		type: 'post_object',
-		
-		settings: {
-			'pagination':	true
-		}
-		
-	});
-	
-	
-	// page_link
-	acf.fields.page_link = acf.fields.post_object.extend({
-		
-		type: 'page_link',
-		
-	});
 	
 
 })(jQuery);

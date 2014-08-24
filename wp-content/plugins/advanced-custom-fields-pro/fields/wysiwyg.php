@@ -37,10 +37,9 @@ class acf_field_wysiwyg extends acf_field {
 		$this->label = __("Wysiwyg Editor",'acf');
 		$this->category = 'content';
 		$this->defaults = array(
-			'tabs'			=> 'all',
-			'toolbar'		=> 'full',
-			'media_upload' 	=> 1,
-			'default_value'	=> '',
+			'toolbar'		=>	'full',
+			'media_upload' 	=>	1,
+			'default_value'	=>	'',
 		);
     	
     	
@@ -235,52 +234,27 @@ class acf_field_wysiwyg extends acf_field {
 		
 		
 		// vars
+		//$id = 'wysiwyg-' . $field['id'] . '-' . uniqid();
 		$id = $field['id'] . '-' . uniqid();
-		$mode = 'html';
-		$show_tabs = true;
-		
-		
-		// get height
+		$switch_class = 'html-active';
 		$height = acf_get_user_setting('wysiwyg_height', 300);
-		$height = max( $height, 300 ); // minimum height is 300
-		
-		
-		// detect mode
-		if( $field['tabs'] == 'visual' ) {
-			
-			// case: visual tab only
-			$mode = 'tmce';
-			$show_tabs = false;
-			
-		} elseif( $field['tabs'] == 'text' ) {
-			
-			// case: text tab only
-			$show_tabs = false;
-			
-		} elseif( wp_default_editor() == 'tinymce' ) {
-			
-			// case: both tabs
-			$mode = 'tmce';
-			
-		}
-		
-		
-		// mode
-		$switch_class = $mode . '-active';
 		
 		
 		// filter value for editor
 		remove_all_filters( 'acf_the_editor_content' );
 		
-		if( $mode == 'tmce' ) {
+		if( wp_default_editor() == 'tinymce' ) {
 			
 			add_filter('acf_the_editor_content', 'wp_richedit_pre');
+			
+			$switch_class = 'tmce-active';
 			
 		} else {
 			
 			add_filter('acf_the_editor_content', 'wp_htmledit_pre');
 			
 		}
+		
 		
 		$field['value'] = apply_filters( 'acf_the_editor_content', $field['value'] );
 		
@@ -292,7 +266,7 @@ class acf_field_wysiwyg extends acf_field {
 					<?php do_action( 'media_buttons' ); ?>
 				</div>
 				<?php endif; ?>
-				<?php if( user_can_richedit() && $show_tabs ): ?>
+				<?php if( user_can_richedit() ): ?>
 					<div class="wp-editor-tabs">
 						<a id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></a>
 						<a id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);"><?php echo __('Visual'); ?></a>
@@ -349,26 +323,13 @@ class acf_field_wysiwyg extends acf_field {
 		));
 		
 		
-		// tabs
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Tabs','acf'),
-			'instructions'	=> '',
-			'type'			=> 'select',
-			'name'			=> 'tabs',
-			'choices'		=> array(
-				'all'			=>	__("Visual & Text",'acf'),
-				'visual'		=>	__("Visual Only",'acf'),
-				'text'			=>	__("Text Only",'acf'),
-			)
-		));
-		
-		
 		// toolbar
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Toolbar','acf'),
 			'instructions'	=> '',
-			'type'			=> 'select',
+			'type'			=> 'radio',
 			'name'			=> 'toolbar',
+			'layout'		=> 'horizontal',
 			'choices'		=> $choices
 		));
 		

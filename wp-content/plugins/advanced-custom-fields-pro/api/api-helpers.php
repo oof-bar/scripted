@@ -1557,8 +1557,7 @@ function acf_get_posts( $args ) {
 	
 	// defaults
 	$args = acf_parse_args( $args, array(
-		'posts_per_page'			=> -1,
-		'paged'						=> 0,
+		'posts_per_page'			=>	-1,
 		'post_type'					=> 'post',
 		'orderby'					=> 'menu_order title',
 		'order'						=> 'ASC',
@@ -1570,8 +1569,7 @@ function acf_get_posts( $args ) {
 	
 	// find array of post_type
 	$post_types = acf_force_type_array( $args['post_type'] );
-	$post_types_labels = acf_get_pretty_post_types($post_types);
-	
+		
 	
 	// attachment doesn't work if it is the only item in an array
 	if( count($post_types) == 1 ) {
@@ -1579,10 +1577,6 @@ function acf_get_posts( $args ) {
 		$args['post_type'] = current($post_types);
 		
 	}
-	
-	
-	// add filter to orderby post type
-	add_filter('posts_orderby', '_acf_orderby_post_type', 10, 2);
 	
 	
 	// get posts
@@ -1618,54 +1612,18 @@ function acf_get_posts( $args ) {
 		
 		
 		// sort into hierachial order!
-		// this will fail if a search has taken place because parents wont exist
-		if( is_post_type_hierarchical($post_type) && empty($args['s'])) {
+		if( is_post_type_hierarchical( $post_type ) ) {
 			
-			// vars
-			$match_id = $this_posts[ 0 ]->ID;
-			$offset = 0;
-			$length = count($this_posts);
+			// this will fail if a search has taken place because parents wont exist
+			if( empty($args['s']) ) {
 			
-			
-			// reset $this_posts
-			$this_posts = array();
-			
-			
-			// get all posts
-			$all_args = array_merge($args, array(
-				'posts_per_page'	=> -1,
-				'paged'				=> 0,
-				'post_type'			=> $post_type
-			));
-			
-			$all_posts = get_posts( $all_args );
-			
-			
-			// loop over posts and find $i
-			foreach( $all_posts as $offset => $p ) {
-				
-				if( $p->ID == $match_id ) {
-					
-					break;
-					
-				}
+				$this_posts = get_page_children( 0, $this_posts );
 				
 			}
 			
-			
-			// order posts
-			$all_posts = get_page_children( 0, $all_posts );
-			
-			
-			for( $i = $offset; $i < ($offset + $length); $i++ ) {
-				
-				$this_posts[] = acf_extract_var( $all_posts, $i);
-				
-			}			
-			
 		}
 		
-				
+		
 		// populate $this_posts
 		foreach( array_keys($this_posts) as $key ) {
 			
@@ -1680,7 +1638,8 @@ function acf_get_posts( $args ) {
 		
 		
 		// group by post type
-		$post_type_name = $post_types_labels[ $post_type ];
+		$post_type_object = get_post_type_object( $post_type );
+		$post_type_name = $post_type_object->labels->name;
 		
 		$r[ $post_type_name ] = $this_group;
 					
@@ -1692,35 +1651,12 @@ function acf_get_posts( $args ) {
 	
 }
 
-function _acf_orderby_post_type( $ordeby, $wp_query ) {
-	
-	// global
-	global $wpdb;
-	
-	
-	// get post types
-	$post_types = $wp_query->get('post_type');
-	
-	
-	// prepend SQL
-	if( is_array($post_types) ) {
-		
-		$post_types = implode("','", $post_types);
-		$ordeby = "FIELD({$wpdb->posts}.post_type,'$post_types')," . $ordeby;
-		
-	}
-	
-	
-	// remove this filter (only once)
-	remove_filter('posts_orderby', '_acf_orderby_post_type');
-	
-	
-	// return
-	return $ordeby;
-}
-
 
 function acf_get_post_title( $post = 0 ) {
+	
+	// title
+	$title = '';
+	
 	
 	// load post if given an ID
 	if( is_numeric($post) ) {
@@ -1730,26 +1666,22 @@ function acf_get_post_title( $post = 0 ) {
 	}
 	
 	
-	// title
-	$title = get_the_title( $post->ID );
-	
-	
-	// empty
-	if( $title === '' ) {
-		
-		$title = __('(no title)', 'acf');
-		
-	}
-	
-	
 	// ancestors
 	if( $post->post_type != 'attachment' ) {
 		
 		$ancestors = get_ancestors( $post->ID, $post->post_type );
 		
-		$title = str_repeat('- ', count($ancestors)) . $title;
+		if( !empty($ancestors) ) {
+		
+			$title .= str_repeat('- ', count($ancestors));
+			
+		}
 		
 	}
+	
+	
+	// title
+	$title .= get_the_title( $post->ID );
 	
 	
 	// status

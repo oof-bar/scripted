@@ -72,13 +72,12 @@ class acf_field_post_object extends acf_field {
 	function ajax_query() {
 		
    		// options
-   		$options = acf_parse_args( $_POST, array(
+   		$options = acf_parse_args( $_GET, array(
 			'post_id'		=> 0,
 			's'				=> '',
 			'lang'			=> false,
 			'field_key'		=> '',
 			'nonce'			=> '',
-			'paged'			=> 1
 		));
 		
 		
@@ -95,11 +94,6 @@ class acf_field_post_object extends acf_field {
    		$args = array();
    		
 		
-		// paged
-   		$args['posts_per_page'] = 20;
-   		$args['paged'] = $options['paged'];
-   		
-   		
 		// load field
 		$field = acf_get_field( $options['field_key'] );
 		

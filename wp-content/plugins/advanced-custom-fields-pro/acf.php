@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields Pro
 Plugin URI: http://www.advancedcustomfields.com/
 Description: Fully customise WordPress edit screens with powerful fields. Boasting a professional interface and a powerful API, it’s a must have for any web developer working with WordPress. Field types include: Wysiwyg, text, textarea, image, file, select, checkbox, page link, post object, date picker, color picker, repeater, flexible content, gallery and more!
-Version: 5.0.5
+Version: 5.0.4
 Author: elliot condon
 Author URI: http://www.elliotcondon.com/
 Copyright: Elliot Condon
@@ -61,7 +61,7 @@ class acf {
 			
 			// basic
 			'name'			=> __('Advanced Custom Fields', 'acf'),
-			'version'		=> '5.0.5',
+			'version'		=> '5.0.4',
 						
 			// urls
 			'basename'		=> plugin_basename( __FILE__ ),
@@ -133,7 +133,6 @@ class acf {
 		acf_include('fields/textarea.php');
 		acf_include('fields/number.php');
 		acf_include('fields/email.php');
-		acf_include('fields/url.php');
 		acf_include('fields/password.php');
 		acf_include('fields/wysiwyg.php');
 		acf_include('fields/oembed.php');
@@ -162,9 +161,6 @@ class acf {
 		// actions
 		add_action('init',			array($this, 'wp_init'), 5);
 		add_filter('posts_where',	array($this, 'wp_posts_where'), 10, 2 );
-		//add_filter('posts_orderby',	array($this, 'wp_posts_orderby'), 10, 2 );
-		//add_filter('posts_groupby',	array($this, 'wp_posts_groupby'), 10, 2 );
-		//add_filter('posts_request',	array($this, 'posts_request'), 10, 1 );
 		
 	}
 	
@@ -425,11 +421,46 @@ class acf {
 	
 	
 	/*
-function posts_request( $thing ) {
+	*  debug SQL
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	27/02/2014
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function wp_posts_join( $join, $wp_query ) {
+		
+		/*
+// acf_field_name
+		if( $post_id = $wp_query->get('acf_post_id') )
+		{
+			$join = str_replace('.ID', '.post_name', $join);
+			$join = str_replace('.post_id', '.meta_value', $join);
+	   }
+*/
+	   
+	   return $join;
+	    
+	    
+	}
+	
+	
+	function posts_request( $thing ) {
+		/*
+
+		echo '<pre>';
+			print_r($thing );
+		echo '</pre>';
+		die;
+*/
 		
 		return $thing;
 	}
-*/
 	
 }
 

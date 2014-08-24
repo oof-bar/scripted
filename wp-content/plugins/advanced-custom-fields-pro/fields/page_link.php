@@ -70,13 +70,12 @@ class acf_field_page_link extends acf_field {
 	function ajax_query() {
 		
    		// options
-   		$options = acf_parse_args( $_POST, array(
+   		$options = acf_parse_args( $_GET, array(
 			'post_id'		=> 0,
 			's'				=> '',
 			'lang'			=> false,
 			'field_key'		=> '',
 			'nonce'			=> '',
-			'paged'			=> 1
 		));
 		
 		
@@ -93,11 +92,6 @@ class acf_field_page_link extends acf_field {
    		$args = array();
    		
 		
-		// paged
-   		$args['posts_per_page'] = 20;
-   		$args['paged'] = $options['paged'];
-   		
-   		
 		// load field
 		$field = acf_get_field( $options['field_key'] );
 		
@@ -127,6 +121,7 @@ class acf_field_page_link extends acf_field {
 			$args['post_type'] = acf_get_post_types();
 			
 		}
+		
 		
 		// create tax queries
 		if( !empty($field['taxonomy']) ) {
@@ -167,59 +162,31 @@ class acf_field_page_link extends acf_field {
 		
 		
 		// add archives to $r
-		if( $args['paged'] == 1 ) {
+		$archives = array();
+		$archives[] = array(
+			'id'	=> home_url(),
+			'text'	=> home_url()
+		);
+		
+		foreach( $args['post_type'] as $post_type ) {
 			
-			$archives = array();
-			$archives[] = array(
-				'id'	=> home_url(),
-				'text'	=> home_url()
-			);
+			$archive_link = get_post_type_archive_link( $post_type );
 			
-			foreach( $args['post_type'] as $post_type ) {
-				
-				$archive_link = get_post_type_archive_link( $post_type );
-				
-				if( $archive_link ) {
-				
-					$archives[] = array(
-						'id'	=> $archive_link,
-						'text'	=> $archive_link
-					);
-					
-				}
-				
-			}
+			if( $archive_link ) {
 			
-			
-			// search
-			if( !empty($args['s']) ) {
-				
-				foreach( array_keys($archives) as $i ) {
-					
-					if( strpos( $archives[$i]['text'], $args['s'] ) === false ) {
-						
-						unset($archives[$i]);
-						
-					}
-					
-				}
-				
-				$archives = array_values($archives);
-				
-			}
-			
-			
-			if( !empty($archives) ) {
-				
-				$r[] = array(
-					'text'		=> __('Archives', 'acf'),
-					'children'	=> $archives
+				$archives[] = array(
+					'id'	=> $archive_link,
+					'text'	=> $archive_link
 				);
 				
 			}
 			
 		}
 		
+		$r[] = array(
+			'text'		=> __('Archives', 'acf'),
+			'children'	=> $archives
+		);
 		
 		
 		// get posts grouped by post type

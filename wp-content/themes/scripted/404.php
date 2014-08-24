@@ -4,7 +4,7 @@
 
 <section class="error-404">
   <div class="wrapper">
-    <div class="column col-8 push-2 tablet-three-quarters mobile-full">
+    <div class="column col-8 centered tablet-three-quarters mobile-full">
       <p>
         <?= se_option('error_text') ?>
       </p>

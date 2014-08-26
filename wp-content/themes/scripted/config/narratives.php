@@ -4,6 +4,35 @@ function get_narrative_section ( $layout ) {
   return ( get_template_directory() . '/narrative-layouts/' . $layout . '.php' );
 }
 
+# Set and Get Narrative Field Cache with the Transient API
+
+function get_narrative_fields ( $narrative ) {
+  if ( $fields = get_transient( get_narrative_cache_name( $narrative->ID ) ) ) {
+    # echo "<!-- Narrative was cached! -->";
+    # pp($fields);
+  } else {
+    # echo "<!-- Retrieving with ACF... -->";
+    $fields = get_fields( $narrative->ID );
+    set_transient( get_narrative_cache_name( $narrative->ID ), $fields );
+  }
+  return $fields;
+}
+
+function clean_narrative_fields ( $post ) {
+  if ( ( get_post_type($post) == 'page' ) && ( get_page_template_slug( $post ) == 'narrative.php' ) ) {
+    delete_transient( get_narrative_cache_name($post) );
+    get_narrative_fields( $post );
+  }
+}
+
+# Abstract the building of the transient name
+function get_narrative_cache_name ( $narrative ) {
+  return ( 'narrative_' . $narrative );
+}
+
+add_action('save_post', 'clean_narrative_fields');
+
+
 /*
 // Deprecated Custom Post Type (Now a Page Template)
 

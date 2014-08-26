@@ -1,6 +1,6 @@
 <? /* Template Name: Narrative */ ?>
 <? get_header(); ?>
-<? $narrative = get_fields(); ?>
+<? $narrative = get_narrative_fields( $post ); ?>
 <? $page_title = get_the_title(); ?>
 
 <? if ( $narrative['hero'] ) { ?>

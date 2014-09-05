@@ -53,7 +53,7 @@ $ ->
     $('.menu-item-has-children').on 'mouseenter mouseleave', (e) ->
       if e.type == 'mouseenter'
         window.clearTimeout $(this).data('delay')
-        $(this).addClass('open')
+        $(this).addClass('open').siblings().removeClass('open')
       else
         # console.log 'Leave'
         $(this).data 'delay', window.setTimeout =>

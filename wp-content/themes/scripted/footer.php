@@ -44,7 +44,6 @@
     </div>
 
     <? include get_partial('analytics'); ?>
-    <? include get_partial('typekit'); ?>
 
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 

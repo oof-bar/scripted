@@ -52,7 +52,7 @@
           </div>
 
           <div class="column col-8 tablet-hide caps bold small link-grey text-center">
-            <? wp_nav_menu('primary') ?>
+            <? wp_nav_menu(array('theme_location' => 'primary')) ?>
           </div>
 
           <? if ( $donate_link = se_option('donate_page') ) { ?>

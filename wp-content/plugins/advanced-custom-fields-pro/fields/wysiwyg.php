@@ -37,9 +37,10 @@ class acf_field_wysiwyg extends acf_field {
 		$this->label = __("Wysiwyg Editor",'acf');
 		$this->category = 'content';
 		$this->defaults = array(
-			'toolbar'		=>	'full',
-			'media_upload' 	=>	1,
-			'default_value'	=>	'',
+			'tabs'			=> 'all',
+			'toolbar'		=> 'full',
+			'media_upload' 	=> 1,
+			'default_value'	=> '',
 		);
     	
     	
@@ -150,9 +151,9 @@ class acf_field_wysiwyg extends acf_field {
    	
    	
    	/*
-   	*  input_form_data
+   	*  input_admin_footer
    	*
-   	*  This function is called once on the input page between the head and footer
+   	*  description
    	*
    	*  @type	function
    	*  @date	6/03/2014
@@ -162,7 +163,7 @@ class acf_field_wysiwyg extends acf_field {
    	*  @return	$post_id (int)
    	*/
    	
-   	function input_form_data( $args ) {
+   	function input_admin_footer() {
 	   	
 	   	// vars
 		$json = array();
@@ -234,27 +235,52 @@ class acf_field_wysiwyg extends acf_field {
 		
 		
 		// vars
-		//$id = 'wysiwyg-' . $field['id'] . '-' . uniqid();
 		$id = $field['id'] . '-' . uniqid();
-		$switch_class = 'html-active';
+		$mode = 'html';
+		$show_tabs = true;
+		
+		
+		// get height
 		$height = acf_get_user_setting('wysiwyg_height', 300);
+		$height = max( $height, 300 ); // minimum height is 300
+		
+		
+		// detect mode
+		if( $field['tabs'] == 'visual' ) {
+			
+			// case: visual tab only
+			$mode = 'tmce';
+			$show_tabs = false;
+			
+		} elseif( $field['tabs'] == 'text' ) {
+			
+			// case: text tab only
+			$show_tabs = false;
+			
+		} elseif( wp_default_editor() == 'tinymce' ) {
+			
+			// case: both tabs
+			$mode = 'tmce';
+			
+		}
+		
+		
+		// mode
+		$switch_class = $mode . '-active';
 		
 		
 		// filter value for editor
 		remove_all_filters( 'acf_the_editor_content' );
 		
-		if( wp_default_editor() == 'tinymce' ) {
+		if( $mode == 'tmce' ) {
 			
 			add_filter('acf_the_editor_content', 'wp_richedit_pre');
-			
-			$switch_class = 'tmce-active';
 			
 		} else {
 			
 			add_filter('acf_the_editor_content', 'wp_htmledit_pre');
 			
 		}
-		
 		
 		$field['value'] = apply_filters( 'acf_the_editor_content', $field['value'] );
 		
@@ -266,10 +292,10 @@ class acf_field_wysiwyg extends acf_field {
 					<?php do_action( 'media_buttons' ); ?>
 				</div>
 				<?php endif; ?>
-				<?php if( user_can_richedit() ): ?>
+				<?php if( user_can_richedit() && $show_tabs ): ?>
 					<div class="wp-editor-tabs">
-						<a id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></a>
-						<a id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);"><?php echo __('Visual'); ?></a>
+						<button id="<?php echo $id; ?>-tmce" class="wp-switch-editor switch-tmce" onclick="switchEditors.switchto(this);" type="button"><?php echo __('Visual', 'acf'); ?></button>
+						<button id="<?php echo $id; ?>-html" class="wp-switch-editor switch-html" onclick="switchEditors.switchto(this);" type="button"><?php echo _x( 'Text', 'Name for the Text editor tab (formerly HTML)' ); ?></button>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -323,13 +349,26 @@ class acf_field_wysiwyg extends acf_field {
 		));
 		
 		
+		// tabs
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Tabs','acf'),
+			'instructions'	=> '',
+			'type'			=> 'select',
+			'name'			=> 'tabs',
+			'choices'		=> array(
+				'all'			=>	__("Visual & Text",'acf'),
+				'visual'		=>	__("Visual Only",'acf'),
+				'text'			=>	__("Text Only",'acf'),
+			)
+		));
+		
+		
 		// toolbar
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Toolbar','acf'),
 			'instructions'	=> '',
-			'type'			=> 'radio',
+			'type'			=> 'select',
 			'name'			=> 'toolbar',
-			'layout'		=> 'horizontal',
 			'choices'		=> $choices
 		));
 		

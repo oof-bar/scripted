@@ -80,7 +80,7 @@ class acf_field_flexible_content extends acf_field {
 			'key'			=> uniqid(),
 			'name'			=> '',
 			'label'			=> '',
-			'display'		=> 'row',
+			'display'		=> 'block',
 			'sub_fields'	=> array(),
 			'min'			=> '',
 			'max'			=> '',
@@ -206,11 +206,16 @@ class acf_field_flexible_content extends acf_field {
 			'name'	=> $field['name'],
 		));
 		
+		
+		// no value message
+		$no_value_message = __('Click the "%s" button below to start creating your layout','acf');
+		$no_value_message = apply_filters('acf/fields/flexible_content/no_value_message', $no_value_message, $field);
+
 ?>
 <div <?php acf_esc_attr_e(array( 'class' => 'acf-flexible-content', 'data-min' => $field['min'], 'data-max'	=> $field['max'] )); ?>>
 	
 	<div class="no-value-message" <?php if( $field['value'] ){ echo 'style="display:none;"'; } ?>>
-		<?php printf( __('Click the "%s" button below to start creating your layout','acf'), $field['button_label']); ?>
+		<?php printf( $no_value_message, $field['button_label'] ); ?>
 	</div>
 	
 	<div class="clones">
@@ -243,8 +248,8 @@ class acf_field_flexible_content extends acf_field {
 		</li>
 	</ul>
 	
-	<script type="text-html" class="tmpl-popup">
-		<div class="acf-fc-popup">
+	<script type="text-html" class="tmpl-popup"><?php 
+		?><div class="acf-fc-popup">
 			<ul>
 				<?php foreach( $layouts as $layout ): 
 					
@@ -287,7 +292,10 @@ class acf_field_flexible_content extends acf_field {
 	function render_layout( $field, $layout, $i, $value ) {
 		
 		// vars
-		$order = is_numeric($i) ? ($i + 1) : 0;
+		$order = 0;
+		
+		
+		// atts
 		$layout_atts = array(
 			'class'			=> 'layout',
 			'data-layout'	=> $layout['name'],
@@ -313,12 +321,35 @@ class acf_field_flexible_content extends acf_field {
 		}
 		
 		
+		// clone
+		if( is_numeric($i) ) {
+			
+			$order = $i + 1;
+			
+		} else {
+			
+			$layout_atts['class'] .= ' acf-clone';
+			
+		}
+		
 		
 		// field wrap
 		$el = 'td';
-		if( $layout['display']== 'row' ) {
+		$before_fields = '';
+		$after_fields = '';
+		
+		if( $layout['display'] == 'row' ) {
 		
 			$el = 'tr';
+			$before_fields = '<td class="acf-table-wrap"><table class="acf-table">';
+			$after_fields = '</table></td>';
+			
+		} elseif( $layout['display'] == 'block' ) {
+		
+			$el = 'div';
+			
+			$before_fields = '<td class="acf-fields">';
+			$after_fields = '</td>';
 			
 		}
 		
@@ -327,6 +358,10 @@ class acf_field_flexible_content extends acf_field {
 			
 	<div style="display:none">
 		<?php acf_hidden_input(array( 'name' => "{$field['name']}[{$i}][acf_fc_layout]", 'value' => $layout['name'] )); ?>
+	</div>
+	
+	<div class="acf-fc-layout-handle">
+		<span class="fc-layout-order"><?php echo $order; ?></span> <?php echo $layout['label']; ?>
 	</div>
 	
 	<ul class="acf-fc-layout-controlls acf-hl acf-clearfix">
@@ -341,10 +376,6 @@ class acf_field_flexible_content extends acf_field {
 			</a>
 		</li>
 	</ul>
-		
-	<div class="acf-fc-layout-handle">
-		<span class="fc-layout-order"><?php echo $order; ?></span>. <?php echo $layout['label']; ?>
-	</div>
 	
 <?php if( !empty($layout['sub_fields']) ): ?>
 		
@@ -364,9 +395,9 @@ class acf_field_flexible_content extends acf_field {
 						
 						
 						// Add custom width
-						if( !empty($sub_field['column_width']) ) {
+						if( $sub_field['wrapper']['width'] ) {
 						
-							$atts['data-width'] = $sub_field['column_width'];
+							$atts['data-width'] = $sub_field['wrapper']['width'];
 							
 						}
 							
@@ -380,7 +411,7 @@ class acf_field_flexible_content extends acf_field {
 						</th>
 						
 					<?php endforeach; ?> 
-					
+
 				</tr>
 			</thead>
 			
@@ -388,14 +419,9 @@ class acf_field_flexible_content extends acf_field {
 		
 		<tbody>
 			<tr>
-			
 			<?php
 
-			// layout: Row
-			if( $layout['display'] == 'row' ): ?>
-				<td class="acf-table-wrap">
-					<table class="acf-table">
-			<?php endif;
+			echo $before_fields;
 			
 
 			// loop though sub fields
@@ -434,11 +460,9 @@ class acf_field_flexible_content extends acf_field {
 			
 
 			// layout: Row
-			if( $layout['display'] == 'row' ): ?>
-					</table>
-				</td>
-			<?php endif; ?>
-											
+			echo $after_fields; 
+			
+			?>							
 			</tr>
 		</tbody>
 		
@@ -487,8 +511,7 @@ class acf_field_flexible_content extends acf_field {
 			$layout_prefix = "{$field['prefix']}[layouts][{$layout['key']}]";
 			
 			
-?>
-<tr class="acf-field" data-name="fc_layout" data-setting="flexible_content" data-key="<?php echo $layout['key']; ?>">
+?><tr class="acf-field" data-name="fc_layout" data-setting="flexible_content" data-key="<?php echo $layout['key']; ?>">
 	<td class="acf-label">
 		<label><?php _e("Layout",'acf'); ?></label>
 		<p class="description acf-fl-actions">
@@ -510,90 +533,82 @@ class acf_field_flexible_content extends acf_field {
 			
 			?>
 		</div>
-		<table class="acf-table acf-clear-table acf-fc-meta">
-			<tbody>
-				<tr>
-					<td class="acf-fc-meta-label" colspan="4">
-						<?php 
+		<ul class="acf-hl acf-fc-meta">
+			<li class="acf-fc-meta-label" style="float: none;">
+				<?php 
+				
+				acf_render_field(array(
+					'type'		=> 'text',
+					'name'		=> 'label',
+					'prefix'	=> $layout_prefix,
+					'value'		=> $layout['label'],
+					'prepend'	=> __('Label','acf')
+				));
+				
+				?>
+			</li>
+			<li class="acf-fc-meta-name" style="float: none;">
+				<?php 
 						
-						acf_render_field(array(
-							'type'		=> 'text',
-							'name'		=> 'label',
-							'prefix'	=> $layout_prefix,
-							'value'		=> $layout['label'],
-							'prepend'	=> __('Label','acf')
-						));
-						
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="acf-fc-meta-name" colspan="4">
-						<?php 
-						
-						acf_render_field(array(
-							'type'		=> 'text',
-							'name'		=> 'name',
-							'prefix'	=> $layout_prefix,
-							'value'		=> $layout['name'],
-							'prepend'	=> __('Name','acf')
-						));
-						
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td class="acf-fc-meta-display" colspan="2" >
-						<div class="acf-input-prepend">
-							<?php _e('Display','acf'); ?>
-						</div>
-						<div class="acf-input-wrap select">
-							<?php 
-							
-							acf_render_field(array(
-								'type'		=> 'select',
-								'name'		=> 'display',
-								'prefix'	=> $layout_prefix,
-								'value'		=> $layout['display'],
-								'choices'	=> array(
-									'row' 		=> __("Block",'acf'),
-									'table' 	=> __("Table",'acf'), 
-								),
-							));
-							
-							?>
-						</div>
-					</td>
-					<td class="acf-fc-meta-min">
-						<?php
-						
-						acf_render_field(array(
-							'type'		=> 'text',
-							'name'		=> 'min',
-							'prefix'	=> $layout_prefix,
-							'value'		=> $layout['min'],
-							'prepend'	=> __('Min','acf')
-						));
-						
-						?>
-					</td>
-					<td class="acf-fc-meta-max">
-						<?php 
-						
-						acf_render_field(array(
-							'type'		=> 'text',
-							'name'		=> 'max',
-							'prefix'	=> $layout_prefix,
-							'value'		=> $layout['max'],
-							'prepend'	=> __('Max','acf')
-						));
-						
-						?>
-					</td>
+				acf_render_field(array(
+					'type'		=> 'text',
+					'name'		=> 'name',
+					'prefix'	=> $layout_prefix,
+					'value'		=> $layout['name'],
+					'prepend'	=> __('Name','acf')
+				));
+				
+				?>
+			</li>
+			<li class="acf-fc-meta-display" style="width:33%; padding-right:15px;">
+				<div class="acf-input-prepend">
+					<?php _e('Display','acf'); ?>
+				</div>
+				<div class="acf-input-wrap select">
+					<?php 
 					
-				</tr>
-			</tbody>
-		</table>
+					acf_render_field(array(
+						'type'		=> 'select',
+						'name'		=> 'display',
+						'prefix'	=> $layout_prefix,
+						'value'		=> $layout['display'],
+						'choices'	=> array(
+							'table'			=> __('Table','acf'),
+							'block'			=> __('Block','acf'),
+							'row'			=> __('Row','acf')
+						),
+					));
+					
+					?>
+				</div>
+			</li>
+			<li class="acf-fc-meta-min" style="width:33%; padding-right:15px;">
+				<?php
+						
+				acf_render_field(array(
+					'type'		=> 'text',
+					'name'		=> 'min',
+					'prefix'	=> $layout_prefix,
+					'value'		=> $layout['min'],
+					'prepend'	=> __('Min','acf')
+				));
+				
+				?>
+			</li>
+			<li class="acf-fc-meta-max" style="float: none;">
+				<?php 
+				
+				acf_render_field(array(
+					'type'		=> 'text',
+					'name'		=> 'max',
+					'prefix'	=> $layout_prefix,
+					'value'		=> $layout['max'],
+					'prepend'	=> __('Max','acf')
+				));
+				
+				?>
+			</li>
+		</ul>
 		<?php 
 		
 		// vars
@@ -1002,6 +1017,11 @@ class acf_field_flexible_content extends acf_field {
 						} elseif( isset($row[ $sub_field['name'] ]) ) {
 							
 							$v = $row[ $sub_field['name'] ];
+							
+						} else {
+							
+							// input is not set (hidden by conditioanl logic)
+							continue;
 							
 						}
 						

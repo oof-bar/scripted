@@ -162,7 +162,10 @@ class acf_form_taxonomy {
 ?>
 <script type="text/javascript">
 (function($) {
-
+	
+	// store origional HTML
+	var $orig = $('#addtag').children('.acf-field').clone();
+	
 	$(document).ready(function(){
 		
 		// update acf validation class
@@ -214,6 +217,34 @@ class acf_form_taxonomy {
 			
 		});
 	
+	});
+	
+	$(document).ajaxComplete(function(event, xhr, settings) {
+		
+		// bail early if is other ajax call
+		if( settings.data.indexOf('action=add-tag') == -1 ) {
+			
+			return;
+			
+		}
+		
+		
+		// action for 3rd party customization
+		acf.do_action('remove', $('#addtag'));
+		
+		
+		// remove old fields
+		$('#addtag').find('.acf-field').remove();
+		
+		
+		// add orig fields
+		$('#acf-form-data').after( $orig.clone() );
+		
+		
+		// action for 3rd party customization
+		acf.do_action('append', $('#addtag'));
+		
+
 	});
 
 	

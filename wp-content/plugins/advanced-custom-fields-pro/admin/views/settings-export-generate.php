@@ -14,7 +14,7 @@ $field_groups = acf_extract_var( $args, 'field_groups');
 		</div>
 		
 		<div class="inner">
-			<p><?php _e("The following code can be used to register a local version of the selected field group(s). A local field group can provide many benefits such as faster load times, version control & dynamic fields/settings. Simply copy and paste the following code to your theme's functions.php file", 'acf'); ?></p>
+			<p><?php _e("The following code can be used to register a local version of the selected field group(s). A local field group can provide many benefits such as faster load times, version control & dynamic fields/settings. Simply copy and paste the following code to your theme's functions.php file or include it within an external file.", 'acf'); ?></p>
 			
 			<textarea class="pre" readonly="true"><?php
 			

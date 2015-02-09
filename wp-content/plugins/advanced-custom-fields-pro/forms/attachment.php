@@ -60,11 +60,21 @@ class acf_form_attachment {
 	function validate_page() {
 		
 		// global
-		global $pagenow, $typenow;
+		global $pagenow, $typenow, $wp_version;
 		
 		
 		// validate page
 		if( $pagenow === 'post.php' && $typenow === 'attachment' ) {
+			
+			return true;
+			
+		}
+		
+		
+		// validate page
+		if( $pagenow === 'upload.php' && version_compare($wp_version, '4.0', '>=') ) {
+			
+			add_action('admin_footer', array($this, 'admin_footer'), 0);
 			
 			return true;
 			
@@ -92,7 +102,7 @@ class acf_form_attachment {
 	
 	function admin_enqueue_scripts() {
 		
-		// bail early if not validt page
+		// bail early if not valid page
 		if( !$this->validate_page() ) {
 			
 			return;
@@ -102,6 +112,31 @@ class acf_form_attachment {
 		
 		// load acf scripts
 		acf_enqueue_scripts();
+				
+	}
+	
+	
+	/*
+	*  admin_footer
+	*
+	*  This function will add acf_form_data to the WP 4.0 attachment grid
+	*
+	*  @type	action (admin_footer)
+	*  @date	11/09/2014
+	*  @since	5.0.0
+	*
+	*  @param	n/a
+	*  @return	n/a
+	*/
+	
+	function admin_footer() {
+		
+		// render post data
+		acf_form_data(array( 
+			'post_id'	=> 0, 
+			'nonce'		=> 'attachment',
+			'ajax'		=> 1
+		));
 		
 	}
 	

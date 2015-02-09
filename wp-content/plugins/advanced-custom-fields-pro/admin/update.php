@@ -164,7 +164,7 @@ class acf_update {
 		
 		
 		// actions
-		add_action( 'admin_notices', array( $this, 'admin_notices') );
+		add_action( 'admin_notices', array( $this, 'admin_notices'), 1 );
 		
 		
 		

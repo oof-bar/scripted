@@ -14,12 +14,6 @@
       'request' => $_POST
     );
 
-
-    if ( !wp_verify_nonce( $_POST['nonce'], 'email_signup_nonce') ) {
-      $payload['message'] = "Sorry, we've flagged this as a dangerous request.";
-      wp_send_json_error( $payload );
-    }
-
     try {
       $response = $MC->lists->subscribe(se_option('mailchimp_list'), array('email'=>$email));
       $payload['mc'] = $response;

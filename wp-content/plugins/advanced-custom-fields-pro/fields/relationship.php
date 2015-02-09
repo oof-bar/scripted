@@ -47,13 +47,6 @@ class acf_field_relationship extends acf_field {
 			'max'		=> __("Maximum values reached ( {max} values )",'acf'),
 			'loading'	=> __('Loading','acf'),
 			'empty'		=> __('No matches found','acf'),
-			'tmpl_li'	=> '<li>
-								<input type="hidden" name="<%= name %>[]" value="<%= value %>" />
-								<span data-id="<%= value %>" class="acf-relationship-item">
-									<%= text %>
-									<a href="#" class="acf-icon small dark"><i class="acf-sprite-remove"></i></a>
-								</span>
-							</li>'
 		);
 		
 		
@@ -69,43 +62,40 @@ class acf_field_relationship extends acf_field {
 	
 	
 	/*
-	*  query_posts
+	*  get_choices
 	*
-	*  description
+	*  This function will return an array of data formatted for use in a select2 AJAX response
 	*
 	*  @type	function
-	*  @date	24/10/13
-	*  @since	5.0.0
+	*  @date	15/10/2014
+	*  @since	5.0.9
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	$options (array)
+	*  @return	(array)
 	*/
 	
-	function ajax_query() {
+	function get_choices( $options = array() ) {
 		
-   		// options
-   		$options = acf_parse_args( $_GET, array(
-			'post_id'		=> 0,
-			's'				=> '',
-			'post_type'		=> '',
-			'taxonomy'		=> '',
-			'lang'			=> false,
-			'field_key'		=> '',
-			'nonce'			=> '',
+   		// defaults
+   		$options = acf_parse_args($options, array(
+			'post_id'			=> 0,
+			's'					=> '',
+			'post_type'			=> '',
+			'taxonomy'			=> '',
+			'lang'				=> false,
+			'field_key'			=> '',
+			'paged'				=> 1
 		));
-		
-		
-		// validate
-		if( ! wp_verify_nonce($options['nonce'], 'acf_nonce') ) {
-		
-			die();
-			
-		}
 		
 		
 		// vars
    		$r = array();
    		$args = array();
+   		
+   		
+   		// paged
+   		$args['posts_per_page'] = 20;
+   		$args['paged'] = $options['paged'];
    		
 		
 		// load field
@@ -113,7 +103,7 @@ class acf_field_relationship extends acf_field {
 		
 		if( !$field ) {
 		
-			die();
+			return false;
 			
 		}
 		
@@ -144,7 +134,6 @@ class acf_field_relationship extends acf_field {
 			
 			$args['post_type'] = acf_get_post_types();
 		}
-		
 		
 		
 		// update taxonomy
@@ -267,8 +256,49 @@ class acf_field_relationship extends acf_field {
 		}
 		
 		
+		// return
+		return $r;
+			
+	}
+	
+	
+	/*
+	*  ajax_query
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	24/10/13
+	*  @since	5.0.0
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	function ajax_query() {
+		
+		// validate
+		if( empty($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'acf_nonce') ) {
+		
+			die();
+			
+		}
+		
+		
+		// get posts
+		$posts = $this->get_choices( $_POST );
+		
+		
+		// validate
+		if( !$posts ) {
+			
+			die();
+			
+		}
+		
+		
 		// return JSON
-		echo json_encode( $r );
+		echo json_encode( $posts );
 		die();
 			
 	}
@@ -428,6 +458,7 @@ class acf_field_relationship extends acf_field {
 			'data-s'			=> '',
 			'data-post_type'	=> '',
 			'data-taxonomy'		=> '',
+			'data-paged'		=> 1,
 		);
 		
 		
@@ -670,9 +701,9 @@ class acf_field_relationship extends acf_field {
 							
 							?><li>
 								<input type="hidden" name="<?php echo $field['name']; ?>[]" value="<?php echo $post->ID; ?>" />
-								<span data-id="<?php echo $post->ID; ?>" class="acf-relationship-item">
+								<span data-id="<?php echo $post->ID; ?>" class="acf-rel-item">
 									<?php echo $this->get_post_title( $post, $field ); ?>
-									<a href="#" class="acf-icon small dark"><i class="acf-sprite-remove"></i></a>
+									<a href="#" class="acf-icon small dark" data-name="remove_item"><i class="acf-sprite-remove"></i></a>
 								</span>
 							</li><?php
 							

@@ -45,6 +45,10 @@ window.Select = window.Select or class Select
         @pick $(e.target).index()
       else
         @activate()
+      false
+
+    $('body').on 'click', (e) =>
+      @deactivate()
 
     $(window).on 'resize', =>
       @resize()
@@ -53,6 +57,9 @@ window.Select = window.Select or class Select
     for s in @selectables
       s.show()
 
+    $(document).on 'click.MenuClose', (e) =>
+      @deactivate()
+
     @el.addClass 'open'
     @active = true
 
@@ -60,6 +67,8 @@ window.Select = window.Select or class Select
     for s in @selectables
       unless s.active
         s.hide()
+
+    $(document).off 'click.MenuClose'
 
     @el.removeClass 'open'
     @active = false

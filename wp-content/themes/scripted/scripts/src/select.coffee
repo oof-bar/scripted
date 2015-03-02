@@ -45,10 +45,7 @@ window.Select = window.Select or class Select
         @pick $(e.target).index()
       else
         @activate()
-      false
-
-    $('body').on 'click', (e) =>
-      @deactivate()
+      e.stopPropagation()
 
     $(window).on 'resize', =>
       @resize()

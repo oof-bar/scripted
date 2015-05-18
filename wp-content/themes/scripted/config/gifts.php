@@ -22,6 +22,7 @@ function add_cpt_gifts ( ) {
     'description' => 'A gift is a successful charge to a credit card. We capture a few bits of info about the donor and save them here.',
     'public' => true,
     'publicaly_queryable' => false,
+    'exclude_from_search' => true,
     'query_var' => false,
     'show_ui' => true,
     'show_in_menu' => true,
@@ -30,7 +31,6 @@ function add_cpt_gifts ( ) {
     'hierarchical' => false,
     'supports' => array('title'),
     'has_archive' => false,
-    'query_var' => false,
     'rewrite' => array(
       'slug' => 'donation',
       'pages' => false

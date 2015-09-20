@@ -41,7 +41,8 @@
       ));
 
     } catch ( Stripe_CardError $e ) {
-      $error = $e->getJsonBody()['error'];
+      $error = $e->getJsonBody();
+      $error = $error['error'];
 
       wp_send_json_error(array( 
         'message' => $error['message'],

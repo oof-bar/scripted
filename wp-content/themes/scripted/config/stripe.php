@@ -22,7 +22,7 @@
 
 
     try {
-      $charge = Stripe_Charge::create(array(
+      $charge = \Stripe\Stripe_Charge::create(array(
         'amount' => $donor['amount'],
         'currency' => 'usd',
         'card' => $donor['stripe-token'],

@@ -923,6 +923,30 @@
 }
 
 /*
+  Alerts
+*/
+
+aside.notification {
+  padding: 1em 0;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .close {
+    float: right;
+    font-size: 2em;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75
+    }
+  }
+}
+  
+
+/*
   Footer
 */
 

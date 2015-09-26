@@ -10,8 +10,10 @@ body {
 }
 
 p {
-  margin-bottom: 1em;
   max-width: 45em;
+  & + p {
+    margin-top: 1em;
+  }
 }
 
 // Headers

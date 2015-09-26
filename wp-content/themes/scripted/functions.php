@@ -16,7 +16,7 @@
   require_once("config/mc.php");
 
   # Stripe
-  require_once("lib/stripe-php/lib/Stripe.php");
+  require_once("lib/stripe-php/init.php");
   require_once("config/stripe.php");
 
   # Underscore PHP Port

@@ -1,6 +1,6 @@
 <?
 
-  Stripe::setApiKey(SE_STRIPE_API_KEY);
+  \Stripe\Stripe::setApiKey(SE_STRIPE_API_KEY);
 
   add_action( 'wp_ajax_give', 'se_give' );
   add_action( 'wp_ajax_nopriv_give', 'se_give' );
@@ -22,7 +22,7 @@
 
 
     try {
-      $charge = Stripe_Charge::create(array(
+      $charge = \Stripe\Charge::create(array(
         'amount' => $donor['amount'],
         'currency' => 'usd',
         'card' => $donor['stripe-token'],

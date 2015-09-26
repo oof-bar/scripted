@@ -1,4 +1,4 @@
-<? if ( se_option('active') && !isset($_COOKIE['show_notification']) ) { ?>
+<? if ( se_option('active') && !isset($_COOKIE['notification_dismissed']) ) { ?>
   <aside class="notification blue">
     <div class="wrapper">
       <div class="column col-11 tablet-three-quarters">

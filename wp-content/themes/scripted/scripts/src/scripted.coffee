@@ -60,10 +60,13 @@ $ ->
           $(this).removeClass('open')
         , 250
 
-  $('aside.notification .close').on 'click', (e) ->
-    $('aside.notification').slideUp()
-    Cookies.set 'show_notification', 'false',
+  notification_dismissed = Cookies.get 'notification_dismissed'
+
+  if notification_dismissed then $('aside.notification').hide()
+
+  $('aside.notification').on 'click', 'a, .close', (e) ->
+    if $(e.target).is '.close' then $('aside.notification').slideUp()
+    Cookies.set 'notification_dismissed', true,
       expires: 3
       path: global.cookies_path
       secure: true
-

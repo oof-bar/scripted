@@ -36,6 +36,8 @@
       
       <? include get_partial('mobile-drawer') ?>
 
+      <? include get_partial('notification') ?>
+
       <section class="navigation">
         <div class="wrapper">
 

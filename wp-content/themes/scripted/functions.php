@@ -27,8 +27,8 @@
   $Parsedown = new Parsedown();
 
   # Get Site Option
-  function se_option ( $option = false ) {
-    $options = get_fields('option');
+  function se_option ( $option = false, $options_page = 'option' ) {
+    $options = get_fields($options_page);
     if ( $option && isset($options[$option]) ) {
       return $options[$option];
     } else {

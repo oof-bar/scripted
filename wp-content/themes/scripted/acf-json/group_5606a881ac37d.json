@@ -1,0 +1,58 @@
+{
+    "key": "group_5606a881ac37d",
+    "title": "Site-Wide Notifications",
+    "fields": [
+        {
+            "key": "field_5606a9666543f",
+            "label": "Active",
+            "name": "active",
+            "prefix": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Show Notification?",
+            "default_value": 0
+        },
+        {
+            "key": "field_5606a8926543e",
+            "label": "Notification Text",
+            "name": "notification_text",
+            "prefix": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-notifications"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "modified": 1443277217
+}

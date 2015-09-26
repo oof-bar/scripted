@@ -7,7 +7,9 @@
   wp_localize_script('scripted', 'global', array(
     'ajax_url' => admin_url('admin-ajax.php'),
     'environment' => SE_ENVIRONMENT,
-    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY
+    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY,
+    'cookie_path' => COOKIEPATH,
+    'cookie_domain' => COOKIE_DOMAIN
   ));
   wp_enqueue_script('scripted');
 
@@ -50,4 +52,7 @@
   wp_register_script('jquery-validate-extras', $scripts_path . 'src/lib/additional-methods.js', array('jquery', 'jquery-validate'), '1.13.0');
   wp_enqueue_script('jquery-validate-extras');
 
+  # Cookie Manipulation
+  wp_register_script('cookies', $scripts_path . 'src/lib/js.cookie.js', array(), '2.0.3');
+  wp_enqueue_script('cookies');
 

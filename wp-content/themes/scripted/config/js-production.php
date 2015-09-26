@@ -1,11 +1,12 @@
 <? # Production Scripts
   # ScriptEd Specific
   wp_register_script('app', get_template_directory_uri() . '/scripts/app.min.js', array('vendor'), '0.1.0', true);
-
   wp_localize_script('app', 'global', array(
     'ajax_url' => admin_url('admin-ajax.php'),
     'environment' => SE_ENVIRONMENT,
-    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY
+    'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY,
+    'cookie_path' => COOKIEPATH,
+    'cookie_domain' => COOKIE_DOMAIN
   ));
 
   wp_enqueue_script('app');

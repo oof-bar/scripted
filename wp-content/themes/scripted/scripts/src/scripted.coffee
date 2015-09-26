@@ -47,7 +47,7 @@ $ ->
       $('.donate-widget .instructions').addClass('active').slideDown()
 
 
-  # Main Navigation Dropdowna Menus
+  # Main Navigation Dropdown Menus
   if $('#menu-main-navigation').length
     # $('.menu-item-has-children').css('background-color', 'red')
     $('.menu-item-has-children').on 'mouseenter mouseleave', (e) ->
@@ -59,4 +59,11 @@ $ ->
         $(this).data 'delay', window.setTimeout =>
           $(this).removeClass('open')
         , 250
+
+  $('aside.notification .close').on 'click', (e) ->
+    $('aside.notification').slideUp()
+    Cookies.set 'show_notification', 'false',
+      expires: 3
+      path: global.cookies_path
+      secure: true
 

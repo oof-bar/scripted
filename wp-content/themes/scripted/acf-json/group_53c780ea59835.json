@@ -11,6 +11,11 @@
             "instructions": "Only adjust this if records need to be adjusted, or an invoice is to be made for a donor. Otherwise, this is intended as a permanent record of the donation!",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "$",
@@ -28,6 +33,11 @@
             "instructions": "Email of the donor. Optional in the form.",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -45,6 +55,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -52,6 +67,120 @@
             "maxlength": "",
             "readonly": 0,
             "disabled": 0
+        },
+        {
+            "key": "field_561982a1297e0",
+            "label": "Recurring",
+            "name": "recurring",
+            "prefix": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0
+        },
+        {
+            "key": "field_561984bd297e2",
+            "label": "Stripe Customer ID",
+            "name": "customer_id",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561982a1297e0",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_5619981e0cdee",
+            "label": "Stripe Subscription ID",
+            "name": "subscription_id",
+            "prefix": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561982a1297e0",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_561997d9297e3",
+            "label": "Subscription Status",
+            "name": "subscription_status",
+            "prefix": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561982a1297e0",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "active": "Active",
+                "canceled: Canceled": "canceled: Canceled"
+            },
+            "default_value": {
+                "": ""
+            },
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "disabled": 0,
+            "readonly": 0
         }
     ],
     "location": [
@@ -70,5 +199,6 @@
     "instruction_placement": "label",
     "hide_on_screen": [
         "slug"
-    ]
+    ],
+    "modified": 1444517947
 }

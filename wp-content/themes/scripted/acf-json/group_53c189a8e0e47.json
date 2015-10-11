@@ -11,6 +11,11 @@
             "instructions": "Add tags that describe ScriptEd's content. These will be used in a \"meta tag\" to offer search engines an easy way to index it and associate the content with terms that might not naturally appear in the writing.",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "min": "",
             "max": "",
             "layout": "table",
@@ -25,7 +30,11 @@
                     "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
@@ -45,6 +54,11 @@
             "instructions": "Use the ID of the MailChimp list you wish to use for subscriptions through the footer. The signup form will not appear without this.",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -62,12 +76,104 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "post_type": [
                 "page"
             ],
             "taxonomy": "",
             "allow_null": 1,
             "multiple": 0
+        },
+        {
+            "key": "field_5619c5ccf93a9",
+            "label": "Recurring Donation Plans",
+            "name": "recurring_donation_plans",
+            "prefix": "",
+            "type": "repeater",
+            "instructions": "These options determine what Stripe \u201cPlans\u201d are made available to donors, in the donation form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": 1,
+            "max": "",
+            "layout": "table",
+            "button_label": "Add Plan",
+            "sub_fields": [
+                {
+                    "key": "field_5619c5eff93aa",
+                    "label": "Plan Name",
+                    "name": "label",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "The user will see this as the menu item\u2019s label in the form",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_5619c636f93ab",
+                    "label": "Plan ID",
+                    "name": "id",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "This is the Plan's ID, registered with Stripe. It's important that these match, or donors will have their form submissions rejected.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_5619c688f93ac",
+                    "label": "Plan Amount",
+                    "name": "amount",
+                    "prefix": "",
+                    "type": "text",
+                    "instructions": "How much is each installment of this plan?",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "$",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ]
         },
         {
             "key": "field_53ddba4efc63e",
@@ -78,6 +184,11 @@
             "instructions": "This will appear on a successful donation page, above information about the specific gift.",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "toolbar": "basic",
             "media_upload": 1,
@@ -92,6 +203,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "ScriptEd is a New York based 501(c)(3) not for profit organization.",
             "placeholder": "",
             "prepend": "",
@@ -109,6 +225,11 @@
             "instructions": "Where would you like general contact ",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -123,6 +244,11 @@
             "instructions": "Twitter Handle",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -140,6 +266,11 @@
             "instructions": "URL of the ScriptEd FaceBook page, including the leading http:\/\/ or https:\/\/",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -157,6 +288,11 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
@@ -177,5 +313,6 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ""
+    "hide_on_screen": "",
+    "modified": 1444529982
 }

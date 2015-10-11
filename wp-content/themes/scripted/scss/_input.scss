@@ -12,6 +12,17 @@ label {
     display: block;
     margin-bottom: 1em;
   }
+
+  &.inline-label {
+    margin-top: 0;
+    
+    .field-label {
+      display: inline-block;
+      margin-bottom: 0;
+      margin-left: 1em;
+      vertical-align: middle;
+    }
+  }
 }
 
 input, .input {
@@ -24,7 +35,7 @@ input, .input {
   margin: 0;
   @include animate();
 
-  &[type=text], &[type=email], &[type=number], &[type=password] {
+  &[type="text"], &[type="email"], &[type="number"], &[type="password"], &[type="checkbox"] {
     width: 100%;
     display: block;
     border: 2px solid $grey-light;
@@ -39,6 +50,17 @@ input, .input {
     }
     &.error {
       border-color: $orange;
+    }
+  }
+
+  &[type="checkbox"] {
+    background: $white;
+    display: inline-block;
+    width: auto;
+    padding: 0.8em;
+    vertical-align: middle;
+    &:checked {
+      border-color: $grey-dark;
     }
   }
 
@@ -77,16 +99,6 @@ em.error {
 .placeholder {
   position: relative;
 
-}
-
-#select-cc-expiry-month {
-  // display: inline-block;
-  // width: 3em;
-}
-
-#select-cc-expiry-year {
-  // display: inline-block;
-  // width: 5em;
 }
 
 .select {

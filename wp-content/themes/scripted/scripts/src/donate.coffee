@@ -6,6 +6,10 @@
 
 window.Give = window.Give or class Give
   constructor: (settings) ->
+    @settings = $.extend true,
+      rules: {}
+      messages: {}
+    , settings
     @form = $('#give')
     @price_format = /^\d{1,}(\.\d{2})?/
     @payment = new window.Give.Auth @
@@ -16,7 +20,6 @@ window.Give = window.Give or class Give
     # console.log @
 
   watch: ->
-
     @form.on 'submit', (e) =>
       # console.log "Preventing Real Submit"
       e.preventDefault()
@@ -25,11 +28,12 @@ window.Give = window.Give or class Give
         @authorize()
       else false
 
-    # This picks up inline data-* attributes and builds the rules.
     @form.validate
       debug: ( (global.environment == 'production') ? false : true )
       errorElement: 'em'
-      ignore: ""
+      ignore: ''
+      rules: @settings.rules
+      messages: @settings.messages
 
     $('#amount-formatted').on 'change', (e) =>
       $('#amount-cents').val @to_cents($(e.target).val())
@@ -124,7 +128,6 @@ window.Give.Auth = window.Give.Auth or class Auth
       error.destroy()
     @errors = []
 
-
   params: ->
     {
       number: $('#cc-number').val().replace(/[^\d]/g, '');
@@ -171,7 +174,9 @@ window.Give.Message = window.Give.Message or class Message
 
 $ ->
   if ( $('#give').length )
-    window.SE.Donate = window.SE.Donate or new window.Give()
+    window.SE.Donate = window.SE.Donate or new window.Give
+      rules: window.SE.Storage.donation_form_rules
+      messages: window.SE.Storage.donation_form_messages
 
     Stripe.setPublishableKey global.stripe_publishable_key
 
@@ -179,30 +184,23 @@ $ ->
       location: '#select-cc-expiry-month'
       input: '#cc-expiry-month'
       default: ( new Date().getMonth() )
-      speed: 150
-    ,
-    (->
-      months = []
-      for month in [1..12]
-        months.push
-          name: month.toString()
-          value: month
-      months
-    ).call()
-
 
     window.SE.UI.select_year = new window.Select
       location: '#select-cc-expiry-year'
       input: '#cc-expiry-year'
-      default: 0
-      speed: 150
-    ,
-    (->
-      years = []
-      now = new Date()
-      for year in [now.getFullYear()..(now.getFullYear()+10)]
-        years.push
-          name: year.toString()
-          value: year
-      years
-    ).call()
+
+    window.SE.UI.select_plan = new window.Select
+      location: '#select-plan'
+      input: '#plan'
+
+    $('#recurring').on 'change', (e) ->
+      if $(this).is ':checked'
+        $('#amount-formatted').hide()
+        $('#select-plan').show()
+        $('#amount-formatted').validate()
+      else
+        $('#amount-formatted').show()
+        $('#select-plan').hide()
+    .trigger 'change'
+
+

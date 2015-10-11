@@ -22,7 +22,10 @@
   wp_enqueue_script('helpers');
 
   # Donate
-  wp_register_script('donate', $scripts_path . 'donate.js', array('jquery','stripe'), '0.1.0', true);
+  wp_register_script('donate-config', $scripts_path . 'donate-form-config.js', array('jquery', 'stripe'), '0.1.0', true);
+  wp_enqueue_script('donate-config');
+
+  wp_register_script('donate', $scripts_path . 'donate.js', array('jquery', 'stripe', 'donate-config'), '0.1.0', true);
   wp_enqueue_script('donate');
 
   # Volunteer

@@ -2,6 +2,7 @@ window.SE =
   loaded_at: Date.now()
   Validators: {}
   UI: {}
+  Storage: {}
 
 
 $ ->

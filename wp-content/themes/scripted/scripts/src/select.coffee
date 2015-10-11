@@ -1,9 +1,5 @@
 window.Select = window.Select or class Select
   constructor: (settings, map) ->
-    # Save a raw copy of the provided array of options:
-    @options = map
-
-
     # Open a new Array to store our SelectOptions class instances
     @selectables = []
 
@@ -15,12 +11,21 @@ window.Select = window.Select or class Select
       # The index of the default option
       default: settings.default or 0
       # The transition speed for the menu opening
-      speed: settings.speed or 250
+      speed: settings.speed or 150
       # Where we'll put the new value
       input: $(settings.input)
       # Make the callback a member of this class. We'll call it in .change()
-      callback: settings.callback or ->
+      callback: settings.callback or (option, menu) ->
         true
+
+    @options = map or (=>
+      values = []
+      @settings.input.find('option').each (index, option) =>
+        values.push
+          name: $(option).text()
+          value: $(option).val()
+      values
+    )()
 
     @build()
     @pick @settings.default
@@ -38,6 +43,8 @@ window.Select = window.Select or class Select
 
     @el.appendTo @settings.location
 
+    @settings.input.hide()
+
   watch: ->
 
     @el.on 'click', '.option', (e) =>
@@ -45,6 +52,7 @@ window.Select = window.Select or class Select
         @pick $(e.target).index()
       else
         @activate()
+      e.preventDefault()
       e.stopPropagation()
 
     $(window).on 'resize', =>
@@ -78,6 +86,7 @@ window.Select = window.Select or class Select
     @current = id
     @update_input()
     @deactivate()
+    @settings.callback @selectables[@current], @
 
   update_input: ->
     @settings.input.val @selectables[@current].value

@@ -3,7 +3,7 @@
 
           <div class="column col-3 tablet-half mobile-full">
             <div class="wordmark bold serif text-orange">
-              <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/images/logo.png" />
+              <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
             </div>
             <div class="non-profit-note add-margin-bottom">
               <?= se_option('np_notice') ?>

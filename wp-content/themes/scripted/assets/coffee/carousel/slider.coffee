@@ -1,6 +1,4 @@
-# Testimonials Slider
-
-window.Slider = window.Slider or class Slider
+module.exports = class Slider
   constructor: (settings) ->
     @options =
       container: $( settings.container or '.slider' )

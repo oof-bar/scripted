@@ -659,7 +659,7 @@
       color: $grey-darker;
       cursor: pointer;
       padding: 1em 1.75em 1em 0;
-      background: transparent image-url('arrow-open.png') right center no-repeat;
+      background: transparent url('../images/arrow-open.png') right center no-repeat;
       @include animate($property: color);
       &:hover {
         color: $black;
@@ -673,7 +673,7 @@
     }
     &.open {
       .question {
-        background-image: image-url('arrow-close.png');
+        background-image: url('../images/arrow-close.png');
         color: $black;
       }
     }

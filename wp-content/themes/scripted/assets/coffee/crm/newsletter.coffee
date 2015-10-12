@@ -1,8 +1,4 @@
-#
-# Newsletter Signup
-#
-
-window.Newsletter = window.Newsletter or class Newsletter
+module.exports = class Newsletter
   constructor: (settings) ->
     @options =
       form: $(settings.form or "#newsletter-signup")
@@ -82,17 +78,3 @@ window.Newsletter = window.Newsletter or class Newsletter
 
   hide_form: ->
     @options.form.hide()
-
-
-
-$ ->
-  window.SE.Signup = window.SE.Signup or new Newsletter({
-    form: "#se-newsletter-signup"
-    email_field: "#se-email-subscriber"
-    api: global.ajax_url
-    action: "email_signup"
-    output: "#email-response"
-    locked_class: 'locked'
-    location: 'footer'
-    secure_token: $('#se-email-nonce').val()
-  })

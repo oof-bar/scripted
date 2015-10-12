@@ -21,13 +21,13 @@ function get_narrative_fields ( $narrative ) {
 function clean_narrative_fields ( $post ) {
   if ( ( get_post_type($post) == 'page' ) && ( get_page_template_slug( $post ) == 'narrative.php' ) ) {
     delete_transient( get_narrative_cache_name($post) );
-    get_narrative_fields( $post );
+    get_narrative_fields( get_post($post) );
   }
 }
 
 # Abstract the building of the transient name
-function get_narrative_cache_name ( $narrative ) {
-  return ( 'narrative_' . $narrative );
+function get_narrative_cache_name ( $narrative_id ) {
+  return ( 'narrative_' . $narrative_id );
 }
 
 add_action('save_post', 'clean_narrative_fields');

@@ -1,4 +1,6 @@
-window.Select = window.Select or class Select
+Option = require './option'
+
+module.exports = class Menu
   constructor: (settings, map) ->
     # Open a new Array to store our SelectOptions class instances
     @selectables = []
@@ -39,7 +41,7 @@ window.Select = window.Select or class Select
     # @placeholder = $('<div/>').addClass('input select-placeholder').appendTo(@settings.location)
 
     for option, index in @options
-      @selectables.push new window.SelectOption option.name, option.value, @, index
+      @selectables.push new Option option.name, option.value, @, index
 
     @el.appendTo @settings.location
 
@@ -95,32 +97,3 @@ window.Select = window.Select or class Select
     @settings.location.css
       height: @selectables[@current].el.outerHeight()
       # width: @selectables[@current].el.outerWidth()
-
-
-window.SelectOption = window.SelectOption or class SelectOption
-  constructor: (name, value, selector, index) ->
-    @id = index
-    @name = name
-    @value = value
-    @parent = selector
-
-    @el = $('<div/>').addClass('option').html(name).append('<span class="icon-check"/>')
-
-    @add()
-
-  add: ->
-    @parent.el.append @el
-
-  show: ->
-    @el.slideDown @parent.settings.speed
-
-  hide: ->
-    @el.slideUp @parent.settings.speed
-
-  activate: ->
-    @el.addClass 'active'
-    @active = true
-
-  deactivate: ->
-    @el.removeClass 'active'
-    @active = false

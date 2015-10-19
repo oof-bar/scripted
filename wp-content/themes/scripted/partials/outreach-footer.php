@@ -7,17 +7,17 @@
     </div>
     <div class="column col-9 tablet-full">
       <div class="outreach-links">
-        <? if ( $contact_email = se_option('contact_email') ) { ?>
+        <? if ( $contact_email = ScriptEd\Helpers::option('contact_email') ) { ?>
           <span class="small caps link email">
             Send Us An <a href="mailto:<?= $contact_email ?>" title="Email ScriptEd">email</a>
           </span>
         <? } ?>
-        <? if ( $twitter = se_option('twitter') ) { ?>
+        <? if ( $twitter = ScriptEd\Helpers::option('twitter') ) { ?>
           <span class="small caps link twitter">
             Follow Us On <a href="https://twitter.com/<?= $twitter ?>" target="_blank" title="Follow us on Twitter">Twitter</a>
           </span>
         <? } ?>
-        <? if ( $facebook = se_option('facebook') ) { ?>
+        <? if ( $facebook = ScriptEd\Helpers::option('facebook') ) { ?>
           <span class="small caps link facebook">
             Like Us On <a href="<?= $facebook ?>" target="_blank" title="Like us on FaceBook">FaceBook</a>
           </span>

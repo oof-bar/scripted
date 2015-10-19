@@ -8,6 +8,17 @@ module.exports = ->
     $('.blink').toggleClass 'visible'
   , 1000
 
+  # Menu Item Drop-downs
+  $('.menu-item-has-children').on 'mouseenter mouseleave', (e) ->
+    if e.type == 'mouseenter'
+      window.clearTimeout $(this).data('delay')
+      $(this).addClass('open').siblings().removeClass('open')
+    else
+      # console.log 'Leave'
+      $(this).data 'delay', window.setTimeout =>
+        $(this).removeClass('open')
+      , 250
+
   # Banner/Notification
   notification_dismissed = Cookie.get 'notification_dismissed'
 

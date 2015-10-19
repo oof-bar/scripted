@@ -6,24 +6,24 @@
               <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
             </div>
             <div class="non-profit-note add-margin-bottom">
-              <?= se_option('np_notice') ?>
+              <?= ScriptEd\Helpers::option('np_notice') ?>
             </div>
-            <? if ( se_option("mailchimp_list") ) include get_partial('newsletter-signup') ?>
+            <? if ( ScriptEd\Helpers::option('mailchimp_list') ) ScriptEd\Helpers::partial('newsletter-signup') ?>
           </div>
 
           <div class="column col-2 push-1 tablet-half mobile-hide secondary-nav">
             <span class="caps semi-bold small">Explore</span> 
             <div class="add-margin-top caps bold small link-grey">
-              <? wp_nav_menu(array(
+              <? wp_nav_menu([
                 'theme_location' => 'footer',
                 'container_class' => 'footer-nav'
-              )); ?>
+              ]); ?>
             </div>
           </div>
           
           <div class="column col-6 tablet-full">
             <span class="caps semi-bold small">Sponsors</span>
-            <? if ( $sponsors = se_option('sponsors') ) { ?>
+            <? if ( $sponsors = ScriptEd\Helpers::option('sponsors') ) { ?>
               <div class="sponsors add-margin-top">
                 <? foreach ( $sponsors as $sponsor ) { ?>
                   <div class="sponsor">
@@ -39,11 +39,11 @@
         </div>
       </section>
 
-      <? include get_partial('outreach-footer') ?>
+      <? ScriptEd\Helpers::partial('outreach-footer') ?>
 
     </div>
 
-    <? include get_partial('analytics'); ?>
+    <? ScriptEd\Helpers::partial('analytics'); ?>
 
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 

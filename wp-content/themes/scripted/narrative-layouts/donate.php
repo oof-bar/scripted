@@ -5,7 +5,7 @@
   <div class="wrapper donate-widget">
 
     <div class="column col-12">
-      <form action="<?= se_option('donate_page') ?>" method="post">
+      <form action="<?= ScriptEd\Helpers::option('donate_page') ?>" method="post">
         <p class="centered large">
           I want to donate <span class="nowrap"><span class="amount-prefix">$</span><input type="text-center" min="1" name="amount" class="amount inline" /></span> to support future&nbsp;developers.
         </p>

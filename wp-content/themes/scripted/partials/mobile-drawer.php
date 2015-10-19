@@ -7,6 +7,6 @@
     'container_class' => 'mobile-nav'
   )) ?>
   <div class="drawer-footer">
-    <div class="wrap small"><?= se_option('np_notice') ?></div>
+    <div class="wrap small"><?= ScriptEd\Helpers::option('np_notice') ?></div>
   </div>
 </section>

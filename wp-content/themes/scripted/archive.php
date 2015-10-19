@@ -1,18 +1,17 @@
 <? get_header(); ?>
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero', ['post' => $post]) ?>
 
-<? include get_partial('blog-latest') ?>
+<?= ScriptEd\Helpers::partial('blog-latest') ?>
 
 <section class="main archive">
   <div class="wrapper">
 
-    <? include get_partial('blog-navigation') ?>
+    <?= ScriptEd\Helpers::partial('blog-navigation') ?>
 
     <div class="column col-7 tablet-three-quarters mobile-full">
+      <?= ScriptEd\Helpers::partial('archive-loop', ['post' => $post]) ?>
 
-      <? include get_partial('archive-loop') ?>
-
-      <? include get_partial('pagination') ?>
+      <?= ScriptEd\Helpers::partial('pagination') ?>
       
     </div>
     

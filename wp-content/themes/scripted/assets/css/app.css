@@ -1502,6 +1502,14 @@ input[type="checkbox"], .input[type="checkbox"] {
   width: auto;
   padding: 0.8em;
   vertical-align: middle;
+  cursor: pointer;
+}
+input[type="checkbox"]:hover, .input[type="checkbox"]:hover {
+  border-color: #aaaaaa;
+}
+input[type="checkbox"]:focus, .input[type="checkbox"]:focus {
+  border-color: #f2f2f2;
+  background: #ffffff;
 }
 input[type="checkbox"]:checked, .input[type="checkbox"]:checked {
   border-color: #aaaaaa;

@@ -59,6 +59,16 @@ input, .input {
     width: auto;
     padding: 0.8em;
     vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      border-color: $grey-dark;
+    }
+
+    &:focus {
+      border-color: $grey-light;
+      background: $white;
+    }
+
     &:checked {
       border-color: $grey-dark;
     }

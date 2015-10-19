@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) OR exit;
 Plugin Name:  WordPress Post Type Archive Links
 Plugin URI:   https://github.com/stephenharris/WordPress-Post-Type-Archive-Links
 Description:  Adds a MetaBox to the Appearance > Menu page to add post type archive links
-Version:      1.3.0
+Version:      1.3.1
 Author:       Stephen Harris
 Author URI:   https://github.com/stephenharris/
 Author Email: contact@stephenharris.info
@@ -358,9 +358,9 @@ class Post_Type_Archive_Links {
 					'filter' => FILTER_SANITIZE_STRING,
 					'flags' => FILTER_REQUIRE_ARRAY
 				)
-			),
-			true
+			)
 		);
+		
 		empty( $post_types['post_types'] ) AND exit;
 		// return post types if chosen
 		return array_values( $post_types['post_types'] );

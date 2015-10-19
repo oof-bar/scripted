@@ -11,7 +11,7 @@
             'Student Voice' => 'se_student_voice'
           ) ?>
           <? foreach ( $recent as $name => $post_type ) { ?>
-            <? $last = last_post($post_type); ?>
+            <? $last = ScriptEd\Helpers::last_post($post_type); ?>
             <? if ( $last->post_count ) { $latest = $last->posts[0] ?>
               <div class="cell mobile-row latest-post <?= strtolower($name) ?>">
                 <div class="type small caps text-grey-dark">

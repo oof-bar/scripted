@@ -1,15 +1,18 @@
 <? get_header(); ?>
 <? $gift = get_fields() ?>
 
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 
 <? if ( !post_password_required() ) { ?>
   <section class="give-confirmation">
     <div class="wrapper intro">
 
       <div class="column col-8 push-2 greedy">
-        <?= se_option('give_memo') ?>
+        <?= ScriptEd\Helpers::option('give_memo') ?>
+        <? ScriptEd\Util::dump($gift) ?>
       </div>
+      
+
 
       <div class="column col-8 push-2 greedy">
         Please find a confirmation of your donation, below. A copy has been mailed to <strong><?= $gift['email'] ?></strong> for your records.

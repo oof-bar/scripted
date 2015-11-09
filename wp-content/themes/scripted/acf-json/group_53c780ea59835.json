@@ -3,12 +3,28 @@
     "title": "Gift",
     "fields": [
         {
+            "key": "field_563fbe0ae3dc6",
+            "label": "Disclaimers",
+            "name": "disclaimers",
+            "prefix": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Adjust these records only if changes have happened elsewhere (like the Stripe dashboard), or an invoice is to be made for a donor.\r\nOtherwise, this is intended as a permanent record of the donation!"
+        },
+        {
             "key": "field_53c780f0a5d3d",
             "label": "Amount",
             "name": "amount",
             "prefix": "",
             "type": "text",
-            "instructions": "Only adjust this if records need to be adjusted, or an invoice is to be made for a donor. Otherwise, this is intended as a permanent record of the donation!",
+            "instructions": "Original one-time or recurring donation amount.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -74,7 +90,7 @@
             "name": "recurring",
             "prefix": "",
             "type": "true_false",
-            "instructions": "",
+            "instructions": "Did the donor opt for a recurring plan?",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -90,8 +106,8 @@
             "label": "Stripe Customer ID",
             "name": "customer_id",
             "prefix": "",
-            "type": "text",
-            "instructions": "",
+            "type": "password",
+            "instructions": "ID for the customer that Stripe provided upon creation of the subscription. We use this to manage the state of the subscription, so it must not be changed!",
             "required": 0,
             "conditional_logic": [
                 [
@@ -107,11 +123,9 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
@@ -120,8 +134,8 @@
             "label": "Stripe Subscription ID",
             "name": "subscription_id",
             "prefix": "",
-            "type": "text",
-            "instructions": "",
+            "type": "password",
+            "instructions": "The unique ID for this donor's subscription. We use this to manage the state of the subscription, so it must not be changed!",
             "required": 0,
             "conditional_logic": [
                 [
@@ -137,11 +151,9 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": "",
             "readonly": 0,
             "disabled": 0
         },
@@ -151,7 +163,7 @@
             "name": "subscription_status",
             "prefix": "",
             "type": "select",
-            "instructions": "",
+            "instructions": "The last state of the subscription reported by Stripe. Only update this if you've made changes to the donor\u2019s subscription in the Stripe dashboard.",
             "required": 0,
             "conditional_logic": [
                 [
@@ -169,10 +181,14 @@
             },
             "choices": {
                 "active": "Active",
-                "canceled: Canceled": "canceled: Canceled"
+                "trialing": "Trial",
+                "past_due": "Past Due",
+                "canceled": "Canceled",
+                "unpaid": "Unpaid",
+                "manual": "Manual"
             },
             "default_value": {
-                "": ""
+                "manual": "manual"
             },
             "allow_null": 0,
             "multiple": 0,
@@ -195,10 +211,10 @@
     "menu_order": 0,
     "position": "normal",
     "style": "default",
-    "label_placement": "top",
+    "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": [
         "slug"
     ],
-    "modified": 1444517947
+    "modified": 1447028636
 }

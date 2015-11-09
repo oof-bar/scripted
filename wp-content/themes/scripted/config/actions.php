@@ -108,4 +108,14 @@ class Actions {
   public static function wp_ajax_nopriv_email_signup () {
     Newsletter::signup();
   }
+
+  # Donations
+
+  public static function wp_ajax_give () {
+    Gift::process();
+  }
+
+  public static function wp_ajax_nopriv_give () {
+    Gift::process();
+  }
 }

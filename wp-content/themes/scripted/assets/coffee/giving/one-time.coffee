@@ -7,15 +7,15 @@ module.exports = class AuthType
 
   charge: ->
     @clear_errors()
-    Stripe.card.createToken @params(), =>
-      @after_auth()
+    Stripe.card.createToken @params(), (status, response) =>
+      @after_auth status, response
 
   after_auth: (status, @response) ->
-    if @response
+    if @response.error
       @errors.push new Notification @response.error.message, 'error', true, 'icon-ban'
       @parent.unlock()
     else
-      # console.log response
+      console.log @response
       @parent.authorize true
 
   clear_errors: ->

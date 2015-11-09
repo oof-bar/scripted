@@ -1,4 +1,5 @@
 OneTimePayment = require './one-time'
+Notification = require 'notifications/message'
 
 module.exports = class Give
   constructor: (settings) ->
@@ -43,14 +44,14 @@ module.exports = class Give
       @payment.charge()
 
   add_token: ->
-    $('#stripe-token').val @payment.stripe.id
+    $('#stripe-token').val @payment.response.id
 
   create: ->
     @clear_errors()
     @response = {}
 
     $.ajax
-      url: global.ajax_url
+      url: ScriptEd.ajax_url
       type: 'POST'
       data: @params()
       success: (data, status, jqxhr) =>
@@ -65,14 +66,15 @@ module.exports = class Give
 
   after_create: (response) ->
     @response = response
-    # console.log response
+    console.log response
 
     if response.success
       # console.log response
-      window.location = response.data.confirmation_path
+      @unlock()
+      # window.location = response.data.confirmation_path
     else
       @unlock()
-      @errors.push new window.Give.Message( response.data.message, 'error', true, 'icon-ban' )
+      @errors.push new Notification(response.data.message, 'error', true, 'icon-ban')
 
   lock: ->
     @form.addClass 'locked'

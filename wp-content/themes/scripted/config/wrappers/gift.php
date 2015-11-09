@@ -39,7 +39,7 @@ class Gift {
           'amount' => $charge->subscription['plan']['amount'],
           'recurring' => true,
           'charge' => $charge,
-          'status' => $charge->status
+          'status' => $charge->subscription['plan']['status']
         ]);
       } else {
         $charge = Stripe\Charge::create([

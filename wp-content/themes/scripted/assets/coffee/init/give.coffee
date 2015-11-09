@@ -5,7 +5,7 @@ Config = require 'data/donation-validation-rules'
 module.exports = ->
   console.log 'Giving'
 
-  Stripe.setPublishableKey global.stripe_publishable_key
+  Stripe.setPublishableKey ScriptEd.stripe_publishable_key
 
   new DonationForm Config
 

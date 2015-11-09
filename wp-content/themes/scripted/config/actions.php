@@ -19,13 +19,15 @@ class Actions {
   }
 
   public static function init() {
-    add_post_type_support('page', 'excerpt');
     Initializers::create_post_types();
+    Initializers::create_thumbnail_versions();
     Initializers::register_menus();
+    Initializers::add_options_pages();
+    add_post_type_support('page', 'excerpt');
   }
 
   public static function registered_post_type ($post_type, $args) {
-    # Util::dump(['type' => $post_type, 'args' => $args]);
+    // Util::dump(['type' => $post_type, 'args' => $args]);
   }
 
   public static function admin_init () {
@@ -90,6 +92,11 @@ class Actions {
       default:
         break;
     }
+  }
+
+  # CMS Events
+  public static function save_post ($post) {
+    Narrative::clean($post);
   }
 
   # AJAX Actions

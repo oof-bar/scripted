@@ -1,6 +1,6 @@
 <section class="give-form">
 
-  <? $amount = ( ( isset($_POST['amount']) && $_POST['amount'] ) ? $_POST['amount'] : 25 ); ?>
+  <? $amount = (isset($_POST['amount']) && $_POST['amount']) ? $_POST['amount'] : 25; ?>
 
   <form id="give">
 
@@ -56,7 +56,7 @@
         </label>
         <div id="select-plan" class="placeholder"></div>
         <select id="plan" class="plan" name="plan-id">
-          <? foreach ( se_option('recurring_donation_plans') as $plan ) { ?>
+          <? foreach ( ScriptEd\Helpers::option('recurring_donation_plans') as $plan ) { ?>
             <option value="<?= $plan['id'] ?>"><?= $plan['label'] ?></option>
           <? } ?>
         </select>

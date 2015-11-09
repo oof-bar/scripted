@@ -1,6 +1,9 @@
 <? namespace ScriptEd;
 
-use WP_Query, \html, \tpl;
+use WP_Query,
+    html,
+    tpl,
+    a;
 
 class Helpers {
   public static function page_title ($post) {
@@ -14,7 +17,7 @@ class Helpers {
       return post_type_archive_title(null, false);
     } else if ( is_single() or is_page() ) {
       if ( count($ancestors = get_post_ancestors($post)) ) {
-        $parent = \__::first($ancestors);
+        $parent = a::first($ancestors);
         return '<span class="parent-page"><a href="' . get_permalink($parent) . '">' . get_the_title($parent) . '</a>:</span> <span class="subpage-title light">' . get_the_title() . '</span>';
       } else {
         return get_the_title();
@@ -36,6 +39,7 @@ class Helpers {
         'post_parent' => $page->ID,
         'orderby' => 'menu_order'
       ]);
+
       # Prepend this page, because it won't be in the results.
       array_unshift($list, $page);
     } else {
@@ -43,12 +47,38 @@ class Helpers {
       $list = get_posts([
         'post_type' => 'page',
         'post_status' => 'publish',
-        'post_parent' => \__::first($tree),
+        'post_parent' => a::first($tree),
         'orderby' => 'menu_order'
-      ]
-      );
+      ]);
+
       # Prepend the parent page, because it won't be in the results.
-      array_unshift($list, get_post(\__::first($tree)));
+      array_unshift($list, get_post(a::first($tree)));
+    }
+    return $list;
+  }
+
+  public static function page_menu ($page) {
+    $tree = get_post_ancestors( $page );
+    if ( !count( $tree ) ) {
+      // No parent pages. Get the children pages.
+      $list = get_posts( array(
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'post_parent' => $page->ID,
+        'orderby' => 'menu_order'
+      ));
+      # Prepend this page, because it won't be in the results.
+      array_unshift($list, $page);
+    } else {
+      // There are parent pages.
+      $list = get_posts( array(
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'post_parent' => a::first($tree),
+        'orderby' => 'menu_order'
+      ));
+      # Prepend the parent page, because it won't be in the results.
+      array_unshift($list, get_post(a::first($tree)));
     }
     return $list;
   }
@@ -63,7 +93,7 @@ class Helpers {
 
   public static function meta_tags () {
     if ( $tags = static::option('tags') ) {
-      $tag_list = \__::pluck( $tags, 'tag');
+      $tag_list = a::extract($tags, 'tag');
       return implode(',', $tag_list);
     }
   }

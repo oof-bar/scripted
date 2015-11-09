@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $voice = get_fields(); ?>
 
 <div <? post_class('post student-voice'); ?>>

@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $voice = get_fields(); ?>
 
 <div class="wrapper student-voice">

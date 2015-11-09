@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $event = get_fields(); ?>
 
 <div class="wrapper event">

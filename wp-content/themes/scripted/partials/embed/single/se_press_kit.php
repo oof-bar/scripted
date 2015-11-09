@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $kit = get_fields(); ?>
 
 <div class="wrapper press-kit">

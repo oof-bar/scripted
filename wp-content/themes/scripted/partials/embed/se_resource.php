@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $resource = get_fields(); ?>
 
 <div <? post_class('post resource'); ?>>

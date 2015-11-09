@@ -1,6 +1,6 @@
 <? /* Template Name: Narrative */ ?>
 <? get_header(); ?>
-<? $narrative = get_narrative_fields( $post ); ?>
+<? $narrative = ScriptEd\Narrative::get_fields($post); ?>
 <? $page_title = get_the_title(); ?>
 
 <? if ( $narrative['hero'] ) { ?>
@@ -28,12 +28,12 @@
 
 <? } else { ?>
 
-  <? include get_partial('hero') ?>
+  <?= ScriptEd\Helpers::partial('hero') ?>
 
 <? } ?>
 
 <? foreach ( $narrative['layout'] as $section ) { ?>
-  <? include get_narrative_section($section['acf_fc_layout']); ?>
+  <? include ScriptEd\Narrative::get_section($section['acf_fc_layout']); ?>
 <? } ?>
 
 <? get_footer(); ?>

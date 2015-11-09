@@ -40,7 +40,7 @@ input, .input {
     display: block;
     border: 2px solid $grey-light;
     background-color: $grey-light;
-    padding: 0.8em 1em 0.8em 1em;
+    padding: 0.8em 1em 0.7em 1em;
     &:hover {
       border-color: $grey-mid;
     }
@@ -60,6 +60,20 @@ input, .input {
     padding: 0.8em;
     vertical-align: middle;
     cursor: pointer;
+    position: relative;
+
+    &::before {
+      display: none;
+      position: absolute;
+      font-family: 'feather';
+      content: '\e116';
+      color: $grey-dark;
+      top: 2px;
+      left: 0;
+      text-align: center;
+      width: 100%;
+    }
+
     &:hover {
       border-color: $grey-dark;
     }
@@ -71,10 +85,14 @@ input, .input {
 
     &:checked {
       border-color: $grey-dark;
+
+      &::before {
+        display: block;
+      }
     }
   }
 
-  &.button{
+  &.button {
     margin-top: 1em;
   }
 }

@@ -1,5 +1,5 @@
 <? get_header(); ?>
-<?= ScriptEd\Helpers::partial('hero', ['post' => $post]) ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 
 <?= ScriptEd\Helpers::partial('blog-latest') ?>
 

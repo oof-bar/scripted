@@ -1,5 +1,7 @@
 <? namespace ScriptEd;
 
+use Stripe;
+
   /*
     Helpers
   */
@@ -20,10 +22,11 @@
 
   # Stripe
   require_once("lib/stripe-php/init.php");
-  require_once("config/stripe.php");
+  // require_once("config/stripe.php");
+  Stripe\Stripe::setApiKey(SE_STRIPE_API_KEY);
 
   # Underscore PHP Port
-  require_once("lib/Underscore.php");
+  // require_once("lib/Underscore.php");
 
   # PHP Markdown
   require_once("lib/Parsedown.php");
@@ -125,6 +128,7 @@
   */
 
   # Sibling/Child Page Links
+  /*
   function se_page_links ( $page ) {
     $tree = get_post_ancestors( $page );
     if ( !count( $tree ) ) {
@@ -142,14 +146,15 @@
       $list = get_posts( array(
         'post_type' => 'page',
         'post_status' => 'publish',
-        'post_parent' => __::first($tree),
+        'post_parent' => a::first($tree),
         'orderby' => 'menu_order'
       ));
       # Prepend the parent page, because it won't be in the results.
-      array_unshift($list, get_post(__::first($tree)));
+      array_unshift($list, get_post(a::first($tree)));
     }
     return $list;
   }
+  */
 
 
   /*
@@ -162,31 +167,31 @@
   require_once('config/narratives.php');
 
   # Volunteer Applications
-  require_once('config/volunteers.php');
+  // require_once('config/volunteers.php');
 
   # Post Override
-  require_once('config/post.php');
+  // require_once('config/post.php');
 
   # Aggregator
-  require_once('config/aggregator.php');
+  // require_once('config/aggregator.php');
 
   # Events
-  require_once('config/events.php');
+  // require_once('config/events.php');
 
   # Resources
-  require_once('config/resources.php');
+  // require_once('config/resources.php');
 
   # Student Projects
-  require_once('config/student-voices.php');
+  // require_once('config/student-voices.php');
 
   # Media Mentions
-  require_once('config/mentions.php');
+  // require_once('config/mentions.php');
 
   # Press Releases & Kits
-  require_once('config/press-kits.php');
+  // require_once('config/press-kits.php');
 
   # Donors
-  require_once('config/gifts.php');
+  // require_once('config/gifts.php');
 
   // add_action('init', 'init_custom_post_types');
 
@@ -294,6 +299,7 @@
 
 
 
+  require_once('config/info.php');
   require_once('config/utilities.php');
   require_once('config/helpers.php');
   require_once('config/post-types.php');

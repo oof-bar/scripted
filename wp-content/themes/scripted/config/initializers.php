@@ -47,26 +47,6 @@ class Initializers {
       ]
     );
 
-    # Feed Aggregation
-    PostTypes::create(
-      'se_aggregator',
-      'Update',
-      'Updates',
-      [
-        'description' => 'A hacky implementation of a custom archive of multiple post types.',
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'show_in_menu' => false,
-        'hierarchical' => false,
-        'supports' => [],
-        'has_archive' => 'updates',
-        'rewrite' => [
-          'slug' => 'updates'
-        ]
-      ]
-    );
-
     # Student Voices
     PostTypes::create(
       'se_student_voice',
@@ -97,6 +77,75 @@ class Initializers {
         'has_archive' => 'student-voice',
         'rewrite' => [
           'slug' => 'student-voice'
+        ]
+      ]
+    );
+
+    # Resource Posts
+    PostTypes::create(
+      'se_resource',
+      'Resource',
+      'Resources',
+      [
+        'description' => 'Alongside normal blog entries and events, educational resources will be available.',
+        'public' => true,
+        'menu_position' => 42,
+        'menu_icon' => 'dashicons-portfolio',
+        'hierarchical' => false,
+        'supports' => ['title', 'excerpt', 'editor'],
+        'has_archive' => 'resources',
+        'rewrite' => [
+          'slug' => 'resources'
+        ]
+      ]
+    );
+
+    # Feed Aggregation
+    PostTypes::create(
+      'se_aggregator',
+      'Update',
+      'Updates',
+      [
+        'description' => 'A hacky implementation of a custom archive of multiple post types.',
+        'public' => true,
+        'show_ui' => true,
+        'show_in_nav_menus' => true,
+        'show_in_menu' => false,
+        'hierarchical' => false,
+        'supports' => [],
+        'has_archive' => 'updates',
+        'rewrite' => [
+          'slug' => 'updates'
+        ]
+      ]
+    );
+
+    # Override Posts
+    PostTypes::create(
+      'post',
+      'Post',
+      'News',
+      [
+        'rewrite' => ['slug' => 'news'],
+        'label' => 'News',
+        'has_archive' => 'news',
+        '_builtin' => false,
+        'show_in_nav_menus' => true,
+        'publicaly_queryable' => true,
+        'labels' => [
+          'name' => 'News',
+          'singular_name' => 'News',
+          'menu_name' => 'News Posts',
+          'name_admin_bar' => 'News Posts',
+          'all_items' => 'All Posts',
+          'add_new' => 'New Post',
+          'add_new_item' => 'Add New Post',
+          'edit_item' => 'Edit Post',
+          'new_item' => 'New Post',
+          'view_item' => 'View Post',
+          'search_items' => 'Search Posts',
+          'not_found' => 'No Posts Found',
+          'not_found_in_trash' => 'No Posts Found in Trash'
         ]
       ]
     );
@@ -136,25 +185,6 @@ class Initializers {
       ]
     );
     
-    # Resource Posts
-    PostTypes::create(
-      'se_resource',
-      'Resource',
-      'Resources',
-      [
-        'description' => 'Alongside normal blog entries and events, educational resources will be available.',
-        'public' => true,
-        'menu_position' => 42,
-        'menu_icon' => 'dashicons-portfolio',
-        'hierarchical' => false,
-        'supports' => ['title', 'excerpt', 'editor'],
-        'has_archive' => 'resources',
-        'rewrite' => [
-          'slug' => 'resources'
-        ]
-      ]
-    );
-
     # Press Kits
     PostTypes::create(
       'se_press_kit',
@@ -174,12 +204,15 @@ class Initializers {
       ]
     );
 
+    /*
     # Default Post Override
     global $wp_post_types;
 
     $default_post_config = &$wp_post_types['post'];
     $default_post_config->rewrite = ['slug' => 'news'];
     $default_post_config->label = 'News';
+    $default_post_config->has_archive = true;
+    $default_post_config->_builtin = false;
     $default_post_config->labels = [
       'name' => 'News',
       'singular_name' => 'News',
@@ -195,6 +228,9 @@ class Initializers {
       'not_found' => 'No Posts Found',
       'not_found_in_trash' => 'No Posts Found in Trash'
     ];
+    */
+    // global $wp_post_types;
+    // Util::dump($wp_post_types);
   }
 
   public static function register_menus() {

@@ -1,3 +1,4 @@
+<? global $post; ?>
 <section class="header orange">
   <div class="wrapper">
     <div class="column col-10">

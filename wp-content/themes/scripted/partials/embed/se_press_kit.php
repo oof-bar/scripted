@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $kit = get_fields(); ?>
 
 <div <? post_class('post press-kit'); ?>>

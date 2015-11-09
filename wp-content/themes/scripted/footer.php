@@ -8,7 +8,9 @@
             <div class="non-profit-note add-margin-bottom">
               <?= ScriptEd\Helpers::option('np_notice') ?>
             </div>
-            <? if ( ScriptEd\Helpers::option('mailchimp_list') ) ScriptEd\Helpers::partial('newsletter-signup') ?>
+            <? if ( ScriptEd\Helpers::option('mailchimp_list') ) { ?>
+              <?= ScriptEd\Helpers::partial('newsletter-signup') ?>
+            <? } ?>
           </div>
 
           <div class="column col-2 push-1 tablet-half mobile-hide secondary-nav">
@@ -39,11 +41,11 @@
         </div>
       </section>
 
-      <? ScriptEd\Helpers::partial('outreach-footer') ?>
+      <?= ScriptEd\Helpers::partial('outreach-footer') ?>
 
     </div>
 
-    <? ScriptEd\Helpers::partial('analytics'); ?>
+    <?= ScriptEd\Helpers::partial('analytics'); ?>
 
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 

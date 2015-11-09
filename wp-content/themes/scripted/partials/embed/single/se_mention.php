@@ -1,3 +1,4 @@
+<? global $post ?>
 <? $mention = get_fields(); ?>
 
 <div class="wrapper media-mention">

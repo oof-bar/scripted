@@ -201,7 +201,7 @@ $icons: (
 );
 
 @each $icon in $icons {
-  .#{unquote(nth($icon, 1))}:before {
+  .#{unquote(nth($icon, 1))}::before {
     content: nth($icon, 2)
   }
 }

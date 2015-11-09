@@ -1,3 +1,5 @@
+<? global $post ?>
+
 <div <? post_class('page event'); ?>>
 
   <? include get_partial('post-info') ?>

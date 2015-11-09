@@ -1,3 +1,4 @@
+<? global $post ?>
 <div <? post_class('post event'); ?>>
 
   <?= ScriptEd\Helpers::partial('post-info', ['post' => $post]) ?>

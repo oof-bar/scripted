@@ -8,6 +8,7 @@
     <div class="wrapper intro">
 
       <div class="column col-8 push-2 greedy">
+        <div id="give-messages"></div>
         <?= ScriptEd\Helpers::option('give_memo') ?>
       </div>
       

@@ -1,3 +1,5 @@
+Notification = require 'notifications/message'
+
 module.exports = ->
   console.log 'Donation Confirmation'
 
@@ -13,7 +15,9 @@ module.exports = ->
         data:
           action: 'cancel_recurring_donation'
           id: $(this).data 'donation-id'
-        success: (data) ->
-          console.log data
+        success: (response) ->
           confirmation_table.removeClass 'updating'
-          window.location.reload()
+          if response.success
+            window.location.reload()
+          else
+            new Notification(response.data.message, 'error', true, 'icon-ban')

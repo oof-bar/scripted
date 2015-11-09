@@ -16,7 +16,6 @@ module.exports = class Give
 
   watch: ->
     @form.on 'submit', (e) =>
-      # console.log "Preventing Real Submit"
       e.preventDefault()
       if @validate() && !@locked
         @lock()
@@ -66,12 +65,10 @@ module.exports = class Give
 
   after_create: (response) ->
     @response = response
-    console.log response
 
     if response.success
-      # console.log response
       @unlock()
-      # window.location = response.data.confirmation_path
+      window.location = response.data.confirmation_path
     else
       @unlock()
       @errors.push new Notification(response.data.message, 'error', true, 'icon-ban')

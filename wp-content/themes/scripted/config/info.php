@@ -8,6 +8,7 @@ class Info {
     'recurring' => 'field_561982a1297e0',
     'customer_id' => 'field_561984bd297e2',
     'subscription_id' => 'field_5619981e0cdee',
-    'subscription_status' => 'field_561997d9297e3'
+    'subscription_status' => 'field_561997d9297e3',
+    'plan_id' => 'field_56401ada79cf2'
   ];
 }

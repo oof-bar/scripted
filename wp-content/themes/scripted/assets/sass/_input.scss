@@ -33,7 +33,7 @@ input, .input {
   background: none;
   padding: 0;
   margin: 0;
-  @include animate();
+  @include animate(background-color, border-color);
 
   &[type="text"], &[type="email"], &[type="number"], &[type="password"], &[type="checkbox"] {
     width: 100%;
@@ -74,13 +74,13 @@ input, .input {
       width: 100%;
     }
 
-    &:hover {
-      border-color: $grey-dark;
-    }
-
     &:focus {
       border-color: $grey-light;
       background: $white;
+    }
+
+    &:hover {
+      border-color: $grey-dark;
     }
 
     &:checked {
@@ -142,7 +142,7 @@ em.error {
   color: $black;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  @include animate();
+  @include animate(background-color);
 
   &:hover {
     border-color: $grey-mid;

@@ -683,10 +683,19 @@
 // Gift Receipt
 
 .give-confirmation {
-  table {
-    .monospace {
-      color: $grey-darker;
-      font-weight: normal;
+  .table {
+    .value {
+      font-family: monospace;
+    }
+
+    .actions {
+      text-align: right;
+    }
+
+    &.updating {
+      pointer-events: none;
+      opacity: 0.5;
+      @include animation(pulse 1.5s infinite);
     }
   }
 

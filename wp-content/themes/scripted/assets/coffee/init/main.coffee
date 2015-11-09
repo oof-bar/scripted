@@ -6,6 +6,7 @@ module.exports = ->
     home: require './home'
     'page-template-give-money': require './give'
     'page-template-narrative': require './narrative'
+    'single-se_gift': require './donation'
 
   # Trigger appropriate actions
   actions.before()

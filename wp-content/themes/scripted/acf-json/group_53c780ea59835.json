@@ -180,12 +180,12 @@
                 "id": ""
             },
             "choices": {
+                "manual": "Manual",
                 "active": "Active",
                 "trialing": "Trial",
                 "past_due": "Past Due",
                 "canceled": "Canceled",
-                "unpaid": "Unpaid",
-                "manual": "Manual"
+                "unpaid": "Unpaid"
             },
             "default_value": {
                 "manual": "manual"
@@ -197,6 +197,36 @@
             "placeholder": "",
             "disabled": 0,
             "readonly": 0
+        },
+        {
+            "key": "field_56401ada79cf2",
+            "label": "Plan ID",
+            "name": "plan_id",
+            "prefix": "",
+            "type": "text",
+            "instructions": "When the donor created a recurring gift, they used this plan, which corresponds to those available in the site's Options screen, as well as in the Stripe dashboard.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561982a1297e0",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
         }
     ],
     "location": [
@@ -216,5 +246,5 @@
     "hide_on_screen": [
         "slug"
     ],
-    "modified": 1447028636
+    "modified": 1447041844
 }

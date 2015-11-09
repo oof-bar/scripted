@@ -109,6 +109,14 @@ class Actions {
     Newsletter::signup();
   }
 
+  public static function wp_ajax_cancel_recurring_donation () {
+    Gift::cancel($_POST['id']);
+  }
+  
+  public static function wp_ajax_nopriv_cancel_recurring_donation () {
+    Gift::cancel($_POST['id']);
+  }
+
   # Donations
 
   public static function wp_ajax_give () {

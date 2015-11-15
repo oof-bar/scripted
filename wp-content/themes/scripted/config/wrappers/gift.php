@@ -3,6 +3,7 @@
 use Stripe,
     Mandrill,
     html,
+    r,
     a;
 
 class Gift {

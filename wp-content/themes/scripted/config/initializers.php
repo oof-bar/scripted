@@ -258,18 +258,20 @@ class Initializers {
   }
 
   public static function add_options_pages() {
-    acf_add_options_page( array(
-      'page_title' => 'Site Options',
-      'menu_title'  => 'Options',
-      'menu_slug' => 'se_site_options',
-      'redirect' => false
-    ));
-    
-    acf_add_options_sub_page(array(
-      'page_title'  => 'Notifications',
-      'menu_title'  => 'Notifications ',
-      'parent_slug' => 'se_site_options',
-    ));
+    if ( function_exists('acf_add_options_page') ) {
+      acf_add_options_page([
+        'page_title' => 'Site Options',
+        'menu_title'  => 'Options',
+        'menu_slug' => 'se_site_options',
+        'redirect' => false
+      ]);
+      
+      acf_add_options_sub_page([
+        'page_title'  => 'Notifications',
+        'menu_title'  => 'Notifications ',
+        'parent_slug' => 'se_site_options',
+      ]);
+    }
   }
 
   public static function create_taxonomies() {}

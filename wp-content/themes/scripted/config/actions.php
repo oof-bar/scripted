@@ -109,14 +109,6 @@ class Actions {
     Newsletter::signup();
   }
 
-  public static function wp_ajax_cancel_recurring_donation () {
-    Gift::cancel($_POST['id']);
-  }
-  
-  public static function wp_ajax_nopriv_cancel_recurring_donation () {
-    Gift::cancel($_POST['id']);
-  }
-
   # Donations
 
   public static function wp_ajax_give () {
@@ -125,5 +117,21 @@ class Actions {
 
   public static function wp_ajax_nopriv_give () {
     Gift::process();
+  }
+
+  public static function wp_ajax_give_hook () {
+    Gift::log($_POST);
+  }
+
+  public static function wp_ajax_nopriv_give_hook () {
+    Gift::log($_POST);
+  }
+
+  public static function wp_ajax_cancel_recurring_donation () {
+    Gift::cancel();
+  }
+  
+  public static function wp_ajax_nopriv_cancel_recurring_donation () {
+    Gift::cancel();
   }
 }

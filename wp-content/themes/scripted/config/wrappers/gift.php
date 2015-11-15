@@ -2,9 +2,11 @@
 
 use Stripe,
     Mandrill,
+    html,
     a;
 
 class Gift {
+  public static $post_type = 'se_gift';
   public static $statuses = [
     'manual' => 'Manual',
     'active' => 'Active',
@@ -25,7 +27,7 @@ class Gift {
     # Any request without a stripe token is wrong.
     if ( !isset($donation['stripe-token']) ) {
       wp_send_json_error([
-        'message' => 'Sorry, your payment couldn\'t be completed. Our server did not receive all the information it requires to move forward. Please reload the page and try again.',
+        'message' => Helpers::markdown('Sorry, your payment couldn\'t be completed. Our server did not receive all the information it requires to move forward. Please reload the page and try again.'),
         'post' => $donation
       ]);
     }
@@ -41,7 +43,7 @@ class Gift {
       if ( isset($donation['recurring']) ) {
         # Chain our subscription to the creation of a Stripe Customer
         $charge = Stripe\Customer::create([
-          'description' => 'Recurring donor.',
+          'description' => $donation['name-first'] . ' ' . $donation['name-last'],
           'source' => $donation['stripe-token'],
           'plan' => $donation['plan-id']
         ]);
@@ -53,6 +55,16 @@ class Gift {
           'charge' => $charge,
           'status' => $charge->subscription['status'],
           'plan' => $donation['plan-id']
+        ]);
+
+        $donation = static::save($gift);
+
+        # And send a welcome email
+        $confirmation = Mailer::send_template($gift['email'], get_the_title($donation), 'recurring-donation-confirmation', [
+          'name' => $gift['name-first'],
+          'plan' => static::label_for_plan_id($gift['plan']),
+          'confirmation_url' => html::a(get_permalink($donation), get_permalink($donation)),
+          'date' => get_the_date('F d, Y', $donation)
         ]);
       } else {
         # Use the standard Stripe Charge, since we don't need to track a customer
@@ -69,116 +81,54 @@ class Gift {
           'recurring' => false,
           'charge' => $charge
         ]);
-      }
 
-      # Add a record of this to the DB and send a confirmation
-      $donation = static::create($gift);
-      $confirmation = static::send_confirmation($donation);
+        $donation = static::save($gift);
+
+        $confirmation = Mailer::send_template($gift['email'], get_the_title($donation), 'one-time-donation-confirmation', [
+          'name' => get_the_title($donation),
+          'amount' => $gift['amount'],
+          'confirmation_url' => html::a(get_permalink($donation), get_permalink($donation)),
+          'date' => get_the_date('F d, Y', $donation)
+        ]);
+      }
 
       wp_send_json_success([
         'post' => $donation,
-        'stripe' => $charge,
+        # 'stripe' => $charge,
         'confirmation_path' => get_permalink($donation),
         'confirmation_email' => $confirmation
       ]);
 
-    } catch (Stripe\Error\Card $e) {
+    } catch (Stripe\Error\Base $e) {
       $error = $e->getJsonBody();
       $error = $error['error'];
 
       wp_send_json_error([
-        'message' => $error['message'],
-        # 'post' => $donation
-      ]);
-    } catch (Stripe\Error\Authentication $e) {
-      $error = $e->getJsonBody();
-      $error = $error['error'];
-      
-      wp_send_json_error([
-        'message' => $error['message'],
-        # 'post' => $donation
-      ]);
-    } catch (Stripe\Error\InvalidRequest $e) {
-      $error = $e->getJsonBody();
-      $error = $error['error'];
-      
-      wp_send_json_error([
-        'message' => $error['message'],
+        'message' => Helpers::markdown($error['message']),
         # 'post' => $donation
       ]);
     }
   }
 
-  public static function send_confirmation($gift) {
-    try {
-      $mandrill = new Mandrill(SE_MANDRILL_API_KEY);
-      $template = 'gift-confirmation';
-      $fields = get_fields($gift);
-      $content = [
-        ['name' => get_the_title($gift)],
-        ['amount' => $fields['amount']],
-        ['confirmation_url' => get_permalink($gift)],
-        ['date' => get_the_date('F d, Y', $gift)]
-      ];
-      
-      $message = [
-        'template_name' => $template, 
-        'template_content' => $content,
-        'to' => [
-          [
-            'email' => $fields['email'],
-            'name' => get_the_title($gift)
-          ]
-        ],
-        'metadata' => [
-          'amount' => $fields['amount']
-        ],
-        'global_merge_vars' => [
-          [
-            'name' => 'confirmation_url',
-            'content' => get_permalink($gift)
-          ],
-          [
-            'name' => 'amount',
-            'content' => $fields['amount']
-          ],
-          [
-            'name' => 'donor_name',
-            'content' => get_the_title($gift)
-          ],
-          [
-            'name' => 'date',
-            'content' => get_the_date('F d, Y', $gift)
-          ]
-        ]
-      ];
-
-      return $mandrill->messages->sendTemplate($template, $content, $message);
-
-    } catch(Mandrill_Error $e) {
-      return $e;
-    }
-  }
-
-  public static function create ($params) {
+  public static function save ($params) {
     $donation = wp_insert_post([
       'post_name' => sha1(uniqid() . $params['name-first']),
       'post_title' => sanitize_text_field($params['name-first']) . ' ' . sanitize_text_field($params['name-last']),
-      'post_type' => 'se_gift',
+      'post_type' => static::$post_type,
       'post_status' => 'publish',
       'ping_status' => 'closed'
     ]);
 
-    update_field(Info::$field_keys['give_email'], $params['email'], $donation);
-    update_field(Info::$field_keys['give_zip'], $params['zip'], $donation);
-    update_field(Info::$field_keys['recurring'], $params['recurring'], $donation);
-    update_field(Info::$field_keys['give_amount'], ($params['amount'] / 100), $donation);
+    update_field(Info::field_key('give_email'), $params['email'], $donation);
+    update_field(Info::field_key('give_zip'), $params['zip'], $donation);
+    update_field(Info::field_key('recurring'), $params['recurring'], $donation);
+    update_field(Info::field_key('give_amount'), ($params['amount'] / 100), $donation);
     
     if ( $params['recurring'] ) {
-      update_field(Info::$field_keys['customer_id'], $params['charge']->id, $donation);
-      update_field(Info::$field_keys['subscription_id'], $params['charge']->subscription['id'], $donation);
-      update_field(Info::$field_keys['subscription_status'], $params['status'], $donation);
-      update_field(Info::$field_keys['plan_id'], $params['plan'], $donation);
+      update_field(Info::field_key('customer_id'), $params['charge']->id, $donation);
+      update_field(Info::field_key('subscription_id'), $params['charge']->subscription['id'], $donation);
+      update_field(Info::field_key('subscription_status'), $params['status'], $donation);
+      update_field(Info::field_key('plan_id'), $params['plan'], $donation);
     }
 
     # Let's hang on to this
@@ -187,21 +137,39 @@ class Gift {
     return $donation;
   }
 
-  public static function find_by_hash ($hash) {
-    $donations = get_posts([
-      'post_name' => $hash,
-      'post_type' => 'se_gift'
-    ]);
+  public static function log ($event) {
+    # Cache the event
+    switch ($event['type']) {
+      case ('invoice.payment_succeeded'):
+        $invoice = $event['data']['object'];
+        $donation = static::find_by_subscription_id($invoice['subscription']);
+        if ( $donation ) {
+          add_post_meta($donation, 'stripe_log', $event);
 
-    if ( $donation = a::first($donations) ) {
-      return $donation;
-    } else {
-      return false;
+          # Set the next payment date
+          update_field(Info::field_key('next_payment'), $invoice['period_end'], $donation);
+          $fields = get_fields($donation);
+
+          # Send Receipt
+          $receipt = Mailer::send_template($fields['email'], get_the_title($donation), 'recurring-donation-invoice', [
+            'name' => get_the_title($donation),
+            'plan' => static::label_for_plan_id($fields['plan_id']),
+            'confirmation_url' => html::a(get_permalink($donation), get_permalink($donation)),
+            'created' => get_the_date('F d, Y', $donation),
+            'next_payment' => date('F d, Y', $fields['next_payment'])
+          ]);
+
+          wp_send_json_success(['mc' => $receipt]);
+        }
+        break;
+      default:
+        wp_send_json_success();
+        break;
     }
   }
 
-  public static function cancel ($hash) {
-    if ( $donation = static::destroy($hash) ) {
+  public static function cancel () {
+    if ( isset($_POST['id']) && $donation = static::destroy($_POST['id']) ) {
       wp_send_json_success([
         'status' => get_field('subscription_status', $donation)
       ]);
@@ -220,7 +188,9 @@ class Gift {
         try {
           $donor = \Stripe\Customer::retrieve($fields['customer_id']);
           $subscription = $donor->subscriptions->retrieve($fields['subscription_id'])->cancel();
-          update_field(Info::$field_keys['subscription_status'], $subscription->status, $donation);
+          update_field(Info::field_key('subscription_status'), $subscription->status, $donation);
+
+          update_field(Info::field_key('canceled_at'), time(), $donation);
 
           add_post_meta($donation, 'stripe_log', $subscription);
           return $subscription->status;
@@ -228,6 +198,37 @@ class Gift {
           return false;
         }
       }
+    } else {
+      return false;
+    }
+  }
+
+  public static function find_by_hash ($hash) {
+    $donations = get_posts([
+      'post_name' => $hash,
+      'post_type' => static::$post_type
+    ]);
+
+    if ( $donation = a::first($donations) ) {
+      return $donation;
+    } else {
+      return false;
+    }
+  }
+
+  public static function find_by_subscription_id ($id) {
+    $donations = get_posts([
+      'post_type' => static::$post_type,
+      'meta_query' => [
+        [
+          'key' => 'subscription_id',
+          'value' => $id
+        ]
+      ]
+    ]);
+
+    if ( $donation = a::first($donations) ) {
+      return $donation;
     } else {
       return false;
     }

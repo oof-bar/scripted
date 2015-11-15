@@ -30,7 +30,7 @@ use Stripe;
 
   # PHP Markdown
   require_once("lib/Parsedown.php");
-  $Parsedown = new \Parsedown();
+  # $Parsedown = new \Parsedown();
 
   # Get Site Option
   /*
@@ -302,6 +302,7 @@ use Stripe;
   require_once('config/info.php');
   require_once('config/utilities.php');
   require_once('config/helpers.php');
+  require_once('config/mailer.php');
   require_once('config/post-types.php');
   require_once('config/initializers.php');
   require_once('config/actions.php');

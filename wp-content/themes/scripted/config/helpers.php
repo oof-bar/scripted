@@ -1,11 +1,13 @@
 <? namespace ScriptEd;
 
 use WP_Query,
+    Parsedown,
     html,
     tpl,
     a;
 
 class Helpers {
+  public static $markdown_parser;
   public static function page_title ($post) {
     if ( is_singular('se_gift') ) {
       return 'Thanks!';
@@ -114,5 +116,18 @@ class Helpers {
       'orderby' => 'date',
       'order' => 'DESC'
     ));
+  }
+
+  public static function markdown ($text) {
+    $parser = static::get_markdown_parser_instance();
+    return $parser->text($text);
+  }
+
+  public static function get_markdown_parser_instance () {
+    if ( static::$markdown_parser ) {
+      return static::$markdown_parser;
+    } else {
+      return static::$markdown_parser = new Parsedown();
+    }
   }
 }

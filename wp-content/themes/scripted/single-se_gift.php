@@ -30,7 +30,9 @@
                 <div class="cell label">Plan</div>
                 <div class="cell value">
                   <?= ScriptEd\Gift::label_for_plan_id($gift['plan_id']) ?>
-                  <? if ( in_array($gift['subscription_status'], array_keys(ScriptEd\Gift::$statuses)) ) { ?>
+                  <? if ( $gift['subscription_status'] == 'canceled' ) { ?>
+                    (Canceled <time datetime="<?= date('Y-m-d', $gift['canceled_at']) ?>" class="cancelation-date"><?= date('F d, Y', (int)$gift['canceled_at']) ?></time>)
+                  <? } else { ?>
                     (<?= ScriptEd\Gift::$statuses[$gift['subscription_status']] ?>)
                   <? } ?>
                 </div>

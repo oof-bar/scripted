@@ -1,5 +1,6 @@
 <section class="give-form">
 
+  <? $plans = ScriptEd\Helpers::option('recurring_donation_plans') ?>
   <? $amount = (isset($_POST['amount']) && $_POST['amount']) ? $_POST['amount'] : 25; ?>
 
   <form id="give">
@@ -37,14 +38,16 @@
 
     </div>
 
-    <div class="wrapper">
-      <div class="column col-12 tablet-half mobile-full collapse-space">
-        <label for="recurring" class="inline-label">
-          <input type="checkbox" id="recurring" name="recurring" />
-          <span class="field-label">Make this a recurring donation</span>
-        </label>
+    <? if ( $plans && count($plans) ) { ?>
+      <div class="wrapper">
+        <div class="column col-12 tablet-half mobile-full collapse-space">
+          <label for="recurring" class="inline-label">
+            <input type="checkbox" id="recurring" name="recurring" />
+            <span class="field-label">Make this a recurring donation</span>
+          </label>
+        </div>
       </div>
-    </div>
+    <? } ?>
 
     <div class="wrapper field-group payment">
 
@@ -54,12 +57,15 @@
           <input type="number" min="1" id="amount-formatted" name="amount-formatted" class="amount formatted" value="<?= $amount ?>" />
           <input type="hidden" id="amount-cents" name="amount" class="amount cents" value="<?= ( $amount * 100 ) ?>" />
         </label>
-        <div id="select-plan" class="placeholder"></div>
-        <select id="plan" class="plan" name="plan-id">
-          <? foreach ( ScriptEd\Helpers::option('recurring_donation_plans') as $plan ) { ?>
-            <option value="<?= $plan['id'] ?>"><?= $plan['label'] ?></option>
-          <? } ?>
-        </select>
+
+        <? if ( $plans && count($plans) ) { ?>
+          <div id="select-plan" class="placeholder"></div>
+          <select id="plan" class="plan" name="plan-id">
+            <? foreach ( ScriptEd\Helpers::option('recurring_donation_plans') as $plan ) { ?>
+              <option value="<?= $plan['id'] ?>"><?= $plan['label'] ?></option>
+            <? } ?>
+          </select>
+        <? } ?>
       </div>
 
       <div class="column col-3 tablet-three-quarters mobile-full collapse-space">

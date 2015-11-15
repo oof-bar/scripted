@@ -3,7 +3,7 @@
 class Util {
   public static function dump ($obj) {
     echo '<pre>';
-    print_r($obj);
+    var_dump($obj);
     echo '</pre>';
   }
 }

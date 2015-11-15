@@ -612,6 +612,11 @@
     cursor: pointer;
     @include border-radius(3px);
 
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
     &:before {
       position: absolute;
       top: 45%;

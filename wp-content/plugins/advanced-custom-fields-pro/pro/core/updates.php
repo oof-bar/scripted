@@ -1,8 +1,12 @@
 <?php 
 
-class acf_pro_connect {
+if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if( ! class_exists('acf_pro_updates') ) :
+
+class acf_pro_updates {
 	
-	
+
 	/*
 	*  __construct
 	*
@@ -18,41 +22,45 @@ class acf_pro_connect {
 	
 	function __construct() {
 		
-		// override requests for plugin information
-        add_filter('plugins_api', array($this, 'inject_info'), 20, 3);
-        
-        
-		// insert our update info into the update array maintained by WP
-		add_filter('site_transient_update_plugins', array($this, 'inject_update'));
+		// append plugin information
+		// Note: is_admin() was used previously, however this prevents jetpack manage & ManageWP from working
+	    add_filter('plugins_api', array($this, 'inject_info'), 20, 3);
+	    
+	    
+		// append update information
+		add_filter('pre_set_site_transient_update_plugins', array($this, 'inject_update'));
 		
 		
 		// add custom message when PRO not activated but update available
 		add_action('in_plugin_update_message-' . acf_get_setting('basename'), array($this, 'in_plugin_update_message'), 10, 2 );
+			
 	}
 	
 	
 	/*
 	*  inject_info
 	*
-	*  description
+	*  This function will populate the plugin data visible in the 'View details' popup
 	*
 	*  @type	function
 	*  @date	17/01/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	$result (bool|object)
+	*  @param	$action (string)
+	*  @param	$args (object)
+	*  @return	$result
 	*/
 	
-	function inject_info( $res, $action = null, $args = null ) {
+	function inject_info( $result, $action = null, $args = null ) {
 		
 		// vars
 		$slug = acf_get_setting('slug');
         
         
 		// validate
-    	if( isset($args->slug) && $args->slug == $slug )
-    	{
+    	if( isset($args->slug) && $args->slug == $slug ) {
+	    	
 	    	$info = acf_pro_get_remote_info();
 	    	$sections = acf_extract_vars($info, array(
 	    		'description',
@@ -63,9 +71,10 @@ class acf_pro_connect {
 	    	
 	    	$obj = new stdClass();
 		
-		    foreach( $info as $k => $v )
-		    {
+		    foreach( $info as $k => $v ) {
+			    
 		        $obj->$k = $v;
+		        
 		    }
 		    
 		    $obj->sections = $sections;
@@ -76,7 +85,7 @@ class acf_pro_connect {
     	
     	
     	// return        
-        return $res;
+        return $result;
         
 	}
 	
@@ -84,26 +93,26 @@ class acf_pro_connect {
 	/*
 	*  inject_update
 	*
-	*  description
+	*  This function will connect to the ACF website and find release details
 	*
 	*  @type	function
 	*  @date	16/01/2014
 	*  @since	5.0.0
 	*
-	*  @param	$post_id (int)
-	*  @return	$post_id (int)
+	*  @param	$transient (object)
+	*  @return	$transient
 	*/
 	
 	function inject_update( $transient ) {
 		
-		// bail early if not admin
-		if( !is_admin() ) {
+		// bail early if no show_updates
+		if( !acf_get_setting('show_updates') ) {
 			
 			return $transient;
 			
 		}
 		
-		
+				
 		// bail early if no update available
 		if( !acf_pro_is_update_available() ) {
 			
@@ -113,14 +122,15 @@ class acf_pro_connect {
 		
 		 
         // vars
-        $info = acf_pro_get_remote_info();
-        $basename = acf_get_setting('basename');
-        $slug = acf_get_setting('slug');
-
+		$info = acf_pro_get_remote_info();
+		$basename = acf_get_setting('basename');
+		$slug = acf_get_setting('slug');
+		
 		
         // create new object for update
         $obj = new stdClass();
         $obj->slug = $slug;
+        $obj->plugin = $basename;
         $obj->new_version = $info['version'];
         $obj->url = $info['homepage'];
         $obj->package = '';
@@ -129,7 +139,12 @@ class acf_pro_connect {
         // license
 		if( acf_pro_is_license_active() ) {
 			
-			$obj->package = acf_pro_get_remote_url( 'download', array( 'k' => acf_pro_get_license() ) );
+			$obj->package = acf_pro_get_remote_url('download', array(
+				'k'				=> acf_pro_get_license(),
+				'wp_url'		=> home_url(),
+				'acf_version'	=> acf_get_setting('version'),
+				'wp_version'	=> get_bloginfo('version'),
+			));
 		
 		}
 		
@@ -140,6 +155,7 @@ class acf_pro_connect {
 		
 		// return 
         return $transient;
+        
 	}
 	
 	
@@ -159,22 +175,28 @@ class acf_pro_connect {
 	function in_plugin_update_message( $plugin_data, $r ) {
 		
 		// validate
-		if( acf_pro_is_license_active() )
-		{
+		if( acf_pro_is_license_active() ) {
+			
 			return;
+			
 		}
 		
+		
+		// vars
 		$m = __('To enable updates, please enter your license key on the <a href="%s">Updates</a> page. If you don\'t have a licence key, please see <a href="%s">details & pricing</a>', 'acf');
 		
+		
+		// show message
 		echo '<br />' . sprintf( $m, admin_url('edit.php?post_type=acf-field-group&page=acf-settings-updates'), 'http://www.advancedcustomfields.com/pro');
 	
 	}
-	
 	
 }
 
 
 // initialize
-new acf_pro_connect();
+new acf_pro_updates();
+
+endif; // class_exists check
 
 ?>

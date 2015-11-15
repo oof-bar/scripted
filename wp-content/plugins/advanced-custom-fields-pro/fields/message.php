@@ -36,7 +36,10 @@ class acf_field_message extends acf_field {
 		$this->label = __("Message",'acf');
 		$this->category = 'layout';
 		$this->defaults = array(
-			'message'	=> '',
+			'value'			=> false, // prevents acf_render_fields() from attempting to load value
+			'message'		=> '',
+			'esc_html'		=> 0,
+			'new_lines'		=> 'wpautop',
 		);
 		
 		
@@ -58,8 +61,37 @@ class acf_field_message extends acf_field {
 	*/
 	
 	function render_field( $field ) {
-	
-		echo wpautop( $field['message'] );
+		
+		// vars
+		$m = $field['message'];
+		
+		
+		// wptexturize (improves "quotes")
+		$m = wptexturize( $m );
+		
+		
+		// esc_html
+		if( $field['esc_html'] ) {
+			
+			$m = esc_html( $m );
+			
+		}
+		
+		
+		// new lines
+		if( $field['new_lines'] == 'wpautop' ) {
+			
+			$m = wpautop($m);
+			
+		} elseif( $field['new_lines'] == 'br' ) {
+			
+			$m = nl2br($m);
+			
+		}
+		
+		
+		// return
+		echo $m;
 		
 	}
 	
@@ -82,9 +114,37 @@ class acf_field_message extends acf_field {
 		// default_value
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Message','acf'),
-			'instructions'	=> __('Please note that all text will first be passed through the wp function ','acf') . '<a href="http://codex.wordpress.org/Function_Reference/wpautop" target="_blank">wpautop()</a>',
+			'instructions'	=> '',
 			'type'			=> 'textarea',
 			'name'			=> 'message',
+		));
+		
+		
+		// formatting
+		acf_render_field_setting( $field, array(
+			'label'			=> __('New Lines','acf'),
+			'instructions'	=> __('Controls how new lines are rendered','acf'),
+			'type'			=> 'select',
+			'name'			=> 'new_lines',
+			'choices'		=> array(
+				'wpautop'		=> __("Automatically add paragraphs",'acf'),
+				'br'			=> __("Automatically add &lt;br&gt;",'acf'),
+				''				=> __("No Formatting",'acf')
+			)
+		));
+		
+		
+		// HTML
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Escape HTML','acf'),
+			'instructions'	=> __('Allow HTML markup to display as visible text instead of rendering','acf'),
+			'type'			=> 'radio',
+			'name'			=> 'esc_html',
+			'choices'		=> array(
+				1				=> __("Yes",'acf'),
+				0				=> __("No",'acf'),
+			),
+			'layout'	=>	'horizontal',
 		));
 		
 	}

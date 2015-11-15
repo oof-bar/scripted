@@ -139,7 +139,7 @@ class Gift {
   }
 
   public static function log () {
-    $event = json_decode(r::body());
+    $event = json_decode(r::body(), true);
     # Cache the event
     switch ($event['type']) {
       case ('invoice.payment_succeeded'):

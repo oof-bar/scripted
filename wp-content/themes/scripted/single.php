@@ -1,10 +1,10 @@
 <? get_header(); ?>
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 
 <section class="main">
 
   <? the_post() ?>
-  <? include get_embed( get_post_type(), 'single' ); ?>
+  <?= ScriptEd\Helpers::embed( get_post_type(), 'single' ); ?>
 
 </section>
 

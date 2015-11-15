@@ -12,7 +12,7 @@ class Helpers {
     if ( is_singular('se_gift') ) {
       return 'Thanks!';
     } else if ( is_singular(['post', 'se_news', 'se_event', 'se_press_kit', 'se_student_voice', 'se_resource', 'se_mention']) ) {
-      return html::span(html::a(get_post_type_archive_link($post->post_type), get_post_type_object($post->post_type)->labels->singular_name), ['class' => 'parent-page archive']) . html::span(get_the_title(), ['class' => 'subpage-title']);
+      return html::tag('span', html::a(get_post_type_archive_link($post->post_type), get_post_type_object($post->post_type)->labels->singular_name), ['class' => 'parent-page archive']) . ': ' . html::tag('span', get_the_title(), ['class' => 'subpage-title']);
 
       #return '<span class="parent-page archive"><a href="' . get_post_type_archive_link($post->post_type) . '">' . get_post_type_object($post->post_type)->labels->singular_name . '</a>:</span> <span class="subpage-title light">' . get_the_title() . '</span>';
     } else if ( is_archive() ) {

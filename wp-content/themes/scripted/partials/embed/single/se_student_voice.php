@@ -4,7 +4,7 @@
 <div class="wrapper student-voice">
 
   <div class="column col-3 tablet-quarter mobile-full">
-    <? include get_partial('post-meta') ?>
+    <?= ScriptEd\Helpers::partial('post-meta') ?>
   </div>
 
   <div class="column col-7 push-1 tablet-three-quarters">

@@ -1,6 +1,6 @@
 <? # Template Name: Team ?>
 <? get_header() ?>
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 <? the_post() ?>
 <? $team = get_fields() ?>
 
@@ -8,8 +8,8 @@
   <div class="wrapper">
 
     <div class="column col-3 tablet-quarter mobile-full">
-      <? include get_partial('page-navigation') ?>
-      <? if ( isset($team['attachments']) && is_array( $attachments = $team['attachments'] ) ) include get_partial('page-attachments') ?>
+      <?= ScriptEd\Helpers::partial('page-navigation', ['post' => $post]) ?>
+      <? if ( isset($team['attachments']) && is_array( $attachments = $team['attachments'] ) ) ScriptEd\Helpers::partial('page-attachments') ?>
     </div>
 
     <div class="column col-9 tablet-three-quarters mobile-full">

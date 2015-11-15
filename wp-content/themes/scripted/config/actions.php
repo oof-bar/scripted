@@ -120,11 +120,11 @@ class Actions {
   }
 
   public static function wp_ajax_give_hook () {
-    Gift::log($_POST);
+    Gift::log();
   }
 
   public static function wp_ajax_nopriv_give_hook () {
-    Gift::log($_POST);
+    Gift::log();
   }
 
   public static function wp_ajax_cancel_recurring_donation () {

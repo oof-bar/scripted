@@ -144,12 +144,18 @@ class Gift {
     switch ($event['type']) {
       case ('invoice.payment_succeeded'):
         $invoice = $event['data']['object'];
+
+        $next_payment = a::first(array_filter($invoice['lines']['data'], function ($line) use ($invoice) {
+          return $line['id'] == $invoice['subscription'];
+        }))['period']['end'];
+
         $donation = static::find_by_subscription_id($invoice['subscription']);
+
         if ( $donation ) {
           add_post_meta($donation, 'stripe_log', $event);
 
-          # Set the next payment date
-          update_field(Info::field_key('next_payment'), $invoice['period_end'], $donation);
+          # Set the next payment date and fetch all the fields
+          update_field(Info::field_key('next_payment'), $next_payment, $donation);
           $fields = get_fields($donation);
 
           # Send Receipt

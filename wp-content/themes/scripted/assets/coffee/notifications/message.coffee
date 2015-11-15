@@ -11,8 +11,9 @@ module.exports = class Message
       .prependTo '#give-messages'
 
     if dismissable
-      @error_element.on 'click', =>
-        @dismiss()
+      @error_element.on 'click', (e) =>
+        unless e.target.tagName.toLowerCase() == 'a'
+          @dismiss()
 
     @display()
 

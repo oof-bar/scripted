@@ -6,7 +6,6 @@
             "key": "field_563fbe0ae3dc6",
             "label": "Disclaimers",
             "name": "disclaimers",
-            "prefix": "",
             "type": "message",
             "instructions": "",
             "required": 0,
@@ -16,13 +15,14 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Adjust these records only if changes have happened elsewhere (like the Stripe dashboard), or an invoice is to be made for a donor.\r\nOtherwise, this is intended as a permanent record of the donation!"
+            "message": "Adjust these records only if changes have happened elsewhere (like the Stripe dashboard), or an invoice is to be made for a donor.\r\nOtherwise, this is intended as a permanent record of the donation!",
+            "esc_html": 0,
+            "new_lines": "wpautop"
         },
         {
             "key": "field_53c780f0a5d3d",
             "label": "Amount",
             "name": "amount",
-            "prefix": "",
             "type": "text",
             "instructions": "Original one-time or recurring donation amount.",
             "required": 0,
@@ -44,7 +44,6 @@
             "key": "field_53c78208a5d3e",
             "label": "Email",
             "name": "email",
-            "prefix": "",
             "type": "text",
             "instructions": "Email of the donor. Optional in the form.",
             "required": 0,
@@ -66,7 +65,6 @@
             "key": "field_53c8c6ade6597",
             "label": "Zipcode",
             "name": "zip",
-            "prefix": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -88,7 +86,6 @@
             "key": "field_561982a1297e0",
             "label": "Recurring",
             "name": "recurring",
-            "prefix": "",
             "type": "true_false",
             "instructions": "Did the donor opt for a recurring plan?",
             "required": 0,
@@ -105,7 +102,6 @@
             "key": "field_561984bd297e2",
             "label": "Stripe Customer ID",
             "name": "customer_id",
-            "prefix": "",
             "type": "password",
             "instructions": "ID for the customer that Stripe provided upon creation of the subscription. We use this to manage the state of the subscription, so it must not be changed!",
             "required": 0,
@@ -133,7 +129,6 @@
             "key": "field_5619981e0cdee",
             "label": "Stripe Subscription ID",
             "name": "subscription_id",
-            "prefix": "",
             "type": "password",
             "instructions": "The unique ID for this donor's subscription. We use this to manage the state of the subscription, so it must not be changed!",
             "required": 0,
@@ -158,10 +153,38 @@
             "disabled": 0
         },
         {
+            "key": "field_56401ada79cf2",
+            "label": "Plan ID",
+            "name": "plan_id",
+            "type": "text",
+            "instructions": "When the donor created a recurring gift, they used this plan, which corresponds to those available in the site's Options screen, as well as in the Stripe dashboard.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561982a1297e0",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
             "key": "field_561997d9297e3",
             "label": "Subscription Status",
             "name": "subscription_status",
-            "prefix": "",
             "type": "select",
             "instructions": "The last state of the subscription reported by Stripe. Only update this if you've made changes to the donor\u2019s subscription in the Stripe dashboard.",
             "required": 0,
@@ -199,12 +222,11 @@
             "readonly": 0
         },
         {
-            "key": "field_56401ada79cf2",
-            "label": "Plan ID",
-            "name": "plan_id",
-            "prefix": "",
-            "type": "text",
-            "instructions": "When the donor created a recurring gift, they used this plan, which corresponds to those available in the site's Options screen, as well as in the Stripe dashboard.",
+            "key": "field_5647c1f7e1cfc",
+            "label": "Next Payment",
+            "name": "next_payment",
+            "type": "number",
+            "instructions": "",
             "required": 0,
             "conditional_logic": [
                 [
@@ -224,7 +246,40 @@
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": "",
+            "min": "",
+            "max": "",
+            "step": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56482cfa3c79e",
+            "label": "Canceled At",
+            "name": "canceled_at",
+            "type": "number",
+            "instructions": "The PHP timestamp that the subscription was canceled.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_561997d9297e3",
+                        "operator": "==",
+                        "value": "canceled"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": "",
             "readonly": 0,
             "disabled": 0
         }
@@ -246,5 +301,7 @@
     "hide_on_screen": [
         "slug"
     ],
-    "modified": 1447041844
+    "active": 1,
+    "description": "",
+    "modified": 1447570730
 }

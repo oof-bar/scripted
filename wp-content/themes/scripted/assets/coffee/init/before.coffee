@@ -1,2 +1,2 @@
 module.exports = ->
-  console.log 'Before'
+  # console.log 'Before'

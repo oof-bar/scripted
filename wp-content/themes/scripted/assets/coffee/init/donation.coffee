@@ -1,7 +1,7 @@
 Notification = require 'notifications/message'
 
 module.exports = ->
-  console.log 'Donation Confirmation'
+  # console.log 'Donation Confirmation'
 
   confirmation_table = $('.give-confirmation .table')
 

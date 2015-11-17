@@ -1,5 +1,5 @@
 module.exports = ->
-  console.log 'Home'
+  # console.log 'Home'
   
   $('.media-play').on 'click', ->
     $('.media-content').fadeIn()

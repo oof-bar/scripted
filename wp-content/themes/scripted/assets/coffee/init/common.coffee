@@ -3,7 +3,7 @@ NewsletterSignup = require 'crm/newsletter'
 ActiveLinks = require 'misc/link-state'
 
 module.exports = ->
-  console.log 'Common'
+  # console.log 'Common'
 
   ActiveLinks()
 

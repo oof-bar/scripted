@@ -3,7 +3,7 @@ Menu = require 'select/menu'
 Config = require 'data/donation-validation-rules'
 
 module.exports = ->
-  console.log 'Giving'
+  # console.log 'Giving'
 
   Stripe.setPublishableKey ScriptEd.stripe_publishable_key
 

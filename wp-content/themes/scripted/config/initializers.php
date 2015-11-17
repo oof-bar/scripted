@@ -10,7 +10,7 @@ class Initializers {
       [
         'description' => 'A gift is a successful charge to a credit card. We capture a few bits of info about the donor and save them here.',
         'public' => true,
-        'publicly_queryable' => false,
+        'publicly_queryable' => true,
         'exclude_from_search' => true,
         'query_var' => false,
         'show_ui' => true,

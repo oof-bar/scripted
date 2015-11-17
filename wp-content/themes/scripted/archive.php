@@ -12,7 +12,6 @@
       <?= ScriptEd\Helpers::partial('archive-loop', ['post' => $post]) ?>
 
       <?= ScriptEd\Helpers::partial('pagination') ?>
-      
     </div>
     
   </div>

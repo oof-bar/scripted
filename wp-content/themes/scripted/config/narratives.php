@@ -2,7 +2,7 @@
 
 class Narrative {
   public static function get_section ($layout) {
-  return ( get_template_directory() . '/narrative-layouts/' . $layout . '.php' );
+    return ( get_template_directory() . '/narrative-layouts/' . $layout . '.php' );
   }
 
   # Set and Get Narrative Field Cache with the Transient API

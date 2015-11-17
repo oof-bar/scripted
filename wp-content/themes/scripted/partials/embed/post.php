@@ -1,5 +1,5 @@
 <? global $post ?>
-<div <? post_class('post event'); ?>>
+<div <? post_class('post'); ?>>
 
   <?= ScriptEd\Helpers::partial('post-info', ['post' => $post]) ?>
   

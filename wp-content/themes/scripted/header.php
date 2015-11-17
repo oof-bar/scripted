@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php bloginfo('name'); ?><?php wp_title(' / ', true, 'RIGHT'); ?></title>
+    <title><? bloginfo('name'); ?><? wp_title(' / ', true, 'RIGHT'); ?></title>
 
     <!-- Basic Properties -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

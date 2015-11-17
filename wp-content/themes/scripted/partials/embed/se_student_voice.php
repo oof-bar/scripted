@@ -3,7 +3,7 @@
 
 <div <? post_class('post student-voice'); ?>>
 
-  <?= ScriptEd\Helpers::partial('post-info') ?>
+  <?= ScriptEd\Helpers::partial('post-info', ['post' => $post]) ?>
 
   <h3><a href="<? the_permalink() ?>"><?= the_title(); ?></a></h3>
 

@@ -8,7 +8,7 @@
 
     <div class="column col-7 tablet-three-quarters mobile-full">
 
-      <?= ScriptEd\Helpers::partial('archive-loop') ?>
+      <?= ScriptEd\Helpers::partial('archive-loop', ['post' => $post]) ?>
       
       <?= ScriptEd\Helpers::partial('pagination') ?>
 

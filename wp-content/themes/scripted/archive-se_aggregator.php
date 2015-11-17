@@ -3,6 +3,7 @@
 <?= ScriptEd\Helpers::partial('hero') ?>
 
 <section class="main aggregator-archive">
+
   <div class="wrapper">
     
     <?= ScriptEd\Helpers::partial('blog-navigation') ?>

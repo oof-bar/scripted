@@ -87,7 +87,7 @@ class Gift {
 
         $confirmation = Mailer::send_template($gift['email'], get_the_title($donation), 'one-time-donation-confirmation', [
           'name' => get_the_title($donation),
-          'amount' => $gift['amount'],
+          'amount' => $gift['amount'] / 100,
           'confirmation_url' => html::a(get_permalink($donation), get_permalink($donation)),
           'date' => get_the_date('F d, Y', $donation)
         ]);

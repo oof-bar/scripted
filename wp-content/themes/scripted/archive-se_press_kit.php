@@ -1,16 +1,16 @@
 <? get_header(); ?>
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 
 <section class="main press-kits-archive">
   <div class="wrapper">
 
-    <? include get_partial('press-navigation') ?>
+    <?= ScriptEd\Helpers::partial('press-navigation') ?>
 
     <div class="column col-9 tablet-three-quarters mobile-full">
       
-      <? include get_partial('archive-loop') ?>
+      <?= ScriptEd\Helpers::partial('archive-loop', ['post' => $post]) ?>
 
-      <? include get_partial('pagination') ?>
+      <?= ScriptEd\Helpers::partial('pagination') ?>
 
     </div>
     

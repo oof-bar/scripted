@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php bloginfo('name'); ?><?php wp_title(' / ', true, 'RIGHT'); ?></title>
+    <title><? bloginfo('name'); ?><? wp_title(' / ', true, 'RIGHT'); ?></title>
 
     <!-- Basic Properties -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,14 +17,14 @@
 
     <!-- Content -->
     <meta name="description" content="<?= bloginfo('description') ?>"/>
-    <meta name="tags" content="<?= se_meta_tags() ?>">
+    <meta name="tags" content="<?= ScriptEd\Helpers::meta_tags() ?>">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= bloginfo('template_directory') ?>/images/favicon.ico" type="image/x-icon" />
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Roboto:100,300,400,500,700,900,100italic,300italic,400italic,500italic,700italic,900italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <? include get_partial('typekit'); ?>
+    <?= ScriptEd\Helpers::partial('typekit'); ?>
 
     <!-- Everything Else, Queued Scripts -->
     <? wp_head(); ?>
@@ -34,9 +34,9 @@
     
     <div class="content-wrapper">
       
-      <? include get_partial('mobile-drawer') ?>
+      <? ScriptEd\Helpers::partial('mobile-drawer') ?>
 
-      <? include get_partial('notification') ?>
+      <? ScriptEd\Helpers::partial('notification') ?>
 
       <section class="navigation">
         <div class="wrapper">
@@ -54,10 +54,10 @@
           </div>
 
           <div class="column col-8 tablet-hide caps bold small link-grey text-center">
-            <? wp_nav_menu(array('theme_location' => 'primary')) ?>
+            <? wp_nav_menu(['theme_location' => 'primary']) ?>
           </div>
 
-          <? if ( $donate_link = se_option('donate_page') ) { ?>
+          <? if ( $donate_link = ScriptEd\Helpers::option('donate_page') ) { ?>
             <div class="column col-2 tablet-quarter mobile-hide text-right">
               <a class="button small orange donate" href="<?= $donate_link ?>">Donate</a>
             </div>

@@ -1,4 +1,4 @@
-<? $nearby = se_page_links($post) ?>
+<? $nearby = ScriptEd\Helpers::page_menu($post) ?>
 <div class="page-navigation side-nav">
   <ul>
     <? foreach ( $nearby as $p ) { ?>

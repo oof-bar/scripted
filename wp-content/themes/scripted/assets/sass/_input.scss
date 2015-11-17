@@ -1,0 +1,289 @@
+/*
+  Input/UI
+*/
+
+label {
+  display: block;
+  cursor: pointer;
+  color: $grey-darker;
+  margin-top: 1.5em;
+  position: relative;
+  .field-label {
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  &.inline-label {
+    margin-top: 0;
+    
+    .field-label {
+      display: inline-block;
+      margin-bottom: 0;
+      margin-left: 1em;
+      vertical-align: middle;
+    }
+  }
+}
+
+input, .input {
+  @include border-radius(3px);
+  -webkit-appearance: none;
+  border: none;
+  font: inherit;
+  background: none;
+  padding: 0;
+  margin: 0;
+  @include animate(background-color, border-color);
+
+  &[type="text"], &[type="email"], &[type="number"], &[type="password"], &[type="checkbox"] {
+    width: 100%;
+    display: block;
+    border: 2px solid $grey-light;
+    background-color: $grey-light;
+    padding: 0.8em 1em 0.7em 1em;
+    &:hover {
+      border-color: $grey-mid;
+    }
+    &:focus {
+      border-color: $grey-dark;
+      background: $white;
+    }
+    &.error {
+      border-color: $orange;
+    }
+  }
+
+  &[type="checkbox"] {
+    background: $white;
+    display: inline-block;
+    width: auto;
+    padding: 0.8em;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+
+    &::before {
+      display: none;
+      position: absolute;
+      font-family: 'feather';
+      content: '\e116';
+      color: $grey-dark;
+      top: 2px;
+      left: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    &:focus {
+      border-color: $grey-light;
+      background: $white;
+    }
+
+    &:hover {
+      border-color: $grey-dark;
+    }
+
+    &:checked {
+      border-color: $grey-dark;
+
+      &::before {
+        display: block;
+      }
+    }
+  }
+
+  &.button {
+    margin-top: 1em;
+  }
+}
+
+em.error {
+  display: block;
+  color: $orange-light;
+  margin-top: 0.5em;
+}
+
+.combined-field {
+  display: inline;
+  width: auto;
+  input {
+    display: inline-block;
+  }
+  &.join-right {
+    text-align: right;
+    padding-right: 0.15em;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &.join-left {
+    padding-left: 0.15em;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.placeholder {
+  position: relative;
+
+}
+
+.select {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1500;
+  padding: 0;
+  width: 100%;
+  display: block;
+  border: 2px solid $grey-light;
+  background-color: $grey-light;
+  max-height: 15em;
+  color: $black;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  @include animate(background-color);
+
+  &:hover {
+    border-color: $grey-mid;
+  }
+
+  .option {
+    position: relative;
+    padding: 0.8em 1em 0.8em 1em;
+    @include animate($property: background-color);
+
+    span {
+      @extend .icon-check;
+      display: none;
+      position: absolute;
+      top: 50%;
+      margin-top: -0.6em;
+      right: 0.5em;
+      color: $grey-dark;
+    }
+
+    &:hover {
+      color: $black;
+      background-color: darken($grey-light, 5%);
+    }
+    
+    &.active span {
+      display: inline;
+    }
+  }
+}
+
+
+.button, button, input[type=submit] {
+  @include border-radius(3px);
+  display: inline-block;
+  padding: 0.8em 2em 0.65em 2em;
+  margin-right: 0.25em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+
+  &.small {
+    font-size: 0.7em;
+    padding: 0.5em 1.25em 0.35em 1.25em;
+  }
+
+  &.orange {
+    background-color: $orange;
+    color: $white;
+    border: 2px solid $orange;
+
+    &:hover {
+      background-color: $orange-light;
+      border: 2px solid $orange-light;
+    }
+
+    &:active {
+      background-color: $orange-dark;
+      border: 2px solid $orange-dark;
+    }
+  }
+
+  &.orange.outline {
+    color: $orange;
+    background-color: transparent;
+
+    &:hover {
+      color: $orange-light;
+    }
+
+    &:active {
+      color: $orange-dark;
+    }
+  }
+
+  &.blue {
+    background-color: $blue;
+    color: $white;
+    border: 2px solid $blue;
+
+    &:hover {
+      background-color: $blue-light;
+      border: 2px solid $blue-light;
+    }
+
+    &:active {
+      background-color: $blue-dark;
+      border: 2px solid $blue-dark;
+    }
+  }
+
+  &.blue.outline {
+    color: $blue;
+    background-color: transparent;
+
+    &:hover {
+      color: $blue-light;
+    }
+
+    &:active {
+      color: $blue-dark;
+    }
+  }
+
+  &.white {
+    background-color: $white;
+    color: $blue;
+    border: 2px solid $white;
+    opacity: 1;
+
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+
+  &.white.outline {
+    color: $white;
+    background-color: transparent;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+
+  [class^="icon-"]:before,
+  [class*=" icon-"]:before {
+    margin-left: 0.5em;
+    font-size: inherit;
+    position: relative;
+    top: -0.1em;
+  }
+}

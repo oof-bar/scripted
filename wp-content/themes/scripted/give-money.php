@@ -3,12 +3,9 @@
 <? the_post() ?>
 <? $giving = get_fields() ?>
 
-<? include get_partial('hero') ?>
-
-<? include get_partial('donation-form') ?>
-
-<? include get_partial('give-faq') ?>
-
-<? include get_partial('give-options') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
+<?= ScriptEd\Helpers::partial('donation-form') ?>
+<?= ScriptEd\Helpers::partial('give-faq', ['giving' => $giving]) ?>
+<?= ScriptEd\Helpers::partial('give-options', ['giving' => $giving]) ?>
 
 <? get_footer(); ?>

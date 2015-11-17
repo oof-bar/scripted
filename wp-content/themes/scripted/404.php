@@ -1,6 +1,6 @@
 <? get_header(); ?>
 
-<? include get_partial('hero') ?>
+<?= ScriptEd\Helpers::partial('hero') ?>
 
 <section class="error-404">
   <div class="wrapper">

@@ -120,36 +120,6 @@ class Initializers {
       ]
     );
 
-    # Override Posts
-    PostTypes::create(
-      'post',
-      'Post',
-      'News',
-      [
-        'rewrite' => ['slug' => 'news'],
-        'label' => 'News',
-        'has_archive' => 'news',
-        '_builtin' => false,
-        'show_in_nav_menus' => true,
-        'publicaly_queryable' => true,
-        'labels' => [
-          'name' => 'News',
-          'singular_name' => 'News',
-          'menu_name' => 'News Posts',
-          'name_admin_bar' => 'News Posts',
-          'all_items' => 'All Posts',
-          'add_new' => 'New Post',
-          'add_new_item' => 'Add New Post',
-          'edit_item' => 'Edit Post',
-          'new_item' => 'New Post',
-          'view_item' => 'View Post',
-          'search_items' => 'Search Posts',
-          'not_found' => 'No Posts Found',
-          'not_found_in_trash' => 'No Posts Found in Trash'
-        ]
-      ]
-    );
-
     # "Pingbacks" or Media Mentions
     PostTypes::create(
       'se_mention',
@@ -203,34 +173,38 @@ class Initializers {
         ]
       ]
     );
+  }
 
-    /*
-    # Default Post Override
-    global $wp_post_types;
-
-    $default_post_config = &$wp_post_types['post'];
-    $default_post_config->rewrite = ['slug' => 'news'];
-    $default_post_config->label = 'News';
-    $default_post_config->has_archive = true;
-    $default_post_config->_builtin = false;
-    $default_post_config->labels = [
-      'name' => 'News',
-      'singular_name' => 'News',
-      'menu_name' => 'News Posts',
-      'name_admin_bar' => 'News Posts',
-      'all_items' => 'All Posts',
-      'add_new' => 'New Post',
-      'add_new_item' => 'Add New Post',
-      'edit_item' => 'Edit Post',
-      'new_item' => 'New Post',
-      'view_item' => 'View Post',
-      'search_items' => 'Search Posts',
-      'not_found' => 'No Posts Found',
-      'not_found_in_trash' => 'No Posts Found in Trash'
-    ];
-    */
-    // global $wp_post_types;
-    // Util::dump($wp_post_types);
+  public static function override_post_types() {
+    # Override Posts
+    PostTypes::create(
+      'post',
+      'Post',
+      'News',
+      [
+        'rewrite' => ['slug' => 'news'],
+        'label' => 'News',
+        'has_archive' => 'news',
+        '_builtin' => false,
+        'show_in_nav_menus' => true,
+        'publicaly_queryable' => true,
+        'labels' => [
+          'name' => 'News',
+          'singular_name' => 'News',
+          'menu_name' => 'News Posts',
+          'name_admin_bar' => 'News Posts',
+          'all_items' => 'All Posts',
+          'add_new' => 'New Post',
+          'add_new_item' => 'Add New Post',
+          'edit_item' => 'Edit Post',
+          'new_item' => 'New Post',
+          'view_item' => 'View Post',
+          'search_items' => 'Search Posts',
+          'not_found' => 'No Posts Found',
+          'not_found_in_trash' => 'No Posts Found in Trash'
+        ]
+      ]
+    );
   }
 
   public static function register_menus() {

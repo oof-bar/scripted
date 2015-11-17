@@ -311,4 +311,4 @@ use Stripe;
   require_once('config/wrappers/newsletter.php');
   require_once('config/wrappers/gift.php');
 
-  add_action('all', '\ScriptEd\Actions::respond', 0);
+  add_action('all', '\ScriptEd\Actions::respond', 1);

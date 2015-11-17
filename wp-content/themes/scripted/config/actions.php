@@ -26,14 +26,19 @@ class Actions {
     add_post_type_support('page', 'excerpt');
   }
 
+  public static function wp_loaded () {
+    Initializers::override_post_types();
+  }
+
   public static function registered_post_type ($post_type, $args) {
-    // Util::dump(['type' => $post_type, 'args' => $args]);
+    // Util::dump(['type' => $post_type, $args->label]);
   }
 
   public static function admin_init () {
     # Editor Styles
     # Broken after switch to Grunt. We should get this working again, somehow…
     # add_editor_style('stylesheets/editor-style.css');
+    Initializers::override_post_types();
   }
 
   # Add Scripts and Stylesheets

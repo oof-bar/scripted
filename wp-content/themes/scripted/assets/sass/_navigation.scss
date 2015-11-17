@@ -160,7 +160,9 @@
         }
       }
 
-      &.current-menu-item {
+      &.current-menu-item,
+      &.current_page_parent,
+      &.active {
         border-left-color: $blue;
 
         a {

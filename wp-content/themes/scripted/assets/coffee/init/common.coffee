@@ -1,8 +1,11 @@
 Cookie = require 'js-cookie'
 NewsletterSignup = require 'crm/newsletter'
+ActiveLinks = require 'misc/link-state'
 
 module.exports = ->
   console.log 'Common'
+
+  ActiveLinks()
 
   window.setInterval ->
     $('.blink').toggleClass 'visible'

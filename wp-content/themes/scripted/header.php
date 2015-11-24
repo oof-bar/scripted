@@ -34,9 +34,9 @@
     
     <div class="content-wrapper">
       
-      <? ScriptEd\Helpers::partial('mobile-drawer') ?>
+      <?= ScriptEd\Helpers::partial('mobile-drawer') ?>
 
-      <? ScriptEd\Helpers::partial('notification') ?>
+      <?= ScriptEd\Helpers::partial('notification') ?>
 
       <section class="navigation">
         <div class="wrapper">

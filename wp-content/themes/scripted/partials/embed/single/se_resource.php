@@ -6,7 +6,7 @@
     <?= ScriptEd\Helpers::partial('post-meta') ?>
   </div>
 
-  <div class="column col-7 push-1 tablet-three-quarters">
+  <div class="column col-7 push-1 tablet-three-quarters mobile-full">
     <? if ( $resource['link'] ) { ?>
       <div class="post-quote">
         <blockquote>

@@ -219,5 +219,5 @@ hr {
 }
 
 .rounded-corners {
-  @include border-radius (3px);
+  border-radius: 3px;
 }

@@ -4,21 +4,22 @@ var gulp = require('gulp'),
     coffeeify = require('gulp-coffeeify'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    compass = require('gulp-compass'),
+    sass = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
     test = require('gulp-if'),
     del = require('del'),
     rename = require('gulp-rename');
 
 var paths = {
   scripts: {
-    main: ['assets/coffee/app.coffee'],
-    listen: ['assets/coffee/**/*.coffee'],
-    out: 'assets/js'
+    main: ['wp-content/themes/scripted/assets/coffee/app.coffee'],
+    listen: ['wp-content/themes/scripted/assets/coffee/**/*.coffee'],
+    out: 'wp-content/themes/scripted/assets/js'
   },
   stylesheets: {
-    main: ['assets/sass/app.scss'],
-    listen: ['assets/sass/**/*.scss'],
-    out: 'assets/css'
+    main: ['wp-content/themes/scripted/assets/sass/app.scss'],
+    listen: ['wp-content/themes/scripted/assets/sass/**/*.scss'],
+    out: 'wp-content/themes/scripted/assets/css'
   }
 };
 
@@ -28,7 +29,7 @@ var templates = {
       .pipe(coffeeify({
         options: {
           debug: !mangle,
-          paths: [__dirname + '/node_modules', __dirname + '/assets/coffee']
+          paths: [__dirname + '/node_modules', __dirname + '/wp-content/themes/scripted/assets/coffee']
         }
       }))
       .pipe(test(mangle, uglify(), null))
@@ -36,13 +37,13 @@ var templates = {
   },
   styles: function (compress) {
     return gulp.src(paths.stylesheets.main)
-      .pipe(compass({
-        config_file: './assets/config.rb',
-        css: 'assets/css',
-        sass: 'assets/sass'
-      }).on('error', function(error) {
-        console.log(error);
-        this.emit('end');
+      .pipe(sass({
+        outputStyle: (compress ? 'compressed' : 'expanded'),
+        includePaths: require('node-neat').includePaths.concat(require('node-reset-scss').includePath)
+      }).on('error', sass.logError))
+      .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        remove: false
       }))
       .pipe(gulp.dest(paths.stylesheets.out));
   }

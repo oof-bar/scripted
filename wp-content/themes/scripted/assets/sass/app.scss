@@ -5,8 +5,9 @@
   August W. Miller, Savannah L. Julian
 */
 
-@import 'compass/css3';
-@import 'compass/reset';
+@import 'bourbon';
+@import 'reset';
+
 @import 'variables';
 @import 'mixins';
 

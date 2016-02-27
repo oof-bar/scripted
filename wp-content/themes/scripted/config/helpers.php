@@ -85,6 +85,11 @@ class Helpers {
     return $list;
   }
 
+  public static function speak_number ($number) {
+    $speakables = ['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
+    return (($number > abs(10) || $number < 0) ? $number : $speakables[abs($number)]);
+  }
+
   public static function partial ($name, $data = []) {
     return tpl::load(get_template_directory() . '/partials/' . $name . '.php', $data);
   }

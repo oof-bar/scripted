@@ -49,8 +49,7 @@ class Actions {
     wp_register_script('app', $scripts_path . 'app.js', ['stripe'], '0.2.0', true);
     wp_localize_script('app', 'ScriptEd', [
       'ajax_url' => admin_url('admin-ajax.php'),
-      'environment' => SE_ENVIRONMENT,
-      'stripe_publishable_key' => SE_STRIPE_PUBLISHABLE_API_KEY,
+      'stripe_publishable_key' => $_SERVER['STRIPE_PUBLISHABLE'],
       'cookie_path' => COOKIEPATH,
       'cookie_domain' => COOKIE_DOMAIN
     ]);

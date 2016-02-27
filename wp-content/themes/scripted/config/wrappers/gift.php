@@ -73,7 +73,10 @@ class Gift {
           'amount' => $donation['amount'],
           'currency' => 'usd',
           'card' => $donation['stripe-token'],
-          'description' => $donation['name-first'] . ' ' . $donation['name-last']
+          'description' => $donation['name-first'] . ' ' . $donation['name-last'],
+          'metadata' => [
+            'email' => $gift['email']
+          ]
         ]);
 
         # Then set up our Gift creation params

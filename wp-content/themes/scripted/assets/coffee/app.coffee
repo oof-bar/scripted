@@ -2,7 +2,8 @@ global.$ = global.jQuery = require 'jquery'
 
 # These are sort of in no-man's land... Not sure how to handle this better?
 require 'jquery-validation'
-require 'lib/jquery-validate-extra-methods'
+validate_creditcard = require 'polyfill/validate-creditcard'
+validate_creditcard()
 
 init = require 'init/main'
 

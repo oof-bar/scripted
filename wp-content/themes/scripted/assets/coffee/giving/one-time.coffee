@@ -25,7 +25,7 @@ module.exports = class AuthType
 
   params: ->
     {
-      number: $('#cc-number').val().replace(/[^\d]/g, '');
+      number: $('#cc-number').val().replace(/[^\d]/g, '')
       cvc: $('#cc-cvc').val()
       exp_month: $('#cc-expiry-month').val()
       exp_year: $('#cc-expiry-year').val()

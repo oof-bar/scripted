@@ -46,7 +46,8 @@ class Gift {
         $charge = Stripe\Customer::create([
           'description' => $donation['name-first'] . ' ' . $donation['name-last'],
           'source' => $donation['stripe-token'],
-          'plan' => $donation['plan-id']
+          'plan' => $donation['plan-id'],
+          'email' => $donation['email']
         ]);
 
         # Then set up our Gift creation params

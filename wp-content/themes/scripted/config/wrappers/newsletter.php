@@ -5,7 +5,7 @@ use Mailchimp;
 class Newsletter {
   public static function signup() {
     # Instantiate MailChimp
-    $MC = new Mailchimp(SE_MAILCHIMP_API_KEY);
+    $MC = new Mailchimp($_SERVER['MAILCHIMP_API_KEY']);
 
     # Capture the Email Address
     $email = $_POST['email'];

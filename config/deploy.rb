@@ -39,4 +39,5 @@ set :linked_dirs, fetch(:linked_dirs, []).push('wp-content/uploads')
 # set :keep_releases, 5
 
 before :deploy, 'assets:compile'
+after 'deploy:updated', 'assets:create_asset_dirs'
 after 'deploy:updated', 'assets:upload'

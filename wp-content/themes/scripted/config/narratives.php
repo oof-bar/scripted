@@ -8,10 +8,7 @@ class Narrative {
   # Set and Get Narrative Field Cache with the Transient API
   public static function get_fields ($narrative) {
     if ( $fields = get_transient(static::get_cache_name($narrative->ID)) ) {
-      # echo "<!-- Narrative was cached! -->";
-      # pp($fields);
     } else {
-      # echo "<!-- Retrieving with ACF... -->";
       $fields = get_fields($narrative->ID);
       set_transient(static::get_cache_name($narrative->ID), $fields);
     }

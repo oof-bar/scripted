@@ -524,7 +524,7 @@
     width: 175px;
     height: 175px;
     margin: 0 auto;
-    border-radius: 00em;
+    border-radius: 100em;
 
     @include mobile {
       margin: 0 auto 2em auto;
@@ -558,7 +558,7 @@
       height: 5px;
       background-color: $grey-mid;
       // cursor: pointer;
-      border-radius: px;
+      border-radius: 5px;
 
       &.active {
         background-color: $grey-dark;
@@ -610,7 +610,7 @@
     padding-left: 4em;
     font-style: italic;
     cursor: pointer;
-    border-radius: px;
+    border-radius: 3px;
 
     a {
       color: inherit;

@@ -22,7 +22,7 @@ class Actions {
     Initializers::create_post_types();
     Initializers::create_thumbnail_versions();
     Initializers::register_menus();
-    Initializers::add_options_pages();
+    Initializers::register_options_pages();
     add_post_type_support('page', 'excerpt');
   }
 

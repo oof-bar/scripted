@@ -6,11 +6,15 @@
             "key": "field_53de73c1798c3",
             "label": "Call to Action",
             "name": "cta",
-            "prefix": "",
             "type": "text",
             "instructions": "Invite the user to act.",
             "required": 1,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "Give us a Hand",
             "placeholder": "",
             "prepend": "",
@@ -23,28 +27,33 @@
             "key": "field_53de73e7798c4",
             "label": "Message",
             "name": "message",
-            "prefix": "",
-            "type": "textarea",
+            "type": "wysiwyg",
             "instructions": "Offer some context for the action, or what it helps ScriptEd accomplish.",
             "required": 1,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "wpautop",
-            "readonly": 0,
-            "disabled": 0
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
         },
         {
             "key": "field_53de7484798c7",
             "label": "Link Type",
             "name": "link_type",
-            "prefix": "",
             "type": "radio",
             "instructions": "Should the link point to something inside the ScriptEd website, or on the wider Internet?",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
                 "internal": "Internal",
                 "external": "External"
@@ -58,7 +67,6 @@
             "key": "field_53de740a798c5",
             "label": "Link (Internal)",
             "name": "link_internal",
-            "prefix": "",
             "type": "page_link",
             "instructions": "",
             "required": 0,
@@ -71,6 +79,11 @@
                     }
                 }
             ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "post_type": [
                 "page",
                 "se_aggregator",
@@ -79,7 +92,7 @@
                 "se_resource",
                 "se_student_voice"
             ],
-            "taxonomy": "",
+            "taxonomy": [],
             "allow_null": 0,
             "multiple": 0
         },
@@ -87,7 +100,6 @@
             "key": "field_53de7546798c8",
             "label": "Link (External)",
             "name": "link_external",
-            "prefix": "",
             "type": "text",
             "instructions": "The full link to the external resource. Please include http:\/\/ or https:\/\/",
             "required": 1,
@@ -100,6 +112,11 @@
                     }
                 }
             ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -112,11 +129,15 @@
             "key": "field_53de7447798c6",
             "label": "Link Label",
             "name": "link_label",
-            "prefix": "",
             "type": "text",
             "instructions": "The linked prompt",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -140,5 +161,10 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ""
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": 1,
+    "description": "",
+    "modified": 1457727017
 }

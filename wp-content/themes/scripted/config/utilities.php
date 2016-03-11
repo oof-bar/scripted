@@ -6,4 +6,10 @@ class Util {
     var_dump($obj);
     echo '</pre>';
   }
+
+  public static function console ($obj) {
+    echo '<script>console.log(';
+    echo json_encode($obj);
+    echo ');</script>';
+  }
 }

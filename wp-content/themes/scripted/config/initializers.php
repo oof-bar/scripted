@@ -157,19 +157,19 @@ class Initializers {
     
     # Press Kits
     PostTypes::create(
-      'se_press_kit',
-      'Press Kit',
-      'Press Kits',
+      'se_report',
+      'Annual Report',
+      'Annual Reports',
       [
-        'description' => 'Downloadable press resources and media kits ought to be added here.',
+        'description' => 'Annual reports ought to be added here.',
         'public' => true,
         'menu_position' => 51,
         'menu_icon' => 'dashicons-analytics',
         'hierarchical' => false,
         'supports' => ['title'],
-        'has_archive' => 'press-kits',
+        'has_archive' => 'annual-reports',
         'rewrite' => [
-          'slug' => 'press-kits'
+          'slug' => 'annual-reports'
         ]
       ]
     );
@@ -231,7 +231,7 @@ class Initializers {
     add_image_size('jumbo', 1650, 1650, false);
   }
 
-  public static function add_options_pages() {
+  public static function register_options_pages() {
     if ( function_exists('acf_add_options_page') ) {
       acf_add_options_page([
         'page_title' => 'Site Options',

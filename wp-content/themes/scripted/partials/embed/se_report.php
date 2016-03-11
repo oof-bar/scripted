@@ -2,7 +2,7 @@
 <? $kit = get_fields(); ?>
 
 <div <? post_class('post press-kit'); ?>>
-  
+
   <a class="button small blue float-right" href="<?= $kit['attachment']['url'] ?>" target="_blank">
     Download
   </a>
@@ -11,7 +11,6 @@
     <? if ( $kit['attachment'] ) { ?>
       <a href="<?= $kit['attachment']['url'] ?>" target="_blank">
         <? the_title() ?>
-
       </a>
     <? } else { ?>
       <? the_title(); ?>

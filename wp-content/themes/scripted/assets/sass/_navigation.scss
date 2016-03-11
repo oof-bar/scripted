@@ -108,7 +108,7 @@
       margin-top: 1em;
       border-radius: 3px;
       box-shadow: 0 0.1em 0.25em 0.1em rgba(0,0,0,0.15);
-      @include transform(translate3d(0, -1em, 0));
+      @include transform(translate(0, -1em));
       @include animate($duration: 150ms);
 
       li {

@@ -3,7 +3,7 @@
 */
 
 @mixin animate($duration: .3s, $property: all, $function: cubic-bezier(0, 1, 1, 1)) {
-  @include transition($duration, $function, $property);
+  @include transition($duration $function $property);
 }
 
 @mixin clearfix {

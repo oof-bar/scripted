@@ -831,6 +831,37 @@
 }
 
 /*
+  Team
+*/
+
+.jobs {
+  .open-positions {}
+  .position {
+    margin-bottom: 2em;
+    padding-top: 1em;
+    @include border-top;
+    @include clearfix;
+
+    h3 {
+      color: $blue
+    }
+
+    .date {}
+
+    .description {
+      float: left;
+      width: 75%;
+    }
+
+    .download {
+      float: right;
+      width: 25%;
+      text-align: right;
+    }
+  }
+}
+
+/*
   Educators
 */
 

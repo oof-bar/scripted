@@ -85,6 +85,11 @@ class Helpers {
     return $list;
   }
 
+  public static function speak_number ($number) {
+    $speakables = ['zero','one','two','three','four','five','six','seven','eight','nine','ten'];
+    return (($number > abs(10) || $number < 0) ? $number : $speakables[abs($number)]);
+  }
+
   public static function partial ($name, $data = []) {
     return tpl::load(get_template_directory() . '/partials/' . $name . '.php', $data);
   }
@@ -100,12 +105,20 @@ class Helpers {
     }
   }
 
-  public static function option ($option = false, $options_page = 'option') {
-    $options = get_fields($options_page);
-    if ( $option && isset($options[$option]) ) {
-      return $options[$option];
+  public static $option_groups = [];
+
+  public static function option ($option = false, $group = 'option') {
+    # Serve from our static cache, if the group has already been queried
+    if ( array_key_exists($group, static::$option_groups) ) {
+      $set = static::$option_groups[$group];
     } else {
-      return false;
+      $set = static::$option_groups[$group] = get_fields($group);
+    }
+    
+    if ( $option && isset($set[$option]) ) {
+      return $set[$option];
+    } else {
+      return $set;
     }
   }
 

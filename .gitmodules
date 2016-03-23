@@ -4,3 +4,6 @@
 [submodule "wp-content/themes/scripted/lib/kirby-toolkit"]
 	path = wp-content/themes/scripted/lib/kirby-toolkit
 	url = git@github.com:getkirby/toolkit.git
+[submodule "wordpress"]
+	path = wordpress
+	url = https://github.com/WordPress/WordPress.git

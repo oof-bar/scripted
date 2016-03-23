@@ -1,0 +1,141 @@
+{
+    "key": "group_56f1ceff67ea5",
+    "title": "Jobs",
+    "fields": [
+        {
+            "key": "field_56f1cf0ab25ce",
+            "label": "Open Positions",
+            "name": "open_positions",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_56f1cf48b25d1",
+            "min": "",
+            "max": "",
+            "layout": "block",
+            "button_label": "Add Job Posting",
+            "sub_fields": [
+                {
+                    "key": "field_56f1cf48b25d1",
+                    "label": "Position Name",
+                    "name": "name",
+                    "type": "text",
+                    "instructions": "What position are you hiring for?",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_56f1d020b25d2",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "instructions": "Provide a bit of information for applicants to decide whether or not to download the longer description. Markdown is permitted.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_56f1d07db25d3",
+                    "label": "Download",
+                    "name": "download",
+                    "type": "file",
+                    "instructions": "Provide a downloadable PDF or document with an expanded description.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_56f1d0b2b25d4",
+                    "label": "Date Posted",
+                    "name": "date_posted",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "F j, Y",
+                    "return_format": "F j, Y",
+                    "first_day": 0
+                }
+            ]
+        },
+        {
+            "key": "field_56f1cf1eb25d0",
+            "label": "No Open Positions Message",
+            "name": "no_open_positions",
+            "type": "wysiwyg",
+            "instructions": "If there aren't any open positions, this message will be shown.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "text",
+            "toolbar": "basic",
+            "media_upload": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "jobs.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1458688301
+}

@@ -8,5 +8,4 @@
 
 </section>
 
-
 <? get_footer(); ?>

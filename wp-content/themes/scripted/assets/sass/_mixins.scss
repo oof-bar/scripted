@@ -2,66 +2,64 @@
   Mixins
 */
 
-@mixin animate( $duration: .3s , $property: all , $function: cubic-bezier( 0 , 1 , 1 , 1 ) ) {
-  @include transition-duration( $duration );
-  @include transition-property( $property );
-  @include transition-timing-function( $function );
+@mixin animate($duration: .3s, $property: all, $function: cubic-bezier(0, 1, 1, 1)) {
+  @include transition($duration $function $property);
 }
 
-@mixin clearfix ( ) {
+@mixin clearfix {
   &:after {
-  display: table;
-  content: '';
-  clear: both;
+    display: table;
+    content: '';
+    clear: both;
   }
 }
 
 // Screen Sizes
 
-@mixin wide ( ) {
+@mixin wide {
   @media screen and ( min-width : $breakpoint-desktop ) {
-  @content;
+    @content;
   }
 }
 
-@mixin desktop ( ) {
+@mixin desktop {
   @media screen and ( min-width : $breakpoint-tablet ) {
-  @content;
+    @content;
   }
 }
 
-@mixin tablet ( ) {
+@mixin tablet {
   @media screen and ( max-width : $breakpoint-tablet ) {
-  @content;
+    @content;
   }
 }
 
-@mixin mobile ( ) {
-  @media screen and ( max-width : $breakpoint-mobile ) {
-  @content;
+@mixin mobile {
+  @media screen and (max-width: $breakpoint-mobile) {
+    @content;
   }
 }
 
 
 @-webkit-keyframes rotate {
   0% {
-  -webkit-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
   50% {
-  -webkit-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
   }
   100% {
-  -webkit-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
 }
 
 // Appearance
 
-@mixin border-top ( $color: $grey-light ) {
+@mixin border-top ($color: $grey-light) {
   border-top: 1px solid $color;
 }
 
-@mixin text-on-image ( $color: $blue ) {
+@mixin text-on-image ($color: $blue) {
   text-shadow: 0 1px 1px darken(transparentize($color, 0.5), 35%);
 }
 
@@ -74,7 +72,6 @@
          only screen and (                min-resolution: 2dppx) { 
       
     @content;
-
   }
 }
 

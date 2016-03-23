@@ -10,7 +10,7 @@ class Mailer {
     if ( static::$instance ) {
       return static::$instance;
     } else {
-      return static::$instance = new Mandrill(SE_MANDRILL_API_KEY);
+      return static::$instance = new Mandrill($_SERVER['MANDRILL_API_KEY']);
     }
   }
 

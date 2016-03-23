@@ -1,11 +1,8 @@
-wp-content/themes/scripted/node_modules
 wp-content/themes/scripted/assets/js/
 wp-content/themes/scripted/assets/css/
 wp-content/themes/scripted/.sass-cache
 wp-config.php
-wp-environment.php
 wp-content/uploads
-.rsync-log
-deploy-staging.sh
-deploy-prod.sh
-.rsync-log-production
+
+.sass-cache
+node_modules

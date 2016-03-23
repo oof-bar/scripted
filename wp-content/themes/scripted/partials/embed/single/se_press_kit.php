@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="column col-7 push-1 tablet-three-quarters">
+  <div class="column col-7 push-1 tablet-three-quarters mobile-full">
     <div class="post-content">
       <? the_content() ?>
       <? pp($kit) ?>

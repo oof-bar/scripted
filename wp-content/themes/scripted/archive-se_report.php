@@ -1,7 +1,7 @@
 <? get_header(); ?>
 <?= ScriptEd\Helpers::partial('hero') ?>
 
-<section class="main press-mention-archive">
+<section class="main press-kits-archive">
   <div class="wrapper">
     <div class="column col-8 push-2 tablet-three-quarters mobile-full">
       <?= ScriptEd\Helpers::partial('archive-loop', ['post' => $post]) ?>

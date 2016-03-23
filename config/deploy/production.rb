@@ -7,7 +7,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-set :app_domain, 'scripted.staging.oof.studio'
+set :app_domain, 'scripted.org'
 server fetch(:app_domain), user: 'deploy', roles: ['web']
 
 set :deploy_to, '/var/www/clients/scripted/production'

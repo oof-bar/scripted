@@ -22,6 +22,12 @@
   #{headers(all)} {
     color: $grey-dark;
   }
+
+  iframe {
+    width: 100%;
+    border: 2px solid $grey-light;
+    background-color: $grey-light;
+  }
 }
 
 /*

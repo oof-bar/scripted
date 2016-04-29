@@ -13,7 +13,8 @@ class Info {
     'subscription_status' => 'field_561997d9297e3',
     'plan_id' => 'field_56401ada79cf2',
     'next_payment' => 'field_5647c1f7e1cfc',
-    'canceled_at' => 'field_56482cfa3c79e'
+    'canceled_at' => 'field_56482cfa3c79e',
+    'source_id' => 'field_5722ae0337bb4'
   ];
 
   public static function field_key ($key) {

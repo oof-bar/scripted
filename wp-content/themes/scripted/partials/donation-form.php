@@ -12,7 +12,7 @@
       </div>
 
     </div>
-    
+
     <div class="wrapper field-group name">
 
       <div class="column col-4 tablet-half mobile-full collapse-space">
@@ -106,7 +106,7 @@
           <input type="text" id="cc-cvc" class="cc cvc exclude" name="cc-cvc" />
         </label>
       </div>
-        
+
       <div class="column col-2 tablet-quarter mobile-half collapse-space">
         <label>
           <span class="field-label">Zip Code</span>
@@ -119,6 +119,7 @@
     <div class="wrapper">
       <div class="column col-3 tablet-half mobile-full collapse-space">
         <input type="hidden" id="stripe-token" name="stripe-token" class="cc token" />
+        <input type="hidden" id="source-id" name="source-id" value="<?= $id ?>" />
         <input class="button blue exclude" type="submit" value="Make it so!" />
       </div>
     </div>

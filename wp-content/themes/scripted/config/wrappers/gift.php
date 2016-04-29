@@ -37,7 +37,8 @@ class Gift {
       'name-first' => $donation['name-first'],
       'name-last' => $donation['name-last'],
       'email' => $donation['email'],
-      'zip' => $donation['zip']
+      'zip' => $donation['zip'],
+      'source_id' => $donation['source-id']
     ];
 
     try {
@@ -76,7 +77,8 @@ class Gift {
           'card' => $donation['stripe-token'],
           'description' => $donation['name-first'] . ' ' . $donation['name-last'],
           'metadata' => [
-            'email' => $gift['email']
+            'email' => $gift['email'],
+            'source_id' => $donation['source-id']
           ]
         ]);
 
@@ -99,7 +101,6 @@ class Gift {
 
       wp_send_json_success([
         'post' => $donation,
-        # 'stripe' => $charge,
         'confirmation_path' => get_permalink($donation),
         'confirmation_email' => $confirmation
       ]);
@@ -109,8 +110,7 @@ class Gift {
       $error = $error['error'];
 
       wp_send_json_error([
-        'message' => Helpers::markdown($error['message']),
-        # 'post' => $donation
+        'message' => Helpers::markdown($error['message'])
       ]);
     }
   }
@@ -127,8 +127,9 @@ class Gift {
     update_field(Info::field_key('give_email'), $params['email'], $donation);
     update_field(Info::field_key('give_zip'), $params['zip'], $donation);
     update_field(Info::field_key('recurring'), $params['recurring'], $donation);
+    update_field(Info::field_key('source_id'), $params['source_id'], $donation);
     update_field(Info::field_key('give_amount'), ($params['amount'] / 100), $donation);
-    
+
     if ( $params['recurring'] ) {
       update_field(Info::field_key('customer_id'), $params['charge']->id, $donation);
       update_field(Info::field_key('subscription_id'), $params['charge']->subscription['id'], $donation);

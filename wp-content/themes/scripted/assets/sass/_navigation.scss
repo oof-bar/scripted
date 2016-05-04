@@ -9,6 +9,25 @@
     height: 3px;
     background-color: $grey-dark;
     margin-bottom: 4px;
+    @include transition(0.25s linear all);
+  }
+
+  .drawer-open & {
+    .patty {
+      // opacity: 0;
+    }
+
+    .bun {
+      width: 14px;
+
+      &.top {
+        transform: translate(-3px, 3px) rotate(-45deg);
+      }
+
+      &.bottom {
+        transform: translate(-3px, -3px) rotate(45deg);
+      }
+    }
   }
 }
 

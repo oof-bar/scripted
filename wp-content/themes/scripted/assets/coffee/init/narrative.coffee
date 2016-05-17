@@ -1,3 +1,4 @@
+Equalizer = require 'misc/equalizer'
 Slider = require 'carousel/slider'
 
 module.exports = ->
@@ -13,5 +14,8 @@ module.exports = ->
       e.preventDefault()
 
   $('.donate-widget .amount').on 'focus', (e) ->
-    # console.log "Focused"
     $('.donate-widget .instructions').addClass('active').slideDown()
+
+  $('section.impact').each (index, section) ->
+    impact = $(section)
+    new Equalizer impact.find('.statistics')

@@ -143,4 +143,8 @@ class Helpers {
       return static::$markdown_parser = new Parsedown();
     }
   }
+
+  public static function asset_url ($asset) {
+    return get_template_directory_uri() . '/' . 'assets' . '/' . $asset;
+  }
 }

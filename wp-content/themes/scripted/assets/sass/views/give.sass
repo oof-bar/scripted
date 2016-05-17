@@ -1,0 +1,84 @@
++keyframes(pulse)
+  0%
+    opacity: 1
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1
+
+section.give-form
+  .locked
+    pointer-events: none
+    +animation(pulse 1.5s infinite)
+
+  .field-group
+    
+
+  .cc-expiry
+    &.month
+      width: 3.2em
+
+    &.year
+      width: 4.4em
+
+
+section.faq
+  .faq-item
+    border-top: 1px solid $grey-light
+
+    &:last-of-type
+      border-bottom: 1px solid $grey-light
+
+    .question
+      font-weight: 600
+      color: $grey-darker
+      cursor: pointer
+      padding: 1em 1.75em 1em 0
+      background: transparent url('../images/arrow-open.png') right center no-repeat
+      +animate($property: color)
+
+      &:hover
+        color: $black
+
+    .answer
+      display: none
+
+      .answer-wrap
+        padding: 1em 0 2em 0
+
+    &.open
+      .question
+        background-image: url('../images/arrow-close.png')
+        color: $black
+
+section.give-confirmation
+  .table
+    .value
+      font-family: monospace
+
+    .actions
+      text-align: right
+
+    &.updating
+      pointer-events: none
+      opacity: 0.5
+      +animation(pulse 1.5s infinite)
+
+  .disclaimer
+    margin-top: 2em
+
+  .gift-info
+    margin-top: 2em
+
+  .table
+    .row
+      .cell
+        padding: 1em 0
+        +border-top
+        
+        &:first-child
+          font-weight: 600
+
+      &:last-child
+        .cell
+          border-bottom: 1px solid $grey-light

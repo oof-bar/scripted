@@ -1,0 +1,100 @@
+section.team
+  .people
+    .person
+      margin-bottom: 1.5em
+
+      h5
+        margin-bottom: 0.25em
+
+      .title
+        margin-bottom: 1em
+
+      .portrait
+        margin-bottom: 1.5em
+
+      .portrait-mask
+        margin: 0
+        height: 150px
+        width: 150px
+        border-radius: 150px
+        background: #DDD
+        overflow: hidden
+
+    // Display formats
+
+    &.abbreviated
+      .portrait-mask
+        margin: 0 auto
+        +filling-image
+        +lazy-image
+
+      .details
+        text-align: center
+
+    &.full
+      .person
+        padding-top: 3rem
+        margin-bottom: 3rem
+
+    &.tiles
+      .profile
+        position: relative
+        overflow: hidden
+        height: 100%
+        border: 1px solid $grey-light
+        background-color: $grey-light
+
+        &::after
+          content: ''
+          position: absolute
+          bottom: 0
+          height: 40%
+          width: 100%
+          +linear-gradient(rgba($black, 0), rgba($black, 0.4))
+          z-index: 1
+
+        &:hover
+          .portrait
+            opacity: 0.5
+
+          .info
+            top: 0
+            background-color: rgba($blue, 0.85)
+            text-shadow: none
+            background-image: none
+
+            .bio
+              opacity: 1
+
+      .portrait
+        +fill
+        +filling-image
+        +transition(0.15s linear opacity)
+        z-index: 0
+
+        img
+          +lazy-image
+
+      .info
+        position: relative
+        top: 70%
+        padding: 0.75rem
+        padding-bottom: 4rem
+        +transition(0.75s cubic-bezier(0, 1, 0.4, 1) all)
+        color: $white
+        height: 100%
+        text-shadow: 0 1px 5px rgba($black, 0.45)
+        background-color: transparent
+        z-index: 2
+
+        h5,
+        .title
+          color: inherit
+
+        .bio
+          opacity: 0.25
+          +fade
+
+      a
+        color: inherit
+        text-decoration: underline

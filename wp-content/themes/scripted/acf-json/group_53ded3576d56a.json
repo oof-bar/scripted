@@ -6,14 +6,19 @@
             "key": "field_53ded5620d84a",
             "label": "Layout",
             "name": "layout",
-            "prefix": "",
             "type": "radio",
             "instructions": "Does this page need full profiles, or just names and pictures?",
             "required": 1,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "choices": {
-                "full": "Full Bios",
-                "abbreviated": "Just Names and Photos"
+                "tiles": "Tiles, with larger photos",
+                "abbreviated": "Just Names and Photos",
+                "full": "Names and bios, displayed in a list"
             },
             "other_choice": 0,
             "save_other_choice": 0,
@@ -24,26 +29,34 @@
             "key": "field_53ded35ef214a",
             "label": "People",
             "name": "people",
-            "prefix": "",
             "type": "repeater",
             "instructions": "Add people to be featured on this page.",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_53ded37ef214c",
             "min": "",
             "max": "",
-            "layout": "table",
+            "layout": "row",
             "button_label": "Add Person",
             "sub_fields": [
                 {
                     "key": "field_53ded37ef214c",
                     "label": "Name",
                     "name": "name",
-                    "prefix": "",
                     "type": "text",
                     "instructions": "Try and keep this consistent\u2014 if it's likely that one group would prefer anonymity, formatting all the names \"J. Seinfeld\" or \"Jerry S.\" is acceptable.",
                     "required": 1,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
@@ -56,26 +69,39 @@
                     "key": "field_53ded374f214b",
                     "label": "Portrait",
                     "name": "portrait",
-                    "prefix": "",
                     "type": "image",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "return_format": "array",
                     "preview_size": "thumbnail",
-                    "library": "all"
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
                 },
                 {
                     "key": "field_53ded3c9f214d",
                     "label": "Title",
                     "name": "title",
-                    "prefix": "",
                     "type": "text",
                     "instructions": "Title or Position that the person holds or refers to themselves as. \"CEO, Shopify,\" \"Founding Board Member\" or \"Software Engineer\" are some examples.",
                     "required": 0,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
@@ -88,17 +114,20 @@
                     "key": "field_53ded470f214e",
                     "label": "Bio",
                     "name": "bio",
-                    "prefix": "",
                     "type": "textarea",
                     "instructions": "A few sentences about the person. Try and keep these roughly equal in length for each profile.",
                     "required": 0,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "wpautop",
+                    "new_lines": "",
                     "readonly": 0,
                     "disabled": 0
                 },
@@ -106,12 +135,15 @@
                     "key": "field_53ded5af0d84b",
                     "label": "Link",
                     "name": "link",
-                    "prefix": "",
                     "type": "text",
                     "instructions": "Provide a link, if the person would like their name and title to lead to a personal or business website.",
                     "required": 0,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
@@ -137,5 +169,8 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ""
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1463524323
 }

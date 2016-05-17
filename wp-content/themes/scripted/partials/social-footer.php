@@ -1,4 +1,4 @@
-<section class="outreach border-top text-grey-dark link-orange">
+<section class="social border-top text-grey-dark link-orange">
   <div class="wrapper">
     <div class="column col-3 tablet-full">
       <div class="copyright small caps">
@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="column col-9 tablet-full">
-      <div class="outreach-links">
+      <div class="social-links">
         <? if ( $contact_email = ScriptEd\Helpers::option('contact_email') ) { ?>
           <span class="small caps link email">
             Send Us An <a href="mailto:<?= $contact_email ?>" title="Email ScriptEd">email</a>

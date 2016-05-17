@@ -1,0 +1,79 @@
+section.testimonials
+  padding-bottom: 6em
+
+  +mobile
+    padding-bottom: 4em
+
+  .slider-wrap
+    position: relative
+
+  .testimonial
+    position: absolute
+    width: 100%
+    z-index: 1000
+    opacity: 0
+    +animate($duration: 1000ms, $property: opacity)
+
+    .quote
+      font-size: 1.5em
+      font-weight: 300
+      line-height: 1.2em
+      font-family: $family-serif
+
+    .attribution
+      font-size: 1em
+      margin-top: 1.25em
+      font-weight: 600
+
+    .cell
+      vertical-align: middle
+      float: none
+
+    &.active
+      z-index: 1500
+      opacity: 1
+
+    +mobile
+      text-align: center
+      font-size: 80%
+      display: block
+
+  .portrait
+    position: relative
+    overflow: hidden
+    width: 175px
+    height: 175px
+    margin: 0 auto
+    border-radius: 100em
+
+    +mobile
+      margin: 0 auto 2em auto
+      width: 150px
+      height: 150px
+      padding-bottom: 0
+
+    img
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+
+  .slide-pagination
+    position: absolute
+    bottom: 3em
+    width: 100%
+    text-align: center
+
+    +mobile
+      bottom: 2em
+
+    .indicator
+      display: inline-block
+      margin: 0 0.5em
+      width: 5px
+      height: 5px
+      background-color: $grey-mid
+      border-radius: 5px
+
+      &.active
+        background-color: $grey-dark

@@ -6,11 +6,9 @@
   <form id="give">
 
     <div class="wrapper">
-
       <div class="column col-8 push-2 greedy">
-        <div id="give-messages"></div>
+        <div id="give-messages" class="messages"></div>
       </div>
-
     </div>
 
     <div class="wrapper field-group name">

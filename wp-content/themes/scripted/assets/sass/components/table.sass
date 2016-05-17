@@ -1,0 +1,18 @@
+.table
+  display: table
+  margin: 0 0 1em 0
+  width: 100%
+
+  .row
+    display: table-row
+    border-top: 1px solid $grey-light
+
+    &:last-of-type
+      border-bottom: 1px solid $grey-light
+
+    .cell
+      position: relative
+      display: table-cell
+
+      +mobile
+        display: block

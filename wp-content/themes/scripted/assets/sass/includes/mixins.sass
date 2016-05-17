@@ -1,0 +1,91 @@
+=animate($duration: .3s, $property: all, $function: cubic-bezier(0, 1, 1, 1))
+  +transition($duration $function $property)
+
+=clearfix
+  &::after
+    display: table
+    content: ''
+    clear: both
+
+=fill($position: absolute)
+  position: $position
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+
+=filling-image
+  img
+    max-width: none
+
+=lazy-image
+  opacity: 0
+  +fade
+
+  &.loaded
+    opacity: 1
+
+// Screen Sizes
+
+=wide
+  @media screen and ( min-width : $breakpoint-desktop )
+    @content
+
+=desktop
+  @media screen and (min-width: $breakpoint-tablet)
+    @content
+
+=tablet
+  @media screen and (max-width: $breakpoint-tablet)
+    @content
+
+=mobile
+  @media screen and (max-width: $breakpoint-mobile)
+    @content
+
+
+@-webkit-keyframes rotate
+  0%
+    -webkit-transform: rotate(0deg)
+  50%
+    -webkit-transform: rotate(-180deg)
+  100%
+    -webkit-transform: rotate(0deg)
+
+// Appearance
+
+=border-top ($color: $grey-light)
+  border-top: 1px solid $color
+
+=text-on-image ($color: $blue)
+  text-shadow: 0 1px 1px darken(transparentize($color, 0.5), 35%)
+
+// Animation
+
+=fade($speed: 0.15s)
+  +transition($speed linear opacity)
+
+=animation($animate...)
+  $max: length($animate)
+  $animations: ''
+
+  @for $i from 1 through $max
+    $animations: #{$animations + nth($animate, $i)}
+
+    @if $i < $max
+      $animations: #{$animations + ", "}
+
+  -webkit-animation: $animations
+  -moz-animation:    $animations
+  -o-animation:      $animations
+  animation:         $animations
+
+=keyframes($animationName)
+  @-webkit-keyframes #{$animationName}
+    @content
+  @-moz-keyframes #{$animationName}
+    @content
+  @-o-keyframes #{$animationName}
+    @content
+  @keyframes #{$animationName}
+    @content

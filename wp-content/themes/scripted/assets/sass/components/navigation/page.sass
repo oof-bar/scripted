@@ -1,0 +1,26 @@
+.side-nav
+  margin-bottom: 2em
+
+  ul
+    li
+      border-left: 1px solid $grey-mid
+
+      a
+        display: block
+        color: $grey-dark
+        padding-left: 1em
+        line-height: 2.5em
+
+      &:hover
+        border-left-color: $grey-darker
+
+        a
+          color: $grey-darker
+
+      &.current-menu-item,
+      &.current_page_parent,
+      &.active
+        border-left-color: $blue
+
+        a
+          color: $blue

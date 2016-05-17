@@ -1,0 +1,44 @@
+.latest-posts
+  padding-bottom: 0
+
+  +mobile
+    display: none
+
+  .type
+    margin-bottom: 0.5em
+
+    a
+      color: inherit
+
+  .post-date
+    position: absolute
+    bottom: 0.75em
+
+    +mobile
+      bottom: 0.5em
+
+  .post-title
+    margin-bottom: 2em
+
+  .table
+    border: 1px solid $grey-light
+    border-radius: 3px
+
+    .cell
+      width: 25%
+      padding: 0.75em
+      border-right: 1px solid $grey-light
+
+      +mobile
+        width: auto
+        border-right: none
+        border-bottom: 1px solid $grey-light
+
+        &:last-child
+          border-bottom: none
+
+      &:last-child
+        border-right: none
+
+      &:hover
+        background-color: lighten($grey-light, 5%)

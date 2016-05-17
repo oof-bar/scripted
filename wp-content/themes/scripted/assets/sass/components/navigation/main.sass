@@ -1,0 +1,58 @@
+.navigation
+  padding: 1.5em 0
+  z-index: 1000
+
+  +mobile
+    padding: 1em 0 0.75em 0
+
+  .column
+
+  .wordmark
+    margin-top: 0.2em
+
+    +tablet
+      text-align: center
+
+  .menu
+    margin-top: 0.65em
+
+    .menu-item-has-children
+      padding-right: 1.5em
+      background: transparent url('../images/arrow-close.svg') right center no-repeat
+      background-size: 14px
+
+  li
+    display: inline-block
+    margin: 0 0.75em
+    position: relative
+
+    ul 
+      position: absolute
+      visibility: hidden
+      opacity: 0
+      background: white
+      left: 0
+      margin-left: -1em
+      margin-top: 1em
+      border-radius: 3px
+      box-shadow: 0 0.1em 0.25em 0.1em rgba(0,0,0,0.15)
+      +transform(translate(0, -1em))
+      +animate($duration: 150ms)
+
+      li
+        display: block
+        text-align: left
+        margin: 0
+        &:not(:last-child)
+          border-bottom: 1px solid $grey-light
+        a
+          display: block
+          padding: 1em 2em 1em 1em
+          white-space: nowrap
+
+    &.open ul
+      visibility: visible
+      opacity: 1
+      +transform(translate(0, 0))
+
+  .donate

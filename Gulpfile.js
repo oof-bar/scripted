@@ -17,8 +17,8 @@ var paths = {
     out: 'wp-content/themes/scripted/assets/js'
   },
   stylesheets: {
-    main: ['wp-content/themes/scripted/assets/sass/app.scss'],
-    listen: ['wp-content/themes/scripted/assets/sass/**/*.scss'],
+    main: ['wp-content/themes/scripted/assets/sass/app.sass'],
+    listen: ['wp-content/themes/scripted/assets/sass/**/*.sass'],
     out: 'wp-content/themes/scripted/assets/css'
   }
 };

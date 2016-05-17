@@ -1,0 +1,18 @@
+.content-wrapper
+  transform: translate(0, 0)
+  +animate($property: transform)
+
+.page-content,
+.post-content
+  margin-bottom: 2em
+
+  #{headers(all)}
+    color: $grey-dark
+
+  h5
+    color: $blue
+
+  iframe
+    width: 100%
+    border: 2px solid $grey-light
+    background-color: $grey-light

@@ -1,0 +1,115 @@
+*
+  box-sizing: border-box
+
+  &:focus
+    outline: none
+
+html,
+body
+  overflow-x: hidden
+  width: 100%
+
+body
+  -webkit-font-smoothing: antialiased
+
+// Structure
+
+section
+  padding: 4em 0
+  position: relative
+
+  &.expanded
+    padding: 7em 0
+
+    +mobile
+      padding: 3em 0
+
+  &.border
+    +border-top
+
+  +mobile
+    padding: 2em 0
+
+img
+  max-width: 100%
+
+hr
+  border: none
+  border-bottom: 1px dashed $grey-light
+  margin: 1.5em 0
+
+
+// Typography
+
+body
+  font-size: 17px
+  line-height: 20px
+  font-family: $family-sans
+  color: $black
+
+
+p
+  max-width: 45em
+  & + p
+    margin-top: 1em
+
+// Headers
+
+#{headers(all)}
+
+h1, h2, h3
+  font-family: $family-serif
+
+h4
+  font-family: $family-sans
+
+h1
+  font-size: 2.6em
+  font-weight: 300
+  line-height: 1.1em
+  margin-bottom: 0.5em
+  +mobile
+    font-size: 2em
+
+h2
+  font-size: 2em
+  font-weight: 300
+  line-height: 1em
+  margin-bottom: 0.75em
+
+h3
+  font-size: 1.4em
+  font-weight: 400
+  line-height: 1.2em
+  margin-bottom: 1em
+
+h4
+  font-size: 1.3em
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  font-weight: 600
+  margin-bottom: 1em
+  +mobile
+    font-size: 1em
+
+h5
+  font-size: 1.1em
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  font-weight: 600
+  margin-bottom: 1em
+
+small
+  font-size: 0.8em
+  font-family: $family-sans
+
+em
+  font-style: italic
+
+strong
+  font-weight: 700
+
+pre
+  font-family: monospace
+  font-size: 85%
+

@@ -1,0 +1,105 @@
+@for $column from 1 through $columns
+  .col-#{$column}
+    width: ((100% / $columns) * $column)
+
+  .push-#{$column}
+    margin-left: ((100% / $columns) * $column)
+
+    +mobile
+       margin-left: 0
+
+.wrapper
+  +clearfix
+  position: relative
+  max-width: $max-width
+  margin: 0 auto
+  padding: 0 2em
+
+  &.static
+    position: static
+
+  +mobile
+    padding: 0 1em
+
+.column
+  padding-right: ($gutter-width / 2)
+  padding-left: ($gutter-width / 2)
+  min-height: 1em
+  position: relative
+  float: left
+  box-sizing: border-box
+  +clearfix
+
+  +mobile
+    clear: both
+    width: 100%
+
+  &.static
+    position: static
+
+.column .column
+
+.centered
+  float: none
+  margin: 0 auto
+  padding: 0
+
+.greedy + .column
+  clear: both
+
++desktop
+  .desktop-hide
+    display: none
+
++tablet
+  .tablet-full
+    width: 100%
+    margin-left: 0
+
+  .tablet-three-quarters
+    width: (100% / 4) * 3
+    margin-left: 0
+
+  .tablet-half
+    width: (100% / 2)
+    clear: none
+    margin-left: 0
+
+  .tablet-quarter
+    width: (100% / 4)
+    clear: none
+    margin-left: 0
+
+  .tablet-third
+    width: (100% / 3)
+    clear: none
+    margin-left: 0
+
+  .tablet-two-thirds
+    width: ((100% / 3) * 2)
+    clear: none
+    margin-left: 0
+
+  .tablet-hide
+    display: none
+
+  .tablet-show
+    display: initial
+
++mobile
+   .mobile-full
+      width: 100%
+
+   .mobile-half
+      width: (100% / 2)
+      clear: none
+
+   .mobile-quarter
+      width: (100% / 4)
+      clear: none
+
+   .mobile-hide
+      display: none
+
+   .mobile-show
+      display: initial

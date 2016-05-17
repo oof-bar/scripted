@@ -41,7 +41,7 @@
         </div>
       </section>
 
-      <?= ScriptEd\Helpers::partial('outreach-footer') ?>
+      <?= ScriptEd\Helpers::partial('social-footer') ?>
 
     </div>
 

@@ -88,8 +88,12 @@
                         <a href="<?= $person['link'] ?>" target="_blank" title="<? $person['name'] ?>">
                       <? } ?>
 
-                      <div class="name"><?= $person['name'] ?></div>
-                      <div class="title small text-grey-mid"><?= $person['title'] ?></div>
+                      <h6 class="name text-blue">
+                        <?= $person['name'] ?>
+                      </h6>
+                      <div class="title small text-grey-dark">
+                        <?= $person['title'] ?>
+                      </div>
 
                       <? if ( $person['link'] ) { ?>
                         </a>

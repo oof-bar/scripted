@@ -53,18 +53,12 @@
                     </div>
                   </div>
                   <div class="column col-9 tablet-three-quarters mobile-full details">
-                    <? if ( $person['link'] ) { ?>
-                      <a href="<?= $person['link'] ?>" target="_blank" title="<? $person['name'] ?>">
-                    <? } ?>
-                      <h5 class="name text-blue">
-                        <?= $person['name'] ?>
-                      </h5>
-                      <div class="title small text-grey-dark">
-                        <?= $person['title'] ?>
-                      </div>
-                    <? if ( $person['link'] ) { ?>
-                      </a>
-                    <? } ?>
+                    <h5 class="name text-blue">
+                      <?= $person['name'] ?>
+                    </h5>
+                    <div class="title small text-grey-dark">
+                      <?= $person['title'] ?>
+                    </div>
                     <div class="bio">
                       <?= $person['bio'] ?>
                     </div>
@@ -84,20 +78,12 @@
                       </div>
                     </div>
                     <div class="details">
-                      <? if ( $person['link'] ) { ?>
-                        <a href="<?= $person['link'] ?>" target="_blank" title="<? $person['name'] ?>">
-                      <? } ?>
-
                       <h6 class="name text-blue">
                         <?= $person['name'] ?>
                       </h6>
                       <div class="title small text-grey-dark">
                         <?= $person['title'] ?>
                       </div>
-
-                      <? if ( $person['link'] ) { ?>
-                        </a>
-                      <? } ?>
                     </div>
                   </div>
                 </div>

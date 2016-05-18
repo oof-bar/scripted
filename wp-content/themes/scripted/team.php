@@ -23,7 +23,7 @@
         <? if ( $team['people'] ) { ?>
           <? foreach ( $team['people'] as $person ) { ?>
             <? switch ( $team['layout'] ) { case 'tiles': ?>
-                <div class="column col-6 mobile-full clearfix person">
+                <div class="column col-6 mobile-full tablet-full clearfix person">
                   <div class="profile">
                     <div class="portrait">
                       <img src="<?= $person['portrait']['sizes']['large'] ?>" alt="<?= $person['name'] ?>" />

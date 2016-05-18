@@ -27,22 +27,30 @@
 
 // Screen Sizes
 
+
 =wide
-  @media screen and ( min-width : $breakpoint-desktop )
+  +breakpoint($breakpoint-desktop, min)
     @content
 
 =desktop
-  @media screen and (min-width: $breakpoint-tablet)
+  +breakpoint($breakpoint-tablet, min)
     @content
 
 =tablet
-  @media screen and (max-width: $breakpoint-tablet)
+  +breakpoint($breakpoint-tablet, max)
     @content
 
 =mobile
-  @media screen and (max-width: $breakpoint-mobile)
+  +breakpoint($breakpoint-mobile, max)
     @content
 
+=breakpoint($size, $direction: max)
+  @if $direction == max
+    @media screen and ( max-width: $size )
+      @content
+  @else
+    @media screen and ( min-width: $size )
+      @content
 
 @-webkit-keyframes rotate
   0%

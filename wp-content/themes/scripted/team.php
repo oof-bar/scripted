@@ -44,7 +44,7 @@
               <? break ?>
               <? case 'full': ?>
                 <div class="person border-top clearfix">
-                  <div class="column col-3 tablet-quarter mobile-full portrait">
+                  <div class="column col-3 tablet-full portrait">
                     <div class="portrait-mask">
                       <? if ( $person['portrait'] ) { ?>
                           <img src="<?= $person['portrait']['sizes']['thumbnail'] ?>" alt="<?= $person['name'] ?>"/>
@@ -52,7 +52,7 @@
                       <? } ?>
                     </div>
                   </div>
-                  <div class="column col-9 tablet-three-quarters mobile-full details">
+                  <div class="column col-9 tablet-full details">
                     <h5 class="name text-blue">
                       <?= $person['name'] ?>
                     </h5>
@@ -66,7 +66,7 @@
                 </div>
               <? break ?>
               <? default: ?>
-                <div class="column col-4 tablet-third mobile-half text-center person">
+                <div class="column col-4 tablet-half text-center person">
                   <div class="profile">
                     <div class="portrait">
                       <div class="portrait-mask">

@@ -27,6 +27,8 @@ Clone the repo and its submodules with:
 git clone https://github.com/AugustMiller/scripted.git --recursive /Users/your-username/Sites/scripted
 ```
 
+We include Wordpress as a submodule to simplify updates and keep this repository nice and lean. The [Kirby Toolkit](https://github.com/getkirby/toolkit) is also used— it's allowed us to maintain a readable codebase, and informed the design of some of our own custom static classes (more on the project structure, later).
+
 #### Local Server
 
 Add a `VirtualHost` to your Apache configuration (it's best to put it in `/etc/apache2/users/your-username.conf`):
@@ -57,7 +59,7 @@ Add a `VirtualHost` to your Apache configuration (it's best to put it in `/etc/a
 </VirtualHost>
 ```
 
-Replace `DB_*` environment variables with the proper credentials for your database, add any keys that you need for testing, and save.
+Replace `DB_*` environment variables with the proper credentials for your database, add any keys that you need for testing, and save. It's important that they're set (event to an empty string), because the theme checks for them when bootstrapping.
 
 Your `/etc/hosts` file also needs a new line, matching the `ServerName` you declared, above:
 
@@ -81,6 +83,36 @@ A quick `$ gulp watch` will compile and watch for changes to styles and scripts.
 
 #### Database
 
-A recent database backup from a production or staging machine can be provided by oof.
+A recent database backup from a production or staging machine can be provided by oof. Import it into a database matching the name you provided in your `VirtualHost` environment variable.
+
+## The Theme
+
+### Special Considerations
+
+At first glance, many of the templates and other files in the theme directory may not look like a normal Wordpress theme— we've taken the liberty of extracting common functionality, custom helpers, configuration, hooks, actions, etc. into more bite-size, namespaced static classes. This was initially an effort to make the code feel more like a [Kirby](https://getkirby.com) project than a Wordpress theme.
+
+### Architecture
+
+The `config` folder contains all our custom PHP code— no HTML should go in here (except in rare cases where Kirby's `html` class is used to generate HTML snippets).
+
+#### Hooks + Actions
+
+At the bottom of `functions.php`, you'll notice a funny line:
+
+```php
+add_action('all', '\ScriptEd\Actions::respond', 1);
+```
+
+This "magic event" forwards _all_ Wordpress hooks to our own responder— just add a static method to the `ScriptEd\Actions` class with the hook name, and it'll run.
+
+#### Configuration + "Convention"
+
+You can follow the theme's initialization by starting at `ScriptEd\Actions::init`.
+
+The `ScriptEd\Helpers` class is apt to contain most of the things you see in standard templates.
+
+As for conventions— the project is in flux, so there remain plenty of things in need of organization, decrufting, sanity-checks, etc. That's where you come in!
+
+Otherwise, the project is still a Wordpress theme at its core, so you can still approach new templates as you normally would.
 
 :deciduous_tree:

@@ -25,7 +25,7 @@
             "name": "amount",
             "type": "text",
             "instructions": "Original one-time or recurring donation amount.",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -45,8 +45,8 @@
             "label": "Email",
             "name": "email",
             "type": "text",
-            "instructions": "Email of the donor. Optional in the form.",
-            "required": 0,
+            "instructions": "Email of the donor.",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -324,5 +324,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1461890615
+    "modified": 1474481218
 }

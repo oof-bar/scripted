@@ -298,10 +298,12 @@ class Gift {
       $info = get_fields($gift);
       $total = $total + $info['amount'];
 
+      $recurring = isset($info['recurring']) && $info['recurring'];
+
       $row = new Brick('tr', '', ['class' => 'gift']);
       $row->append(new Brick('td', $gift->ID))
           ->append(new Brick('td', $gift->post_date))
-          ->append(new Brick('td', ($info['recurring'] ? '&#10004' : '')))
+          ->append(new Brick('td', ($recurring ? '&#10004' : '')))
           ->append(new Brick('td', get_the_title($gift)))
           ->append(new Brick('td', html::a("mailto:{$info['email']}", $info['email'])))
           ->append(new Brick('td', money_format('$%i', $info['amount'])))

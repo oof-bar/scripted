@@ -18,6 +18,8 @@ class Actions {
     return;
   }
 
+  # Low-level Events
+
   public static function init() {
     Initializers::create_post_types();
     Initializers::create_thumbnail_versions();
@@ -42,6 +44,7 @@ class Actions {
   }
 
   # Add Scripts and Stylesheets
+
   public static function wp_enqueue_scripts () {
     $scripts_path = ( get_template_directory_uri() . '/assets/js/' );
 
@@ -65,6 +68,8 @@ class Actions {
     wp_enqueue_style('app');
   }
 
+  # Post Fetching + Views
+
   public static function pre_get_posts ($query) {
     if ( $query[0]->get('post_type') == 'se_aggregator' && !is_admin() ) {
       $query[0]->set('post_type', ['se_aggregator', 'post', 'se_event', 'se_resource', 'se_student_voice']);
@@ -76,6 +81,7 @@ class Actions {
   }
 
   # Admin Column customization
+
   public static function manage_se_event_posts_columns ($columns) {
     return array_merge($columns, [
       'event_date' => 'Event Date',
@@ -107,6 +113,7 @@ class Actions {
   }
 
   # CMS Events
+
   public static function save_post ($post) {
     Narrative::clean($post);
   }

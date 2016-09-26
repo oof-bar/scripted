@@ -2,6 +2,7 @@
 
 use Stripe,
     Mandrill,
+    Brick,
     html,
     r,
     a;
@@ -262,5 +263,61 @@ class Gift {
       if ( $plan_id === $plan['id'] ) return $plan['label'];
     }
     return 'Unknown or Legacy Plan';
+  }
+
+  public static function all_gifts () {
+    return get_posts([
+      'post_type' => 'se_gift',
+      'posts_per_page' => -1
+    ]);
+  }
+
+  # Output
+
+  public static function generate_report () {
+    $gifts = static::all_gifts();
+    $total = 0;
+
+    $report = new Brick('div', null, ['class' => 'gift-report']);
+    $table = new Brick('table');
+
+    $headers = new Brick('thead');
+
+    # Set up column names
+    $headers->append(new Brick('th', 'ID'))
+            ->append(new Brick('th', 'Date'))
+            ->append(new Brick('th', 'Recurring'))
+            ->append(new Brick('th', 'Donor Name'))
+            ->append(new Brick('th', 'Email'))
+            ->append(new Brick('th', 'Amount'))
+            ->append(new Brick('th', 'URL'));
+
+    $body = new Brick('thead');
+
+    foreach ( $gifts as $gift ) {
+      $info = get_fields($gift);
+      $total = $total + $info['amount'];
+
+      $row = new Brick('tr', '', ['class' => 'gift']);
+      $row->append(new Brick('td', $gift->ID))
+          ->append(new Brick('td', $gift->post_date))
+          ->append(new Brick('td', ($info['recurring'] ? '&#10004' : '')))
+          ->append(new Brick('td', get_the_title($gift)))
+          ->append(new Brick('td', html::a("mailto:{$info['email']}", $info['email'])))
+          ->append(new Brick('td', money_format('$%i', $info['amount'])))
+          ->append(new Brick('td', html::a(get_permalink($gift), 'View', ['target' => '_blank'])));
+
+      $body->append($row);
+    }
+
+    $table->append($headers)
+          ->append($body);
+
+    $summary = new Brick('h3', 'Total: ' . html::tag('span', money_format('$%i', $total)), ['class' => 'summary']);
+
+    $report->append($summary)
+           ->append($table);
+
+    echo $report;
   }
 }

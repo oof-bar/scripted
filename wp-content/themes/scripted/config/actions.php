@@ -98,6 +98,14 @@ class Actions {
     }
   }
 
+  # Admin
+
+  public static function admin_menu () {
+    add_submenu_page('tools.php', 'Gift Report', 'Gift Report', 'administrator', 'gift-report', function () {
+      Gift::generate_report();
+    });
+  }
+
   # CMS Events
   public static function save_post ($post) {
     Narrative::clean($post);

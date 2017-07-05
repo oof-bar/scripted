@@ -12,14 +12,14 @@ var gulp = require('gulp'),
 
 var paths = {
   scripts: {
-    main: ['wp-content/themes/scripted/assets/coffee/app.coffee'],
-    listen: ['wp-content/themes/scripted/assets/coffee/**/*.coffee'],
-    out: 'wp-content/themes/scripted/assets/js'
+    main: ['src/coffee/app.coffee'],
+    listen: ['src/coffee/**/*.coffee'],
+    out: 'web/wp-content/themes/scripted/assets/js'
   },
   stylesheets: {
-    main: ['wp-content/themes/scripted/assets/sass/app.sass'],
-    listen: ['wp-content/themes/scripted/assets/sass/**/*.sass'],
-    out: 'wp-content/themes/scripted/assets/css'
+    main: ['src/sass/app.sass'],
+    listen: ['src/sass/**/*.sass'],
+    out: 'web/wp-content/themes/scripted/assets/css'
   }
 };
 
@@ -29,7 +29,7 @@ var templates = {
       .pipe(coffeeify({
         options: {
           debug: !mangle,
-          paths: [__dirname + '/node_modules', __dirname + '/wp-content/themes/scripted/assets/coffee']
+          paths: [__dirname + '/node_modules', __dirname + '/src/coffee']
         }
       }))
       .pipe(test(mangle, uglify(), null))

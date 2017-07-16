@@ -27,7 +27,7 @@ set :log_level, :info
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('web/wp-config.php', 'web/.htaccess')
+set :linked_files, fetch(:linked_files, []).push('web/wp-config.php')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('web/wp-content/uploads')

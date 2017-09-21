@@ -11,7 +11,7 @@
     <meta property="og:site_name" content="<?= bloginfo('name') ?>"/>
     <meta property="og:title" content="<?= bloginfo('name') ?>"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="<?= bloginfo('template_directory') ?>/images/social-thumbnail.png"/>
+    <meta property="og:image" content="<?= bloginfo('template_directory') ?>/assets/images/social-thumbnail.png"/>
     <meta property="og:url" content="<?= bloginfo('url') ?>"/>
     <meta property="og:description" content="<?= bloginfo('description') ?>"/>
 

@@ -1,8 +1,8 @@
-wp-content/themes/scripted/assets/js/
-wp-content/themes/scripted/assets/css/
-wp-content/themes/scripted/.sass-cache
-wp-config.php
-wp-content/uploads
+web/wp-content/themes/scripted/assets/js/
+web/wp-content/themes/scripted/assets/css/
+web/wp-content/themes/scripted/.sass-cache
+web/wp-config.php
+web/wp-content/uploads
 
 .sass-cache
 node_modules

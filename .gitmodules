@@ -1,9 +1,12 @@
 [submodule "stripe-php"]
     path = wp-content/themes/scripted/lib/stripe-php
     url = https://github.com/stripe/stripe-php.git
-[submodule "wp-content/themes/scripted/lib/kirby-toolkit"]
-	path = wp-content/themes/scripted/lib/kirby-toolkit
+[submodule "web/wp-content/themes/scripted/lib/kirby-toolkit"]
+	path = web/wp-content/themes/scripted/lib/kirby-toolkit
 	url = https://github.com/getkirby/toolkit.git
-[submodule "wordpress"]
-	path = wordpress
+[submodule "web/wordpress"]
+	path = web/wordpress
 	url = https://github.com/WordPress/WordPress.git
+[submodule "web/wp-content/themes/scripted/lib/stripe-php"]
+	path = web/wp-content/themes/scripted/lib/stripe-php
+	url = https://github.com/stripe/stripe-php.git

@@ -7,10 +7,10 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-set :app_domain, 'scripted.org'
+set :app_domain, '45.56.67.144'
 server fetch(:app_domain), user: 'deploy', roles: ['web']
 
-set :deploy_to, '/var/www/clients/scripted/production'
+set :deploy_to, '/var/www/scripted.org'
 
 # role-based syntax
 # ==================

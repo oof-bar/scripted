@@ -1,5 +1,5 @@
 =animate($duration: .3s, $property: all, $function: cubic-bezier(0, 1, 1, 1))
-  +transition($duration $function $property)
+  transition: $duration $function $property
 
 =clearfix
   &::after
@@ -54,11 +54,11 @@
 
 @-webkit-keyframes rotate
   0%
-    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
   50%
-    -webkit-transform: rotate(-180deg)
+    transform: rotate(-180deg)
   100%
-    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
 
 // Appearance
 
@@ -71,7 +71,7 @@
 // Animation
 
 =fade($speed: 0.15s)
-  +transition($speed linear opacity)
+  transition: $speed linear opacity
 
 =animation($animate...)
   $max: length($animate)

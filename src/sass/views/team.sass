@@ -55,7 +55,7 @@ section.team
           bottom: 0
           height: 40%
           width: 100%
-          +linear-gradient(rgba($black, 0), rgba($black, 0.25))
+          background-image: linear-gradient(rgba($black, 0), rgba($black, 0.25))
           z-index: 1
 
         &:hover
@@ -74,7 +74,7 @@ section.team
       .portrait
         +fill
         +filling-image
-        +transition(0.15s linear opacity)
+        transition: 0.15s linear opacity
         z-index: 0
 
         img
@@ -85,7 +85,7 @@ section.team
         top: 80%
         padding: 0.75rem
         padding-bottom: 4rem
-        +transition(0.5s cubic-bezier(0, 1, 0.5, 1) all)
+        transition: 0.5s cubic-bezier(0, 1, 0.5, 1) all
         color: $white
         height: 100%
         text-shadow: 0 1px 5px rgba($black, 0.45)

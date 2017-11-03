@@ -1,8 +1,15 @@
 module.exports = ->
-  # console.log 'Home'
-  
-  $('.media-play').on 'click', ->
-    $('.media-content').fadeIn()
+  $hero = $('section.hero')
+  $playBtn = $hero.find('.hero-media-trigger')
+  $mediaContent = $hero.find('.hero-media-overlay')
 
-  $('.overlay').on 'click', ->
-    $('.media-content').fadeOut()
+  $playBtn.on
+    click: ->
+      $mediaContent.fadeIn()
+    mouseenter: ->
+      $hero.addClass 'media-may-play'
+    mouseleave: ->
+      $hero.removeClass 'media-may-play'
+
+  $mediaContent.on 'click', (e) ->
+    if $(e.target).is($mediaContent) then $mediaContent.fadeOut()

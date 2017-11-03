@@ -1,9 +1,10 @@
 Cookie = require 'js-cookie'
 NewsletterSignup = require 'crm/newsletter'
 
-module.exports = ->
-  # console.log 'Common'
+ImageLoad = require 'util/image-load'
+ImageFit = require 'util/image-fit'
 
+module.exports = ->
   window.setInterval ->
     $('.blink').toggleClass 'visible'
   , 1000
@@ -52,3 +53,23 @@ module.exports = ->
     locked_class: 'locked'
     location: 'footer'
     secure_token: $('#se-email-nonce').val()
+  
+  # Background Images
+
+  # Background Images
+  $('.background-image-host').each (index, bg) ->
+    $bg = $(bg)
+
+    $background = $('<figure />').addClass('background-image')
+    $image = $('<img />').attr
+      src: $bg.data('image')
+
+    cover = new ImageFit $image
+
+    new ImageLoad $image, (img) ->
+      $bg.addClass 'background-image-loaded'
+      cover.resize()
+
+    $background.prepend($image)
+
+    $bg.prepend($background)

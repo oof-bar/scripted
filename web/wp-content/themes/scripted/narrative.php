@@ -5,25 +5,29 @@
 
 <? if ( $narrative['hero'] ) { ?>
 
-  <section class="hero text-center text-white" style="background-image: url('<?= $narrative['hero']['sizes']['jumbo'] ?>');">
+  <section class="hero text-center text-white background-image-host" data-image="<?= $narrative['hero']['sizes']['jumbo'] ?>">
+    <div class="hero-content">
+      <? if ( $narrative['media'] ) { ?>
+        <button class="media-play hero-media-trigger" title="Play Video"></button>
+      <? } ?>
+
+      <h1><?= $narrative['header_text'] ?></h1>
+    </div>
 
     <? if ( $narrative['media'] ) { ?>
-      <div class="wrapper static">
-        <div class="column col-2 centered static">
-          <div class="media-play"></div>
-          <div class="media-content">
-            <div class="overlay">
-              <div class="video-wrap">
-                <?= $narrative['media_embed'] ?>
-              </div>
+      <button class="media-play-takeover hero-media-trigger" title="Play Video"></button>
+    <? } ?>
+
+    <? if ( $narrative['media'] ) { ?>
+      <div class="hero-media-overlay">
+        <div class="hero-media-content">
+          <div class="responsive-video">
+            <div class="responsive-video__shim"></div>
+            <?= $narrative['media_embed'] ?>
           </div>
         </div>
       </div>
     <? } ?>
-    <div class="column col-10 centered static tablet-full">
-      <h1><?= $narrative['header_text'] ?></h1>
-    </div>
-
   </section>
 
 <? } else { ?>

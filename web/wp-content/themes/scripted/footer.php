@@ -6,7 +6,7 @@
               <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
             </div>
             <div class="non-profit-note add-margin-bottom">
-              <?= ScriptEd\Helpers::option('np_notice') ?>
+              <?= Scripted\Helpers::markdown(ScriptEd\Helpers::option('np_notice')) ?>
             </div>
             <? if ( ScriptEd\Helpers::option('mailchimp_list') ) { ?>
               <?= ScriptEd\Helpers::partial('newsletter-signup') ?>

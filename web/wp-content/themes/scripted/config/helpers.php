@@ -8,6 +8,7 @@ use WP_Query,
 
 class Helpers {
   public static $markdown_parser;
+
   public static function page_title ($post) {
     if ( is_singular('se_gift') ) {
       return 'Thanks!';

@@ -12,4 +12,11 @@ class Util {
     echo json_encode($obj);
     echo ');</script>';
   }
+
+  public static function intoGroups ($arr, $num = 1) {
+    $len = count($arr);
+    $groupSize = ceil($len / $num);
+
+    return array_chunk($arr, $groupSize);
+  }
 }

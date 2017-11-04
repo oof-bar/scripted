@@ -2,14 +2,30 @@
   & ~ &
     border-top: 1px solid $grey-light
 
-  .partners__list
+.partners__list
 
-  .partners__description
-    margin-bottom: 4rem
+.partners__partner-segment
+  &:last-child
+    .partners__partner
+      &:last-child
+        +mobile
+          border-bottom: 1px solid $grey-light
 
-  .partners__partner
-    padding: 1rem 0
-    border-top: 1px solid $grey-light
+.partners__description
+  margin-bottom: 4rem
 
-    &:last-child
-      border-bottom: 1px solid $grey-light
+.partners__partner
+  border-top: 1px solid $grey-light
+
+  &:last-child
+    border-bottom: 1px solid $grey-light
+
+    +mobile
+      border-bottom: none
+
+.partners__partner-name
+  display: block
+  padding: 1rem 0
+
+.partners__partner-link-icon
+  color: $grey-mid

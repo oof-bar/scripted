@@ -21,13 +21,16 @@
       </div>
 
       <? foreach ($segments as $partners) { ?>
-        <div class="column col-4 tablet-three-quarters mobile-full partners__partner-segment">
+        <div class="column col-4 mobile-full partners__partner-segment">
           <? foreach ($partners as $partner) { ?>
             <div class="partners__partner">
               <? if ($partner['link']) { ?>
-                <a href="<?= $partner['link'] ?>"><?= $partner['name'] ?></a>
+                <a class="partners__partner-name partners__partner-name--link" href="<?= $partner['link'] ?>">
+                  <?= $partner['name'] ?>
+                  <i class="partners__partner-link-icon icon-arrow-right"></i>
+                </a>
               <? } else { ?>
-                <?= $partner['name'] ?>
+                <span class="partners__partner-name"><?= $partner['name'] ?></span>
               <? } ?>
             </div>
           <? } ?>

@@ -3,7 +3,9 @@
 
           <div class="column col-4 tablet-half mobile-full">
             <div class="wordmark bold serif text-orange">
-              <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
+              <a href="<?= home_url() ?>">
+                <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
+              </a>
             </div>
             <div class="non-profit-note add-margin-bottom">
               <?= Scripted\Helpers::markdown(ScriptEd\Helpers::option('np_notice')) ?>

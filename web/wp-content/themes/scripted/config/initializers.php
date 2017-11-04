@@ -220,8 +220,11 @@ class Initializers {
     # Team
     register_nav_menu('team', 'Team Sidebar');
 
-    # Footer
-    register_nav_menu('footer', 'Footer');
+    # Footer (Primary)
+    register_nav_menu('footer_primary', 'Footer (Primary)');
+
+    # Footer (Secondary)
+    register_nav_menu('footer_secondary', 'Footer (Secondary)');
 
     # Mobile
     register_nav_menu('mobile', 'Mobile Drawer');

@@ -1,40 +1,41 @@
       <section class="footer border">
         <div class="wrapper">
 
-          <div class="column col-3 tablet-half mobile-full">
+          <div class="column col-4 tablet-half mobile-full">
             <div class="wordmark bold serif text-orange">
               <?= bloginfo('title') ?><img class="logo" src="<?= bloginfo('template_directory') ?>/assets/images/logo.png" />
             </div>
             <div class="non-profit-note add-margin-bottom">
               <?= Scripted\Helpers::markdown(ScriptEd\Helpers::option('np_notice')) ?>
             </div>
-            <? if ( ScriptEd\Helpers::option('mailchimp_list') ) { ?>
-              <?= ScriptEd\Helpers::partial('newsletter-signup') ?>
-            <? } ?>
           </div>
 
-          <div class="column col-2 push-1 tablet-half mobile-hide secondary-nav">
-            <span class="caps semi-bold small">Explore</span> 
-            <div class="add-margin-top caps bold small link-grey">
-              <? wp_nav_menu([
-                'theme_location' => 'footer',
-                'container_class' => 'footer-nav'
-              ]); ?>
+          <div class="column col-4 tablet-half mobile-hide secondary-nav">
+            <span class="caps semi-bold small">Explore</span>
+            <div class="footer-menus">
+              <div class="footer-menu">
+                <div class="add-margin-top caps bold small link-grey">
+                  <? wp_nav_menu([
+                    'theme_location' => 'footer_primary',
+                    'container_class' => 'footer-nav'
+                  ]); ?>
+                </div>
+              </div>
+              <div class="footer-menu">
+                <div class="add-margin-top caps bold small link-grey">
+                  <? wp_nav_menu([
+                    'theme_location' => 'footer_secondary',
+                    'container_class' => 'footer-nav'
+                  ]); ?>
+                </div>
+              </div>
             </div>
           </div>
           
-          <div class="column col-6 tablet-full">
-            <span class="caps semi-bold small">Sponsors</span>
-            <? if ( $sponsors = ScriptEd\Helpers::option('sponsors') ) { ?>
-              <div class="sponsors add-margin-top">
-                <? foreach ( $sponsors as $sponsor ) { ?>
-                  <div class="sponsor">
-                    <a href="<?= $sponsor['link'] ?>" target="_blank" title="<?= $sponsor['name'] ?>">
-                      <img src="<?= $sponsor['logo']['url'] ?>" />
-                    </a>
-                  </div>
-                <? } ?>
-              </div>
+          <div class="column col-4 tablet-full">
+            <? if ( ScriptEd\Helpers::option('mailchimp_list') ) { ?>
+              <span class="caps semi-bold small">Newsletter</span>
+              <?= ScriptEd\Helpers::partial('newsletter-signup') ?>
             <? } ?>
           </div>
 

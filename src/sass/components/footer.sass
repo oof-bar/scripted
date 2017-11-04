@@ -10,28 +10,18 @@
   .non-profit-note
     margin-bottom: 2em
 
+  .footer-menus
+    +clearfix
+
+    .footer-menu
+      float: left
+      width: 50%
+      padding-right: 1rem
+
+
   .footer-nav
     li 
       margin-bottom: 1em
 
-  .sponsors
-    +tablet
-      text-align: left
-
-    +mobile
-      text-align: center
-
-    .sponsor
-      max-width: 100px
-      opacity: 0.35
-      display: inline-block
-      margin-right: 1em
-      margin-bottom: 0.5em
-      +animate($property: opacity)
-
-      &:hover
-        opacity: 0.65
-
-      +tablet
-        display: inline-block
-        margin: 0 0.5em
+    .special-link a
+      color: $orange

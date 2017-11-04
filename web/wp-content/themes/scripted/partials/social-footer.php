@@ -22,6 +22,11 @@
             Like Us On <a href="<?= $facebook ?>" target="_blank" title="Like us on FaceBook">FaceBook</a>
           </span>
         <? } ?>
+        <? if ( $instagram = ScriptEd\Helpers::option('instagram') ) { ?>
+          <span class="small caps link instagram">
+            Find Us On <a href="<?= $instagram ?>" target="_blank" title="Find us on Instagram">Instagram</a>
+          </span>
+        <? } ?>
       </div>
     </div>
   </div>

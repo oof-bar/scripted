@@ -19,10 +19,11 @@
   </div>
 
   <div class="wrapper concepts">
+    <? $columnsPerConcept = ceil(12 / count($section['concepts'])) ?>
 
     <? foreach ( $section['concepts'] as $index => $concept ) { ?>
 
-      <div class="column col-3 <?= $index % 3 == 0 ? "" : "push-1" ?> tablet-third mobile-full">
+      <div class="column col-<?= $columnsPerConcept ?> tablet-third mobile-full">
 
         <figure>
           <img src="<?= $concept['illustration']['url'] ?>" />

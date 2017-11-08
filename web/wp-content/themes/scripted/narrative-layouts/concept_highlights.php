@@ -23,7 +23,7 @@
 
     <? foreach ( $section['concepts'] as $index => $concept ) { ?>
 
-      <div class="column col-<?= $columnsPerConcept ?> tablet-third mobile-full">
+      <div class="column col-<?= $columnsPerConcept ?> mobile-full">
 
         <figure>
           <img src="<?= $concept['illustration']['url'] ?>" />

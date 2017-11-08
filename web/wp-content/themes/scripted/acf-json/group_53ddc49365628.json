@@ -6,11 +6,15 @@
             "key": "field_53ddc4a50945f",
             "label": "FAQ",
             "name": "faq",
-            "prefix": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "min": "",
             "max": "",
             "layout": "row",
@@ -20,12 +24,15 @@
                     "key": "field_53ddc4b709460",
                     "label": "Question",
                     "name": "question",
-                    "prefix": "",
                     "type": "text",
                     "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "placeholder": "",
                     "prepend": "",
@@ -38,17 +45,22 @@
                     "key": "field_53ddc4c309461",
                     "label": "Answer",
                     "name": "answer",
-                    "prefix": "",
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
-                    "column_width": "",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "",
                     "toolbar": "basic",
-                    "media_upload": 0
+                    "media_upload": 0,
+                    "tabs": "all"
                 }
-            ]
+            ],
+            "collapsed": ""
         }
     ],
     "location": [
@@ -67,10 +79,13 @@
             }
         ]
     ],
-    "menu_order": 0,
+    "menu_order": 5,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": ""
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1510111293
 }

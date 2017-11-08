@@ -56,12 +56,13 @@
             },
             "choices": {
                 "internal": "Internal",
-                "external": "External"
+                "external": "External",
+                "none": "None"
             },
             "other_choice": 0,
             "save_other_choice": 0,
             "default_value": "internal",
-            "layout": "vertical"
+            "layout": "horizontal"
         },
         {
             "key": "field_53de740a798c5",
@@ -71,13 +72,13 @@
             "instructions": "",
             "required": 0,
             "conditional_logic": [
-                {
-                    "rule_0": {
+                [
+                    {
                         "field": "field_53de7484798c7",
                         "operator": "==",
                         "value": "internal"
                     }
-                }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -102,15 +103,15 @@
             "name": "link_external",
             "type": "text",
             "instructions": "The full link to the external resource. Please include http:\/\/ or https:\/\/",
-            "required": 1,
+            "required": 0,
             "conditional_logic": [
-                {
-                    "rule_0": {
+                [
+                    {
                         "field": "field_53de7484798c7",
                         "operator": "==",
                         "value": "external"
                     }
-                }
+                ]
             ],
             "wrapper": {
                 "width": "",
@@ -132,7 +133,15 @@
             "type": "text",
             "instructions": "The linked prompt",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_53de7484798c7",
+                        "operator": "!=",
+                        "value": "none"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -145,6 +154,141 @@
             "maxlength": "",
             "readonly": 0,
             "disabled": 0
+        },
+        {
+            "key": "field_5a0278e11e34d",
+            "label": "Show Partners Section?",
+            "name": "has_giving_partners",
+            "type": "true_false",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0
+        },
+        {
+            "key": "field_5a0368fa32caa",
+            "label": "Partners Headline",
+            "name": "giving_partners_headline",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a0278e11e34d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_5a0278861e34a",
+            "label": "Partners",
+            "name": "giving_partners",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a0278e11e34d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": "",
+            "max": "",
+            "layout": "table",
+            "button_label": "Add Partner",
+            "sub_fields": [
+                {
+                    "key": "field_5a0278971e34b",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": "",
+                    "readonly": 0,
+                    "disabled": 0
+                },
+                {
+                    "key": "field_5a036dbd35896",
+                    "label": "URL",
+                    "name": "url",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5a0278a91e34c",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -166,5 +310,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1457727017
+    "modified": 1510174162
 }

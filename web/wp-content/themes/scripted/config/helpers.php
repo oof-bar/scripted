@@ -68,7 +68,8 @@ class Helpers {
         'post_type' => 'page',
         'post_status' => 'publish',
         'post_parent' => $page->ID,
-        'orderby' => 'menu_order'
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
       ));
       # Prepend this page, because it won't be in the results.
       array_unshift($list, $page);
@@ -78,7 +79,8 @@ class Helpers {
         'post_type' => 'page',
         'post_status' => 'publish',
         'post_parent' => a::first($tree),
-        'orderby' => 'menu_order'
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
       ));
       # Prepend the parent page, because it won't be in the results.
       array_unshift($list, get_post(a::first($tree)));

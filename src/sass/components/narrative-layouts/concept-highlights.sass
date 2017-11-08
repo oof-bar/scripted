@@ -3,7 +3,12 @@ section.concept-highlights
     border-top: 1px solid $grey-light
 
   .lede
-    margin-bottom: 2rem
+
+  .concept
+    margin-top: 2rem
+
+    +mobile
+      text-align: center
 
   figure
     max-width: 230px
@@ -11,7 +16,10 @@ section.concept-highlights
 
     +mobile
       max-width: 50%
-      margin: 0
+      margin: 0 auto
 
   .explanation
     padding-right: 1rem
+
+    +mobile
+      padding-right: 0

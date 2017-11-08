@@ -16,6 +16,7 @@
           Missing field: Call to Action
         <? } ?>
       </h5>
+
       <div class="large">
         <? if ( $giving['message'] ) { ?>
           <?= $giving['message'] ?>
@@ -23,16 +24,21 @@
           Missing Field: Message
         <? } ?>
       </div>
-      <div class="large">
-        <? $internal = ( $giving['link_type'] == 'internal' ) ?>
-        <? $cta_link = ( $internal ? $giving['link_internal'] : $giving['link_external'] ) ?>
-            <p><a href="<?= $cta_link ?>"<?= $internal ? '' : ' target="_blank"' ?>><?= $giving['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
-      </div>
+
+      <? if ($giving['link_type'] !== 'none') { ?>
+        <div class="large">
+          <? $internal = ( $giving['link_type'] == 'internal' ) ?>
+          <? $cta_link = ( $internal ? $giving['link_internal'] : $giving['link_external'] ) ?>
+
+          <p><a href="<?= $cta_link ?>"<?= $internal ? '' : ' target="_blank"' ?>><?= $giving['link_label'] ?>&nbsp;<span class="icon-arrow-right"></span></a></p>
+        </div>
+      <? } ?>
     </div>
 
   </div>
 </section>
 
+<?= ScriptEd\Helpers::partial('give-partners', ['giving' => $giving]) ?>
 <?= ScriptEd\Helpers::partial('give-faq', ['giving' => $giving]) ?>
 <?= ScriptEd\Helpers::partial('give-options', ['giving' => $giving]) ?>
 

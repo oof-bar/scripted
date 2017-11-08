@@ -12,7 +12,7 @@
         <? /* Not using `column` class here, because we only care about the widths, not the floating behavior… flexbox handles this layout. */ ?>
         <div class="col-2 mobile-third giving-partners__partner">
           <? if (strlen($partner['url'])) { ?>
-            <a href="<?= $partner['url'] ?>" title="<?= $partner['label'] ?>">
+            <a href="<?= $partner['url'] ?>" title="<?= $partner['label'] ?>" target="_blank">
               <img class="giving-partners__partner-image" src="<?= $partner['image']['url'] ?>" alt="<?= $partner['label'] ?>">
             </a>
           <? } else { ?>
